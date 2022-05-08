@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3DS link trade bot", "3DS link trade bot.csproj", "{BCF03F9F-7188-46D0-9D3F-CD4A350D8E00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCF03F9F-7188-46D0-9D3F-CD4A350D8E00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF03F9F-7188-46D0-9D3F-CD4A350D8E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF03F9F-7188-46D0-9D3F-CD4A350D8E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCF03F9F-7188-46D0-9D3F-CD4A350D8E00}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC7D13E9-2DA5-4F5B-8670-DEFDD819FF33}
+	EndGlobalSection
+EndGlobal
