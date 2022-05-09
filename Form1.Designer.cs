@@ -107,7 +107,7 @@
             this.IpAddress.Name = "IpAddress";
             this.IpAddress.Size = new System.Drawing.Size(100, 23);
             this.IpAddress.TabIndex = 1;
-            this.IpAddress.Text = "192.168.1.";
+            this.IpAddress.Text = Properties.Settings.Default.IpAddress;
             // 
             // label1
             // 
@@ -185,6 +185,7 @@
             this.discordtoken.Name = "discordtoken";
             this.discordtoken.Size = new System.Drawing.Size(350, 23);
             this.discordtoken.TabIndex = 1;
+            this.discordtoken.Text = Properties.Settings.Default.discordtoken;
             // 
             // discordconnect
             // 
@@ -210,7 +211,9 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.LinkTrades.ResumeLayout(false);
             this.Logs.ResumeLayout(false);

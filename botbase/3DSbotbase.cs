@@ -63,7 +63,7 @@ namespace _3DS_link_trade_bot
             nine = 160,
             zero = 180,
         }
-        public static async void click(Buttons key)
+        public static async Task click(Buttons key,double delayinseconds)
         {
             var buttonarray = new byte[20];
             var nokey = BitConverter.GetBytes((uint)key);
@@ -90,9 +90,11 @@ namespace _3DS_link_trade_bot
             nokey = BitConverter.GetBytes(0);
             nokey.CopyTo(buttonarray, 16);
             Form1.Connection.Send(buttonarray);
+            var delay = delayinseconds * 1000;
+            await Task.Delay((int)delay);
         }
 
-        public static async void touch(decimal x,decimal y)
+        public static async Task touch(decimal x,decimal y,double delayinseconds)
         {
             var buttonarray = new byte[20];
             var nokey = BitConverter.GetBytes((uint)NoKey);
@@ -119,8 +121,10 @@ namespace _3DS_link_trade_bot
             nokey = BitConverter.GetBytes(0);
             nokey.CopyTo(buttonarray, 16);
             Form1.Connection.Send(buttonarray);
+            var delay = delayinseconds * 1000;
+            await Task.Delay((int)delay);
         }
-        public static async void presshome()
+        public static async Task presshome(double delayinseconds)
         {
             var buttonarray = new byte[20];
             var nokey = BitConverter.GetBytes((uint)NoKey);
@@ -147,6 +151,8 @@ namespace _3DS_link_trade_bot
             nokey = BitConverter.GetBytes(0);
             nokey.CopyTo(buttonarray, 16);
             Form1.Connection.Send(buttonarray);
+            var delay = delayinseconds * 1000;
+            await Task.Delay((int)delay);
         }
 
         public static uint gethexcoord(decimal Xvalue, decimal Yvalue)
@@ -192,8 +198,8 @@ namespace _3DS_link_trade_bot
                     default: break;
 
                 }
-                touch((decimal)(int)numberkeyx, (decimal)(int)numberkeyy);
-                await Task.Delay(800);
+                await touch((decimal)(int)numberkeyx, (decimal)(int)numberkeyy,0.8);
+               
             }
         }
     }

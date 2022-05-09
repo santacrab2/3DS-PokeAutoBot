@@ -11,20 +11,54 @@ namespace _3DS_link_trade_bot
 {
     public class LinkTradeBot
     {
+        public static queuesystem tradeinfo;
+        public static CancellationTokenSource tradetoken = new CancellationTokenSource();
+        public static Queue<queuesystem> The_Q = new Queue<queuesystem>();
         public static async void starttrades()
         {
-            presshome();
-            await Task.Delay(2000);
-            touch(120, 10);
-            await Task.Delay(1000);
-            touch(120, 10);
-            await Task.Delay(5000);
-            touch(160, 10);
-            await Task.Delay(3000);
-            touch(160, 180);
-            await Task.Delay(5000);
-            string fc = "367562863092";
-            enterfriendcode(fc);
+            while (!tradetoken.IsCancellationRequested)
+            {
+                while (The_Q.Count == 0)
+                {
+                    await Task.Delay(25);
+                }
+                tradeinfo = The_Q.Peek();
+                The_Q.Dequeue();
+                switch (tradeinfo.mode)
+                {
+                    case botmode.addfc: await FriendCodeRoutine(); return;
+                }
+            }
         }
+
+        public static async Task FriendCodeRoutine()
+        {
+            await presshome(2);
+
+            await touch(120, 10,1);
+
+            await touch(120, 10,5);
+
+            await touch(160, 10,3);
+
+            await touch(160, 180,5);
+          
+            await enterfriendcode(tradeinfo.friendcode);
+            await Task.Delay(2000);
+            await touch(240, 230,10);
+
+            await touch(180, 100,1);
+
+            await touch(240, 230,3);
+
+            await touch(240, 200,5);
+
+            await click(X,5);
+
+            await presshome(1);
+           
+        }
+
+
     }
 }

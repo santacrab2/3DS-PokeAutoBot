@@ -57,9 +57,16 @@ namespace _3DS_link_trade_bot
         }
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            Properties.Settings.Default.IpAddress = form1.IpAddress.Text;
+            Properties.Settings.Default.discordtoken = form1.discordtoken.Text;
+            Properties.Settings.Default.Save();
             ntr.Disconnect();
             Application.Exit();
+        }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.IpAddress = form1.IpAddress.Text;
+            Properties.Settings.Default.discordtoken = form1.discordtoken.Text;
         }
 
         private void startlinktrades_Click(object sender, EventArgs e)
@@ -74,5 +81,13 @@ namespace _3DS_link_trade_bot
             ChangeStatus("Connected to Discord");
             Log("Connected to Discord");
         }
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.IpAddress = form1.IpAddress.Text;
+            Properties.Settings.Default.discordtoken = form1.discordtoken.Text;
+            Properties.Settings.Default.Save();
+        }
+
+      
     }
 }
