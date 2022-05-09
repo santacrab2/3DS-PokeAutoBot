@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.LinkTrades = new System.Windows.Forms.TabPage();
             this.startlinktrades = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.Logs = new System.Windows.Forms.TabPage();
             this.logbox = new System.Windows.Forms.RichTextBox();
             this.IpAddress = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,31 +39,37 @@
             this.consoledisconnect = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.statusbox = new System.Windows.Forms.RichTextBox();
+            this.Discord = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.discordtoken = new System.Windows.Forms.TextBox();
+            this.discordconnect = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.LinkTrades.SuspendLayout();
+            this.Logs.SuspendLayout();
+            this.Discord.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.LinkTrades);
+            this.tabControl1.Controls.Add(this.Discord);
+            this.tabControl1.Controls.Add(this.Logs);
             this.tabControl1.Location = new System.Drawing.Point(0, 43);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(431, 303);
             this.tabControl1.TabIndex = 0;
             // 
-            // tabPage1
+            // LinkTrades
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tabPage1.Controls.Add(this.startlinktrades);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(423, 275);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Link Trades";
+            this.LinkTrades.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.LinkTrades.Controls.Add(this.startlinktrades);
+            this.LinkTrades.Location = new System.Drawing.Point(4, 24);
+            this.LinkTrades.Name = "LinkTrades";
+            this.LinkTrades.Padding = new System.Windows.Forms.Padding(3);
+            this.LinkTrades.Size = new System.Drawing.Size(423, 275);
+            this.LinkTrades.TabIndex = 0;
+            this.LinkTrades.Text = "Link Trades";
             // 
             // startlinktrades
             // 
@@ -75,16 +81,16 @@
             this.startlinktrades.UseVisualStyleBackColor = true;
             this.startlinktrades.Click += new System.EventHandler(this.startlinktrades_Click);
             // 
-            // tabPage2
+            // Logs
             // 
-            this.tabPage2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tabPage2.Controls.Add(this.logbox);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(423, 275);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Logs";
+            this.Logs.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Logs.Controls.Add(this.logbox);
+            this.Logs.Location = new System.Drawing.Point(4, 24);
+            this.Logs.Name = "Logs";
+            this.Logs.Padding = new System.Windows.Forms.Padding(3);
+            this.Logs.Size = new System.Drawing.Size(423, 275);
+            this.Logs.TabIndex = 1;
+            this.Logs.Text = "Logs";
             // 
             // logbox
             // 
@@ -143,13 +149,52 @@
             // statusbox
             // 
             this.statusbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.statusbox.Location = new System.Drawing.Point(54, 346);
+            this.statusbox.Location = new System.Drawing.Point(54, 349);
             this.statusbox.Multiline = false;
             this.statusbox.Name = "statusbox";
             this.statusbox.ReadOnly = true;
             this.statusbox.Size = new System.Drawing.Size(120, 18);
             this.statusbox.TabIndex = 6;
             this.statusbox.Text = "";
+            // 
+            // Discord
+            // 
+            this.Discord.BackColor = System.Drawing.SystemColors.Control;
+            this.Discord.Controls.Add(this.discordconnect);
+            this.Discord.Controls.Add(this.discordtoken);
+            this.Discord.Controls.Add(this.label3);
+            this.Discord.Location = new System.Drawing.Point(4, 24);
+            this.Discord.Name = "Discord";
+            this.Discord.Padding = new System.Windows.Forms.Padding(3);
+            this.Discord.Size = new System.Drawing.Size(423, 275);
+            this.Discord.TabIndex = 2;
+            this.Discord.Text = "Discord";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 17);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 15);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Token:";
+            // 
+            // discordtoken
+            // 
+            this.discordtoken.Location = new System.Drawing.Point(50, 14);
+            this.discordtoken.Name = "discordtoken";
+            this.discordtoken.Size = new System.Drawing.Size(350, 23);
+            this.discordtoken.TabIndex = 1;
+            // 
+            // discordconnect
+            // 
+            this.discordconnect.Location = new System.Drawing.Point(28, 66);
+            this.discordconnect.Name = "discordconnect";
+            this.discordconnect.Size = new System.Drawing.Size(142, 23);
+            this.discordconnect.TabIndex = 2;
+            this.discordconnect.Text = "Connect to Discord";
+            this.discordconnect.UseVisualStyleBackColor = true;
+            this.discordconnect.Click += new System.EventHandler(this.discordconnect_Click);
             // 
             // Form1
             // 
@@ -167,8 +212,10 @@
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.LinkTrades.ResumeLayout(false);
+            this.Logs.ResumeLayout(false);
+            this.Discord.ResumeLayout(false);
+            this.Discord.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,8 +224,8 @@
         #endregion
 
         private TabControl tabControl1;
-        private TabPage tabPage2;
-        private TabPage tabPage1;
+        private TabPage Logs;
+        private TabPage LinkTrades;
         private Label label1;
         private Button consoleconnect;
         private Button consoledisconnect;
@@ -187,5 +234,9 @@
         public RichTextBox statusbox;
         public RichTextBox logbox;
         private Button startlinktrades;
+        private TabPage Discord;
+        private Button discordconnect;
+        public TextBox discordtoken;
+        private Label label3;
     }
 }

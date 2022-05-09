@@ -66,5 +66,13 @@ namespace _3DS_link_trade_bot
         {
             LinkTradeBot.starttrades();
         }
+
+        private void discordconnect_Click(object sender, EventArgs e)
+        {
+            var bot = new discordmain();
+            bot.MainAsync();
+            ChangeStatus("Connected to Discord");
+            Log("Connected to Discord");
+        }
     }
 }
