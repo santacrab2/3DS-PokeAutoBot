@@ -24,5 +24,13 @@ namespace _3DS_link_trade_bot
 
         }
 
+        [SlashCommand("trade", "trades you a pokemon over link trade in 3ds games")]
+        public async Task trade(string TrainerName, string PokemonText = "", Attachment PK7orPK6 = null)
+        {
+            queuesystem tobequeued;
+            tobequeued = new queuesystem() { discordcontext = Context,friendcode = "",IGN=TrainerName,mode = botmode.trade, tradepokemon = EntityBlank.GetBlank(7) };
+            The_Q.Enqueue(tobequeued);
+        }
+
     }
 }

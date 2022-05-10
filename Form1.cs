@@ -38,8 +38,19 @@ namespace _3DS_link_trade_bot
                 
                 Log("IR Connected");
             }
-            
-            
+            var buttonarray = new byte[20];
+            var nokey = BitConverter.GetBytes(0xFFF);
+            nokey.CopyTo(buttonarray, 0);
+            nokey = BitConverter.GetBytes(0x2000000);
+            nokey.CopyTo(buttonarray, 4);
+            nokey = BitConverter.GetBytes(0x800800);
+            nokey.CopyTo(buttonarray, 8);
+            nokey = BitConverter.GetBytes(0x80800081);
+            nokey.CopyTo(buttonarray, 12);
+            nokey = BitConverter.GetBytes(0);
+            nokey.CopyTo(buttonarray, 16);
+            Form1.Connection.Send(buttonarray);
+
         }
         public static void ChangeStatus(string text)
         {
@@ -48,7 +59,7 @@ namespace _3DS_link_trade_bot
         }
         public static void Log(string text)
         {
-            Program.form1.logbox.AppendText(text + "\n");
+            form1.logbox.AppendText(text + "\n");
         }
 
         private void logbox_TextChanged(object sender, EventArgs e)
@@ -88,6 +99,9 @@ namespace _3DS_link_trade_bot
             Properties.Settings.Default.Save();
         }
 
-      
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LinkTradeBot.LinkTradeRoutine();
+        }
     }
 }

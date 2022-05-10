@@ -31,6 +31,10 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.LinkTrades = new System.Windows.Forms.TabPage();
             this.startlinktrades = new System.Windows.Forms.Button();
+            this.Discord = new System.Windows.Forms.TabPage();
+            this.discordconnect = new System.Windows.Forms.Button();
+            this.discordtoken = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.Logs = new System.Windows.Forms.TabPage();
             this.logbox = new System.Windows.Forms.RichTextBox();
             this.IpAddress = new System.Windows.Forms.TextBox();
@@ -39,14 +43,11 @@
             this.consoledisconnect = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.statusbox = new System.Windows.Forms.RichTextBox();
-            this.Discord = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.discordtoken = new System.Windows.Forms.TextBox();
-            this.discordconnect = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.LinkTrades.SuspendLayout();
-            this.Logs.SuspendLayout();
             this.Discord.SuspendLayout();
+            this.Logs.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -63,6 +64,7 @@
             // LinkTrades
             // 
             this.LinkTrades.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.LinkTrades.Controls.Add(this.button1);
             this.LinkTrades.Controls.Add(this.startlinktrades);
             this.LinkTrades.Location = new System.Drawing.Point(4, 24);
             this.LinkTrades.Name = "LinkTrades";
@@ -80,6 +82,45 @@
             this.startlinktrades.Text = "Start";
             this.startlinktrades.UseVisualStyleBackColor = true;
             this.startlinktrades.Click += new System.EventHandler(this.startlinktrades_Click);
+            // 
+            // Discord
+            // 
+            this.Discord.BackColor = System.Drawing.SystemColors.Control;
+            this.Discord.Controls.Add(this.discordconnect);
+            this.Discord.Controls.Add(this.discordtoken);
+            this.Discord.Controls.Add(this.label3);
+            this.Discord.Location = new System.Drawing.Point(4, 24);
+            this.Discord.Name = "Discord";
+            this.Discord.Padding = new System.Windows.Forms.Padding(3);
+            this.Discord.Size = new System.Drawing.Size(423, 275);
+            this.Discord.TabIndex = 2;
+            this.Discord.Text = "Discord";
+            // 
+            // discordconnect
+            // 
+            this.discordconnect.Location = new System.Drawing.Point(28, 66);
+            this.discordconnect.Name = "discordconnect";
+            this.discordconnect.Size = new System.Drawing.Size(142, 23);
+            this.discordconnect.TabIndex = 2;
+            this.discordconnect.Text = "Connect to Discord";
+            this.discordconnect.UseVisualStyleBackColor = true;
+            this.discordconnect.Click += new System.EventHandler(this.discordconnect_Click);
+            // 
+            // discordtoken
+            // 
+            this.discordtoken.Location = new System.Drawing.Point(50, 14);
+            this.discordtoken.Name = "discordtoken";
+            this.discordtoken.Size = new System.Drawing.Size(350, 23);
+            this.discordtoken.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 17);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 15);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Token:";
             // 
             // Logs
             // 
@@ -107,7 +148,6 @@
             this.IpAddress.Name = "IpAddress";
             this.IpAddress.Size = new System.Drawing.Size(100, 23);
             this.IpAddress.TabIndex = 1;
-            this.IpAddress.Text = Properties.Settings.Default.IpAddress;
             // 
             // label1
             // 
@@ -157,45 +197,15 @@
             this.statusbox.TabIndex = 6;
             this.statusbox.Text = "";
             // 
-            // Discord
+            // button1
             // 
-            this.Discord.BackColor = System.Drawing.SystemColors.Control;
-            this.Discord.Controls.Add(this.discordconnect);
-            this.Discord.Controls.Add(this.discordtoken);
-            this.Discord.Controls.Add(this.label3);
-            this.Discord.Location = new System.Drawing.Point(4, 24);
-            this.Discord.Name = "Discord";
-            this.Discord.Padding = new System.Windows.Forms.Padding(3);
-            this.Discord.Size = new System.Drawing.Size(423, 275);
-            this.Discord.TabIndex = 2;
-            this.Discord.Text = "Discord";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 17);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 15);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Token:";
-            // 
-            // discordtoken
-            // 
-            this.discordtoken.Location = new System.Drawing.Point(50, 14);
-            this.discordtoken.Name = "discordtoken";
-            this.discordtoken.Size = new System.Drawing.Size(350, 23);
-            this.discordtoken.TabIndex = 1;
-            this.discordtoken.Text = Properties.Settings.Default.discordtoken;
-            // 
-            // discordconnect
-            // 
-            this.discordconnect.Location = new System.Drawing.Point(28, 66);
-            this.discordconnect.Name = "discordconnect";
-            this.discordconnect.Size = new System.Drawing.Size(142, 23);
-            this.discordconnect.TabIndex = 2;
-            this.discordconnect.Text = "Connect to Discord";
-            this.discordconnect.UseVisualStyleBackColor = true;
-            this.discordconnect.Click += new System.EventHandler(this.discordconnect_Click);
+            this.button1.Location = new System.Drawing.Point(327, 221);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
@@ -216,9 +226,9 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.LinkTrades.ResumeLayout(false);
-            this.Logs.ResumeLayout(false);
             this.Discord.ResumeLayout(false);
             this.Discord.PerformLayout();
+            this.Logs.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,5 +251,6 @@
         private Button discordconnect;
         public TextBox discordtoken;
         private Label label3;
+        private Button button1;
     }
 }
