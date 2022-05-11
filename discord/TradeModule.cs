@@ -17,16 +17,18 @@ namespace _3DS_link_trade_bot
     public class TradeModule : InteractionModuleBase<SocketInteractionContext>
     {
         [SlashCommand("addfc","adds you to the bots friend list, dont forget to add the bot!")]
-        public async Task addfc(string friendcode)
+        public async Task addfc([Summary(description:"No Dashes!!")]string friendcode)
         {
+            try { await Context.User.SendMessageAsync($"I Have added you to the Friend Code queue. I will message you here when I add you. My Fc is {Program.form1.botfc.Text}"); } catch { await RespondAsync("enable private messages from users on the server to be queued"); return; }
             var tobequeued = new queuesystem() { discordcontext = Context,friendcode = friendcode,tradepokemon=EntityBlank.GetBlank(7),IGN ="",mode = botmode.addfc};
             The_Q.Enqueue(tobequeued);
+            await RespondAsync($"Added {Context.User.Username} to the Friend Code queue.");
 
 
         }
 
         [SlashCommand("trade", "trades you a pokemon over link trade in 3ds games")]
-        public async Task trade(string TrainerName, string PokemonText = " ", Attachment PK7orPK6 = null)
+        public async Task trade(string TrainerName, string PokemonText = " ", Attachment pk7 = null)
         {
             var channelcheck = Program.form1.botchannel.Text.Split(',');
             if (!channelcheck.Contains(Context.Channel.Id.ToString()))
@@ -80,14 +82,14 @@ namespace _3DS_link_trade_bot
                 The_Q.Enqueue(tobequeued);
                
             }
-            if (PK7orPK6 != null)
+            if (pk7 != null)
             {
-                if (!EntityDetection.IsSizePlausible(PK7orPK6.Size))
+                if (!EntityDetection.IsSizePlausible(pk7.Size))
                 {
                     await RespondAsync("this is not a pk file", ephemeral:true);
                     return;
                 }
-                var buffer = await discordmain.DownloadFromUrlAsync(PK7orPK6.Url);
+                var buffer = await discordmain.DownloadFromUrlAsync(pk7.Url);
                 var pkm = new PK7(buffer);
                 if(!new LegalityAnalysis(pkm).Valid)
                 {

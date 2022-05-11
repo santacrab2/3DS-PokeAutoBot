@@ -33,6 +33,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.startlinktrades = new System.Windows.Forms.Button();
             this.Discord = new System.Windows.Forms.TabPage();
+            this.botchannel = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.discordconnect = new System.Windows.Forms.Button();
             this.discordtoken = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,8 +46,9 @@
             this.consoledisconnect = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.statusbox = new System.Windows.Forms.RichTextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.botchannel = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.botfc = new System.Windows.Forms.TextBox();
+            this.LinkTradeStop = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.LinkTrades.SuspendLayout();
             this.Discord.SuspendLayout();
@@ -66,6 +69,7 @@
             // LinkTrades
             // 
             this.LinkTrades.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.LinkTrades.Controls.Add(this.LinkTradeStop);
             this.LinkTrades.Controls.Add(this.button1);
             this.LinkTrades.Controls.Add(this.startlinktrades);
             this.LinkTrades.Location = new System.Drawing.Point(4, 24);
@@ -98,6 +102,8 @@
             // Discord
             // 
             this.Discord.BackColor = System.Drawing.SystemColors.Control;
+            this.Discord.Controls.Add(this.botfc);
+            this.Discord.Controls.Add(this.label5);
             this.Discord.Controls.Add(this.botchannel);
             this.Discord.Controls.Add(this.label4);
             this.Discord.Controls.Add(this.discordconnect);
@@ -110,9 +116,26 @@
             this.Discord.TabIndex = 2;
             this.Discord.Text = "Discord";
             // 
+            // botchannel
+            // 
+            this.botchannel.Location = new System.Drawing.Point(84, 43);
+            this.botchannel.Name = "botchannel";
+            this.botchannel.Size = new System.Drawing.Size(135, 23);
+            this.botchannel.TabIndex = 4;
+            this.botchannel.Text = "Always needs a Comma";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 46);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(75, 15);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Bot Channel:";
+            // 
             // discordconnect
             // 
-            this.discordconnect.Location = new System.Drawing.Point(28, 96);
+            this.discordconnect.Location = new System.Drawing.Point(28, 246);
             this.discordconnect.Name = "discordconnect";
             this.discordconnect.Size = new System.Drawing.Size(142, 23);
             this.discordconnect.TabIndex = 2;
@@ -126,6 +149,7 @@
             this.discordtoken.Name = "discordtoken";
             this.discordtoken.Size = new System.Drawing.Size(350, 23);
             this.discordtoken.TabIndex = 1;
+            this.discordtoken.Text = "token";
             // 
             // label3
             // 
@@ -162,6 +186,7 @@
             this.IpAddress.Name = "IpAddress";
             this.IpAddress.Size = new System.Drawing.Size(100, 23);
             this.IpAddress.TabIndex = 1;
+            this.IpAddress.Text = "192.168.1.";
             // 
             // label1
             // 
@@ -211,21 +236,32 @@
             this.statusbox.TabIndex = 6;
             this.statusbox.Text = "";
             // 
-            // label4
+            // label5
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 51);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Bot Channel";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 72);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 15);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Bots FC:";
             // 
-            // botchannel
+            // botfc
             // 
-            this.botchannel.Location = new System.Drawing.Point(91, 48);
-            this.botchannel.Name = "botchannel";
-            this.botchannel.Size = new System.Drawing.Size(128, 23);
-            this.botchannel.TabIndex = 4;
+            this.botfc.Location = new System.Drawing.Point(64, 69);
+            this.botfc.Name = "botfc";
+            this.botfc.Size = new System.Drawing.Size(148, 23);
+            this.botfc.TabIndex = 6;
+            this.botfc.Text = "0";
+            // 
+            // LinkTradeStop
+            // 
+            this.LinkTradeStop.Location = new System.Drawing.Point(112, 24);
+            this.LinkTradeStop.Name = "LinkTradeStop";
+            this.LinkTradeStop.Size = new System.Drawing.Size(75, 23);
+            this.LinkTradeStop.TabIndex = 2;
+            this.LinkTradeStop.Text = "Stop";
+            this.LinkTradeStop.UseVisualStyleBackColor = true;
+            this.LinkTradeStop.Click += new System.EventHandler(this.LinkTradeStop_Click);
             // 
             // Form1
             // 
@@ -274,5 +310,8 @@
         private Button button1;
         private Label label4;
         public TextBox botchannel;
+        public TextBox botfc;
+        private Label label5;
+        private Button LinkTradeStop;
     }
 }

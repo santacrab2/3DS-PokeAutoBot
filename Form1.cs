@@ -1,8 +1,9 @@
-using System.Net;
+﻿using System.Net;
 using System;
 using System.Text;
 using System.IO;
 using PKHeX.Core;
+using Discord;
 using System.Net.Sockets;
 using static _3DS_link_trade_bot.dsbotbase;
 using static _3DS_link_trade_bot.Program;
@@ -82,7 +83,16 @@ namespace _3DS_link_trade_bot
 
         private void startlinktrades_Click(object sender, EventArgs e)
         {
+
             LinkTradeBot.starttrades();
+            var botchannels = form1.botchannel.Text.Split(',');
+            foreach (var channel in botchannels)
+            {
+                var botchannelid = (ITextChannel)discordmain._client.GetChannel(ulong.Parse(channel));
+                botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("❌", "✅"));
+                botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
+            }
+            
         }
 
         private void discordconnect_Click(object sender, EventArgs e)
@@ -102,6 +112,19 @@ namespace _3DS_link_trade_bot
         private void button1_Click(object sender, EventArgs e)
         {
             LinkTradeBot.LinkTradeRoutine();
+        }
+
+        private void LinkTradeStop_Click(object sender, EventArgs e)
+        {
+            var botchannels = form1.botchannel.Text.Split(',');
+            foreach (var channel in botchannels)
+            {
+                var botchannelid = (ITextChannel)discordmain._client.GetChannel(ulong.Parse(channel));
+                botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("✅", "❌"));
+                botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
+            }
+            LinkTradeBot.tradetoken.Cancel();
+            LinkTradeBot.tradetoken = new();
         }
     }
 }
