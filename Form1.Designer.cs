@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.LinkTrades = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.startlinktrades = new System.Windows.Forms.Button();
             this.Discord = new System.Windows.Forms.TabPage();
             this.discordconnect = new System.Windows.Forms.Button();
@@ -43,7 +44,8 @@
             this.consoledisconnect = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.statusbox = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.botchannel = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.LinkTrades.SuspendLayout();
             this.Discord.SuspendLayout();
@@ -73,6 +75,16 @@
             this.LinkTrades.TabIndex = 0;
             this.LinkTrades.Text = "Link Trades";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(327, 221);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // startlinktrades
             // 
             this.startlinktrades.Location = new System.Drawing.Point(31, 24);
@@ -86,6 +98,8 @@
             // Discord
             // 
             this.Discord.BackColor = System.Drawing.SystemColors.Control;
+            this.Discord.Controls.Add(this.botchannel);
+            this.Discord.Controls.Add(this.label4);
             this.Discord.Controls.Add(this.discordconnect);
             this.Discord.Controls.Add(this.discordtoken);
             this.Discord.Controls.Add(this.label3);
@@ -98,7 +112,7 @@
             // 
             // discordconnect
             // 
-            this.discordconnect.Location = new System.Drawing.Point(28, 66);
+            this.discordconnect.Location = new System.Drawing.Point(28, 96);
             this.discordconnect.Name = "discordconnect";
             this.discordconnect.Size = new System.Drawing.Size(142, 23);
             this.discordconnect.TabIndex = 2;
@@ -197,15 +211,21 @@
             this.statusbox.TabIndex = 6;
             this.statusbox.Text = "";
             // 
-            // button1
+            // label4
             // 
-            this.button1.Location = new System.Drawing.Point(327, 221);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 51);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(72, 15);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Bot Channel";
+            // 
+            // botchannel
+            // 
+            this.botchannel.Location = new System.Drawing.Point(91, 48);
+            this.botchannel.Name = "botchannel";
+            this.botchannel.Size = new System.Drawing.Size(128, 23);
+            this.botchannel.TabIndex = 4;
             // 
             // Form1
             // 
@@ -252,5 +272,7 @@
         public TextBox discordtoken;
         private Label label3;
         private Button button1;
+        private Label label4;
+        public TextBox botchannel;
     }
 }

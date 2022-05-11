@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Discord;
+using PKHeX.Core;
+using PKHeX.Core.AutoMod;
+using PKHeX.Core.Searching;
 using System.Diagnostics;
 using static _3DS_link_trade_bot.Form1;
 using static _3DS_link_trade_bot.dsbotbase;
@@ -28,6 +32,7 @@ namespace _3DS_link_trade_bot
                     await click(X, 1);
                 }
                 tradeinfo = The_Q.Peek();
+                await tradeinfo.discordcontext.User.SendMessageAsync("starting your trade now, be prepared to accept the invite!");
                 The_Q.Dequeue();
                 switch (tradeinfo.mode)
                 {
@@ -38,18 +43,6 @@ namespace _3DS_link_trade_bot
             }
         }
 
-        public static void getfriendlist() 
-        {
-            var data = ntr.ReadBytes(Friendslistoffset, FriendListSize);
-            FriendList list = new FriendList(data);
-            for(int i = 0; i < FriendList.numofguests; i++)
-            {
-                var friend = list[i];
-                guestlist.Add(friend.friendname);
-           
-            }
-
-        }
         public static async Task LinkTradeRoutine()
         {
             if (!isconnected)
@@ -64,11 +57,13 @@ namespace _3DS_link_trade_bot
                     return;
                 }
             }
+            await injection(tradeinfo.tradepokemon);
             await touch(233, 119, 1);
             await touch(161, 83, 3);
             getfriendlist();
             await Task.Delay(5000);
             int downpresses = 0;
+          
             for(int j =0;j< FriendList.numofguests; j++)
             {
                 if (guestlist[j].Contains(tradeinfo.IGN))
@@ -76,6 +71,11 @@ namespace _3DS_link_trade_bot
                     downpresses = j;
                     break;
                 }
+            }
+            if (downpresses == 50)
+            {
+                await tradeinfo.discordcontext.User.SendMessageAsync("I could not find you on the trade list, Please refresh your internet connection and try again!");
+                return;
             }
             for (int f = 0; f < downpresses; f++)
                 await DpadClick(DpadDOWN, 1);
@@ -93,7 +93,53 @@ namespace _3DS_link_trade_bot
                
             await Task.Delay(5_000);
             await click(A, 1);
+            await click(A, 1);
+            stop.Restart();
+            while(ntr.ReadBytes(finalofferscreenoff,1)[0] != 0x4F)
+            {
+                if(stop.ElapsedMilliseconds > 30_000)
+                {
+                    for(int i = 0; i < 3; i++)
+                        await click(B, 2);
+                    await click(A, 3);
+                    return;
+                }
+                await Task.Delay(25);
+            }
+            await click(A, 50);
+            var tradedpkbytes = ntr.ReadBytes(box1slot1, 232);
+            var tradedpk = new PK7(tradedpkbytes);
+            if (SearchUtil.HashByDetails(tradedpk) == SearchUtil.HashByDetails(tradeinfo.tradepokemon))
+            {
+                await tradeinfo.discordcontext.User.SendMessageAsync("Something went wrong, please try again");
+               
+            }
+            else
+            {
+                var temp = $"{Directory.GetCurrentDirectory()}/{tradedpk.FileName}";
+                File.WriteAllBytes(temp, tradedpk.DecryptedBoxData);
+                await tradeinfo.discordcontext.User.SendFileAsync(temp, "Here is the pokemon you traded me");
+                File.Delete(temp);
+            }
+            await click(B, 1);
+            await click(A, 1);
+            return;
 
+        }
+        public static async Task injection(PKM pk)
+        {
+            ntr.WriteBytes(pk.EncryptedBoxData, box1slot1);
+        }
+        public static void getfriendlist()
+        {
+            var data = ntr.ReadBytes(Friendslistoffset, FriendListSize);
+            FriendList list = new FriendList(data);
+            for (int i = 0; i < FriendList.numofguests; i++)
+            {
+                var friend = list[i];
+                guestlist.Add(friend.friendname);
+
+            }
 
         }
         public static async Task FriendCodeRoutine()

@@ -12,6 +12,7 @@ namespace _3DS_link_trade_bot
     public class queuesystem
     {
         public SocketInteractionContext discordcontext { get; set; }
+        
         public PKM tradepokemon { get; set; }
         public string IGN { get; set; }
        public string friendcode { get; set; }

@@ -18,6 +18,9 @@ namespace _3DS_link_trade_bot
 
         public static uint FailedTradeoff = 0x3023E34C;
         public static bool failedtrade => Form1.ntr.ReadBytes(FailedTradeoff, 1)[0] == 0x64;
+        public static uint OfferedPokemonoff = 0x006A6DD4;
+        public static uint finalofferscreenoff = 0x30192EEA;
+        public static uint box1slot1 = 0x33015AB0;
 
     }
     public readonly ref struct FriendList
