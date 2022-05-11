@@ -25,7 +25,7 @@ namespace _3DS_link_trade_bot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string IpAddress {
             get {
                 return ((string)(this["IpAddress"]));
@@ -37,13 +37,37 @@ namespace _3DS_link_trade_bot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("token")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string discordtoken {
             get {
                 return ((string)(this["discordtoken"]));
             }
             set {
                 this["discordtoken"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string botchannel {
+            get {
+                return ((string)(this["botchannel"]));
+            }
+            set {
+                this["botchannel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string botfc {
+            get {
+                return ((string)(this["botfc"]));
+            }
+            set {
+                this["botfc"] = value;
             }
         }
     }

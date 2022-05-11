@@ -3,10 +3,16 @@
   <Profiles />
   <Settings>
     <Setting Name="IpAddress" Type="System.String" Scope="User">
-      <Value Profile="(Default)">192.168.1.</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="discordtoken" Type="System.String" Scope="User">
-      <Value Profile="(Default)">token</Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="botchannel" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="botfc" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

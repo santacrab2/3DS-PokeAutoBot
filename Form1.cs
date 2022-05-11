@@ -69,16 +69,16 @@ namespace _3DS_link_trade_bot
         }
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Properties.Settings.Default.IpAddress = form1.IpAddress.Text;
-            Properties.Settings.Default.discordtoken = form1.discordtoken.Text;
-            Properties.Settings.Default.Save();
+        
             ntr.Disconnect();
             Application.Exit();
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Properties.Settings.Default.IpAddress = form1.IpAddress.Text;
-            Properties.Settings.Default.discordtoken = form1.discordtoken.Text;
+            form1.IpAddress.Text = Properties.Settings.Default.IpAddress;
+            form1.discordtoken.Text = Properties.Settings.Default.discordtoken;
+            form1.botchannel.Text = Properties.Settings.Default.botchannel;
+            form1.botfc.Text = Properties.Settings.Default.botfc;
         }
 
         private void startlinktrades_Click(object sender, EventArgs e)
@@ -106,6 +106,8 @@ namespace _3DS_link_trade_bot
         {
             Properties.Settings.Default.IpAddress = form1.IpAddress.Text;
             Properties.Settings.Default.discordtoken = form1.discordtoken.Text;
+            Properties.Settings.Default.botchannel = form1.botchannel.Text;
+            Properties.Settings.Default.botfc = form1.botfc.Text;   
             Properties.Settings.Default.Save();
         }
 
