@@ -63,10 +63,10 @@ namespace _3DS_link_trade_bot
 
                 ShowdownSet set = ConvertToShowdown(PokemonText);
                 var sav = SaveUtil.GetBlankSAV(GameVersion.UM, "Piplup");
-                var pkm = sav.GetLegalFromSet(set, out _);
+                var pkm = sav.GetLegalFromSet(set, out var res);
                
 
-                if (!new LegalityAnalysis(pkm).Valid)
+                if (!new LegalityAnalysis(pkm).Valid || res.ToString() != "Regenerated")
                 {
                     var reason =  $"I wasn't able to create a {(Species)set.Species} from that set.";
                     var imsg = $"Oops! {reason}";
@@ -76,6 +76,7 @@ namespace _3DS_link_trade_bot
                     return;
                 }
                 try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await RespondAsync("enable private messages from users on the server to be queued");return; }
+               
                 await RespondAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count()+1}. Receiving: {(Species)pkm.Species}");
                 queuesystem tobequeued;
                 tobequeued = new queuesystem() { discordcontext = Context, friendcode = "", IGN = TrainerName, mode = botmode.trade, tradepokemon = pkm };

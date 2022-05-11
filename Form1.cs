@@ -85,13 +85,20 @@ namespace _3DS_link_trade_bot
         {
 
             LinkTradeBot.starttrades();
-            var botchannels = form1.botchannel.Text.Split(',');
+         
+            var botchannels = form1.botchannel.Text.Split(',',StringSplitOptions.RemoveEmptyEntries);
             foreach (var channel in botchannels)
             {
-                var botchannelid = (ITextChannel)discordmain._client.GetChannel(ulong.Parse(channel));
+                var id = ulong.Parse(channel);
+                var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(id).Result;
                 botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("❌", "✅"));
                 botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
+                var offembed = new EmbedBuilder();
+                offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Gen 7 Link Trade Bot is Online");
+                botchannelid.SendMessageAsync("<@&898900914348372058>", embed: offembed.Build());
             }
+        
+
             
         }
 
@@ -118,15 +125,20 @@ namespace _3DS_link_trade_bot
 
         private void LinkTradeStop_Click(object sender, EventArgs e)
         {
-            var botchannels = form1.botchannel.Text.Split(',');
+            LinkTradeBot.tradetoken.Cancel();
+            var botchannels = form1.botchannel.Text.Split(',', StringSplitOptions.RemoveEmptyEntries);
             foreach (var channel in botchannels)
             {
-                var botchannelid = (ITextChannel)discordmain._client.GetChannel(ulong.Parse(channel));
+                var id = ulong.Parse(channel);
+                var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(id).Result;
                 botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("✅", "❌"));
                 botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
+                var offembed = new EmbedBuilder();
+                offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Gen 7 Link Trade Bot is Offline");
+                botchannelid.SendMessageAsync(embed: offembed.Build());
             }
-            LinkTradeBot.tradetoken.Cancel();
-            LinkTradeBot.tradetoken = new();
+       
+         
         }
     }
 }

@@ -26,10 +26,11 @@ namespace _3DS_link_trade_bot
         {
             while (!tradetoken.IsCancellationRequested)
             {
-                while (The_Q.Count == 0)
+                if(The_Q.Count == 0)
                 {
                     await click(X, 1);
                     await click(X, 1);
+                    continue;
                 }
                 tradeinfo = The_Q.Peek();
                 await tradeinfo.discordcontext.User.SendMessageAsync("starting your trade now, be prepared to accept the invite!");
@@ -41,6 +42,7 @@ namespace _3DS_link_trade_bot
 
                 }
             }
+            tradetoken = new();
         }
 
         public static async Task LinkTradeRoutine()
@@ -62,7 +64,7 @@ namespace _3DS_link_trade_bot
             await touch(161, 83, 3);
             getfriendlist();
             await Task.Delay(5000);
-            int downpresses = 0;
+            int downpresses = 50;
           
             for(int j =0;j< FriendList.numofguests; j++)
             {
@@ -71,8 +73,9 @@ namespace _3DS_link_trade_bot
                     downpresses = j;
                     break;
                 }
+
             }
-            if (downpresses == 50)
+            if (downpresses ==50)
             {
                 await tradeinfo.discordcontext.User.SendMessageAsync("I could not find you on the trade list, Please refresh your internet connection and try again!");
                 return;
