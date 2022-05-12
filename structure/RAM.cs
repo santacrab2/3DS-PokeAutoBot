@@ -21,6 +21,10 @@ namespace _3DS_link_trade_bot
         public static uint OfferedPokemonoff = 0x006A6DD4;
         public static uint finalofferscreenoff = 0x30192EEA;
         public static uint box1slot1 = 0x33015AB0;
+        public static uint tradevolutionscreenoff = 0x3002040C;
+        public static bool tradeevolution => Form1.ntr.ReadBytes(tradevolutionscreenoff, 1)[0] == 0x57;
+        public static uint boxscreenoff = 0x006A610A;
+        public static bool onboxscreen => BitConverter.ToUInt16(Form1.ntr.ReadBytes(boxscreenoff, 2)) == 0x4120;
 
     }
     public readonly ref struct FriendList

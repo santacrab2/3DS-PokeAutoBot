@@ -34,7 +34,6 @@ namespace _3DS_link_trade_bot
                     continue;
                 }
                 tradeinfo = The_Q.Peek();
-                
                 The_Q.Dequeue();
                 switch (tradeinfo.mode)
                 {
@@ -54,9 +53,9 @@ namespace _3DS_link_trade_bot
                 
                 await touch(296, 221,3);
                 await click(A,1);
-                await click(A, 10);
-                await click(A, 5);
-                await click(A, 10);
+                await click(A, 20);
+                await click(A, 15);
+                await click(A, 20);
                 if (!isconnected)
                 {
                     return;
@@ -82,7 +81,7 @@ namespace _3DS_link_trade_bot
             {
                 await tradeinfo.discordcontext.User.SendMessageAsync("I could not find you on the trade list, Please refresh your internet connection and try again!");
                 await click(B, 1);
-                await click(B, 1);
+                await click(B, 5);
                 return;
             }
             for (int f = 0; f < downpresses; f++)
@@ -114,11 +113,11 @@ namespace _3DS_link_trade_bot
                 }
                 await Task.Delay(25);
             }
-            await click(A, 1);
-            stop.Restart();
-            while(stop.ElapsedMilliseconds <= 60_000)
+            await click(A, 10);
+            //stop.Restart();
+            while(!onboxscreen)
             {
-                await click(A, 1);
+                await click(A, 5);
             }
             var tradedpkbytes = ntr.ReadBytes(box1slot1, 232);
             var tradedpk = new PK7(tradedpkbytes);
@@ -157,6 +156,7 @@ namespace _3DS_link_trade_bot
         }
         public static async Task FriendCodeRoutine()
         {
+            await tradeinfo.discordcontext.User.SendMessageAsync("adding you to the friends list now!");
             await presshome(2);
 
             await touch(120, 10,1);
