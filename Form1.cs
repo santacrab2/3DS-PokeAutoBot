@@ -17,7 +17,7 @@ namespace _3DS_link_trade_bot
     public partial class Form1 : Form
     {
         public Settings settings = new();
-
+        
         public Form1()
         {
 
@@ -80,9 +80,9 @@ namespace _3DS_link_trade_bot
         private void MainForm_Load(object sender, EventArgs e)
         {
             form1.IpAddress.Text = Properties.Settings.Default.IpAddress;
-            form1.discordtoken.Text = Properties.Settings.Default.discordtoken;
-            form1.botchannel.Text = Properties.Settings.Default.botchannel;
-            form1.botfc.Text = Properties.Settings.Default.botfc;
+            settings.Discordsettings.token = Properties.Settings.Default.discordtoken;
+            settings.Discordsettings.BotChannel = Properties.Settings.Default.botchannel;
+            settings.FriendCode = Properties.Settings.Default.botfc;
         }
 
         private void startlinktrades_Click(object sender, EventArgs e)
@@ -104,11 +104,11 @@ namespace _3DS_link_trade_bot
 
             LinkTradeBot.starttrades();
          
-            var botchannels = form1.botchannel.Text.Split(',',StringSplitOptions.RemoveEmptyEntries);
-            foreach (var channel in botchannels)
+            
+            foreach (var channel in settings.Discordsettings.BotChannel)
             {
-                var id = ulong.Parse(channel);
-                var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(id).Result;
+                
+                var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;
                 botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("❌", "✅"));
                 botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
                 var offembed = new EmbedBuilder();
@@ -122,7 +122,7 @@ namespace _3DS_link_trade_bot
 
         private void discordconnect_Click(object sender, EventArgs e)
         {
-            var bot = new discordmain(settings.Discordsettings);
+            var bot = new discordmain(settings);
             bot.MainAsync();
             ChangeStatus("Connected to Discord");
             Log("Connected to Discord");
@@ -130,9 +130,9 @@ namespace _3DS_link_trade_bot
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Properties.Settings.Default.IpAddress = form1.IpAddress.Text;
-            Properties.Settings.Default.discordtoken = form1.discordtoken.Text;
-            Properties.Settings.Default.botchannel = form1.botchannel.Text;
-            Properties.Settings.Default.botfc = form1.botfc.Text;   
+            Properties.Settings.Default.discordtoken = settings.Discordsettings.token;
+            Properties.Settings.Default.botchannel = settings.Discordsettings.BotChannel;
+            Properties.Settings.Default.botfc = settings.FriendCode;   
             Properties.Settings.Default.Save();
         }
 
@@ -144,11 +144,11 @@ namespace _3DS_link_trade_bot
         private void LinkTradeStop_Click(object sender, EventArgs e)
         {
             LinkTradeBot.tradetoken.Cancel();
-            var botchannels = form1.botchannel.Text.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            foreach (var channel in botchannels)
+            
+            foreach (var channel in settings.Discordsettings.BotChannel)
             {
-                var id = ulong.Parse(channel);
-                var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(id).Result;
+                
+                var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;
                 botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("✅", "❌"));
                 botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
                 var offembed = new EmbedBuilder();

@@ -34,23 +34,17 @@
             this.button1 = new System.Windows.Forms.Button();
             this.startlinktrades = new System.Windows.Forms.Button();
             this.Discord = new System.Windows.Forms.TabPage();
-            this.botfc = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.botchannel = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.discordconnect = new System.Windows.Forms.Button();
-            this.discordtoken = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.Logs = new System.Windows.Forms.TabPage();
             this.logbox = new System.Windows.Forms.RichTextBox();
+            this.Settings = new System.Windows.Forms.TabPage();
+            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.IpAddress = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.consoleconnect = new System.Windows.Forms.Button();
             this.consoledisconnect = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.statusbox = new System.Windows.Forms.RichTextBox();
-            this.Settings = new System.Windows.Forms.TabPage();
-            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.tabs.SuspendLayout();
             this.LinkTrades.SuspendLayout();
             this.Discord.SuspendLayout();
@@ -62,8 +56,8 @@
             // 
             this.tabs.Controls.Add(this.LinkTrades);
             this.tabs.Controls.Add(this.Discord);
-            this.tabs.Controls.Add(this.Logs);
             this.tabs.Controls.Add(this.Settings);
+            this.tabs.Controls.Add(this.Logs);
             this.tabs.Location = new System.Drawing.Point(0, 43);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
@@ -116,80 +110,23 @@
             // Discord
             // 
             this.Discord.BackColor = System.Drawing.SystemColors.Control;
-            this.Discord.Controls.Add(this.botfc);
-            this.Discord.Controls.Add(this.label5);
-            this.Discord.Controls.Add(this.botchannel);
-            this.Discord.Controls.Add(this.label4);
             this.Discord.Controls.Add(this.discordconnect);
-            this.Discord.Controls.Add(this.discordtoken);
-            this.Discord.Controls.Add(this.label3);
             this.Discord.Location = new System.Drawing.Point(4, 24);
             this.Discord.Name = "Discord";
             this.Discord.Padding = new System.Windows.Forms.Padding(3);
             this.Discord.Size = new System.Drawing.Size(423, 275);
             this.Discord.TabIndex = 2;
-            this.Discord.Text = "Discord";
-            // 
-            // botfc
-            // 
-            this.botfc.Location = new System.Drawing.Point(64, 69);
-            this.botfc.Name = "botfc";
-            this.botfc.Size = new System.Drawing.Size(148, 23);
-            this.botfc.TabIndex = 6;
-            this.botfc.Text = "0";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 72);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(50, 15);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Bots FC:";
-            // 
-            // botchannel
-            // 
-            this.botchannel.Location = new System.Drawing.Point(84, 43);
-            this.botchannel.Name = "botchannel";
-            this.botchannel.Size = new System.Drawing.Size(135, 23);
-            this.botchannel.TabIndex = 4;
-            this.botchannel.Text = "Always needs a Comma";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 46);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Bot Channel:";
+            this.Discord.Text = "ChatServices";
             // 
             // discordconnect
             // 
-            this.discordconnect.Location = new System.Drawing.Point(28, 246);
+            this.discordconnect.Location = new System.Drawing.Point(8, 6);
             this.discordconnect.Name = "discordconnect";
             this.discordconnect.Size = new System.Drawing.Size(142, 23);
             this.discordconnect.TabIndex = 2;
             this.discordconnect.Text = "Connect to Discord";
             this.discordconnect.UseVisualStyleBackColor = true;
             this.discordconnect.Click += new System.EventHandler(this.discordconnect_Click);
-            // 
-            // discordtoken
-            // 
-            this.discordtoken.Location = new System.Drawing.Point(50, 14);
-            this.discordtoken.Name = "discordtoken";
-            this.discordtoken.Size = new System.Drawing.Size(350, 23);
-            this.discordtoken.TabIndex = 1;
-            this.discordtoken.Text = "token";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 17);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 15);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Token:";
             // 
             // Logs
             // 
@@ -210,6 +147,24 @@
             this.logbox.Size = new System.Drawing.Size(409, 263);
             this.logbox.TabIndex = 0;
             this.logbox.Text = "";
+            // 
+            // Settings
+            // 
+            this.Settings.BackColor = System.Drawing.SystemColors.Control;
+            this.Settings.Controls.Add(this.propertyGrid1);
+            this.Settings.Location = new System.Drawing.Point(4, 24);
+            this.Settings.Name = "Settings";
+            this.Settings.Padding = new System.Windows.Forms.Padding(3);
+            this.Settings.Size = new System.Drawing.Size(423, 275);
+            this.Settings.TabIndex = 3;
+            this.Settings.Text = "Settings";
+            // 
+            // propertyGrid1
+            // 
+            this.propertyGrid1.Location = new System.Drawing.Point(8, 6);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.Size = new System.Drawing.Size(409, 263);
+            this.propertyGrid1.TabIndex = 0;
             // 
             // IpAddress
             // 
@@ -267,24 +222,6 @@
             this.statusbox.TabIndex = 6;
             this.statusbox.Text = "";
             // 
-            // Settings
-            // 
-            this.Settings.BackColor = System.Drawing.SystemColors.Control;
-            this.Settings.Controls.Add(this.propertyGrid1);
-            this.Settings.Location = new System.Drawing.Point(4, 24);
-            this.Settings.Name = "Settings";
-            this.Settings.Padding = new System.Windows.Forms.Padding(3);
-            this.Settings.Size = new System.Drawing.Size(423, 275);
-            this.Settings.TabIndex = 3;
-            this.Settings.Text = "Settings";
-            // 
-            // propertyGrid1
-            // 
-            this.propertyGrid1.Location = new System.Drawing.Point(8, 6);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(409, 263);
-            this.propertyGrid1.TabIndex = 0;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -305,7 +242,6 @@
             this.tabs.ResumeLayout(false);
             this.LinkTrades.ResumeLayout(false);
             this.Discord.ResumeLayout(false);
-            this.Discord.PerformLayout();
             this.Logs.ResumeLayout(false);
             this.Settings.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -328,13 +264,7 @@
         private Button startlinktrades;
         private TabPage Discord;
         private Button discordconnect;
-        public TextBox discordtoken;
-        private Label label3;
         private Button button1;
-        private Label label4;
-        public TextBox botchannel;
-        public TextBox botfc;
-        private Label label5;
         private Button LinkTradeStop;
         private TabPage Settings;
         private PropertyGrid propertyGrid1;

@@ -8,7 +8,7 @@
     <Setting Name="discordtoken" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="botchannel" Type="System.String" Scope="User">
+    <Setting Name="botchannel" Type="System.UInt64[]" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="botfc" Type="System.String" Scope="User">

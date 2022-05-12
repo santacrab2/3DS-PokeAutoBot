@@ -13,8 +13,8 @@ namespace _3DS_link_trade_bot
         protected const string MainSettings = nameof(MainSettings);
         [Category(MainSettings), Description("Distribution")]
         public bool distribution { get; set; } = false;
-        [Category(MainSettings), Description("await time ")]
-        public int awaittime { get; set; } = 1;
+        [Category(MainSettings), Description("Bot's Friend Code, include Dashes")]
+        public string FriendCode { get; set; } = "0000-0000-0000";
         [Category(Discord)]
         [TypeConverter(typeof(ExpandableObjectConverter))]
         public Discordsettings Discordsettings { get; set; } = new();

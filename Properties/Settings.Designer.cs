@@ -49,10 +49,9 @@ namespace _3DS_link_trade_bot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string botchannel {
+        public ulong[] botchannel {
             get {
-                return ((string)(this["botchannel"]));
+                return ((ulong[])(this["botchannel"]));
             }
             set {
                 this["botchannel"] = value;

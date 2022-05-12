@@ -114,7 +114,12 @@ namespace _3DS_link_trade_bot
                 }
                 await Task.Delay(25);
             }
-            await click(A, 50);
+            await click(A, 1);
+            stop.Restart();
+            while(stop.ElapsedMilliseconds <= 60_000)
+            {
+                await click(A, 1);
+            }
             var tradedpkbytes = ntr.ReadBytes(box1slot1, 232);
             var tradedpk = new PK7(tradedpkbytes);
             if (SearchUtil.HashByDetails(tradedpk) == SearchUtil.HashByDetails(tradeinfo.tradepokemon))
