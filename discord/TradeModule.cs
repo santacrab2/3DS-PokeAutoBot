@@ -46,20 +46,8 @@ namespace _3DS_link_trade_bot
             }
             if (PokemonText != " ")
             {
-                Legalizer.EnableEasterEggs = false;
-                APILegality.SetAllLegalRibbons = false;
-                APILegality.SetMatchingBalls = true;
-                APILegality.ForceSpecifiedBall = true;
-                APILegality.UseXOROSHIRO = true;
-                APILegality.UseTrainerData = true;
-                APILegality.AllowTrainerOverride = true;
-                APILegality.AllowBatchCommands = true;
-                APILegality.PrioritizeGame = true;
-                APILegality.Timeout = 30;
-                APILegality.PrioritizeGameVersion = GameVersion.USUM;
-                // Reload Database & Ribbon Index
-                EncounterEvent.RefreshMGDB($"{Directory.GetCurrentDirectory()}//mgdb//");
-                RibbonStrings.ResetDictionary(GameInfo.Strings.ribbons);
+                await RespondAsync("I have received your command");
+          
 
                 ShowdownSet set = ConvertToShowdown(PokemonText);
                 var sav = SaveUtil.GetBlankSAV(GameVersion.UM, "Piplup");
@@ -72,12 +60,12 @@ namespace _3DS_link_trade_bot
                     var imsg = $"Oops! {reason}";
                  
                         imsg += $"\n{set.SetAnalysis(sav,pkm)}";
-                    await RespondAsync(imsg, ephemeral: true).ConfigureAwait(false);
+                    await FollowupAsync(imsg, ephemeral: true).ConfigureAwait(false);
                     return;
                 }
-                try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await RespondAsync("enable private messages from users on the server to be queued");return; }
+                try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await FollowupAsync("enable private messages from users on the server to be queued");return; }
                
-                await RespondAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count()+1}. Receiving: {(Species)pkm.Species}");
+                await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count()+1}. Receiving: {(Species)pkm.Species}");
                 queuesystem tobequeued;
                 tobequeued = new queuesystem() { discordcontext = Context, friendcode = "", IGN = TrainerName, mode = botmode.trade, tradepokemon = pkm };
                 The_Q.Enqueue(tobequeued);
@@ -85,9 +73,10 @@ namespace _3DS_link_trade_bot
             }
             if (pk7 != null)
             {
+                await RespondAsync("I have received your command");
                 if (!EntityDetection.IsSizePlausible(pk7.Size))
                 {
-                    await RespondAsync("this is not a pk file", ephemeral:true);
+                    await FollowupAsync("this is not a pk file", ephemeral:true);
                     return;
                 }
                 var buffer = await discordmain.DownloadFromUrlAsync(pk7.Url);
@@ -96,12 +85,12 @@ namespace _3DS_link_trade_bot
                 {
                     var sav = SaveUtil.GetBlankSAV(GameVersion.US, "santacrab");
                     ShowdownSet set = new(pkm);
-                    await RespondAsync($"This File is illegal. Heres why: {set.SetAnalysis(sav, pkm)}");
+                    await FollowupAsync($"This File is illegal. Heres why: {set.SetAnalysis(sav, pkm)}");
                 }
-                try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await RespondAsync("enable private messages from users on the server to be queued"); return; }
+                try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await FollowupAsync("enable private messages from users on the server to be queued"); return; }
                 var tobequeued = new queuesystem() { discordcontext = Context, friendcode = "", IGN = TrainerName, tradepokemon = pkm, mode = botmode.trade };
                 The_Q.Enqueue(tobequeued);
-                await RespondAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count() + 1}. Receiving: {(Species)pkm.Species}");
+                await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count() + 1}. Receiving: {(Species)pkm.Species}");
             }
         }
         [SlashCommand("hi","hi")]

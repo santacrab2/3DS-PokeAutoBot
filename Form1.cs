@@ -9,17 +9,20 @@ using static _3DS_link_trade_bot.dsbotbase;
 using static _3DS_link_trade_bot.Program;
 using static _3DS_link_trade_bot.NTRClient;
 using static _3DS_link_trade_bot.dsbotbase.Buttons;
+using PKHeX.Core.AutoMod;
 
 
 namespace _3DS_link_trade_bot
 {
     public partial class Form1 : Form
     {
-   
+        public Settings settings = new();
 
         public Form1()
         {
+
             InitializeComponent();
+            propertyGrid1.SelectedObject = settings;
         }
 
 
@@ -30,6 +33,7 @@ namespace _3DS_link_trade_bot
 
         private void consoleconnect_Click(object sender, EventArgs e)
         {
+            
             ntr.Connect();
             if (clientNTR.IsConnected)
                 ChangeStatus("ntr connected");
@@ -83,6 +87,20 @@ namespace _3DS_link_trade_bot
 
         private void startlinktrades_Click(object sender, EventArgs e)
         {
+            Legalizer.EnableEasterEggs = false;
+            APILegality.SetAllLegalRibbons = false;
+            APILegality.SetMatchingBalls = true;
+            APILegality.ForceSpecifiedBall = true;
+            APILegality.UseXOROSHIRO = true;
+            APILegality.UseTrainerData = true;
+            APILegality.AllowTrainerOverride = true;
+            APILegality.AllowBatchCommands = true;
+            APILegality.PrioritizeGame = true;
+            APILegality.Timeout = 30;
+            APILegality.PrioritizeGameVersion = GameVersion.USUM;
+            // Reload Database & Ribbon Index
+            EncounterEvent.RefreshMGDB($"{Directory.GetCurrentDirectory()}//mgdb//");
+            RibbonStrings.ResetDictionary(GameInfo.Strings.ribbons);
 
             LinkTradeBot.starttrades();
          
@@ -104,7 +122,7 @@ namespace _3DS_link_trade_bot
 
         private void discordconnect_Click(object sender, EventArgs e)
         {
-            var bot = new discordmain();
+            var bot = new discordmain(settings.Discordsettings);
             bot.MainAsync();
             ChangeStatus("Connected to Discord");
             Log("Connected to Discord");

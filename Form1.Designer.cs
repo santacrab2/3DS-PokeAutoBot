@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabs = new System.Windows.Forms.TabControl();
             this.LinkTrades = new System.Windows.Forms.TabPage();
+            this.LinkTradeStop = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.startlinktrades = new System.Windows.Forms.Button();
             this.Discord = new System.Windows.Forms.TabPage();
+            this.botfc = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.botchannel = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.discordconnect = new System.Windows.Forms.Button();
@@ -46,25 +49,26 @@
             this.consoledisconnect = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.statusbox = new System.Windows.Forms.RichTextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.botfc = new System.Windows.Forms.TextBox();
-            this.LinkTradeStop = new System.Windows.Forms.Button();
-            this.tabControl1.SuspendLayout();
+            this.Settings = new System.Windows.Forms.TabPage();
+            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
+            this.tabs.SuspendLayout();
             this.LinkTrades.SuspendLayout();
             this.Discord.SuspendLayout();
             this.Logs.SuspendLayout();
+            this.Settings.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabs
             // 
-            this.tabControl1.Controls.Add(this.LinkTrades);
-            this.tabControl1.Controls.Add(this.Discord);
-            this.tabControl1.Controls.Add(this.Logs);
-            this.tabControl1.Location = new System.Drawing.Point(0, 43);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(431, 303);
-            this.tabControl1.TabIndex = 0;
+            this.tabs.Controls.Add(this.LinkTrades);
+            this.tabs.Controls.Add(this.Discord);
+            this.tabs.Controls.Add(this.Logs);
+            this.tabs.Controls.Add(this.Settings);
+            this.tabs.Location = new System.Drawing.Point(0, 43);
+            this.tabs.Name = "tabs";
+            this.tabs.SelectedIndex = 0;
+            this.tabs.Size = new System.Drawing.Size(431, 303);
+            this.tabs.TabIndex = 0;
             // 
             // LinkTrades
             // 
@@ -78,6 +82,16 @@
             this.LinkTrades.Size = new System.Drawing.Size(423, 275);
             this.LinkTrades.TabIndex = 0;
             this.LinkTrades.Text = "Link Trades";
+            // 
+            // LinkTradeStop
+            // 
+            this.LinkTradeStop.Location = new System.Drawing.Point(112, 24);
+            this.LinkTradeStop.Name = "LinkTradeStop";
+            this.LinkTradeStop.Size = new System.Drawing.Size(75, 23);
+            this.LinkTradeStop.TabIndex = 2;
+            this.LinkTradeStop.Text = "Stop";
+            this.LinkTradeStop.UseVisualStyleBackColor = true;
+            this.LinkTradeStop.Click += new System.EventHandler(this.LinkTradeStop_Click);
             // 
             // button1
             // 
@@ -115,6 +129,23 @@
             this.Discord.Size = new System.Drawing.Size(423, 275);
             this.Discord.TabIndex = 2;
             this.Discord.Text = "Discord";
+            // 
+            // botfc
+            // 
+            this.botfc.Location = new System.Drawing.Point(64, 69);
+            this.botfc.Name = "botfc";
+            this.botfc.Size = new System.Drawing.Size(148, 23);
+            this.botfc.TabIndex = 6;
+            this.botfc.Text = "0";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 72);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 15);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Bots FC:";
             // 
             // botchannel
             // 
@@ -236,32 +267,23 @@
             this.statusbox.TabIndex = 6;
             this.statusbox.Text = "";
             // 
-            // label5
+            // Settings
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 72);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(50, 15);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Bots FC:";
+            this.Settings.BackColor = System.Drawing.SystemColors.Control;
+            this.Settings.Controls.Add(this.propertyGrid1);
+            this.Settings.Location = new System.Drawing.Point(4, 24);
+            this.Settings.Name = "Settings";
+            this.Settings.Padding = new System.Windows.Forms.Padding(3);
+            this.Settings.Size = new System.Drawing.Size(423, 275);
+            this.Settings.TabIndex = 3;
+            this.Settings.Text = "Settings";
             // 
-            // botfc
+            // propertyGrid1
             // 
-            this.botfc.Location = new System.Drawing.Point(64, 69);
-            this.botfc.Name = "botfc";
-            this.botfc.Size = new System.Drawing.Size(148, 23);
-            this.botfc.TabIndex = 6;
-            this.botfc.Text = "0";
-            // 
-            // LinkTradeStop
-            // 
-            this.LinkTradeStop.Location = new System.Drawing.Point(112, 24);
-            this.LinkTradeStop.Name = "LinkTradeStop";
-            this.LinkTradeStop.Size = new System.Drawing.Size(75, 23);
-            this.LinkTradeStop.TabIndex = 2;
-            this.LinkTradeStop.Text = "Stop";
-            this.LinkTradeStop.UseVisualStyleBackColor = true;
-            this.LinkTradeStop.Click += new System.EventHandler(this.LinkTradeStop_Click);
+            this.propertyGrid1.Location = new System.Drawing.Point(8, 6);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.Size = new System.Drawing.Size(409, 263);
+            this.propertyGrid1.TabIndex = 0;
             // 
             // Form1
             // 
@@ -274,17 +296,18 @@
             this.Controls.Add(this.consoleconnect);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.IpAddress);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabs);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.tabControl1.ResumeLayout(false);
+            this.tabs.ResumeLayout(false);
             this.LinkTrades.ResumeLayout(false);
             this.Discord.ResumeLayout(false);
             this.Discord.PerformLayout();
             this.Logs.ResumeLayout(false);
+            this.Settings.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,7 +315,7 @@
 
         #endregion
 
-        private TabControl tabControl1;
+        private TabControl tabs;
         private TabPage Logs;
         private TabPage LinkTrades;
         private Label label1;
@@ -313,5 +336,7 @@
         public TextBox botfc;
         private Label label5;
         private Button LinkTradeStop;
+        private TabPage Settings;
+        private PropertyGrid propertyGrid1;
     }
 }

@@ -17,13 +17,15 @@ namespace _3DS_link_trade_bot
         public static Discord.Interactions.IResult result;
         public static readonly WebClient webClient = new WebClient();
         public static DiscordSocketClient _client;
-
+        private Discordsettings _settings;
 
         public IServiceProvider _services;
+        public discordmain(Discordsettings settings)
+        {
+            _settings = settings;
+        }
 
-
-        public static void tot(string[] args)
-        => new discordmain().MainAsync().GetAwaiter().GetResult();
+      
 
         public async Task MainAsync()
         {
@@ -34,7 +36,7 @@ namespace _3DS_link_trade_bot
             var token = form1.discordtoken.Text;
             //var token = File.ReadAllText("token.txt");
 
-            await _client.LoginAsync(TokenType.Bot, token);
+            await _client.LoginAsync(TokenType.Bot, _settings.token);
             await _client.StartAsync();
            // CommandHandler ch = new CommandHandler(_client, _commands);
             //await ch.InstallCommandsAsync();

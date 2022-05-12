@@ -22,6 +22,7 @@ namespace _3DS_link_trade_bot
         public static queuesystem tradeinfo;
         public static CancellationTokenSource tradetoken = new CancellationTokenSource();
         public static Queue<queuesystem> The_Q = new Queue<queuesystem>();
+        
         public static async void starttrades()
         {
             while (!tradetoken.IsCancellationRequested)
@@ -33,7 +34,7 @@ namespace _3DS_link_trade_bot
                     continue;
                 }
                 tradeinfo = The_Q.Peek();
-                await tradeinfo.discordcontext.User.SendMessageAsync("starting your trade now, be prepared to accept the invite!");
+                
                 The_Q.Dequeue();
                 switch (tradeinfo.mode)
                 {
@@ -47,8 +48,10 @@ namespace _3DS_link_trade_bot
 
         public static async Task LinkTradeRoutine()
         {
+            await tradeinfo.discordcontext.User.SendMessageAsync("starting your trade now, be prepared to accept the invite!");
             if (!isconnected)
             {
+                
                 await touch(296, 221,3);
                 await click(A,1);
                 await click(A, 10);
@@ -78,6 +81,8 @@ namespace _3DS_link_trade_bot
             if (downpresses ==50)
             {
                 await tradeinfo.discordcontext.User.SendMessageAsync("I could not find you on the trade list, Please refresh your internet connection and try again!");
+                await click(B, 1);
+                await click(B, 1);
                 return;
             }
             for (int f = 0; f < downpresses; f++)
