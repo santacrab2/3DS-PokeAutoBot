@@ -37,8 +37,8 @@ namespace _3DS_link_trade_bot
                     await Task.Delay(5);
                     continue;
                 }
-                tradeinfo = The_Q.Peek();
-                The_Q.Dequeue();
+                tradeinfo = The_Q.Dequeue();
+                
                 switch (tradeinfo.mode)
                 {
                     case botmode.addfc: await FriendCodeRoutine(); continue;

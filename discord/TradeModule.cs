@@ -63,11 +63,11 @@ namespace _3DS_link_trade_bot
                     return;
                 }
                 try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await FollowupAsync("enable private messages from users on the server to be queued");return; }
-               
-                await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count()+1}. Receiving: {(Species)pkm.Species}");
                 queuesystem tobequeued;
                 tobequeued = new queuesystem() { discordcontext = Context, friendcode = "", IGN = TrainerName, mode = botmode.trade, tradepokemon = pkm };
                 The_Q.Enqueue(tobequeued);
+                await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count()}. Receiving: {(Species)pkm.Species}");
+                
                
             }
             if (pk7 != null)
@@ -79,7 +79,7 @@ namespace _3DS_link_trade_bot
                     return;
                 }
                 var buffer = await discordmain.DownloadFromUrlAsync(pk7.Url);
-                var pkm = new PK7(buffer);
+                var pkm = EntityFormat.GetFromBytes(buffer);
                 if(!new LegalityAnalysis(pkm).Valid)
                 {
                     var sav = SaveUtil.GetBlankSAV(GameVersion.US, "santacrab");
@@ -89,7 +89,7 @@ namespace _3DS_link_trade_bot
                 try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await FollowupAsync("enable private messages from users on the server to be queued"); return; }
                 var tobequeued = new queuesystem() { discordcontext = Context, friendcode = "", IGN = TrainerName, tradepokemon = pkm, mode = botmode.trade };
                 The_Q.Enqueue(tobequeued);
-                await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count() + 1}. Receiving: {(Species)pkm.Species}");
+                await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count()}. Receiving: {(Species)pkm.Species}");
             }
         }
         [SlashCommand("hi","hi")]

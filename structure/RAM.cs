@@ -46,7 +46,7 @@ namespace _3DS_link_trade_bot
         public friend(Span<byte> data) => Data = data;
         public byte first => Data[0];
         public byte[] test => new byte[12] {Data[24], Data[26], Data[28], Data[30],Data[32],Data[34],Data[36],Data[38],Data[40],Data[42],Data[44],Data[46] };
-        public string friendname => Encoding.ASCII.GetString(test).Trim();
+        public string friendname => Encoding.Unicode.GetString(Data.Slice(24,24)).Trim('\0');
     }
     public readonly ref struct GTSPage
     {

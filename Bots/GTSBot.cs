@@ -28,6 +28,7 @@ namespace _3DS_link_trade_bot
                 await click(A, 20);
                 await click(A, 15);
                 await click(A, 20);
+                await click(A, 5);
                 if (!isconnected)
                 {
                     return;
@@ -43,6 +44,8 @@ namespace _3DS_link_trade_bot
             {
                 ChangeStatus("no pokemon found");
                 _settings.PokemonWanted++;
+                if (_settings.PokemonWanted > 800)
+                    _settings.PokemonWanted = 1;
                 for (int i = 0; i < 3; i++)
                     await click(B, 1);
                 await click(A, 5);
@@ -55,6 +58,8 @@ namespace _3DS_link_trade_bot
             {
                 ChangeStatus("no legal request found");
                 _settings.PokemonWanted++;
+                if (_settings.PokemonWanted > 800)
+                    _settings.PokemonWanted = 1;
                 for (int i = 0; i < 3; i++)
                     await click(B, 1);
                 await click(A, 5);
@@ -68,7 +73,7 @@ namespace _3DS_link_trade_bot
                 await click(A, 1);
             var stop = new Stopwatch();
             stop.Restart();
-            while(BitConverter.ToInt16(ntr.ReadBytes(screenoff,2))!= 0x3F2B && stop.ElapsedMilliseconds < 90_000)
+            while(BitConverter.ToInt16(ntr.ReadBytes(screenoff,2))!= 0x3F2B && stop.ElapsedMilliseconds < 120_000)
                 await click(A, 5);
             if (stop.ElapsedMilliseconds > 90_000)
             {
@@ -94,8 +99,8 @@ namespace _3DS_link_trade_bot
                 }
                
                 var sav = SaveUtil.GetBlankSAV(GameVersion.UM, "piplup.net");
-                pkm = sav.GetLegalFromSet(new ShowdownSet($"{(Species)entry.RequestedPoke}\nLevel: {(entry.levelindex <10?(entry.levelindex*10)-1:99)}\nShiny: Yes\nBall: Dive"), out _);
-             
+                pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.levelindex <10?(entry.levelindex*10)-1:99)}\nShiny: Yes\nBall: Dive"), out _);
+                pkm.OT_Name = "piplup.net";
                 pkm.Gender = entry.genderindex == 2 ? 1:0;
                 if (!new LegalityAnalysis(pkm).Valid)
                 {

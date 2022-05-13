@@ -64,9 +64,10 @@ namespace _3DS_link_trade_bot
             form1.logbox.AppendText(text + "\n");
             
         }
-        public static void Log(string text)
+        public static async Task Log(string text)
         {
-            form1.logbox.AppendText(text + "\n");
+            form1.logbox.AppendText(text);
+            form1.logbox.AppendText("\n");
         }
 
         private void logbox_TextChanged(object sender, EventArgs e)
@@ -128,7 +129,7 @@ namespace _3DS_link_trade_bot
             var bot = new discordmain();
             bot.MainAsync();
             ChangeStatus("Connected to Discord");
-            Log("Connected to Discord");
+           
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -140,13 +141,12 @@ namespace _3DS_link_trade_bot
             Properties.Settings.Default.Save();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             var testlist = LinkTradeBot.getfriendlist();
             foreach (string test in testlist)
             {
-                Log(test);
-               
+               await Log(test);
 
             }
         }
