@@ -27,10 +27,14 @@ namespace _3DS_link_trade_bot
         {
             while (!tradetoken.IsCancellationRequested)
             {
+                //this is where it performs idling tasks
                 if(The_Q.Count == 0)
                 {
                     await click(X, 1);
                     await click(X, 1);
+                    if(_settings.GTSdistribution == true)
+                        await GTSBot.GTStrades();
+                    await Task.Delay(5);
                     continue;
                 }
                 tradeinfo = The_Q.Peek();
@@ -47,10 +51,11 @@ namespace _3DS_link_trade_bot
 
         public static async Task LinkTradeRoutine()
         {
+            ChangeStatus("starting a Link Trade");
             await tradeinfo.discordcontext.User.SendMessageAsync("starting your trade now, be prepared to accept the invite!");
             if (!isconnected)
             {
-                
+                ChangeStatus("connecting to the internet");
                 await touch(296, 221,3);
                 await click(A,1);
                 await click(A, 20);
@@ -64,10 +69,10 @@ namespace _3DS_link_trade_bot
             await injection(tradeinfo.tradepokemon);
             await touch(233, 119, 1);
             await touch(161, 83, 3);
-            getfriendlist();
+            guestlist = getfriendlist();
             await Task.Delay(5000);
             int downpresses = 50;
-          
+            ChangeStatus("reading friend list");
             for(int j =0;j< FriendList.numofguests; j++)
             {
                 if (guestlist[j].Contains(tradeinfo.IGN))
@@ -79,6 +84,7 @@ namespace _3DS_link_trade_bot
             }
             if (downpresses ==50)
             {
+                ChangeStatus("user not found");
                 await tradeinfo.discordcontext.User.SendMessageAsync("I could not find you on the trade list, Please refresh your internet connection and try again!");
                 await click(B, 1);
                 await click(B, 5);
@@ -113,6 +119,7 @@ namespace _3DS_link_trade_bot
                 }
                 await Task.Delay(25);
             }
+            ChangeStatus("link trading");
             await click(A, 10);
             //stop.Restart();
             while(!onboxscreen)
@@ -123,16 +130,19 @@ namespace _3DS_link_trade_bot
             var tradedpk = new PK7(tradedpkbytes);
             if (SearchUtil.HashByDetails(tradedpk) == SearchUtil.HashByDetails(tradeinfo.tradepokemon))
             {
+                ChangeStatus("user did not complete the trade");
                 await tradeinfo.discordcontext.User.SendMessageAsync("Something went wrong, please try again");
                
             }
             else
             {
+                ChangeStatus("user completed the trade");
                 var temp = $"{Directory.GetCurrentDirectory()}/{tradedpk.FileName}";
                 File.WriteAllBytes(temp, tradedpk.DecryptedBoxData);
                 await tradeinfo.discordcontext.User.SendFileAsync(temp, "Here is the pokemon you traded me");
                 File.Delete(temp);
             }
+            ChangeStatus("Link Trade Complete");
             await click(B, 1);
             await click(A, 1);
             return;
@@ -142,16 +152,18 @@ namespace _3DS_link_trade_bot
         {
             ntr.WriteBytes(pk.EncryptedBoxData, box1slot1);
         }
-        public static void getfriendlist()
+        public static List<string> getfriendlist()
         {
+            var the_l = new List<string>();
             var data = ntr.ReadBytes(Friendslistoffset, FriendListSize);
             FriendList list = new FriendList(data);
             for (int i = 0; i < FriendList.numofguests; i++)
             {
                 var friend = list[i];
-                guestlist.Add(friend.friendname);
-
+                the_l.Add(friend.friendname);
+                
             }
+            return the_l;
 
         }
         public static async Task FriendCodeRoutine()

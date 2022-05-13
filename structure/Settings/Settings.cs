@@ -11,8 +11,10 @@ namespace _3DS_link_trade_bot
     {
         protected const string Discord = nameof(Discord);
         protected const string MainSettings = nameof(MainSettings);
-        [Category(MainSettings), Description("Distribution")]
-        public bool distribution { get; set; } = false;
+        [Category(MainSettings), Description("GTS Distribution")]
+        public bool GTSdistribution { get; set; } = false;
+        [Category(MainSettings), Description("GTS Page To Start on")]
+        public int PokemonWanted { get; set; } = 1;
         [Category(MainSettings), Description("Bot's Friend Code, include Dashes")]
         public string FriendCode { get; set; } = "0000-0000-0000";
         [Category(Discord)]

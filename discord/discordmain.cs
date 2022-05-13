@@ -9,6 +9,7 @@ using Discord.Interactions;
 using Discord.WebSocket;
 using System.Net;
 using static _3DS_link_trade_bot.Program;
+using static _3DS_link_trade_bot.Form1;
 
 namespace _3DS_link_trade_bot
 {
@@ -17,13 +18,10 @@ namespace _3DS_link_trade_bot
         public static Discord.Interactions.IResult result;
         public static readonly WebClient webClient = new WebClient();
         public static DiscordSocketClient _client;
-        public static Settings Unisettings;
+        //public static Settings Unisettings;
 
         public IServiceProvider _services;
-        public discordmain(Settings settings)
-        {
-            Unisettings = settings;
-        }
+  
 
       
 
@@ -36,7 +34,7 @@ namespace _3DS_link_trade_bot
             
             //var token = File.ReadAllText("token.txt");
 
-            await _client.LoginAsync(TokenType.Bot, Unisettings.Discordsettings.token);
+            await _client.LoginAsync(TokenType.Bot, _settings.Discordsettings.token);
             await _client.StartAsync();
            // CommandHandler ch = new CommandHandler(_client, _commands);
             //await ch.InstallCommandsAsync();

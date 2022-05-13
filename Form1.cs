@@ -17,12 +17,13 @@ namespace _3DS_link_trade_bot
     public partial class Form1 : Form
     {
         public Settings settings = new();
-        
+        public static Settings _settings;
         public Form1()
         {
 
             InitializeComponent();
             propertyGrid1.SelectedObject = settings;
+            
         }
 
 
@@ -55,11 +56,12 @@ namespace _3DS_link_trade_bot
             nokey = BitConverter.GetBytes(0);
             nokey.CopyTo(buttonarray, 16);
             Form1.Connection.Send(buttonarray);
-
+            _settings = settings;
         }
         public static void ChangeStatus(string text)
         {
             Program.form1.statusbox.Text = text;
+            form1.logbox.AppendText(text + "\n");
             
         }
         public static void Log(string text)
@@ -83,6 +85,7 @@ namespace _3DS_link_trade_bot
             settings.Discordsettings.token = Properties.Settings.Default.discordtoken;
             settings.Discordsettings.BotChannel = Properties.Settings.Default.botchannel;
             settings.FriendCode = Properties.Settings.Default.botfc;
+            settings.PokemonWanted = Properties.Settings.Default.Pokemonwanted;
         }
 
         private void startlinktrades_Click(object sender, EventArgs e)
@@ -122,7 +125,7 @@ namespace _3DS_link_trade_bot
 
         private void discordconnect_Click(object sender, EventArgs e)
         {
-            var bot = new discordmain(settings);
+            var bot = new discordmain();
             bot.MainAsync();
             ChangeStatus("Connected to Discord");
             Log("Connected to Discord");
@@ -132,13 +135,20 @@ namespace _3DS_link_trade_bot
             Properties.Settings.Default.IpAddress = form1.IpAddress.Text;
             Properties.Settings.Default.discordtoken = settings.Discordsettings.token;
             Properties.Settings.Default.botchannel = settings.Discordsettings.BotChannel;
-            Properties.Settings.Default.botfc = settings.FriendCode;   
+            Properties.Settings.Default.botfc = settings.FriendCode;
+            Properties.Settings.Default.Pokemonwanted = settings.PokemonWanted;
             Properties.Settings.Default.Save();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            LinkTradeBot.LinkTradeRoutine();
+            var testlist = LinkTradeBot.getfriendlist();
+            foreach (string test in testlist)
+            {
+                Log(test);
+               
+
+            }
         }
 
         private void LinkTradeStop_Click(object sender, EventArgs e)

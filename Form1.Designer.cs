@@ -35,10 +35,10 @@
             this.startlinktrades = new System.Windows.Forms.Button();
             this.Discord = new System.Windows.Forms.TabPage();
             this.discordconnect = new System.Windows.Forms.Button();
-            this.Logs = new System.Windows.Forms.TabPage();
-            this.logbox = new System.Windows.Forms.RichTextBox();
             this.Settings = new System.Windows.Forms.TabPage();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
+            this.Logs = new System.Windows.Forms.TabPage();
+            this.logbox = new System.Windows.Forms.RichTextBox();
             this.IpAddress = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.consoleconnect = new System.Windows.Forms.Button();
@@ -48,8 +48,8 @@
             this.tabs.SuspendLayout();
             this.LinkTrades.SuspendLayout();
             this.Discord.SuspendLayout();
-            this.Logs.SuspendLayout();
             this.Settings.SuspendLayout();
+            this.Logs.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabs
@@ -128,6 +128,24 @@
             this.discordconnect.UseVisualStyleBackColor = true;
             this.discordconnect.Click += new System.EventHandler(this.discordconnect_Click);
             // 
+            // Settings
+            // 
+            this.Settings.BackColor = System.Drawing.SystemColors.Control;
+            this.Settings.Controls.Add(this.propertyGrid1);
+            this.Settings.Location = new System.Drawing.Point(4, 24);
+            this.Settings.Name = "Settings";
+            this.Settings.Padding = new System.Windows.Forms.Padding(3);
+            this.Settings.Size = new System.Drawing.Size(423, 275);
+            this.Settings.TabIndex = 3;
+            this.Settings.Text = "Settings";
+            // 
+            // propertyGrid1
+            // 
+            this.propertyGrid1.Location = new System.Drawing.Point(8, 6);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.Size = new System.Drawing.Size(409, 263);
+            this.propertyGrid1.TabIndex = 0;
+            // 
             // Logs
             // 
             this.Logs.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -147,24 +165,6 @@
             this.logbox.Size = new System.Drawing.Size(409, 263);
             this.logbox.TabIndex = 0;
             this.logbox.Text = "";
-            // 
-            // Settings
-            // 
-            this.Settings.BackColor = System.Drawing.SystemColors.Control;
-            this.Settings.Controls.Add(this.propertyGrid1);
-            this.Settings.Location = new System.Drawing.Point(4, 24);
-            this.Settings.Name = "Settings";
-            this.Settings.Padding = new System.Windows.Forms.Padding(3);
-            this.Settings.Size = new System.Drawing.Size(423, 275);
-            this.Settings.TabIndex = 3;
-            this.Settings.Text = "Settings";
-            // 
-            // propertyGrid1
-            // 
-            this.propertyGrid1.Location = new System.Drawing.Point(8, 6);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(409, 263);
-            this.propertyGrid1.TabIndex = 0;
             // 
             // IpAddress
             // 
@@ -218,7 +218,7 @@
             this.statusbox.Multiline = false;
             this.statusbox.Name = "statusbox";
             this.statusbox.ReadOnly = true;
-            this.statusbox.Size = new System.Drawing.Size(120, 18);
+            this.statusbox.Size = new System.Drawing.Size(377, 18);
             this.statusbox.TabIndex = 6;
             this.statusbox.Text = "";
             // 
@@ -242,8 +242,8 @@
             this.tabs.ResumeLayout(false);
             this.LinkTrades.ResumeLayout(false);
             this.Discord.ResumeLayout(false);
-            this.Logs.ResumeLayout(false);
             this.Settings.ResumeLayout(false);
+            this.Logs.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

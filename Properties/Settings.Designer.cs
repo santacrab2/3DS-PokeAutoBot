@@ -69,5 +69,17 @@ namespace _3DS_link_trade_bot.Properties {
                 this["botfc"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Pokemonwanted {
+            get {
+                return ((int)(this["Pokemonwanted"]));
+            }
+            set {
+                this["Pokemonwanted"] = value;
+            }
+        }
     }
 }

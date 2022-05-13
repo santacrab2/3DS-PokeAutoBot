@@ -10,7 +10,7 @@ using Discord.Interactions;
 using static _3DS_link_trade_bot.dsbotbase;
 using static _3DS_link_trade_bot.dsbotbase.Buttons;
 using static _3DS_link_trade_bot.LinkTradeBot;
-using static _3DS_link_trade_bot.discordmain;
+using static _3DS_link_trade_bot.Form1;
 
 namespace _3DS_link_trade_bot
 {
@@ -23,7 +23,7 @@ namespace _3DS_link_trade_bot
         [SlashCommand("addfc","adds you to the bots friend list, dont forget to add the bot!")]
         public async Task addfc([Summary(description:"No Dashes!!")]string friendcode)
         {
-            try { await Context.User.SendMessageAsync($"I Have added you to the Friend Code queue. I will message you here when I am add you. My FC is {Unisettings.FriendCode}"); } catch { await RespondAsync("enable private messages from users on the server to be queued"); return; }
+            try { await Context.User.SendMessageAsync($"I Have added you to the Friend Code queue. I will message you here when I am add you. My FC is {_settings.FriendCode}"); } catch { await RespondAsync("enable private messages from users on the server to be queued"); return; }
             var tobequeued = new queuesystem() { discordcontext = Context,friendcode = friendcode,tradepokemon=EntityBlank.GetBlank(7),IGN ="",mode = botmode.addfc};
             The_Q.Enqueue(tobequeued);
             await RespondAsync($"Added {Context.User.Username} to the Friend Code queue.");
