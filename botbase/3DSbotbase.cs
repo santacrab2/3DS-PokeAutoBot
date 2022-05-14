@@ -138,7 +138,7 @@ namespace _3DS_link_trade_bot
             nokey = BitConverter.GetBytes(0);
             nokey.CopyTo(buttonarray, 16);
             Form1.Connection.Send(buttonarray);
-            await Task.Delay(250);
+            await Task.Delay(200);
             buttonarray = new byte[20];
             nokey = BitConverter.GetBytes(0xFFF);
             nokey.CopyTo(buttonarray, 0);

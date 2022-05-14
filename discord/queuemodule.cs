@@ -33,5 +33,21 @@ namespace _3DS_link_trade_bot
             }
 
         }
+        [SlashCommand("dequeue","removes you from queue")]
+        public async Task qc()
+        {
+            var qlist = The_Q.ToList();
+            var index = qlist.FindIndex(z => z.discordcontext.User.Id == Context.User.Id);
+            if(index == -1)
+            {
+                await RespondAsync("you are not in the queue");
+            }
+            qlist.RemoveAt(index);
+            var newqu = new Queue<queuesystem>();
+            foreach (var item in qlist)
+                newqu.Enqueue(item);
+            The_Q = newqu;
+            await RespondAsync("removed you from the queue");
+        }
     }
 }
