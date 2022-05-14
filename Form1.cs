@@ -106,7 +106,7 @@ namespace _3DS_link_trade_bot
             EncounterEvent.RefreshMGDB($"{Directory.GetCurrentDirectory()}//mgdb//");
             RibbonStrings.ResetDictionary(GameInfo.Strings.ribbons);
 
-            LinkTradeBot.starttrades();
+            MainHub.starttrades();
          
             
             foreach (var channel in settings.Discordsettings.BotChannel)
@@ -143,7 +143,7 @@ namespace _3DS_link_trade_bot
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            var testlist = LinkTradeBot.getfriendlist();
+            var testlist = Gen7LinkTradeBot.getfriendlist();
             foreach (string test in testlist)
             {
                await Log(test);
@@ -153,7 +153,7 @@ namespace _3DS_link_trade_bot
 
         private void LinkTradeStop_Click(object sender, EventArgs e)
         {
-            LinkTradeBot.tradetoken.Cancel();
+            MainHub.tradetoken.Cancel();
             
             foreach (var channel in settings.Discordsettings.BotChannel)
             {

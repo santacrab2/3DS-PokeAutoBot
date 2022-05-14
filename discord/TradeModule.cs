@@ -9,7 +9,7 @@ using PKHeX.Core.AutoMod;
 using Discord.Interactions;
 using static _3DS_link_trade_bot.dsbotbase;
 using static _3DS_link_trade_bot.dsbotbase.Buttons;
-using static _3DS_link_trade_bot.LinkTradeBot;
+using static _3DS_link_trade_bot.MainHub;
 using static _3DS_link_trade_bot.Form1;
 
 namespace _3DS_link_trade_bot

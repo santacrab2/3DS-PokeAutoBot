@@ -20,6 +20,12 @@ namespace _3DS_link_trade_bot
         
         public static async Task GTStrades()
         {
+            if (!infestivalplaza)
+            {
+                await click(X, 1);
+                await touch(229, 171, 10);
+
+            }
             if (!isconnected)
             {
                 ChangeStatus("connecting to the internet");
@@ -66,7 +72,7 @@ namespace _3DS_link_trade_bot
                 return;
             }
             ChangeStatus("gts trading");
-            await LinkTradeBot.injection(pkm);
+            await Gen7LinkTradeBot.injection(pkm);
             ntr.WriteBytes(BitConverter.GetBytes(tradeindex), GTScurrentview);
             await click(A, 5);
             for (int i = 0; i < 3; i++)
@@ -92,28 +98,31 @@ namespace _3DS_link_trade_bot
             GTSPage gtspage = new GTSPage(ntr.ReadBytes(GTSblockoff, 0x6400));
             for (int i = gtspagesize; i>=0; i--)
             {
-                var entry = gtspage[i];
-                if (KnownGTSBreakers.Contains(entry.trainername.ToLower()))
+                try
                 {
-                    continue;
-                }
-               
-                var sav = SaveUtil.GetBlankSAV(GameVersion.UM, "piplup.net");
-                pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.levelindex <10?(entry.levelindex*10)-1:99)}\nShiny: Yes\nBall: Dive"), out _);
-                pkm.OT_Name = "piplup.net";
-                pkm.Gender = entry.genderindex == 2 ? 1:0;
-                if (!new LegalityAnalysis(pkm).Valid)
-                {
-                    pkm = null;
-                    continue;
-                }
-                else
-                {
-                    Log($"Trading Trainer:{entry.trainername.ToLower()}");
-                    tradeindex = i;
-                    break;
-                }
+                    var entry = gtspage[i];
+                    if (KnownGTSBreakers.Contains(entry.trainername.ToLower()))
+                    {
+                        continue;
+                    }
 
+                    var sav = SaveUtil.GetBlankSAV(GameVersion.UM, "piplup.net");
+                    pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.levelindex < 10 ? (entry.levelindex * 10) - 1 : 99)}\nShiny: Yes\nBall: Dive"), out _);
+                    pkm.OT_Name = "piplup.net";
+                    pkm.Gender = entry.genderindex == 2 ? 1 : 0;
+                    if (!new LegalityAnalysis(pkm).Valid)
+                    {
+                        pkm = null;
+                        continue;
+                    }
+                    else
+                    {
+                        Log($"Trading Trainer:{entry.trainername.ToLower()}");
+                        tradeindex = i;
+                        break;
+                    }
+                }
+                catch { pkm = null; continue; }
 
             }
             return pkm;

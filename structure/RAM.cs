@@ -28,6 +28,9 @@ namespace _3DS_link_trade_bot
         public static uint GTSpagesizeoff = 0x329921A4;
         public static uint GTSblockoff = 0x329927C4;
         public static uint GTScurrentview = 0x305CD9F4;
+        public static uint coordinatesoff = 0x3182dbc4;
+        public static uint initialfestcoords = 0x2300;
+        public static bool infestivalplaza = BitConverter.ToUInt16(Form1.ntr.ReadBytes(coordinatesoff, 2)) == initialfestcoords;
 
     }
     public readonly ref struct FriendList
