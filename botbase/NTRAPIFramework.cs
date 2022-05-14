@@ -57,11 +57,11 @@ namespace _3DS_link_trade_bot
         }
     }
 
-    public sealed class NTR
+    public class NTR
     {
         private string _host = "192.168.1.106";
         private int _port = 8000;
-
+        public static int game;
         public bool IsConnected;
         private TcpClient? _tcp;
 
@@ -370,7 +370,7 @@ namespace _3DS_link_trade_bot
             }
         }
 
-        private void GetGame(object sender, InfoReadyEventArgs e)
+        public void GetGame(object sender, InfoReadyEventArgs e)
         {
             var pnamestr = new[] { "kujira-1", "kujira-2", "sango-1", "sango-2", "salmon", "niji_loc", "niji_loc", "momiji", "momiji" };
             string pname;
@@ -380,13 +380,18 @@ namespace _3DS_link_trade_bot
             pname = ", pname:" + pname.PadLeft(9);
             string pidaddr = log.Substring(log.IndexOf(pname, StringComparison.Ordinal) - 10, 10);
             PID = Convert.ToInt32(pidaddr, 16);
-
+            if (log.Contains("kujira"))
+                game = 1;
+            if (log.Contains("sango"))
+                game = 2;
             if (log.Contains("niji_loc"))
             {
+                game = 3;
                 Write(0x3E14C0, BitConverter.GetBytes(0xE3A01000), PID);
             }
             else if (log.Contains("momiji"))
             {
+                game = 4;
                 Write(0x3F3424, BitConverter.GetBytes(0xE3A01000), PID); // Ultra Sun  // NFC ON: E3A01001 NFC OFF: E3A01000
                 Write(0x3F3428, BitConverter.GetBytes(0xE3A01000), PID); // Ultra Moon // NFC ON: E3A01001 NFC OFF: E3A01000
             }

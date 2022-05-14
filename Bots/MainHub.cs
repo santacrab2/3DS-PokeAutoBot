@@ -28,6 +28,18 @@ namespace _3DS_link_trade_bot
         {
             while (!tradetoken.IsCancellationRequested)
             {
+                if(NTR.game == 3)
+                {
+                    GTSpagesizeoff = 0x32A6A1A4;
+                    GTScurrentview = 0x305ea384;
+                    GTSpagesizeoff = 0x32A6A1A4;
+                    GTSblockoff = 0x32A6A7C4;
+                    box1slot1 = 0x330D9838; 
+                    screenoff = 0x00674802;
+                    GTSDeposit = 0x32A6A180;
+                    
+                }
+                    
                 try {
                     //this is where it performs idling tasks
                     if (The_Q.Count == 0)
@@ -52,6 +64,7 @@ namespace _3DS_link_trade_bot
                 }
                 catch
                 {
+                    ChangeStatus("Bot Down");
                     foreach (var channel in _settings.Discordsettings.BotChannel)
                     {
 
@@ -62,6 +75,9 @@ namespace _3DS_link_trade_bot
                         offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Gen 7 Link Trade Bot is Offline");
                         await botchannelid.SendMessageAsync(embed: offembed.Build());
                     }
+                    tradetoken.Cancel();
+                    
+                   
                 }
             }
             tradetoken = new();

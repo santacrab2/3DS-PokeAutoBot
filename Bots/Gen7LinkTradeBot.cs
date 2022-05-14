@@ -21,6 +21,7 @@ namespace _3DS_link_trade_bot
     {
         public static async Task LinkTradeRoutine()
         {
+            
             ChangeStatus("starting a Link Trade");
             await tradeinfo.discordcontext.User.SendMessageAsync("starting your trade now, be prepared to accept the invite!");
             if (!infestivalplaza)

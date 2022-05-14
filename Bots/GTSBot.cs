@@ -14,7 +14,7 @@ namespace _3DS_link_trade_bot
 {
     public class GTSBot
     {
-        public static List<string> KnownGTSBreakers = new List<string> { "funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ" , "あか", "adventrsnivy", "noxii",""," ", "doudou#6666", "doudou#9999" }; 
+        public static List<string> KnownGTSBreakers = new List<string> { "funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ" , "あか", "adventrsnivy", "noxii",""," ", "doudou#6666", "doudou#9999", "zeraoratv=yt" }; 
         public static int tradeindex;
         public static int gtspagesize;
         
@@ -43,7 +43,7 @@ namespace _3DS_link_trade_bot
             ChangeStatus("starting GTS distribution task");
             await touch(235, 130, 1);
             await touch(161, 121, 10);
-            ntr.WriteBytes(BitConverter.GetBytes(_settings.PokemonWanted), 0x32992180);
+            ntr.WriteBytes(BitConverter.GetBytes(_settings.PokemonWanted), GTSDeposit);
             await touch(165, 95, 1);
             await touch(154, 187, 5);
             if(BitConverter.ToUInt32(ntr.ReadBytes(screenoff,0x04)) == 0x40F5)
@@ -53,8 +53,8 @@ namespace _3DS_link_trade_bot
                 if (_settings.PokemonWanted > 800)
                     _settings.PokemonWanted = 1;
                 for (int i = 0; i < 3; i++)
-                    await click(B, 1);
-                await click(A, 5);
+                    await click(B, 2);
+                await click(A, 10);
                 return;
             }
             gtspagesize = (int)BitConverter.ToUInt32(ntr.ReadBytes(GTSpagesizeoff, 0x04));
@@ -81,9 +81,10 @@ namespace _3DS_link_trade_bot
             stop.Restart();
             while(BitConverter.ToInt16(ntr.ReadBytes(screenoff,2))!= 0x3F2B && stop.ElapsedMilliseconds < 120_000)
                 await click(A, 5);
-            if (stop.ElapsedMilliseconds > 90_000)
+            if (stop.ElapsedMilliseconds > 120_000)
             {
-                while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B)
+                stop.Restart();
+                while(BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B && stop.ElapsedMilliseconds < 60_000)
                     await click(B, 2);
             }
             await click(B, 1);
