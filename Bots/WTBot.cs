@@ -51,33 +51,40 @@ namespace _3DS_link_trade_bot
                 await click(A, 1);
             foreach(var chan in _settings.Discordsettings.BotWTChannel)
             {
-               var tosend = (ITextChannel) _client.GetChannel(chan);
-                EmbedBuilder embed = new EmbedBuilder();
-                embed.ThumbnailUrl = thegift.IsShiny ? $"https://play.pokemonshowdown.com/sprites/ani-shiny/{((Species)thegift.Species).ToString().ToLower().Replace(" ", "")}.gif" : $"https://play.pokemonshowdown.com/sprites/ani/{((Species)thegift.Species).ToString().ToLower().Replace(" ", "")}.gif";
-                var newShowdown = new List<string>();
-                thegift.ClearNickname();
-                var showdown = ShowdownParsing.GetShowdownText(thegift);
-                foreach (var line in showdown.Split('\n'))
-                    newShowdown.Add(line);
-
-                if (thegift.IsEgg)
-                    newShowdown.Add("\nPokémon is an egg");
-                if (thegift.Ball > (int)Ball.None)
-                    newShowdown.Insert(newShowdown.FindIndex(z => z.Contains("Nature")), $"Ball: {(Ball)thegift.Ball} Ball");
-                if (thegift.IsShiny)
+                var tosend = (ITextChannel)_client.GetChannel(chan);
+                try
                 {
-                    var index = newShowdown.FindIndex(x => x.Contains("Shiny: Yes"));
-                    if (thegift.ShinyXor == 0 || thegift.FatefulEncounter)
-                        newShowdown[index] = "Shiny: Square\r";
-                    else newShowdown[index] = "Shiny: Star\r";
-                }
+                    
+                    EmbedBuilder embed = new EmbedBuilder();
+                    embed.ThumbnailUrl = thegift.IsShiny ? $"https://play.pokemonshowdown.com/sprites/ani-shiny/{((Species)thegift.Species).ToString().ToLower().Replace(" ", "")}.gif" : $"https://play.pokemonshowdown.com/sprites/ani/{((Species)thegift.Species).ToString().ToLower().Replace(" ", "")}.gif";
+                    var newShowdown = new List<string>();
+                    thegift.ClearNickname();
+                    var showdown = ShowdownParsing.GetShowdownText(thegift);
+                    foreach (var line in showdown.Split('\n'))
+                        newShowdown.Add(line);
+
+                    if (thegift.IsEgg)
+                        newShowdown.Add("\nPokémon is an egg");
+                    if (thegift.Ball > (int)Ball.None)
+                        newShowdown.Insert(newShowdown.FindIndex(z => z.Contains("Nature")), $"Ball: {(Ball)thegift.Ball} Ball");
+                    if (thegift.IsShiny)
+                    {
+                        var index = newShowdown.FindIndex(x => x.Contains("Shiny: Yes"));
+                        if (thegift.ShinyXor == 0 || thegift.FatefulEncounter)
+                            newShowdown[index] = "Shiny: Square\r";
+                        else newShowdown[index] = "Shiny: Star\r";
+                    }
+                
 
                 
                 embed.AddField("Wonder trading in 15 seconds", Format.Code(string.Join("\n", newShowdown).TrimEnd()));
                 await tosend.SendMessageAsync(embed: embed.Build());
+                }
+                catch (Exception ex) { await Log(ex.ToString()); }
                 await Task.Delay(15_000);
                 await tosend.SendMessageAsync("wonder trade now");
                 ChangeStatus($"Wonder Trading: {(Species)thegift.Species}");
+              
                 await click(A, 3);
                 
                 if (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x41A8)
