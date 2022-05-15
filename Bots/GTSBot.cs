@@ -31,8 +31,10 @@ namespace _3DS_link_trade_bot
                 ChangeStatus("connecting to the internet");
                 await touch(296, 221, 5);
                 await click(A, 2);
+                //wait for internet connection
                 await click(A, 30);
                 await click(A, 5);
+                //wait for checkstatus
                 await click(A, 20);
                 if (!isconnected)
                 {
@@ -45,6 +47,7 @@ namespace _3DS_link_trade_bot
             ntr.WriteBytes(BitConverter.GetBytes(_settings.PokemonWanted), GTSDeposit);
             await touch(165, 95, 1);
             await touch(154, 187, 5);
+            ChangeStatus("Searching the GTS...");
             if(BitConverter.ToUInt32(ntr.ReadBytes(screenoff,0x04)) == 0x40F5)
             {
                 ChangeStatus("no pokemon found");
@@ -70,7 +73,7 @@ namespace _3DS_link_trade_bot
                 await click(A, 5);
                 return;
             }
-            ChangeStatus("gts trading");
+            ChangeStatus("gts trading...");
             await Gen7LinkTradeBot.injection(pkm);
             ntr.WriteBytes(BitConverter.GetBytes(tradeindex), GTScurrentview);
             await click(A, 5);
@@ -80,6 +83,7 @@ namespace _3DS_link_trade_bot
             stop.Restart();
             while(BitConverter.ToInt16(ntr.ReadBytes(screenoff,2))!= 0x3F2B && stop.ElapsedMilliseconds < 120_000)
                 await click(A, 5);
+            ChangeStatus("GTS trade complete");
             if (stop.ElapsedMilliseconds > 120_000)
             {
                 stop.Restart();

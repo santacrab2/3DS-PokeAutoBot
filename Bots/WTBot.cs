@@ -31,8 +31,10 @@ namespace _3DS_link_trade_bot
                 ChangeStatus("connecting to the internet");
                 await touch(296, 221, 5);
                 await click(A, 2);
+                //start and wait for connection
                 await click(A, 30);
                 await click(A, 5);
+                //start and wait for checking status
                 await click(A, 20);
                 if (!isconnected)
                 {
@@ -76,6 +78,7 @@ namespace _3DS_link_trade_bot
                 await Task.Delay(15_000);
                 await tosend.SendMessageAsync("wonder trade now");
                 await click(A, 1);
+                ChangeStatus($"Wonder Trading: {(Species)thegift.Species}");
                 var stop = new Stopwatch();
                 while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B && stop.ElapsedMilliseconds < 90_000)
                     await Task.Delay(25);

@@ -31,7 +31,6 @@
             this.tabs = new System.Windows.Forms.TabControl();
             this.LinkTrades = new System.Windows.Forms.TabPage();
             this.LinkTradeStop = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.startlinktrades = new System.Windows.Forms.Button();
             this.Discord = new System.Windows.Forms.TabPage();
             this.discordconnect = new System.Windows.Forms.Button();
@@ -68,7 +67,6 @@
             // 
             this.LinkTrades.BackColor = System.Drawing.Color.WhiteSmoke;
             this.LinkTrades.Controls.Add(this.LinkTradeStop);
-            this.LinkTrades.Controls.Add(this.button1);
             this.LinkTrades.Controls.Add(this.startlinktrades);
             this.LinkTrades.Location = new System.Drawing.Point(4, 24);
             this.LinkTrades.Name = "LinkTrades";
@@ -86,16 +84,6 @@
             this.LinkTradeStop.Text = "Stop";
             this.LinkTradeStop.UseVisualStyleBackColor = true;
             this.LinkTradeStop.Click += new System.EventHandler(this.LinkTradeStop_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(327, 221);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // startlinktrades
             // 
@@ -264,7 +252,6 @@
         private Button startlinktrades;
         private TabPage Discord;
         private Button discordconnect;
-        private Button button1;
         private Button LinkTradeStop;
         private TabPage Settings;
         private PropertyGrid propertyGrid1;
