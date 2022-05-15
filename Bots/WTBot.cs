@@ -83,7 +83,7 @@ namespace _3DS_link_trade_bot
                 while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B && stop.ElapsedMilliseconds < 30_000)
                     await Task.Delay(25);
                 await Task.Delay(60_000);
-                while(!infestivalplaza)
+                while (ntr.ReadBytes(screenoff, 1)[0] != 0x0)
                     await click(B, 2);
 
 
