@@ -87,7 +87,7 @@ namespace _3DS_link_trade_bot
                 catch (Exception ex)
                 {
                     await Log(ex.ToString());
-                    ChangeStatus("Bot Down");
+                    ChangeStatus("Bot DTF");
                     foreach (var channel in _settings.Discordsettings.BotTradeChannel)
                     {
 
@@ -103,6 +103,7 @@ namespace _3DS_link_trade_bot
                    
                 }
             }
+            ChangeStatus("Bot Stopped");
             tradetoken = new();
         }
 

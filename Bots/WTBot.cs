@@ -80,10 +80,11 @@ namespace _3DS_link_trade_bot
                 await click(A, 1);
                 ChangeStatus($"Wonder Trading: {(Species)thegift.Species}");
                 var stop = new Stopwatch();
-                while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B && stop.ElapsedMilliseconds < 90_000)
+                while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B && stop.ElapsedMilliseconds < 30_000)
                     await Task.Delay(25);
-                await Task.Delay(42_000);
-                await click(B, 10);
+                await Task.Delay(60_000);
+                while(!infestivalplaza)
+                    await click(B, 2);
 
 
             }
