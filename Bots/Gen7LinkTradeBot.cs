@@ -118,7 +118,7 @@ namespace _3DS_link_trade_bot
             }
             ChangeStatus("Link Trade Complete");
             await click(B, 1);
-            await click(A, 5);
+            await click(A, 10);
             return;
 
         }
@@ -165,7 +165,7 @@ namespace _3DS_link_trade_bot
 
             await presshome(10);
 
-            await presshome(1);
+            await presshome(5);
 
         }
     }
