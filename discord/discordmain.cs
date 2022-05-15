@@ -47,7 +47,11 @@ namespace _3DS_link_trade_bot
            
             var _interactionService = new InteractionService(_client);
             await _interactionService.AddModulesAsync(Assembly.GetEntryAssembly(), null);
-            await _interactionService.RegisterCommandsToGuildAsync(872587205787394119);
+
+            var gilds = _client.Guilds.ToArray();
+            foreach(var gild in gilds)
+                await _interactionService.RegisterCommandsToGuildAsync(gild.Id);
+            
             _client.InteractionCreated += async interaction =>
             {
 

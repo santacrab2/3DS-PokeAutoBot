@@ -96,6 +96,7 @@ namespace _3DS_link_trade_bot
         public  async Task some()
         {
             await RespondAsync("hi", ephemeral: true);
+            
         }
         public static ShowdownSet? ConvertToShowdown(string setstring)
         {

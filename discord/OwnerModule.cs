@@ -12,7 +12,7 @@ namespace _3DS_link_trade_bot
     
     public class OwnerModule : InteractionModuleBase<SocketInteractionContext>
     {
-        [SlashCommand("addTradechannel", "add this channel to the Trade channel List")]
+        [SlashCommand("addtradechannel", "add this channel to the Trade channel List")]
        
         public async Task AddChannel()
         {
@@ -21,7 +21,7 @@ namespace _3DS_link_trade_bot
 
             await RespondAsync($"I have added the channel **{Context.Channel.Name}** with the id {Context.Channel.Id} for you {Context.User.Username}", ephemeral: true);
         }
-        [SlashCommand("addWTchannel", "add this channel to the WT channel List")]
+        [SlashCommand("addwtchannel", "add this channel to the WT channel List")]
 
         public async Task AddWTChannel()
         {

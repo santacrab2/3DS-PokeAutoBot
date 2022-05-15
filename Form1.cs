@@ -122,6 +122,7 @@ namespace _3DS_link_trade_bot
             settings.FriendCode = Properties.Settings.Default.botfc;
             settings.PokemonWanted = Properties.Settings.Default.Pokemonwanted;
             settings.Discordsettings.BotWTChannel = Properties.Settings.Default.wtchannels;
+            
             if (!Directory.Exists(wtfolder))
                 Directory.CreateDirectory(wtfolder);
             if(!Directory.Exists(logfolder))

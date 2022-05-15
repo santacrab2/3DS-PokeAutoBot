@@ -77,13 +77,26 @@ namespace _3DS_link_trade_bot
                 await tosend.SendMessageAsync(embed: embed.Build());
                 await Task.Delay(15_000);
                 await tosend.SendMessageAsync("wonder trade now");
-                await click(A, 1);
                 ChangeStatus($"Wonder Trading: {(Species)thegift.Species}");
+                await click(A, 3);
+                
+                if (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x41A8)
+                {
+                    while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B)
+                        await click(B, 1);
+                    await click(B, 5);
+                    return;
+                }
                 var stop = new Stopwatch();
                 while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B && stop.ElapsedMilliseconds < 30_000)
                     await Task.Delay(25);
-                await Task.Delay(60_000);
-                while (ntr.ReadBytes(screenoff, 1)[0] != 0x0)
+                stop.Restart();
+                while(stop.ElapsedMilliseconds < 60_000)
+                {
+
+                    await touch(155, 153, 1);
+                }
+                while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x00)
                     await click(B, 2);
 
 
