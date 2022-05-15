@@ -14,7 +14,7 @@ namespace _3DS_link_trade_bot
 {
     public class GTSBot
     {
-        public static List<string> KnownGTSBreakers = new List<string> { "funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ" , "あか", "adventrsnivy", "noxii",""," ", "doudou#6666", "doudou#9999", "zeraoratv=yt" }; 
+        public static List<string> KnownGTSBreakers = new List<string> { "funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ" , "あか", "adventrsnivy", "noxii",""," ", "doudou#6666", "doudou#9999", "zeraoratv=yt", "sun." }; 
         public static int tradeindex;
         public static int gtspagesize;
         
@@ -29,12 +29,11 @@ namespace _3DS_link_trade_bot
             if (!isconnected)
             {
                 ChangeStatus("connecting to the internet");
-                await touch(296, 221, 3);
-                await click(A, 1);
-                await click(A, 20);
-                await click(A, 15);
-                await click(A, 20);
+                await touch(296, 221, 5);
+                await click(A, 2);
+                await click(A, 30);
                 await click(A, 5);
+                await click(A, 20);
                 if (!isconnected)
                 {
                     return;
@@ -88,7 +87,7 @@ namespace _3DS_link_trade_bot
                     await click(B, 2);
             }
             await click(B, 1);
-            await click(A, 1);
+            await click(A, 5);
             return;
 
 

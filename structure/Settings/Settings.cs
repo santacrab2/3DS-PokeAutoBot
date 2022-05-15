@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Configuration;
 
 namespace _3DS_link_trade_bot
 {
+    
     public class Settings
     {
         protected const string Discord = nameof(Discord);
@@ -15,6 +17,9 @@ namespace _3DS_link_trade_bot
         public bool GTSdistribution { get; set; } = false;
         [Category(MainSettings), Description("GTS Page To Start on")]
         public int PokemonWanted { get; set; } = 1;
+
+        [Category(MainSettings), Description("WonderTrade Distribution")]
+        public bool WonderTrade { get; set; } = false;
         [Category(MainSettings), Description("Bot's Friend Code, include Dashes")]
         public string FriendCode { get; set; } = "0000-0000-0000";
         [Category(Discord)]

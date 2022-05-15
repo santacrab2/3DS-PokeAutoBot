@@ -12,17 +12,23 @@ using static _3DS_link_trade_bot.dsbotbase.Buttons;
 using PKHeX.Core.AutoMod;
 
 
+
+
 namespace _3DS_link_trade_bot
 {
     public partial class Form1 : Form
     {
+        public static string wtfolder = $"{Directory.GetCurrentDirectory()}//WTFiles";
+        public static string logfolder = $"{Directory.GetCurrentDirectory()}//logs";
         public Settings settings = new();
         public static Settings _settings;
         public Form1()
         {
+            
 
             InitializeComponent();
             propertyGrid1.SelectedObject = settings;
+          
             
         }
 
@@ -55,19 +61,35 @@ namespace _3DS_link_trade_bot
             nokey.CopyTo(buttonarray, 12);
             nokey = BitConverter.GetBytes(0);
             nokey.CopyTo(buttonarray, 16);
-            Form1.Connection.Send(buttonarray);
+            Connection.Send(buttonarray);
             _settings = settings;
         }
         public static void ChangeStatus(string text)
         {
-            Program.form1.statusbox.Text = text;
-            form1.logbox.AppendText(text + "\n");
+            if(form1.logbox.Lines.Count() > 100)
+            {
+                var filelist = Directory.GetFiles(logfolder);
+                if (Directory.GetFiles(logfolder).Length > 7)
+                    File.Delete(filelist[0]);
+                File.AppendAllLines($"{logfolder}//{DateTime.Today.ToShortDateString().Replace("/", ".")}.txt", form1.logbox.Lines);
+                form1.logbox.Clear();
+            }
+            
+            form1.statusbox.Text = text;
+            form1.logbox.AppendText($"{DateTime.Now.ToLongTimeString()}: {text}\n");
             
         }
         public static async Task Log(string text)
         {
-            form1.logbox.AppendText(text);
-            form1.logbox.AppendText("\n");
+            if (form1.logbox.Lines.Count() > 100)
+            {
+                var filelist = Directory.GetFiles(logfolder);
+                if (Directory.GetFiles(logfolder).Length > 7)
+                    File.Delete(filelist[0]);
+                File.AppendAllLines($"{logfolder}//{DateTime.Today.ToShortDateString().Replace("/", ".")}.txt", form1.logbox.Lines);
+                form1.logbox.Clear();
+            }
+            form1.logbox.AppendText($"{DateTime.Now.ToLongTimeString()}: {text}\n");
         }
 
         private void logbox_TextChanged(object sender, EventArgs e)
@@ -84,9 +106,14 @@ namespace _3DS_link_trade_bot
         {
             form1.IpAddress.Text = Properties.Settings.Default.IpAddress;
             settings.Discordsettings.token = Properties.Settings.Default.discordtoken;
-            settings.Discordsettings.BotChannel = Properties.Settings.Default.botchannel;
+            settings.Discordsettings.BotTradeChannel = Properties.Settings.Default.botchannels;
             settings.FriendCode = Properties.Settings.Default.botfc;
             settings.PokemonWanted = Properties.Settings.Default.Pokemonwanted;
+            settings.Discordsettings.BotWTChannel = Properties.Settings.Default.wtchannels;
+            if (!Directory.Exists(wtfolder))
+                Directory.CreateDirectory(wtfolder);
+            if(!Directory.Exists(logfolder))
+                Directory.CreateDirectory(logfolder);
         }
 
         private void startlinktrades_Click(object sender, EventArgs e)
@@ -109,7 +136,7 @@ namespace _3DS_link_trade_bot
             MainHub.starttrades();
          
             
-            foreach (var channel in settings.Discordsettings.BotChannel)
+            foreach (var channel in settings.Discordsettings.BotTradeChannel)
             {
                 
                 var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;
@@ -135,10 +162,17 @@ namespace _3DS_link_trade_bot
         {
             Properties.Settings.Default.IpAddress = form1.IpAddress.Text;
             Properties.Settings.Default.discordtoken = settings.Discordsettings.token;
-            Properties.Settings.Default.botchannel = settings.Discordsettings.BotChannel;
+            Properties.Settings.Default.botchannels = settings.Discordsettings.BotTradeChannel;
             Properties.Settings.Default.botfc = settings.FriendCode;
             Properties.Settings.Default.Pokemonwanted = settings.PokemonWanted;
+            Properties.Settings.Default.wtchannels = settings.Discordsettings.BotWTChannel;
+           
             Properties.Settings.Default.Save();
+            var filelist = Directory.GetFiles(logfolder);
+            if (Directory.GetFiles(logfolder).Length > 7)
+                File.Delete(filelist[0]);
+            
+            File.AppendAllLines($"{logfolder}//{DateTime.Today.ToShortDateString().Replace("/", ".")}.txt",form1.logbox.Lines);
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -155,7 +189,7 @@ namespace _3DS_link_trade_bot
         {
             MainHub.tradetoken.Cancel();
             
-            foreach (var channel in settings.Discordsettings.BotChannel)
+            foreach (var channel in settings.Discordsettings.BotTradeChannel)
             {
                 
                 var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;

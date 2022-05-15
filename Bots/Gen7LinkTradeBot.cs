@@ -30,18 +30,15 @@ namespace _3DS_link_trade_bot
                 await touch(229, 171, 10);
 
             }
-            if (!isconnected)
+            while (!isconnected)
             {
                 ChangeStatus("connecting to the internet");
-                await touch(296, 221, 3);
-                await click(A, 1);
+                await touch(296, 221, 5);
+                await click(A, 2);
+                await click(A, 30);
+                await click(A, 5);
                 await click(A, 20);
-                await click(A, 15);
-                await click(A, 20);
-                if (!isconnected)
-                {
-                    return;
-                }
+               
             }
             await injection(tradeinfo.tradepokemon);
             await touch(233, 119, 1);
@@ -91,7 +88,7 @@ namespace _3DS_link_trade_bot
                 {
                     for (int i = 0; i < 3; i++)
                         await click(B, 2);
-                    await click(A, 3);
+                    await click(A, 5);
                     return;
                 }
                 await Task.Delay(25);
@@ -121,7 +118,7 @@ namespace _3DS_link_trade_bot
             }
             ChangeStatus("Link Trade Complete");
             await click(B, 1);
-            await click(A, 1);
+            await click(A, 5);
             return;
 
         }

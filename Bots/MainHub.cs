@@ -19,6 +19,7 @@ namespace _3DS_link_trade_bot
 {
     public class MainHub
     {
+        public static List<PKM> wtmons = new();
         public static List<string> guestlist = new();
         public static queuesystem tradeinfo;
         public static CancellationTokenSource tradetoken = new CancellationTokenSource();
@@ -26,6 +27,24 @@ namespace _3DS_link_trade_bot
         
         public static async void starttrades()
         {
+            await Log("loading WT mons");
+            var wtfiles = Directory.GetFiles(wtfolder);
+            if (wtfiles.Length > 0)
+            {
+                foreach (var wtfile in wtfiles)
+                {
+                    var wtpkm = EntityFormat.GetFromBytes(File.ReadAllBytes(wtfile));
+                    if (!new LegalityAnalysis(wtpkm).Valid || wtpkm.FatefulEncounter == true)
+                    {
+                        await Log($"{wtfile} not added due to being illegal or untradeable");
+                        continue;
+                    }
+
+                    wtmons.Add(wtpkm);
+                }
+            }
+            if (wtmons.Count() == 0)
+                await Log("No Wonder Trade Pokemon Loaded");
             while (!tradetoken.IsCancellationRequested)
             {
                 if(NTR.game == 3)
@@ -39,7 +58,7 @@ namespace _3DS_link_trade_bot
                     GTSDeposit = 0x32A6A180;
                     
                 }
-                    
+                
                 try {
                     //this is where it performs idling tasks
                     if (The_Q.Count == 0)
@@ -48,7 +67,10 @@ namespace _3DS_link_trade_bot
                         await click(X, 1);
                         if (_settings.GTSdistribution == true)
                             await GTSBot.GTStrades();
-                        await Task.Delay(5);
+                        await Task.Delay(5_000);
+                        if (_settings.WonderTrade == true)
+                            await WTBot.WTroutine();
+                        await Task.Delay(5_000);
                         continue;
 
 
@@ -62,10 +84,11 @@ namespace _3DS_link_trade_bot
 
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    await Log(ex.ToString());
                     ChangeStatus("Bot Down");
-                    foreach (var channel in _settings.Discordsettings.BotChannel)
+                    foreach (var channel in _settings.Discordsettings.BotTradeChannel)
                     {
 
                         var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;

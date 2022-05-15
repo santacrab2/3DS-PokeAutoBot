@@ -49,17 +49,6 @@ namespace _3DS_link_trade_bot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public ulong[] botchannel {
-            get {
-                return ((ulong[])(this["botchannel"]));
-            }
-            set {
-                this["botchannel"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string botfc {
             get {
@@ -79,6 +68,30 @@ namespace _3DS_link_trade_bot.Properties {
             }
             set {
                 this["Pokemonwanted"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("new()")]
+        public global::System.Collections.Generic.List<System.UInt64> botchannels {
+            get {
+                return ((global::System.Collections.Generic.List<System.UInt64>)(this["botchannels"]));
+            }
+            set {
+                this["botchannels"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("new()")]
+        public global::System.Collections.Generic.List<System.UInt64> wtchannels {
+            get {
+                return ((global::System.Collections.Generic.List<System.UInt64>)(this["wtchannels"]));
+            }
+            set {
+                this["wtchannels"] = value;
             }
         }
     }
