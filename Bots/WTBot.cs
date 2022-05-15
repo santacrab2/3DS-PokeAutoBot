@@ -22,7 +22,7 @@ namespace _3DS_link_trade_bot
             var rng = new Random();
             if (!infestivalplaza)
             {
-                await click(X, 1);
+                await click(X, 2);
                 await touch(229, 171, 10);
 
             }
@@ -76,7 +76,8 @@ namespace _3DS_link_trade_bot
                 await Task.Delay(15_000);
                 await tosend.SendMessageAsync("wonder trade now");
                 await click(A, 1);
-                while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B)
+                var stop = new Stopwatch();
+                while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B && stop.ElapsedMilliseconds < 90_000)
                     await Task.Delay(25);
                 await Task.Delay(42_000);
                 await click(B, 10);

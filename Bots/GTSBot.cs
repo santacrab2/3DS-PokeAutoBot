@@ -87,7 +87,7 @@ namespace _3DS_link_trade_bot
                     await click(B, 2);
             }
             await click(B, 1);
-            await click(A, 5);
+            await click(A, 10);
             return;
 
 

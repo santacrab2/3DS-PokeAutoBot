@@ -67,10 +67,10 @@ namespace _3DS_link_trade_bot
                         await click(X, 1);
                         if (_settings.GTSdistribution == true)
                             await GTSBot.GTStrades();
-                        await Task.Delay(5_000);
+                        
                         if (_settings.WonderTrade == true)
                             await WTBot.WTroutine();
-                        await Task.Delay(5_000);
+                        
                         continue;
 
 
