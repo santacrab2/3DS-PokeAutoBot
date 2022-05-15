@@ -10,6 +10,7 @@ using static _3DS_link_trade_bot.Program;
 using static _3DS_link_trade_bot.NTRClient;
 using static _3DS_link_trade_bot.dsbotbase.Buttons;
 using PKHeX.Core.AutoMod;
+using static _3DS_link_trade_bot.RAM;
 
 
 
@@ -63,6 +64,17 @@ namespace _3DS_link_trade_bot
             nokey.CopyTo(buttonarray, 16);
             Connection.Send(buttonarray);
             _settings = settings;
+            if (NTR.game == 3)
+            {
+                GTSpagesizeoff = 0x32A6A1A4;
+                GTScurrentview = 0x305ea384;
+                GTSpagesizeoff = 0x32A6A1A4;
+                GTSblockoff = 0x32A6A7C4;
+                box1slot1 = 0x330D9838;
+                screenoff = 0x00674802;
+                GTSDeposit = 0x32A6A180;
+
+            }
         }
         public static void ChangeStatus(string text)
         {

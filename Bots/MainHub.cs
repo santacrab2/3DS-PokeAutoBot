@@ -47,17 +47,7 @@ namespace _3DS_link_trade_bot
                 await Log("No Wonder Trade Pokemon Loaded");
             while (!tradetoken.IsCancellationRequested)
             {
-                if(NTR.game == 3)
-                {
-                    GTSpagesizeoff = 0x32A6A1A4;
-                    GTScurrentview = 0x305ea384;
-                    GTSpagesizeoff = 0x32A6A1A4;
-                    GTSblockoff = 0x32A6A7C4;
-                    box1slot1 = 0x330D9838; 
-                    screenoff = 0x00674802;
-                    GTSDeposit = 0x32A6A180;
-                    
-                }
+              
                 
                 try {
                     //this is where it performs idling tasks
