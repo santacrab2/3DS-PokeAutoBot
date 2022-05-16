@@ -52,11 +52,13 @@ namespace _3DS_link_trade_bot
             foreach(var chan in _settings.Discordsettings.BotWTChannel)
             {
                 var tosend = (ITextChannel)_client.GetChannel(chan);
-                try
-                {
+              
                     
                     EmbedBuilder embed = new EmbedBuilder();
+                try
+                {
                     embed.ThumbnailUrl = thegift.IsShiny ? $"https://play.pokemonshowdown.com/sprites/ani-shiny/{((Species)thegift.Species).ToString().ToLower().Replace(" ", "")}.gif" : $"https://play.pokemonshowdown.com/sprites/ani/{((Species)thegift.Species).ToString().ToLower().Replace(" ", "")}.gif";
+                } catch { }
                     var newShowdown = new List<string>();
                     thegift.ClearNickname();
                     var showdown = ShowdownParsing.GetShowdownText(thegift);
@@ -78,7 +80,9 @@ namespace _3DS_link_trade_bot
 
                 
                 embed.AddField("Wonder trading in 15 seconds", Format.Code(string.Join("\n", newShowdown).TrimEnd()));
-                await tosend.SendMessageAsync(embed: embed.Build());
+                try
+                {
+                    await tosend.SendMessageAsync(embed: embed.Build());
                 }
                 catch (Exception ex) { await Log(ex.ToString()); }
                 await Task.Delay(15_000);
@@ -103,7 +107,7 @@ namespace _3DS_link_trade_bot
 
                     await touch(155, 153, 1);
                 }
-                while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x00)
+                while (!infestivalplaza)
                     await click(B, 2);
 
 

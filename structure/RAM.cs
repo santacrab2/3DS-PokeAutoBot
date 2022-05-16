@@ -14,7 +14,8 @@ namespace _3DS_link_trade_bot
         public static uint friendsize = 0x2E0;
         public static uint namestart = 0x18;
         public static uint isconnectedoff = 0x318C5A12;
-        public static bool isconnected => Form1.ntr.ReadBytes(isconnectedoff, 1)[0] != 0x6C;
+        public static uint L_inlocalwireless = 0x6c;
+        public static bool isconnected => Form1.ntr.ReadBytes(isconnectedoff, 1)[0] != L_inlocalwireless;
 
         public static uint FailedTradeoff = 0x3023E34C;
         public static bool failedtrade => Form1.ntr.ReadBytes(FailedTradeoff, 1)[0] == 0x64;
@@ -24,14 +25,18 @@ namespace _3DS_link_trade_bot
         public static uint tradevolutionscreenoff = 0x3002040C;
         public static bool tradeevolution => Form1.ntr.ReadBytes(tradevolutionscreenoff, 1)[0] == 0x57;
         public static uint screenoff = 0x006A610A;
-        public static bool onboxscreen => BitConverter.ToUInt16(Form1.ntr.ReadBytes(screenoff, 2)) == 0x4120;
+        public static uint boxscreen = 0x4120;
+        public static bool onboxscreen => BitConverter.ToUInt16(Form1.ntr.ReadBytes(screenoff, 2)) == boxscreen;
         public static uint GTSpagesizeoff = 0x329921A4;
         public static uint GTSblockoff = 0x329927C4;
         public static uint GTScurrentview = 0x305CD9F4;
         public static uint GTSDeposit = 0x32992180;
-        public static uint coordinatesoff = 0x3182dbc4;
-        public static uint initialfestcoords = 0x2300;
-        public static bool infestivalplaza = BitConverter.ToUInt16(Form1.ntr.ReadBytes(coordinatesoff, 2)) == initialfestcoords;
+        public static uint festscreenoff = 0x318CBFEC;
+        public static uint festscreendisplayed = 0x38;
+
+
+        public static bool infestivalplaza = Form1.ntr.ReadBytes(festscreenoff, 1)[0] == festscreendisplayed;
+        
 
     }
     public readonly ref struct FriendList

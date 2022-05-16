@@ -96,7 +96,7 @@ namespace _3DS_link_trade_bot
             ChangeStatus("link trading");
             await click(A, 10);
             //stop.Restart();
-            while (!onboxscreen)
+            while (!onboxscreen || !infestivalplaza)
             {
                 await click(A, 5);
             }
