@@ -33,7 +33,7 @@ namespace _3DS_link_trade_bot
             }
 
         }
-        [SlashCommand("dequeue","removes you from queue")]
+        [SlashCommand("leavequeue","removes you from queue")]
         public async Task qc()
         {
             var qlist = The_Q.ToList();

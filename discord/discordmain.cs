@@ -10,6 +10,7 @@ using Discord.WebSocket;
 using System.Net;
 using static _3DS_link_trade_bot.Program;
 using static _3DS_link_trade_bot.Form1;
+using PKHeX.Core;
 
 namespace _3DS_link_trade_bot
 {
@@ -36,9 +37,9 @@ namespace _3DS_link_trade_bot
 
             await _client.LoginAsync(TokenType.Bot, _settings.Discordsettings.token);
             await _client.StartAsync();
-           // CommandHandler ch = new CommandHandler(_client, _commands);
+            // CommandHandler ch = new CommandHandler(_client, _commands);
             //await ch.InstallCommandsAsync();
-
+            _client.MessageReceived += readpkfiles;
             // Block this task until the program is closed.
             await Task.Delay(-1);
         }
@@ -98,6 +99,43 @@ namespace _3DS_link_trade_bot
         public static async Task<byte[]> DownloadFromUrlAsync(string url)
         {
             return await webClient.DownloadDataTaskAsync(url);
+        }
+        private async Task readpkfiles(SocketMessage messageParam)
+        {
+            var message = messageParam as SocketUserMessage;
+            if (message == null) 
+                return;
+            if(message.Attachments.Count > 0)
+            {
+                var attach = message.Attachments.FirstOrDefault();
+                if (attach == default)
+                    return;
+                var att = Format.Sanitize(attach.Filename);
+                if (!EntityDetection.IsSizePlausible(attach.Size))
+                    return;
+
+                var pokme = EntityFormat.GetFromBytes(await DownloadFromUrlAsync(attach.Url), 7);
+                var newShowdown = new List<string>();
+                var showdown = ShowdownParsing.GetShowdownText(pokme);
+                foreach (var line in showdown.Split('\n'))
+                    newShowdown.Add(line);
+
+                if (pokme.IsEgg)
+                    newShowdown.Add("\nPokémon is an egg");
+                if (pokme.Ball > (int)Ball.None)
+                    newShowdown.Insert(newShowdown.FindIndex(z => z.Contains("Nature")), $"Ball: {(Ball)pokme.Ball} Ball");
+                if (pokme.IsShiny)
+                {
+                    var index = newShowdown.FindIndex(x => x.Contains("Shiny: Yes"));
+                    if (pokme.ShinyXor == 0 || pokme.FatefulEncounter)
+                        newShowdown[index] = "Shiny: Square\r";
+                    else newShowdown[index] = "Shiny: Star\r";
+                }
+                var SID = string.Format("{0:0000}", pokme.TrainerSID7);
+                var TID = string.Format("{0:000000}", pokme.TrainerID7);
+                newShowdown.InsertRange(1, new string[] { $"OT: {pokme.OT_Name}", $"TID: {TID}", $"SID: {SID}", $"OTGender: {(Gender)pokme.OT_Gender}", $"Language: {(LanguageID)pokme.Language}" });
+                await message.Channel.SendMessageAsync(Format.Code(string.Join("\n", newShowdown).TrimEnd()));
+            }
         }
     }
 }
