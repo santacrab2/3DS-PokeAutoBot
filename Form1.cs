@@ -153,11 +153,14 @@ namespace _3DS_link_trade_bot
             {
                 
                 var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;
-                botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("❌", "✅"));
-                botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
-                var offembed = new EmbedBuilder();
-                offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Gen 7 Link Trade Bot is Online");
-                botchannelid.SendMessageAsync("<@&898900914348372058>", embed: offembed.Build());
+                if (botchannelid.Name.Contains("❌"))
+                {
+                    botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("❌", "✅"));
+                    botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
+                    var offembed = new EmbedBuilder();
+                    offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Gen 7 Link Trade Bot is Online");
+                    botchannelid.SendMessageAsync("<@&898900914348372058>", embed: offembed.Build());
+                }
             }
         
 

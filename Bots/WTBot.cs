@@ -108,7 +108,7 @@ namespace _3DS_link_trade_bot
                     await touch(155, 153, 1);
                 }
                 ChangeStatus("Wonder Trade Complete");
-                while (ntr.ReadBytes(festscreenoff, 1)[0] == 0x38)
+                while (!infestivalplaza)
                     await click(B, 2);
 
 
