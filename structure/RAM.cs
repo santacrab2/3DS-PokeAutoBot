@@ -32,10 +32,10 @@ namespace _3DS_link_trade_bot
         public static uint GTScurrentview = 0x305CD9F4;
         public static uint GTSDeposit = 0x32992180;
         public static uint festscreenoff = 0x318CBFEC;
-        public static uint festscreendisplayed = 0x38;
+        public static int festscreendisplayed = 0x38;
 
 
-        public static bool infestivalplaza = Form1.ntr.ReadBytes(festscreenoff, 1)[0] == festscreendisplayed;
+        public static bool infestivalplaza => Form1.ntr.ReadBytes(festscreenoff, 1)[0] == festscreendisplayed;
         
 
     }
