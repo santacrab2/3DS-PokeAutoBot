@@ -22,6 +22,7 @@ namespace _3DS_link_trade_bot
     public enum botmode
     {
         addfc,
-        trade
+        trade,
+        dump
     }
 }

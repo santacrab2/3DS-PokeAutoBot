@@ -168,5 +168,88 @@ namespace _3DS_link_trade_bot
             await presshome(5);
 
         }
+        public static async Task DumpRoutine()
+        {
+            ChangeStatus("starting a Link Trade");
+            await tradeinfo.discordcontext.User.SendMessageAsync("starting your dump trade now, be prepared to accept the invite! You have 30 seconds to get the files you need before I quit.");
+            if (!infestivalplaza)
+            {
+                await click(X, 1);
+                await touch(229, 171, 10);
+
+            }
+            while (!isconnected)
+            {
+                ChangeStatus("connecting to the internet");
+                await touch(296, 221, 5);
+                await click(A, 2);
+                await click(A, 30);
+                await click(A, 5);
+                await click(A, 20);
+
+            }
+            await touch(233, 119, 1);
+            await touch(161, 83, 3);
+            guestlist = getfriendlist();
+            await Task.Delay(5000);
+            int downpresses = 50;
+            ChangeStatus("reading friend list");
+            for (int j = 0; j < FriendList.numofguests; j++)
+            {
+                if (guestlist[j].Contains(tradeinfo.IGN))
+                {
+                    downpresses = j;
+                    break;
+                }
+
+            }
+            if (downpresses == 50)
+            {
+                ChangeStatus("user not found");
+                await tradeinfo.discordcontext.User.SendMessageAsync("I could not find you on the trade list, Please refresh your internet connection and try again!");
+                await click(B, 1);
+                await click(B, 5);
+                return;
+            }
+            for (int f = 0; f < downpresses; f++)
+                await DpadClick(DpadDOWN, 1);
+            await click(A, 1);
+            await click(A, 1);
+            Stopwatch stop = new();
+            stop.Restart();
+            while (stop.ElapsedMilliseconds <= 30_000 && ntr.ReadBytes(FailedTradeoff, 1)[0] != 0xFF && !failedtrade)
+                await Task.Delay(25);
+            if (failedtrade)
+            {
+                await click(B, 2);
+                await click(B, 2);
+            }
+
+            await Task.Delay(5_000);
+            var initialpokebytes = ntr.ReadBytes(OfferedPokemonoff, 232);
+            var initpoke = EntityFormat.GetFromBytes(initialpokebytes);
+            var temppath = $"{Path.GetTempPath()}//{initpoke.FileName}";
+            File.WriteAllBytes(temppath, initpoke.DecryptedBoxData);
+            await tradeinfo.discordcontext.User.SendFileAsync(temppath, "Here is the pokemon you showed me.");
+            File.Delete(temppath);
+            stop.Restart();
+            while(stop.ElapsedMilliseconds < 30_000)
+            {
+                var newpokebytes = ntr.ReadBytes(OfferedPokemonoff, 232);
+                var newpoke = EntityFormat.GetFromBytes(newpokebytes);
+                if(SearchUtil.HashByDetails(newpoke) != SearchUtil.HashByDetails(initpoke))
+                {
+                    temppath = $"{Path.GetTempPath()}//{newpoke.FileName}";
+                    File.WriteAllBytes(temppath, newpoke.DecryptedBoxData);
+                    await tradeinfo.discordcontext.User.SendFileAsync(temppath, "Here is the pokemon you showed me.");
+                    File.Delete(temppath);
+                    initpoke = newpoke;
+                }
+            }
+            await click(B, 1);
+            await click(A, 10);
+            return;
+
+        }
     }
 }

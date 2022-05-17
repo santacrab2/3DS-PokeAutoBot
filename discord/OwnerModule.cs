@@ -30,5 +30,11 @@ namespace _3DS_link_trade_bot
 
             await RespondAsync($"I have added the channel **{Context.Channel.Name}** with the id {Context.Channel.Id} for you {Context.User.Username}", ephemeral: true);
         }
+        [SlashCommand("queueclear","clears the queue entirely, owner command")]
+        public async Task clearqueue()
+        {
+            MainHub.The_Q.Clear();
+            await RespondAsync("the queue has been cleared", ephemeral:true);
+        }
     }
 }

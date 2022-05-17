@@ -110,7 +110,7 @@ namespace _3DS_link_trade_bot
                 ChangeStatus("Wonder Trade Complete");
                 while (!infestivalplaza)
                     await click(B, 2);
-
+                await Task.Delay(5_000);
 
             }
 

@@ -92,6 +92,13 @@ namespace _3DS_link_trade_bot
                 await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count()}. Receiving: {(Species)pkm.Species}");
             }
         }
+
+        [SlashCommand("dump","reads pokemon in your box that you show the bot and sends you pk files of them without trading")]
+        public async Task dump(string TrainerName)
+        {
+            The_Q.Enqueue(new queuesystem { discordcontext = Context, IGN = TrainerName, friendcode = "", tradepokemon = null, mode = botmode.dump });
+            await RespondAsync($"{Context.User.Username} - added to the dump queue. Current Position: {The_Q.Count()}.");
+        }
         [SlashCommand("hi","hi")]
         public  async Task some()
         {
