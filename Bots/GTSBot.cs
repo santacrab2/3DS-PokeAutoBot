@@ -15,7 +15,7 @@ namespace _3DS_link_trade_bot
     public class GTSBot
     {
         
-        public static List<string> KnownGTSBreakers = new List<string> { "funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ" , "あか", "adventrsnivy", "noxii",""," ", "doudou#6666", "doudou#9999", "zeraoratv=yt", "sun.", "leonmaxi.tv" }; 
+        public static List<string> KnownGTSBreakers = new List<string> { "funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ" , "あか", "adventrsnivy", "noxii",""," ", "doudou#6666", "doudou#9999", "zeraoratv=yt", "sun.", "leonmaxi.tv", "rayky" }; 
         public static int tradeindex;
         public static int gtspagesize;
         
@@ -24,7 +24,7 @@ namespace _3DS_link_trade_bot
             if (!infestivalplaza)
             {
                 await click(X, 1);
-                await touch(229, 171, 10);
+                await touch(229, 171, 15);
 
             }
             if (!isconnected)
