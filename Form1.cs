@@ -116,6 +116,7 @@ namespace _3DS_link_trade_bot
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
+            
             form1.IpAddress.Text = Properties.Settings.Default.IpAddress;
             settings.Discordsettings.token = Properties.Settings.Default.discordtoken;
             settings.Discordsettings.BotTradeChannel = Properties.Settings.Default.botchannels;

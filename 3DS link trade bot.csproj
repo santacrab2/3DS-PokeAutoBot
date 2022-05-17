@@ -7,7 +7,20 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>165Ledyba.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="165Ledyba.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="165Ledyba.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="165Ledyba.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Discord.Net" Version="3.6.1" />

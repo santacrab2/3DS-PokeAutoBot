@@ -95,8 +95,8 @@ namespace _3DS_link_trade_bot
             }
             ChangeStatus("link trading");
             await click(A, 10);
-            //stop.Restart();
-            while (!onboxscreen || !infestivalplaza)
+            stop.Restart();
+            while ((!onboxscreen || !infestivalplaza)&& stop.ElapsedMilliseconds < 120_000)
             {
                 await click(A, 5);
             }
