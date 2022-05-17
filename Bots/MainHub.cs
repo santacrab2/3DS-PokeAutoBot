@@ -71,6 +71,7 @@ namespace _3DS_link_trade_bot
                     {
                         case botmode.addfc: await FriendCodeRoutine(); continue;
                         case botmode.trade: await LinkTradeRoutine(); continue;
+                        case botmode.dump: await DumpRoutine(); continue;
 
                     }
                 }
