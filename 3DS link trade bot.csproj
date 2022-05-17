@@ -8,6 +8,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>165Ledyba.ico</ApplicationIcon>
+    <Authors>SantaCrab, BewearHugs</Authors>
   </PropertyGroup>
 
   <ItemGroup>
