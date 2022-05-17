@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabs = new System.Windows.Forms.TabControl();
             this.LinkTrades = new System.Windows.Forms.TabPage();
             this.LinkTradeStop = new System.Windows.Forms.Button();
@@ -222,8 +223,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.IpAddress);
             this.Controls.Add(this.tabs);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "3DS Link Trade Bot";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
