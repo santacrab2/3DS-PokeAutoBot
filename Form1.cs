@@ -75,6 +75,12 @@ namespace _3DS_link_trade_bot
                 GTSDeposit = 0x32A6A180;
 
             }
+            try {
+                var bot = new discordmain();
+                bot.MainAsync();
+                ChangeStatus("Connected to Discord");
+            }
+            catch { ChangeStatus("Could not connect to discord"); }
         }
         public static void ChangeStatus(string text)
         {

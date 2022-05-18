@@ -33,8 +33,6 @@
             this.LinkTrades = new System.Windows.Forms.TabPage();
             this.LinkTradeStop = new System.Windows.Forms.Button();
             this.startlinktrades = new System.Windows.Forms.Button();
-            this.Discord = new System.Windows.Forms.TabPage();
-            this.discordconnect = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.Logs = new System.Windows.Forms.TabPage();
@@ -47,7 +45,6 @@
             this.statusbox = new System.Windows.Forms.RichTextBox();
             this.tabs.SuspendLayout();
             this.LinkTrades.SuspendLayout();
-            this.Discord.SuspendLayout();
             this.Settings.SuspendLayout();
             this.Logs.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +52,6 @@
             // tabs
             // 
             this.tabs.Controls.Add(this.LinkTrades);
-            this.tabs.Controls.Add(this.Discord);
             this.tabs.Controls.Add(this.Settings);
             this.tabs.Controls.Add(this.Logs);
             this.tabs.Location = new System.Drawing.Point(0, 43);
@@ -95,27 +91,6 @@
             this.startlinktrades.Text = "Start";
             this.startlinktrades.UseVisualStyleBackColor = true;
             this.startlinktrades.Click += new System.EventHandler(this.startlinktrades_Click);
-            // 
-            // Discord
-            // 
-            this.Discord.BackColor = System.Drawing.SystemColors.Control;
-            this.Discord.Controls.Add(this.discordconnect);
-            this.Discord.Location = new System.Drawing.Point(4, 24);
-            this.Discord.Name = "Discord";
-            this.Discord.Padding = new System.Windows.Forms.Padding(3);
-            this.Discord.Size = new System.Drawing.Size(423, 275);
-            this.Discord.TabIndex = 2;
-            this.Discord.Text = "ChatServices";
-            // 
-            // discordconnect
-            // 
-            this.discordconnect.Location = new System.Drawing.Point(8, 6);
-            this.discordconnect.Name = "discordconnect";
-            this.discordconnect.Size = new System.Drawing.Size(142, 23);
-            this.discordconnect.TabIndex = 2;
-            this.discordconnect.Text = "Connect to Discord";
-            this.discordconnect.UseVisualStyleBackColor = true;
-            this.discordconnect.Click += new System.EventHandler(this.discordconnect_Click);
             // 
             // Settings
             // 
@@ -231,7 +206,6 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabs.ResumeLayout(false);
             this.LinkTrades.ResumeLayout(false);
-            this.Discord.ResumeLayout(false);
             this.Settings.ResumeLayout(false);
             this.Logs.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -252,8 +226,6 @@
         public RichTextBox statusbox;
         public RichTextBox logbox;
         private Button startlinktrades;
-        private TabPage Discord;
-        private Button discordconnect;
         private Button LinkTradeStop;
         private TabPage Settings;
         private PropertyGrid propertyGrid1;

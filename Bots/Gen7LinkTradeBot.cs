@@ -144,6 +144,7 @@ namespace _3DS_link_trade_bot
         }
         public static async Task FriendCodeRoutine()
         {
+            ChangeStatus($"Adding {tradeinfo.discordcontext.User.Username} with friend code: {tradeinfo.friendcode}");
             await tradeinfo.discordcontext.User.SendMessageAsync("adding you to the friends list now!");
             await presshome(2);
 
