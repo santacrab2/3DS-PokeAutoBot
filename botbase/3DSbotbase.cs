@@ -192,6 +192,7 @@ namespace _3DS_link_trade_bot
             return 0x01000000 + hexY * 0x1000 + hexX;
         }
 
+       
         public static async Task enterfriendcode(string fc)
         {
             for (int i = 0; i < fc.Length; i++)

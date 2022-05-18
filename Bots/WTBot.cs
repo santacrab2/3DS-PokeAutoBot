@@ -87,7 +87,12 @@ namespace _3DS_link_trade_bot
                     await tosend.SendMessageAsync(embed: embed.Build());
                 }
                 catch (Exception ex) { await Log(ex.ToString()); }
-                await Task.Delay(15_000);
+                await Task.Delay(10_000);
+                for(int i = 5; i > 0; i--)
+                {
+                    await tosend.SendMessageAsync($"{i}");
+                    await Task.Delay(1000);
+                }
                 await tosend.SendMessageAsync("wonder trade now");
                 ChangeStatus($"Wonder Trading: {(Species)thegift.Species}");
               
@@ -107,7 +112,7 @@ namespace _3DS_link_trade_bot
                 while(stop.ElapsedMilliseconds < 60_000)
                 {
 
-                    await touch(155, 153, 1);
+                    await touch(155, 151, 1);
                 }
                 ChangeStatus("Wonder Trade Complete");
                 while (!infestivalplaza)

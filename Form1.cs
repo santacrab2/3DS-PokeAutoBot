@@ -64,17 +64,7 @@ namespace _3DS_link_trade_bot
             nokey.CopyTo(buttonarray, 16);
             Connection.Send(buttonarray);
             _settings = settings;
-            if (NTR.game == 3)
-            {
-                GTSpagesizeoff = 0x32A6A1A4;
-                GTScurrentview = 0x305ea384;
-                GTSpagesizeoff = 0x32A6A1A4;
-                GTSblockoff = 0x32A6A7C4;
-                box1slot1 = 0x330D9838;
-                screenoff = 0x00674802;
-                GTSDeposit = 0x32A6A180;
-
-            }
+         
             try {
                 var bot = new discordmain();
                 bot.MainAsync();
@@ -138,6 +128,23 @@ namespace _3DS_link_trade_bot
 
         private void startlinktrades_Click(object sender, EventArgs e)
         {
+            if (NTR.game == 3)
+            {
+                GTSpagesizeoff = 0x32A6A1A4;
+                GTScurrentview = 0x305ea384;
+                GTSpagesizeoff = 0x32A6A1A4;
+                GTSblockoff = 0x32A6A7C4;
+                box1slot1 = 0x330D9838;
+                screenoff = 0x00674802;
+                GTSDeposit = 0x32A6A180;
+                Friendslistoffset = 0x30010F94;
+                isconnectedoff = 0x318635CE;
+                FailedTradeoff = 0x300FE0A4;
+                OfferedPokemonoff = 0x006754CC;
+                finalofferscreenoff = 0x307F7982;
+                festscreenoff = 0x31883B7C;
+                festscreendisplayed = 0xC8;
+            }
             Legalizer.EnableEasterEggs = false;
             APILegality.SetAllLegalRibbons = false;
             APILegality.SetMatchingBalls = true;
@@ -224,6 +231,11 @@ namespace _3DS_link_trade_bot
             }
        
          
+        }
+
+        private async void button1_Click_1(object sender, EventArgs e)
+        {
+            await touch(142, 194, 1);
         }
     }
 }
