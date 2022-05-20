@@ -73,7 +73,7 @@ namespace _3DS_link_trade_bot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("new()")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public global::System.Collections.Generic.List<System.UInt64> botchannels {
             get {
                 return ((global::System.Collections.Generic.List<System.UInt64>)(this["botchannels"]));
@@ -85,13 +85,37 @@ namespace _3DS_link_trade_bot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("new()")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public global::System.Collections.Generic.List<System.UInt64> wtchannels {
             get {
                 return ((global::System.Collections.Generic.List<System.UInt64>)(this["wtchannels"]));
             }
             set {
                 this["wtchannels"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool gtsbool {
+            get {
+                return ((bool)(this["gtsbool"]));
+            }
+            set {
+                this["gtsbool"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool wtbool {
+            get {
+                return ((bool)(this["wtbool"]));
+            }
+            set {
+                this["wtbool"] = value;
             }
         }
     }

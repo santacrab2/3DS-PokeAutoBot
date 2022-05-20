@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabs = new System.Windows.Forms.TabControl();
             this.LinkTrades = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.LinkTradeStop = new System.Windows.Forms.Button();
             this.startlinktrades = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
@@ -43,7 +44,6 @@
             this.consoledisconnect = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.statusbox = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.LinkTrades.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -74,8 +74,19 @@
             this.LinkTrades.TabIndex = 0;
             this.LinkTrades.Text = "Link Trades";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(339, 180);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // LinkTradeStop
             // 
+            this.LinkTradeStop.Enabled = false;
             this.LinkTradeStop.Location = new System.Drawing.Point(112, 24);
             this.LinkTradeStop.Name = "LinkTradeStop";
             this.LinkTradeStop.Size = new System.Drawing.Size(75, 23);
@@ -86,6 +97,7 @@
             // 
             // startlinktrades
             // 
+            this.startlinktrades.Enabled = false;
             this.startlinktrades.Location = new System.Drawing.Point(31, 24);
             this.startlinktrades.Name = "startlinktrades";
             this.startlinktrades.Size = new System.Drawing.Size(75, 23);
@@ -161,12 +173,14 @@
             // 
             // consoledisconnect
             // 
+            this.consoledisconnect.Enabled = false;
             this.consoledisconnect.Location = new System.Drawing.Point(229, 12);
             this.consoledisconnect.Name = "consoledisconnect";
             this.consoledisconnect.Size = new System.Drawing.Size(75, 23);
             this.consoledisconnect.TabIndex = 4;
             this.consoledisconnect.Text = "Disconnect";
             this.consoledisconnect.UseVisualStyleBackColor = true;
+            this.consoledisconnect.Click += new System.EventHandler(this.consoledisconnect_Click);
             // 
             // label2
             // 
@@ -187,16 +201,6 @@
             this.statusbox.Size = new System.Drawing.Size(377, 18);
             this.statusbox.TabIndex = 6;
             this.statusbox.Text = "";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(339, 180);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Form1
             // 
@@ -237,10 +241,10 @@
         public TextBox IpAddress;
         public RichTextBox statusbox;
         public RichTextBox logbox;
-        private Button startlinktrades;
-        private Button LinkTradeStop;
         private TabPage Settings;
         private PropertyGrid propertyGrid1;
         private Button button1;
+        public Button startlinktrades;
+        public Button LinkTradeStop;
     }
 }

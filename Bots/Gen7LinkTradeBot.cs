@@ -28,7 +28,7 @@ namespace _3DS_link_trade_bot
             {
                 await click(X, 1);
                 await touch(229, 171, 10);
-                await touch(296, 221, 10);
+                await touch(296, 221, 5);
                 await click(B, 10);
 
             }
@@ -37,9 +37,9 @@ namespace _3DS_link_trade_bot
                 ChangeStatus("connecting to the internet");
                 await touch(296, 221, 5);
                 await click(A, 2);
-                await click(A, 30);
-                await click(A, 5);
                 await click(A, 20);
+                await click(A, 5);
+                await click(A, 15);
                
             }
             await injection(tradeinfo.tradepokemon);
@@ -150,8 +150,8 @@ namespace _3DS_link_trade_bot
 
             await touch(120, 10, 1);
 
-            await touch(120, 10, 5);
-
+            await touch(120, 10, 6);
+            await click(A, 2);
             await touch(160, 10, 3);
 
             await touch(160, 180, 5);

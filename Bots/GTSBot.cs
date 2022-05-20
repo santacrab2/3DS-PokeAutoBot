@@ -25,7 +25,7 @@ namespace _3DS_link_trade_bot
             {
                 await click(X, 1);
                 await touch(229, 171, 10);
-                await touch(296, 221, 10);
+                await touch(296, 221,5);
                 await click(B, 10);
 
             }

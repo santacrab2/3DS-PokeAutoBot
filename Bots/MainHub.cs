@@ -96,6 +96,8 @@ namespace _3DS_link_trade_bot
             }
             ChangeStatus("Bot Stopped");
             tradetoken = new();
+            Program.form1.startlinktrades.Enabled = true;
+            Program.form1.LinkTradeStop.Enabled = false;
         }
 
       

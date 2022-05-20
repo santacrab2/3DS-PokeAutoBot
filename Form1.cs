@@ -71,6 +71,9 @@ namespace _3DS_link_trade_bot
                 ChangeStatus("Connected to Discord");
             }
             catch { ChangeStatus("Could not connect to discord"); }
+            form1.consoleconnect.Enabled = false;
+            form1.consoledisconnect.Enabled = true;
+            form1.startlinktrades.Enabled = true;
         }
         public static void ChangeStatus(string text)
         {
@@ -119,6 +122,8 @@ namespace _3DS_link_trade_bot
             settings.FriendCode = Properties.Settings.Default.botfc;
             settings.PokemonWanted = Properties.Settings.Default.Pokemonwanted;
             settings.Discordsettings.BotWTChannel = Properties.Settings.Default.wtchannels;
+            settings.GTSdistribution = Properties.Settings.Default.gtsbool;
+            settings.WonderTrade = Properties.Settings.Default.wtbool;
             
             if (!Directory.Exists(wtfolder))
                 Directory.CreateDirectory(wtfolder);
@@ -139,11 +144,12 @@ namespace _3DS_link_trade_bot
                 GTSDeposit = 0x32A6A180;
                 Friendslistoffset = 0x30010F94;
                 isconnectedoff = 0x318635CE;
-                FailedTradeoff = 0x300FE0A4;
+                FailedTradeoff = 0x300FE0A0;
                 OfferedPokemonoff = 0x006754CC;
                 finalofferscreenoff = 0x307F7982;
                 festscreenoff = 0x31883B7C;
                 festscreendisplayed = 0xC8;
+                tradevolutionscreenoff = 0x3002310C;
             }
             Legalizer.EnableEasterEggs = false;
             APILegality.SetAllLegalRibbons = false;
@@ -176,7 +182,8 @@ namespace _3DS_link_trade_bot
                     botchannelid.SendMessageAsync("<@&898900914348372058>", embed: offembed.Build());
                 }
             }
-        
+            form1.startlinktrades.Enabled = false;
+            form1.LinkTradeStop.Enabled = true;
 
             
         }
@@ -196,7 +203,8 @@ namespace _3DS_link_trade_bot
             Properties.Settings.Default.botfc = settings.FriendCode;
             Properties.Settings.Default.Pokemonwanted = settings.PokemonWanted;
             Properties.Settings.Default.wtchannels = settings.Discordsettings.BotWTChannel;
-           
+            Properties.Settings.Default.gtsbool = settings.GTSdistribution;
+            Properties.Settings.Default.wtbool = settings.WonderTrade;
             Properties.Settings.Default.Save();
             var filelist = Directory.GetFiles(logfolder);
             if (Directory.GetFiles(logfolder).Length > 7)
@@ -229,13 +237,23 @@ namespace _3DS_link_trade_bot
                 offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Gen 7 Link Trade Bot is Offline");
                 botchannelid.SendMessageAsync(embed: offembed.Build());
             }
-       
+            form1.startlinktrades.Enabled = true;
+            form1.LinkTradeStop.Enabled = false;
          
         }
 
         private async void button1_Click_1(object sender, EventArgs e)
         {
             await touch(142, 194, 1);
+        }
+
+        private void consoledisconnect_Click(object sender, EventArgs e)
+        {
+            ntr.Disconnect();
+            form1.consoledisconnect.Enabled = false;
+            form1.startlinktrades.Enabled = false;
+            form1.LinkTradeStop.Enabled = false;
+            form1.consoleconnect.Enabled = true;
         }
     }
 }
