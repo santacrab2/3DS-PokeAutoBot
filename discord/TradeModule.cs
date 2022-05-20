@@ -61,7 +61,7 @@ namespace _3DS_link_trade_bot
                     var imsg = $"Oops! {reason}";
                  
                         imsg += $"\n{set.SetAnalysis(sav,pkm)}";
-                    await FollowupAsync(imsg, ephemeral: true).ConfigureAwait(false);
+                    await FollowupAsync(imsg).ConfigureAwait(false);
                     return;
                 }
                 try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await FollowupAsync("enable private messages from users on the server to be queued");return; }

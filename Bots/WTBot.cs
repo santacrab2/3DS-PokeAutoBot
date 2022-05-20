@@ -110,7 +110,7 @@ namespace _3DS_link_trade_bot
             
                 var stop = new Stopwatch();
                 await click(A, 3);
-                
+                stop.Restart();
                 if (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x41A8)
                 {
                     while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B && stop.ElapsedMilliseconds < weirds_users_suck)
