@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabs = new System.Windows.Forms.TabControl();
             this.LinkTrades = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.LinkTradeStop = new System.Windows.Forms.Button();
             this.startlinktrades = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
@@ -64,7 +63,6 @@
             // LinkTrades
             // 
             this.LinkTrades.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.LinkTrades.Controls.Add(this.button1);
             this.LinkTrades.Controls.Add(this.LinkTradeStop);
             this.LinkTrades.Controls.Add(this.startlinktrades);
             this.LinkTrades.Location = new System.Drawing.Point(4, 24);
@@ -73,16 +71,6 @@
             this.LinkTrades.Size = new System.Drawing.Size(423, 275);
             this.LinkTrades.TabIndex = 0;
             this.LinkTrades.Text = "Link Trades";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(339, 180);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // LinkTradeStop
             // 
@@ -243,7 +231,6 @@
         public RichTextBox logbox;
         private TabPage Settings;
         private PropertyGrid propertyGrid1;
-        private Button button1;
         public Button startlinktrades;
         public Button LinkTradeStop;
     }
