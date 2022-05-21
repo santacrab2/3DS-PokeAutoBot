@@ -15,7 +15,7 @@ namespace _3DS_link_trade_bot
     public class GTSBot
     {
         
-        public static List<string> KnownGTSBreakers = new List<string> { "funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ" , "あか", "adventrsnivy", "noxii",""," ", "doudou#6666", "doudou#9999", "zeraoratv=yt", "sun.", "leonmaxi.tv", "rayky", "kewl" }; 
+        public static List<string> KnownGTSBreakers = new List<string> { "funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ" , "あか", "adventrsnivy", "noxii",""," ", "doudou#6666", "doudou#9999", "zeraoratv=yt", "sun.", "leonmaxi.tv", "rayky", "kewl", "not toxi" }; 
         public static int tradeindex;
         public static int gtspagesize;
         
@@ -23,6 +23,7 @@ namespace _3DS_link_trade_bot
         {
             if (!infestivalplaza)
             {
+                ChangeStatus("entering festival plaza");
                 await click(X, 1);
                 await touch(229, 171, 10);
                 await touch(296, 221,5);
@@ -39,11 +40,9 @@ namespace _3DS_link_trade_bot
                 await click(A, 5);
                 //wait for checkstatus
                 await click(A, 20);
-                if (!isconnected)
-                {
-                    return;
-                }
             }
+            if (userinvitedbot)
+                await click(X, 1);
             ChangeStatus("starting GTS distribution task");
             await touch(235, 130, 1);
             await touch(161, 121, 10);

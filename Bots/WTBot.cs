@@ -23,6 +23,7 @@ namespace _3DS_link_trade_bot
             var rng = new Random();
             if (!infestivalplaza)
             {
+                ChangeStatus("entering festival plaza");
                 await click(X, 1);
                 await touch(229, 171, 10);
                 await touch(296, 221, 5);
@@ -39,11 +40,10 @@ namespace _3DS_link_trade_bot
                 await click(A, 5);
                 //start and wait for checking status
                 await click(A, 20);
-                if (!isconnected)
-                {
-                    return;
-                }
+                
             }
+            if (userinvitedbot)
+                await click(X, 1);
             ChangeStatus("starting WT distribution task");
             await touch(235, 130, 1);
             await touch(165, 165, 5);

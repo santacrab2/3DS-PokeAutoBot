@@ -53,14 +53,12 @@ namespace _3DS_link_trade_bot
                     //this is where it performs idling tasks
                     if (The_Q.Count == 0)
                     {
-                        await click(X, 1);
-                        await click(X, 1);
+                       
                         if (_settings.GTSdistribution == true)
                             await GTSBot.GTStrades();
                         
                         if (_settings.WonderTrade == true)
                             await WTBot.WTroutine();
-                        
                         continue;
 
 

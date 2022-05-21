@@ -26,6 +26,7 @@ namespace _3DS_link_trade_bot
             await tradeinfo.discordcontext.User.SendMessageAsync("starting your trade now, be prepared to accept the invite!");
             if (!infestivalplaza)
             {
+                ChangeStatus("entering festival plaza");
                 await click(X, 1);
                 await touch(229, 171, 10);
                 await touch(296, 221, 5);
@@ -42,6 +43,8 @@ namespace _3DS_link_trade_bot
                 await click(A, 15);
                
             }
+            if (userinvitedbot)
+                await click(X, 1);
             await injection(tradeinfo.tradepokemon);
             await touch(233, 119, 1);
             await touch(161, 83, 3);
@@ -61,7 +64,7 @@ namespace _3DS_link_trade_bot
             if (downpresses == 50)
             {
                 ChangeStatus("user not found");
-                await tradeinfo.discordcontext.User.SendMessageAsync("I could not find you on the trade list, Please refresh your internet connection and try again!");
+                await tradeinfo.discordcontext.User.SendMessageAsync("I could not find you on the guest list, Please refresh your internet connection and try again!");
                 await click(B, 1);
                 await click(B, 5);
                 return;
@@ -98,7 +101,7 @@ namespace _3DS_link_trade_bot
             ChangeStatus("link trading");
             await click(A, 10);
             stop.Restart();
-            while ((!onboxscreen && !infestivalplaza)&& stop.ElapsedMilliseconds < 120_000)
+            while ((!onboxscreen && !infestivalplaza))
             {
                 await click(A, 5);
             }

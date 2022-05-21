@@ -33,7 +33,9 @@ namespace _3DS_link_trade_bot
         public static uint GTSDeposit = 0x32992180;
         public static uint festscreenoff = 0x318CBFEC;
         public static int festscreendisplayed = 0x38;
-
+        public static uint Userinvitedbotscreenoff = 0x31928D74;
+        public static int userinvitedbotscreenval = 0x21;
+        public static bool userinvitedbot => Form1.ntr.ReadBytes(Userinvitedbotscreenoff, 1)[0] == userinvitedbotscreenval;
 
         public static bool infestivalplaza => Form1.ntr.ReadBytes(festscreenoff, 1)[0] == festscreendisplayed;
         
