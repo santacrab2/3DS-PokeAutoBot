@@ -28,7 +28,7 @@ namespace _3DS_link_trade_bot
             var tobequeued = new queuesystem() { discordcontext = Context,friendcode = friendcode,tradepokemon=EntityBlank.GetBlank(7),IGN ="",mode = botmode.addfc};
             The_Q.Enqueue(tobequeued);
             await RespondAsync($"Added {Context.User.Username} to the Friend Code queue.");
-
+       
 
         }
 
@@ -50,7 +50,11 @@ namespace _3DS_link_trade_bot
           
 
                 ShowdownSet set = ConvertToShowdown(PokemonText);
-                var sav = SaveUtil.GetBlankSAV(GameVersion.UM, "Piplup");
+                SaveFile sav;
+                if (NTR.game == 3 || NTR.game == 4)
+                    sav = SaveUtil.GetBlankSAV(GameVersion.UM, "Piplup");
+                else
+                    sav = SaveUtil.GetBlankSAV(GameVersion.OR, "piplup");
                 var pkm = sav.GetLegalFromSet(set, out var res);
 
                 if (Legal.ZCrystalDictionary.ContainsValue(pkm.HeldItem))
@@ -84,7 +88,11 @@ namespace _3DS_link_trade_bot
                 var pkm = EntityFormat.GetFromBytes(buffer);
                 if(!new LegalityAnalysis(pkm).Valid)
                 {
-                    var sav = SaveUtil.GetBlankSAV(GameVersion.US, "santacrab");
+                    SaveFile sav;
+                    if (NTR.game == 3 || NTR.game == 4)
+                        sav = SaveUtil.GetBlankSAV(GameVersion.UM, "Piplup");
+                    else
+                        sav = SaveUtil.GetBlankSAV(GameVersion.OR, "piplup");
                     ShowdownSet set = new(pkm);
                     await FollowupAsync($"This File is illegal. Heres why: {set.SetAnalysis(sav, pkm)}");
                 }

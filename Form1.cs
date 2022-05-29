@@ -29,7 +29,7 @@ namespace _3DS_link_trade_bot
 
             InitializeComponent();
             propertyGrid1.SelectedObject = settings;
-          
+            
             
         }
 
@@ -156,12 +156,13 @@ namespace _3DS_link_trade_bot
             APILegality.SetMatchingBalls = true;
             APILegality.ForceSpecifiedBall = true;
             APILegality.UseXOROSHIRO = true;
-            APILegality.UseTrainerData = true;
+           APILegality.PrioritizeGame = false;
+            APILegality.PrioritizeGameVersion = GameVersion.Any;
             APILegality.AllowTrainerOverride = true;
             APILegality.AllowBatchCommands = true;
-            APILegality.PrioritizeGame = true;
-            APILegality.Timeout = 30;
-            APILegality.PrioritizeGameVersion = GameVersion.USUM;
+         
+            APILegality.Timeout = 45;
+          
             // Reload Database & Ribbon Index
             EncounterEvent.RefreshMGDB($"{Directory.GetCurrentDirectory()}//mgdb//");
             RibbonStrings.ResetDictionary(GameInfo.Strings.ribbons);
@@ -213,15 +214,7 @@ namespace _3DS_link_trade_bot
             File.AppendAllLines($"{logfolder}//{DateTime.Today.ToShortDateString().Replace("/", ".")}.txt",form1.logbox.Lines);
         }
 
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            var testlist = Gen7LinkTradeBot.getfriendlist();
-            foreach (string test in testlist)
-            {
-               await Log(test);
-
-            }
-        }
+      
 
         private void LinkTradeStop_Click(object sender, EventArgs e)
         {
@@ -254,6 +247,172 @@ namespace _3DS_link_trade_bot
             form1.startlinktrades.Enabled = false;
             form1.LinkTradeStop.Enabled = false;
             form1.consoleconnect.Enabled = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //this reads the PSS in gen 6 and gives me a list of the trainer names, this is basically the start of gen 6!!
+            ulong blocksize = 0x4e30;
+            ulong off = 0x08C6FFDC;
+            var data = ntr.ReadBytes(off, 0x4E20);
+            for (int i = 0; i < 2; i++)
+            {
+                PSSfriendlist friendlisttest = new PSSfriendlist(data);
+                for (int j = 0; j < 100; j++)
+                {
+                    var friend = friendlisttest[j];
+                    if (friend.pssID == 0)
+                        break;
+                    Log(friend.otname);
+                }
+                off += blocksize;
+                data = ntr.ReadBytes(off, 0x4E20);
+            }
+        }
+   
+        private async void RCup_Click(object sender, EventArgs e)
+        {
+            var buttonarray = new byte[20];
+            var nokey = BitConverter.GetBytes((uint)DpadUP);
+            nokey.CopyTo(buttonarray, 0);
+            nokey = BitConverter.GetBytes(0x2000000);
+            nokey.CopyTo(buttonarray, 4);
+            nokey = BitConverter.GetBytes(0x800800);
+            nokey.CopyTo(buttonarray, 8);
+            nokey = BitConverter.GetBytes(0x80800081);
+            nokey.CopyTo(buttonarray, 12);
+            nokey = BitConverter.GetBytes(0);
+            nokey.CopyTo(buttonarray, 16);
+            Connection.Send(buttonarray);
+        }
+        private async void RC_Release(object sender, EventArgs e)
+        {
+            var buttonarray = new byte[20];
+            var nokey = BitConverter.GetBytes(0xFFF);
+            nokey.CopyTo(buttonarray, 0);
+            nokey = BitConverter.GetBytes(0x2000000);
+            nokey.CopyTo(buttonarray, 4);
+            nokey = BitConverter.GetBytes(0x800800);
+            nokey.CopyTo(buttonarray, 8);
+            nokey = BitConverter.GetBytes(0x80800081);
+            nokey.CopyTo(buttonarray, 12);
+            nokey = BitConverter.GetBytes(0);
+            nokey.CopyTo(buttonarray, 16);
+            Connection.Send(buttonarray);
+
+
+        }
+
+        private void RCleft_Click(object sender, EventArgs e)
+        {
+            var buttonarray = new byte[20];
+            var nokey = BitConverter.GetBytes((uint)DpadLEFT);
+            nokey.CopyTo(buttonarray, 0);
+            nokey = BitConverter.GetBytes(0x2000000);
+            nokey.CopyTo(buttonarray, 4);
+            nokey = BitConverter.GetBytes(0x800800);
+            nokey.CopyTo(buttonarray, 8);
+            nokey = BitConverter.GetBytes(0x80800081);
+            nokey.CopyTo(buttonarray, 12);
+            nokey = BitConverter.GetBytes(0);
+            nokey.CopyTo(buttonarray, 16);
+            Connection.Send(buttonarray);
+        }
+
+        private void RCdown_Click(object sender, EventArgs e)
+        {
+            var buttonarray = new byte[20];
+            var nokey = BitConverter.GetBytes((uint)DpadDOWN);
+            nokey.CopyTo(buttonarray, 0);
+            nokey = BitConverter.GetBytes(0x2000000);
+            nokey.CopyTo(buttonarray, 4);
+            nokey = BitConverter.GetBytes(0x800800);
+            nokey.CopyTo(buttonarray, 8);
+            nokey = BitConverter.GetBytes(0x80800081);
+            nokey.CopyTo(buttonarray, 12);
+            nokey = BitConverter.GetBytes(0);
+            nokey.CopyTo(buttonarray, 16);
+            Connection.Send(buttonarray);
+        }
+
+        private void RCright_Click(object sender, EventArgs e)
+        {
+            var buttonarray = new byte[20];
+            var nokey = BitConverter.GetBytes((uint)DpadRIGHT);
+            nokey.CopyTo(buttonarray, 0);
+            nokey = BitConverter.GetBytes(0x2000000);
+            nokey.CopyTo(buttonarray, 4);
+            nokey = BitConverter.GetBytes(0x800800);
+            nokey.CopyTo(buttonarray, 8);
+            nokey = BitConverter.GetBytes(0x80800081);
+            nokey.CopyTo(buttonarray, 12);
+            nokey = BitConverter.GetBytes(0);
+            nokey.CopyTo(buttonarray, 16);
+            Connection.Send(buttonarray);
+        }
+
+        private void RCx_Click(object sender, EventArgs e)
+        {
+            var buttonarray = new byte[20];
+            var nokey = BitConverter.GetBytes((uint)X);
+            nokey.CopyTo(buttonarray, 0);
+            nokey = BitConverter.GetBytes(0x2000000);
+            nokey.CopyTo(buttonarray, 4);
+            nokey = BitConverter.GetBytes(0x800800);
+            nokey.CopyTo(buttonarray, 8);
+            nokey = BitConverter.GetBytes(0x80800081);
+            nokey.CopyTo(buttonarray, 12);
+            nokey = BitConverter.GetBytes(0);
+            nokey.CopyTo(buttonarray, 16);
+            Connection.Send(buttonarray);
+        }
+
+        private void RCy_Click(object sender, EventArgs e)
+        {
+            var buttonarray = new byte[20];
+            var nokey = BitConverter.GetBytes((uint)Y);
+            nokey.CopyTo(buttonarray, 0);
+            nokey = BitConverter.GetBytes(0x2000000);
+            nokey.CopyTo(buttonarray, 4);
+            nokey = BitConverter.GetBytes(0x800800);
+            nokey.CopyTo(buttonarray, 8);
+            nokey = BitConverter.GetBytes(0x80800081);
+            nokey.CopyTo(buttonarray, 12);
+            nokey = BitConverter.GetBytes(0);
+            nokey.CopyTo(buttonarray, 16);
+            Connection.Send(buttonarray);
+        }
+
+        private void RCb_Click(object sender, EventArgs e)
+        {
+            var buttonarray = new byte[20];
+            var nokey = BitConverter.GetBytes((uint)B);
+            nokey.CopyTo(buttonarray, 0);
+            nokey = BitConverter.GetBytes(0x2000000);
+            nokey.CopyTo(buttonarray, 4);
+            nokey = BitConverter.GetBytes(0x800800);
+            nokey.CopyTo(buttonarray, 8);
+            nokey = BitConverter.GetBytes(0x80800081);
+            nokey.CopyTo(buttonarray, 12);
+            nokey = BitConverter.GetBytes(0);
+            nokey.CopyTo(buttonarray, 16);
+            Connection.Send(buttonarray);
+        }
+
+        private void RCa_Click(object sender, EventArgs e)
+        {
+            var buttonarray = new byte[20];
+            var nokey = BitConverter.GetBytes((uint)A);
+            nokey.CopyTo(buttonarray, 0);
+            nokey = BitConverter.GetBytes(0x2000000);
+            nokey.CopyTo(buttonarray, 4);
+            nokey = BitConverter.GetBytes(0x800800);
+            nokey.CopyTo(buttonarray, 8);
+            nokey = BitConverter.GetBytes(0x80800081);
+            nokey.CopyTo(buttonarray, 12);
+            nokey = BitConverter.GetBytes(0);
+            nokey.CopyTo(buttonarray, 16);
+            Connection.Send(buttonarray);
         }
     }
 }

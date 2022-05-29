@@ -15,10 +15,10 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="botchannels" Type="System.Collections.Generic.List&lt;System.UInt64&gt;" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">""</Value>
     </Setting>
     <Setting Name="wtchannels" Type="System.Collections.Generic.List&lt;System.UInt64&gt;" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">""</Value>
     </Setting>
     <Setting Name="gtsbool" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

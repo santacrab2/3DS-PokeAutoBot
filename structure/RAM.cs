@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Buffers.Binary;
+using static System.Buffers.Binary.BinaryPrimitives;
 
 namespace _3DS_link_trade_bot
 {
     public class RAM
     {
+        //gen7
         public static uint Friendslistoffset = 0x30011134;
         public static int FriendListSize = 0x8FC0;
         public static uint friendsize = 0x2E0;
@@ -26,6 +27,7 @@ namespace _3DS_link_trade_bot
         public static bool tradeevolution => Form1.ntr.ReadBytes(tradevolutionscreenoff, 1)[0] == 0x57;
         public static uint screenoff = 0x006A610A;
         public static uint boxscreen = 0x4120;
+        public static uint start_seekscreen = 0x3F2B;
         public static bool onboxscreen => BitConverter.ToUInt16(Form1.ntr.ReadBytes(screenoff, 2)) == boxscreen;
         public static uint GTSpagesizeoff = 0x329921A4;
         public static uint GTSblockoff = 0x329927C4;
@@ -39,7 +41,10 @@ namespace _3DS_link_trade_bot
 
         public static bool infestivalplaza => Form1.ntr.ReadBytes(festscreenoff, 1)[0] == festscreendisplayed;
         
-
+        //gen6
+        public static uint PSSFriendoff = 0x08C6FFDC;
+        public static uint PSSBlockSize = 0x4E30;
+        public static uint PSSDataSize = 0x4E20;
     }
     public readonly ref struct FriendList
     {
@@ -55,8 +60,7 @@ namespace _3DS_link_trade_bot
         public const int friendsize = 0x2E0;
         private readonly Span<byte> Data;
         public friend(Span<byte> data) => Data = data;
-        public byte first => Data[0];
-        public byte[] test => new byte[12] {Data[24], Data[26], Data[28], Data[30],Data[32],Data[34],Data[36],Data[38],Data[40],Data[42],Data[44],Data[46] };
+      
         public string friendname => Encoding.Unicode.GetString(Data.Slice(24,24)).Trim('\0');
     }
     public readonly ref struct GTSPage
@@ -77,5 +81,23 @@ namespace _3DS_link_trade_bot
         public int levelindex => Data[0xF];
 
 
+    }
+    public readonly ref struct PSSfriendlist
+    {
+
+        private readonly Span<byte> Data;
+        public PSSfriendlist(Span<byte> data) => Data = data;
+        public PSSFriend this[int index] => new(Data.Slice(PSSFriend.friendsize*index,PSSFriend.friendsize));
+        
+
+    }
+    public readonly ref struct PSSFriend
+    {
+        private readonly Span<byte> Data;
+        public PSSFriend(Span<byte> data) => Data = data;
+        public const int friendsize = 0xc8;
+         public ulong pssID => ReadUInt64LittleEndian(Data);
+        
+        public string otname => Encoding.Unicode.GetString(Data.Slice(8, 24)).Trim('\0');
     }
 }

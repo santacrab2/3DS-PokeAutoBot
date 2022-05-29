@@ -113,13 +113,13 @@ namespace _3DS_link_trade_bot
                 stop.Restart();
                 if (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x41A8)
                 {
-                    while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B && stop.ElapsedMilliseconds < weirds_users_suck)
+                    while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != start_seekscreen && stop.ElapsedMilliseconds < weirds_users_suck)
                         await click(B, 1);
                     await click(B, 5);
                     return;
                 }
                 
-                while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B && stop.ElapsedMilliseconds < 30_000)
+                while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != start_seekscreen && stop.ElapsedMilliseconds < 30_000)
                     await Task.Delay(25);
                 stop.Restart();
                 while(stop.ElapsedMilliseconds < 60_000)

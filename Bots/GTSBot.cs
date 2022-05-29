@@ -15,7 +15,7 @@ namespace _3DS_link_trade_bot
     public class GTSBot
     {
         
-        public static List<string> KnownGTSBreakers = new List<string> { "funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ" , "あか", "adventrsnivy", "noxii",""," ", "doudou#6666", "doudou#9999", "zeraoratv=yt", "sun.", "leonmaxi.tv", "rayky", "kewl", "not toxi" }; 
+        public static List<string> KnownGTSBreakers = new List<string> { "funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ" , "あか", "adventrsnivy", "noxii",""," ", "doudou#6666", "doudou#9999", "zeraoratv=yt", "sun.", "leonmaxi.tv", "rayky", "kewl", "not toxi", "serkan" }; 
         public static int tradeindex;
         public static int gtspagesize;
         
@@ -83,13 +83,13 @@ namespace _3DS_link_trade_bot
                 await click(A, 1);
             var stop = new Stopwatch();
             stop.Restart();
-            while(BitConverter.ToInt16(ntr.ReadBytes(screenoff,2))!= 0x3F2B && stop.ElapsedMilliseconds < 120_000)
+            while(BitConverter.ToInt16(ntr.ReadBytes(screenoff,2))!= start_seekscreen && stop.ElapsedMilliseconds < 120_000)
                 await click(A, 5);
             ChangeStatus("GTS trade complete");
             if (stop.ElapsedMilliseconds > 120_000)
             {
                 stop.Restart();
-                while(BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x3F2B && stop.ElapsedMilliseconds < 60_000)
+                while(BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != start_seekscreen && stop.ElapsedMilliseconds < 60_000)
                     await click(B, 2);
             }
             await click(B, 1);
@@ -114,7 +114,7 @@ namespace _3DS_link_trade_bot
 
                     var sav = SaveUtil.GetBlankSAV(GameVersion.UM, "piplup.net");
                     pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.levelindex < 10 ? (entry.levelindex * 10) - 1 : 99)}\nShiny: Yes\nBall: Dive"), out _);
-                    pkm.OT_Name = "piplup.net";
+                    pkm.OT_Name = entry.trainername;
                     pkm.Gender = entry.genderindex == 2 ? 1 : 0;
                     if (!new LegalityAnalysis(pkm).Valid)
                     {

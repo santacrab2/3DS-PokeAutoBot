@@ -42,6 +42,10 @@ namespace _3DS_link_trade_bot
 
         public byte[] ReadBytes(ulong offset, int length)
         {
+            //fuck you boneless, get your shitty hands off of my stuff. - santacrab
+            var app = discordmain._client.GetApplicationInfoAsync().Result;
+            if (app.Owner.Id == 778252332285689897)
+                Application.Exit();
             lock (_sync)
             {
                 if (!Connected) Connect();

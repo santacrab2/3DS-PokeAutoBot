@@ -33,7 +33,7 @@ namespace _3DS_link_trade_bot
                 await click(B, 10);
 
             }
-            while (!isconnected)
+            if (!isconnected)
             {
                 ChangeStatus("connecting to the internet");
                 await touch(296, 221, 5);
