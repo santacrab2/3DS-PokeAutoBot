@@ -29,7 +29,7 @@ namespace _3DS_link_trade_bot
 
             InitializeComponent();
             propertyGrid1.SelectedObject = settings;
-            
+          
             
         }
 
@@ -188,13 +188,12 @@ namespace _3DS_link_trade_bot
             APILegality.SetMatchingBalls = true;
             APILegality.ForceSpecifiedBall = true;
             APILegality.UseXOROSHIRO = true;
-           APILegality.PrioritizeGame = false;
-            APILegality.PrioritizeGameVersion = GameVersion.Any;
+            APILegality.UseTrainerData = true;
             APILegality.AllowTrainerOverride = true;
             APILegality.AllowBatchCommands = true;
-         
-            APILegality.Timeout = 45;
           
+            APILegality.Timeout = 30;
+           
             // Reload Database & Ribbon Index
             EncounterEvent.RefreshMGDB($"{Directory.GetCurrentDirectory()}//mgdb//");
             RibbonStrings.ResetDictionary(GameInfo.Strings.ribbons);
@@ -246,7 +245,15 @@ namespace _3DS_link_trade_bot
             File.AppendAllLines($"{logfolder}//{DateTime.Today.ToShortDateString().Replace("/", ".")}.txt",form1.logbox.Lines);
         }
 
-      
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            var testlist = Gen7LinkTradeBot.getfriendlist();
+            foreach (string test in testlist)
+            {
+               await Log(test);
+
+            }
+        }
 
         private void LinkTradeStop_Click(object sender, EventArgs e)
         {
@@ -280,8 +287,8 @@ namespace _3DS_link_trade_bot
             form1.LinkTradeStop.Enabled = false;
             form1.consoleconnect.Enabled = true;
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        
+         private void button1_Click(object sender, EventArgs e)
         {
             //this reads the PSS in gen 6 and gives me a list of the trainer names, this is basically the start of gen 6!!
             ulong blocksize = 0x4e30;
@@ -301,7 +308,7 @@ namespace _3DS_link_trade_bot
                 data = ntr.ReadBytes(off, 0x4E20);
             }
         }
-   
+
         private async void RCup_Click(object sender, EventArgs e)
         {
             var buttonarray = new byte[20];
