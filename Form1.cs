@@ -37,7 +37,7 @@ namespace _3DS_link_trade_bot
 
         public static NTRClient ntr = new();
         public static Socket Connection = new Socket(AddressFamily.InterNetwork, SocketType.Dgram,0);
-        public static Socket Connection2 = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0);
+      
 
         private void consoleconnect_Click(object sender, EventArgs e)
         {
@@ -129,6 +129,38 @@ namespace _3DS_link_trade_bot
                 Directory.CreateDirectory(wtfolder);
             if(!Directory.Exists(logfolder))
                 Directory.CreateDirectory(logfolder);
+            APILegality.SetAllLegalRibbons = false;
+            APILegality.SetMatchingBalls = true;
+            APILegality.ForceSpecifiedBall = true;
+            APILegality.UseXOROSHIRO = true;
+            Legalizer.EnableEasterEggs = false;
+            APILegality.AllowTrainerOverride = true;
+            APILegality.AllowBatchCommands = true;
+            APILegality.Timeout = 30;
+            string OT = "pip";
+            int TID = 54654;
+            int SID = 45636;
+            int lang = 2;
+            for (int i = 1; i < PKX.Generation + 1; i++)
+            {
+                var versions = GameUtil.GetVersionsInGeneration(i, PKX.Generation);
+                foreach (var v in versions)
+                {
+                    var fallback = new SimpleTrainerInfo(v)
+                    {
+                        Language = lang,
+                        TID = TID,
+                        SID = SID,
+                        OT = OT,
+                    };
+                    var exist = TrainerSettings.GetSavedTrainerData(v, i, fallback);
+                    if (exist is SimpleTrainerInfo) // not anything from files; this assumes ALM returns SimpleTrainerInfo for non-user-provided fake templates.
+                        TrainerSettings.Register(fallback);
+                }
+            }
+
+            var trainer = TrainerSettings.GetSavedTrainerData(PKX.Generation);
+            RecentTrainerCache.SetRecentTrainer(trainer);
         }
 
         private void startlinktrades_Click(object sender, EventArgs e)

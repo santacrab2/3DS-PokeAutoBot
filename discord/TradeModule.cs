@@ -35,27 +35,26 @@ namespace _3DS_link_trade_bot
         [SlashCommand("trade", "trades you a pokemon over link trade in 3ds games")]
         public async Task trade(string TrainerName, string PokemonText = " ", Attachment pk7 = null)
         {
+            await DeferAsync();
            
             if (The_Q.Count != 0)
             {
                 if (The_Q.Any(z => z.IGN == TrainerName))
                 {
-                    await RespondAsync("you are already in queue", ephemeral: true);
+                    await FollowupAsync("you are already in queue", ephemeral: true);
                     return;
                 }
             }
             if (PokemonText != " ")
             {
-                await RespondAsync("I have received your command");
+                await DeferAsync();
           
 
                 ShowdownSet set = ConvertToShowdown(PokemonText);
-                SaveFile sav;
-                if (NTR.game == 3 || NTR.game == 4)
-                    sav = SaveUtil.GetBlankSAV(GameVersion.UM, "Piplup");
-                else
-                    sav = SaveUtil.GetBlankSAV(GameVersion.OR, "piplup");
-                var pkm = sav.GetLegalFromSet(set, out var res);
+              
+                var sav = TrainerSettings.GetSavedTrainerData(7);
+                PK7 temp = new();
+                var pkm = sav.GetLegalFromTemplate(temp, set, out var res);
 
                 if (Legal.ZCrystalDictionary.ContainsValue(pkm.HeldItem))
                     pkm.HeldItem = 0;
@@ -78,7 +77,7 @@ namespace _3DS_link_trade_bot
             }
             if (pk7 != null)
             {
-                await RespondAsync("I have received your command");
+                await DeferAsync();
                 if (!EntityDetection.IsSizePlausible(pk7.Size))
                 {
                     await FollowupAsync("this is not a pk file", ephemeral:true);

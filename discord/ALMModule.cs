@@ -17,9 +17,11 @@ namespace _3DS_link_trade_bot
         [SlashCommand("convert", "Makes you a pokemon file from showdown text")]
         public async Task convert(string PokemonText)
         {
+            await DeferAsync();
             ShowdownSet set = TradeModule.ConvertToShowdown(PokemonText);
-            var sav = SaveUtil.GetBlankSAV(GameVersion.UM, "Piplup");
-            var pkm = sav.GetLegalFromSet(set, out var res);
+            var sav = TrainerSettings.GetSavedTrainerData(7);
+            PK7 temp = new();
+            var pkm = sav.GetLegalFromTemplate(temp,set, out var res);
 
 
             if (!new LegalityAnalysis(pkm).Valid || res.ToString() != "Regenerated")
@@ -28,12 +30,12 @@ namespace _3DS_link_trade_bot
                 var imsg = $"Oops! {reason}";
 
                 imsg += $"\n{set.SetAnalysis(sav, pkm)}";
-                await RespondAsync(imsg, ephemeral: true).ConfigureAwait(false);
+                await FollowupAsync(imsg, ephemeral: true).ConfigureAwait(false);
                 return;
             }
             var tempfile = $"{Directory.GetCurrentDirectory()}//{pkm.FileName}";
             File.WriteAllBytes(tempfile, pkm.DecryptedBoxData);
-            await RespondWithFileAsync(tempfile, text:"Here is your legalized pk file");
+            await FollowupWithFileAsync(tempfile, text:"Here is your legalized pk file");
             File.Delete(tempfile);
         }
     }

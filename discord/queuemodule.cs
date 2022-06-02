@@ -16,9 +16,10 @@ namespace _3DS_link_trade_bot
         [SlashCommand("queuelist","Displays the queue")]
         public async Task queuelist()
         {
+            await DeferAsync();
             var embed = new EmbedBuilder().WithTitle("Queue");
             if (The_Q.Count == 0)
-               await RespondAsync("Queue is Empty");
+               await FollowupAsync("Queue is Empty");
             else
             {
                 StringBuilder sb = new StringBuilder();
@@ -29,25 +30,26 @@ namespace _3DS_link_trade_bot
                     i++;
                 }
                 embed.AddField("Users in Queue",sb.ToString());
-                await RespondAsync(embed: embed.Build());
+                await FollowupAsync(embed: embed.Build());
             }
 
         }
         [SlashCommand("leavequeue","removes you from queue")]
         public async Task qc()
         {
+            await DeferAsync();
             var qlist = The_Q.ToList();
             var index = qlist.FindIndex(z => z.discordcontext.User.Id == Context.User.Id);
             if(index == -1)
             {
-                await RespondAsync("you are not in the queue");
+                await FollowupAsync("you are not in the queue");
             }
             qlist.RemoveAt(index);
             var newqu = new Queue<queuesystem>();
             foreach (var item in qlist)
                 newqu.Enqueue(item);
             The_Q = newqu;
-            await RespondAsync("removed you from the queue");
+            await FollowupAsync("removed you from the queue");
         }
     }
 }
