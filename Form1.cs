@@ -159,9 +159,9 @@ namespace _3DS_link_trade_bot
             APILegality.UseTrainerData = true;
             APILegality.AllowTrainerOverride = true;
             APILegality.AllowBatchCommands = true;
-            APILegality.PrioritizeGame = true;
+          
             APILegality.Timeout = 30;
-            APILegality.PrioritizeGameVersion = GameVersion.USUM;
+           
             // Reload Database & Ribbon Index
             EncounterEvent.RefreshMGDB($"{Directory.GetCurrentDirectory()}//mgdb//");
             RibbonStrings.ResetDictionary(GameInfo.Strings.ribbons);
