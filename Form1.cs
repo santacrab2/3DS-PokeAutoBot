@@ -245,15 +245,7 @@ namespace _3DS_link_trade_bot
             File.AppendAllLines($"{logfolder}//{DateTime.Today.ToShortDateString().Replace("/", ".")}.txt",form1.logbox.Lines);
         }
 
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            var testlist = Gen7LinkTradeBot.getfriendlist();
-            foreach (string test in testlist)
-            {
-               await Log(test);
 
-            }
-        }
 
         private void LinkTradeStop_Click(object sender, EventArgs e)
         {
@@ -274,10 +266,7 @@ namespace _3DS_link_trade_bot
          
         }
 
-        private async void button1_Click_1(object sender, EventArgs e)
-        {
-            await touch(142, 194, 1);
-        }
+
 
         private void consoledisconnect_Click(object sender, EventArgs e)
         {
