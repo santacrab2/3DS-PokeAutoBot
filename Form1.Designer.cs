@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabs = new System.Windows.Forms.TabControl();
             this.LinkTrades = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LinkTradeStop = new System.Windows.Forms.Button();
             this.startlinktrades = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
@@ -47,6 +46,7 @@
             this.RCdown = new System.Windows.Forms.Button();
             this.RCleft = new System.Windows.Forms.Button();
             this.RCup = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.IpAddress = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.consoleconnect = new System.Windows.Forms.Button();
@@ -58,9 +58,10 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.tabs.SuspendLayout();
             this.LinkTrades.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.Settings.SuspendLayout();
             this.Logs.SuspendLayout();
+            this.RemoteControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -75,7 +76,7 @@
             this.tabs.Location = new System.Drawing.Point(0, 65);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
-            this.tabs.Size = new System.Drawing.Size(431, 281);
+            this.tabs.Size = new System.Drawing.Size(538, 281);
             this.tabs.TabIndex = 0;
             // 
             // LinkTrades
@@ -88,27 +89,16 @@
             this.LinkTrades.Location = new System.Drawing.Point(4, 24);
             this.LinkTrades.Name = "LinkTrades";
             this.LinkTrades.Padding = new System.Windows.Forms.Padding(3);
-            this.LinkTrades.Size = new System.Drawing.Size(423, 253);
+            this.LinkTrades.Size = new System.Drawing.Size(530, 253);
             this.LinkTrades.TabIndex = 0;
             this.LinkTrades.Text = "Link Trades";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImage = global::_3DS_link_trade_bot.Properties.Resources.pkm_s;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(191, 36);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(50, 47);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
             // 
             // LinkTradeStop
             // 
             this.LinkTradeStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.LinkTradeStop.Enabled = false;
             this.LinkTradeStop.ForeColor = System.Drawing.Color.White;
-            this.LinkTradeStop.Location = new System.Drawing.Point(204, 224);
+            this.LinkTradeStop.Location = new System.Drawing.Point(281, 224);
             this.LinkTradeStop.Name = "LinkTradeStop";
             this.LinkTradeStop.Size = new System.Drawing.Size(75, 23);
             this.LinkTradeStop.TabIndex = 2;
@@ -121,7 +111,7 @@
             this.startlinktrades.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.startlinktrades.Enabled = false;
             this.startlinktrades.ForeColor = System.Drawing.Color.White;
-            this.startlinktrades.Location = new System.Drawing.Point(123, 224);
+            this.startlinktrades.Location = new System.Drawing.Point(187, 224);
             this.startlinktrades.Name = "startlinktrades";
             this.startlinktrades.Size = new System.Drawing.Size(75, 23);
             this.startlinktrades.TabIndex = 0;
@@ -136,7 +126,7 @@
             this.Settings.Location = new System.Drawing.Point(4, 24);
             this.Settings.Name = "Settings";
             this.Settings.Padding = new System.Windows.Forms.Padding(3);
-            this.Settings.Size = new System.Drawing.Size(423, 275);
+            this.Settings.Size = new System.Drawing.Size(423, 253);
             this.Settings.TabIndex = 3;
             this.Settings.Text = "Settings";
             // 
@@ -166,7 +156,7 @@
             this.Logs.Location = new System.Drawing.Point(4, 24);
             this.Logs.Name = "Logs";
             this.Logs.Padding = new System.Windows.Forms.Padding(3);
-            this.Logs.Size = new System.Drawing.Size(423, 275);
+            this.Logs.Size = new System.Drawing.Size(423, 253);
             this.Logs.TabIndex = 1;
             this.Logs.Text = "Logs";
             // 
@@ -180,10 +170,10 @@
             this.logbox.Size = new System.Drawing.Size(409, 263);
             this.logbox.TabIndex = 0;
             this.logbox.Text = "";
-            //
+            // 
             // RemoteControl
             // 
-            this.RemoteControl.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.RemoteControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.RemoteControl.Controls.Add(this.RCa);
             this.RemoteControl.Controls.Add(this.RCb);
             this.RemoteControl.Controls.Add(this.RCx);
@@ -195,14 +185,14 @@
             this.RemoteControl.Location = new System.Drawing.Point(4, 24);
             this.RemoteControl.Name = "RemoteControl";
             this.RemoteControl.Padding = new System.Windows.Forms.Padding(3);
-            this.RemoteControl.Size = new System.Drawing.Size(423, 275);
+            this.RemoteControl.Size = new System.Drawing.Size(530, 253);
             this.RemoteControl.TabIndex = 4;
             this.RemoteControl.Text = "Remote Control";
             // 
             // RCa
             // 
             this.RCa.ForeColor = System.Drawing.Color.Red;
-            this.RCa.Location = new System.Drawing.Point(344, 76);
+            this.RCa.Location = new System.Drawing.Point(477, 76);
             this.RCa.Name = "RCa";
             this.RCa.Size = new System.Drawing.Size(29, 23);
             this.RCa.TabIndex = 7;
@@ -214,19 +204,19 @@
             // RCb
             // 
             this.RCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.RCb.Location = new System.Drawing.Point(303, 101);
+            this.RCb.Location = new System.Drawing.Point(436, 107);
             this.RCb.Name = "RCb";
             this.RCb.Size = new System.Drawing.Size(35, 23);
             this.RCb.TabIndex = 6;
             this.RCb.Text = "B";
             this.RCb.UseVisualStyleBackColor = true;
             this.RCb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RCb_Click);
-            this.RCb.MouseUp +=new System.Windows.Forms.MouseEventHandler(this.RC_Release);
+            this.RCb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RC_Release);
             // 
             // RCx
             // 
             this.RCx.ForeColor = System.Drawing.Color.Teal;
-            this.RCx.Location = new System.Drawing.Point(306, 54);
+            this.RCx.Location = new System.Drawing.Point(439, 54);
             this.RCx.Name = "RCx";
             this.RCx.Size = new System.Drawing.Size(32, 23);
             this.RCx.TabIndex = 5;
@@ -238,7 +228,7 @@
             // RCy
             // 
             this.RCy.ForeColor = System.Drawing.Color.Green;
-            this.RCy.Location = new System.Drawing.Point(272, 76);
+            this.RCy.Location = new System.Drawing.Point(405, 76);
             this.RCy.Name = "RCy";
             this.RCy.Size = new System.Drawing.Size(28, 23);
             this.RCy.TabIndex = 4;
@@ -249,6 +239,7 @@
             // 
             // RCright
             // 
+            this.RCright.ForeColor = System.Drawing.Color.Black;
             this.RCright.Location = new System.Drawing.Point(78, 149);
             this.RCright.Name = "RCright";
             this.RCright.Size = new System.Drawing.Size(32, 23);
@@ -260,6 +251,7 @@
             // 
             // RCdown
             // 
+            this.RCdown.ForeColor = System.Drawing.Color.Black;
             this.RCdown.Location = new System.Drawing.Point(50, 178);
             this.RCdown.Name = "RCdown";
             this.RCdown.Size = new System.Drawing.Size(24, 27);
@@ -271,6 +263,7 @@
             // 
             // RCleft
             // 
+            this.RCleft.ForeColor = System.Drawing.Color.Black;
             this.RCleft.Location = new System.Drawing.Point(18, 149);
             this.RCleft.Name = "RCleft";
             this.RCleft.Size = new System.Drawing.Size(26, 23);
@@ -282,6 +275,7 @@
             // 
             // RCup
             // 
+            this.RCup.ForeColor = System.Drawing.Color.Black;
             this.RCup.Location = new System.Drawing.Point(50, 117);
             this.RCup.Name = "RCup";
             this.RCup.Size = new System.Drawing.Size(23, 27);
@@ -290,6 +284,17 @@
             this.RCup.UseVisualStyleBackColor = true;
             this.RCup.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RCup_Click);
             this.RCup.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RC_Release);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImage = global::_3DS_link_trade_bot.Properties.Resources.pkm_s;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(310, 36);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(50, 47);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // IpAddress
             // 
@@ -352,7 +357,7 @@
             this.statusbox.Multiline = false;
             this.statusbox.Name = "statusbox";
             this.statusbox.ReadOnly = true;
-            this.statusbox.Size = new System.Drawing.Size(377, 18);
+            this.statusbox.Size = new System.Drawing.Size(488, 18);
             this.statusbox.TabIndex = 6;
             this.statusbox.Text = "";
             // 
@@ -361,7 +366,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.BackgroundImage = global::_3DS_link_trade_bot.Properties.Resources.pkm_m;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(247, 36);
+            this.pictureBox2.Location = new System.Drawing.Point(369, 36);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(50, 47);
             this.pictureBox2.TabIndex = 7;
@@ -372,7 +377,7 @@
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.BackgroundImage = global::_3DS_link_trade_bot.Properties.Resources.pkm_us;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox3.Location = new System.Drawing.Point(303, 36);
+            this.pictureBox3.Location = new System.Drawing.Point(425, 36);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(50, 47);
             this.pictureBox3.TabIndex = 8;
@@ -383,7 +388,7 @@
             this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox4.BackgroundImage = global::_3DS_link_trade_bot.Properties.Resources.pkm_um;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox4.Location = new System.Drawing.Point(359, 36);
+            this.pictureBox4.Location = new System.Drawing.Point(481, 36);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(50, 47);
             this.pictureBox4.TabIndex = 9;
@@ -394,7 +399,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.ClientSize = new System.Drawing.Size(436, 373);
+            this.ClientSize = new System.Drawing.Size(550, 373);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
@@ -415,10 +420,10 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabs.ResumeLayout(false);
             this.LinkTrades.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.Settings.ResumeLayout(false);
             this.Logs.ResumeLayout(false);
             this.RemoteControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
