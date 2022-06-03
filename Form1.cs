@@ -137,6 +137,9 @@ namespace _3DS_link_trade_bot
             APILegality.AllowTrainerOverride = true;
             APILegality.AllowBatchCommands = true;
             APILegality.Timeout = 30;
+            APILegality.PrioritizeGame = false;
+            EncounterEvent.RefreshMGDB($"{Directory.GetCurrentDirectory()}//mgdb//");
+            RibbonStrings.ResetDictionary(GameInfo.Strings.ribbons);
             string OT = "pip";
             int TID = 54654;
             int SID = 45636;
@@ -442,5 +445,7 @@ namespace _3DS_link_trade_bot
             nokey.CopyTo(buttonarray, 16);
             Connection.Send(buttonarray);
         }
+
+  
     }
 }

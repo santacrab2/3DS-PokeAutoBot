@@ -144,7 +144,7 @@
             this.propertyGrid1.Location = new System.Drawing.Point(8, 6);
             this.propertyGrid1.Name = "propertyGrid1";
             this.propertyGrid1.SelectedItemWithFocusBackColor = System.Drawing.SystemColors.ControlText;
-            this.propertyGrid1.Size = new System.Drawing.Size(409, 263);
+            this.propertyGrid1.Size = new System.Drawing.Size(519, 247);
             this.propertyGrid1.TabIndex = 0;
             this.propertyGrid1.ViewBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.propertyGrid1.ViewForeColor = System.Drawing.Color.White;
@@ -167,7 +167,7 @@
             this.logbox.Location = new System.Drawing.Point(8, 6);
             this.logbox.Name = "logbox";
             this.logbox.ReadOnly = true;
-            this.logbox.Size = new System.Drawing.Size(409, 263);
+            this.logbox.Size = new System.Drawing.Size(519, 247);
             this.logbox.TabIndex = 0;
             this.logbox.Text = "";
             // 
@@ -188,6 +188,7 @@
             this.RemoteControl.Size = new System.Drawing.Size(530, 253);
             this.RemoteControl.TabIndex = 4;
             this.RemoteControl.Text = "Remote Control";
+        
             // 
             // RCa
             // 
@@ -196,9 +197,9 @@
             this.RCa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.RCa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RCa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.RCa.Location = new System.Drawing.Point(439, 140);
+            this.RCa.Location = new System.Drawing.Point(467, 78);
             this.RCa.Name = "RCa";
-            this.RCa.Size = new System.Drawing.Size(40, 41);
+            this.RCa.Size = new System.Drawing.Size(30, 31);
             this.RCa.TabIndex = 7;
             this.RCa.UseVisualStyleBackColor = false;
             this.RCa.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RCa_Click);
@@ -211,9 +212,9 @@
             this.RCb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.RCb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.RCb.Location = new System.Drawing.Point(393, 178);
+            this.RCb.Location = new System.Drawing.Point(430, 109);
             this.RCb.Name = "RCb";
-            this.RCb.Size = new System.Drawing.Size(42, 42);
+            this.RCb.Size = new System.Drawing.Size(31, 35);
             this.RCb.TabIndex = 6;
             this.RCb.UseVisualStyleBackColor = false;
             this.RCb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RCb_Click);
@@ -226,9 +227,9 @@
             this.RCx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.RCx.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RCx.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.RCx.Location = new System.Drawing.Point(393, 101);
+            this.RCx.Location = new System.Drawing.Point(430, 53);
             this.RCx.Name = "RCx";
-            this.RCx.Size = new System.Drawing.Size(40, 41);
+            this.RCx.Size = new System.Drawing.Size(31, 31);
             this.RCx.TabIndex = 5;
             this.RCx.UseVisualStyleBackColor = false;
             this.RCx.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RCx_Click);
@@ -241,9 +242,9 @@
             this.RCy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.RCy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RCy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.RCy.Location = new System.Drawing.Point(347, 140);
+            this.RCy.Location = new System.Drawing.Point(393, 78);
             this.RCy.Name = "RCy";
-            this.RCy.Size = new System.Drawing.Size(40, 41);
+            this.RCy.Size = new System.Drawing.Size(31, 31);
             this.RCy.TabIndex = 4;
             this.RCy.UseVisualStyleBackColor = false;
             this.RCy.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RCy_Click);
