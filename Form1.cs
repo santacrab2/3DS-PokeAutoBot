@@ -141,9 +141,9 @@ namespace _3DS_link_trade_bot
             int TID = 54654;
             int SID = 45636;
             int lang = 2;
-            for (int i = 1; i < PKX.Generation + 1; i++)
+            for (int i = 1; i <= 7; i++)
             {
-                var versions = GameUtil.GetVersionsInGeneration(i, PKX.Generation);
+                var versions = GameUtil.GetVersionsInGeneration(i, 7);
                 foreach (var v in versions)
                 {
                     var fallback = new SimpleTrainerInfo(v)
@@ -159,7 +159,7 @@ namespace _3DS_link_trade_bot
                 }
             }
 
-            var trainer = TrainerSettings.GetSavedTrainerData(PKX.Generation);
+            var trainer = TrainerSettings.GetSavedTrainerData(7);
             RecentTrainerCache.SetRecentTrainer(trainer);
         }
 
