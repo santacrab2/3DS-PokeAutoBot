@@ -1,7 +1,9 @@
-3DS link trade bot - Currently in Beta **NOT FOR GENERAL CONSUMPTION**
+Huge Thank you to PKHeX developers, ledybot, NTR, Luma developers who all made projects like these possible.
 
-A lot has been added, most of it is semi functional. For those you finding your way here because you want to host a bot. If you are not a developer it is best to wait until a release is posted. A lot needs to be added, currently it only functions on usum, so s/m compatibility still needs to be added, as well as x/y and ORAS. It is a work in project and I am working on it daily to get it at least up and running as quickly as I can. Patience is appreciated and a release will be posted once I feel it is ready for general consumption. 
+Couldn't have made this program as pretty as it is and as user friendly without constant feedback from bewearhugs.
 
-Expect frequent updates, a more thorough guide will be made once the project is actually complete.
+Check out the wiki on how to run it!
+
+Expect frequent updates as I add more fun shit but its functional at this point. 
 
 Support Server - https://www.piplup.net
