@@ -56,6 +56,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.tabs.SuspendLayout();
             this.LinkTrades.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -65,6 +66,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // tabs
@@ -174,6 +176,7 @@
             // RemoteControl
             // 
             this.RemoteControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.RemoteControl.Controls.Add(this.pictureBox5);
             this.RemoteControl.Controls.Add(this.RCa);
             this.RemoteControl.Controls.Add(this.RCb);
             this.RemoteControl.Controls.Add(this.RCx);
@@ -188,7 +191,6 @@
             this.RemoteControl.Size = new System.Drawing.Size(530, 253);
             this.RemoteControl.TabIndex = 4;
             this.RemoteControl.Text = "Remote Control";
-        
             // 
             // RCa
             // 
@@ -252,10 +254,13 @@
             // 
             // RCright
             // 
-            this.RCright.ForeColor = System.Drawing.Color.Black;
-            this.RCright.Location = new System.Drawing.Point(78, 149);
+            this.RCright.BackgroundImage = global::_3DS_link_trade_bot.Properties.Resources.Right;
+            this.RCright.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.RCright.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RCright.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.RCright.Location = new System.Drawing.Point(64, 136);
             this.RCright.Name = "RCright";
-            this.RCright.Size = new System.Drawing.Size(32, 23);
+            this.RCright.Size = new System.Drawing.Size(32, 31);
             this.RCright.TabIndex = 3;
             this.RCright.Text = "➡";
             this.RCright.UseVisualStyleBackColor = true;
@@ -264,10 +269,13 @@
             // 
             // RCdown
             // 
-            this.RCdown.ForeColor = System.Drawing.Color.Black;
-            this.RCdown.Location = new System.Drawing.Point(50, 178);
+            this.RCdown.BackgroundImage = global::_3DS_link_trade_bot.Properties.Resources.Down;
+            this.RCdown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.RCdown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RCdown.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.RCdown.Location = new System.Drawing.Point(37, 162);
             this.RCdown.Name = "RCdown";
-            this.RCdown.Size = new System.Drawing.Size(24, 27);
+            this.RCdown.Size = new System.Drawing.Size(32, 31);
             this.RCdown.TabIndex = 2;
             this.RCdown.Text = "⬇";
             this.RCdown.UseVisualStyleBackColor = true;
@@ -276,10 +284,13 @@
             // 
             // RCleft
             // 
-            this.RCleft.ForeColor = System.Drawing.Color.Black;
-            this.RCleft.Location = new System.Drawing.Point(18, 149);
+            this.RCleft.BackgroundImage = global::_3DS_link_trade_bot.Properties.Resources.Left;
+            this.RCleft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.RCleft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RCleft.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.RCleft.Location = new System.Drawing.Point(8, 136);
             this.RCleft.Name = "RCleft";
-            this.RCleft.Size = new System.Drawing.Size(26, 23);
+            this.RCleft.Size = new System.Drawing.Size(32, 31);
             this.RCleft.TabIndex = 1;
             this.RCleft.Text = "⬅";
             this.RCleft.UseVisualStyleBackColor = true;
@@ -288,10 +299,14 @@
             // 
             // RCup
             // 
-            this.RCup.ForeColor = System.Drawing.Color.Black;
-            this.RCup.Location = new System.Drawing.Point(50, 117);
+            this.RCup.BackgroundImage = global::_3DS_link_trade_bot.Properties.Resources.Up;
+            this.RCup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.RCup.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.RCup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RCup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.RCup.Location = new System.Drawing.Point(37, 113);
             this.RCup.Name = "RCup";
-            this.RCup.Size = new System.Drawing.Size(23, 27);
+            this.RCup.Size = new System.Drawing.Size(31, 31);
             this.RCup.TabIndex = 0;
             this.RCup.Text = "⬆";
             this.RCup.UseVisualStyleBackColor = true;
@@ -407,6 +422,16 @@
             this.pictureBox4.TabIndex = 9;
             this.pictureBox4.TabStop = false;
             // 
+            // pictureBox5
+            // 
+            this.pictureBox5.BackgroundImage = global::_3DS_link_trade_bot.Properties.Resources.Center;
+            this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox5.Location = new System.Drawing.Point(37, 136);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(31, 31);
+            this.pictureBox5.TabIndex = 8;
+            this.pictureBox5.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -440,6 +465,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -474,5 +500,6 @@
         public Button RCb;
         public Button RCx;
         public Button RCy;
+        private PictureBox pictureBox5;
     }
 }
