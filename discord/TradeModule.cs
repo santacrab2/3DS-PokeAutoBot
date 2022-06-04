@@ -47,7 +47,7 @@ namespace _3DS_link_trade_bot
             }
             if (PokemonText != " ")
             {
-                await DeferAsync();
+               
           
 
                 ShowdownSet set = ConvertToShowdown(PokemonText);
@@ -77,7 +77,7 @@ namespace _3DS_link_trade_bot
             }
             if (pk7 != null)
             {
-                await DeferAsync();
+                
                 if (!EntityDetection.IsSizePlausible(pk7.Size))
                 {
                     await FollowupAsync("this is not a pk file", ephemeral:true);

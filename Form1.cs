@@ -186,20 +186,10 @@ namespace _3DS_link_trade_bot
                 festscreendisplayed = 0xC8;
                 tradevolutionscreenoff = 0x3002310C;
             }
-            Legalizer.EnableEasterEggs = false;
-            APILegality.SetAllLegalRibbons = false;
-            APILegality.SetMatchingBalls = true;
-            APILegality.ForceSpecifiedBall = true;
-            APILegality.UseXOROSHIRO = true;
-            APILegality.UseTrainerData = true;
-            APILegality.AllowTrainerOverride = true;
-            APILegality.AllowBatchCommands = true;
-          
-            APILegality.Timeout = 30;
+            
            
-            // Reload Database & Ribbon Index
-            EncounterEvent.RefreshMGDB($"{Directory.GetCurrentDirectory()}//mgdb//");
-            RibbonStrings.ResetDictionary(GameInfo.Strings.ribbons);
+            
+          
 
             MainHub.starttrades();
          
