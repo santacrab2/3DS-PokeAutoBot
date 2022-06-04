@@ -12,7 +12,7 @@ namespace _3DS_link_trade_bot.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -73,7 +73,7 @@ namespace _3DS_link_trade_bot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
         public global::System.Collections.Generic.List<System.UInt64> botchannels {
             get {
                 return ((global::System.Collections.Generic.List<System.UInt64>)(this["botchannels"]));
@@ -85,7 +85,7 @@ namespace _3DS_link_trade_bot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
         public global::System.Collections.Generic.List<System.UInt64> wtchannels {
             get {
                 return ((global::System.Collections.Generic.List<System.UInt64>)(this["wtchannels"]));
@@ -116,6 +116,126 @@ namespace _3DS_link_trade_bot.Properties {
             }
             set {
                 this["wtbool"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("pip")]
+        public string botot {
+            get {
+                return ((string)(this["botot"]));
+            }
+            set {
+                this["botot"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("42069")]
+        public int bottid {
+            get {
+                return ((int)(this["bottid"]));
+            }
+            set {
+                this["bottid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("42069")]
+        public int botsid {
+            get {
+                return ((int)(this["botsid"]));
+            }
+            set {
+                this["botsid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Ribbons {
+            get {
+                return ((bool)(this["Ribbons"]));
+            }
+            set {
+                this["Ribbons"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool matchpokeball {
+            get {
+                return ((bool)(this["matchpokeball"]));
+            }
+            set {
+                this["matchpokeball"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool userpokeball {
+            get {
+                return ((bool)(this["userpokeball"]));
+            }
+            set {
+                this["userpokeball"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool memes {
+            get {
+                return ((bool)(this["memes"]));
+            }
+            set {
+                this["memes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool trainerinfo {
+            get {
+                return ((bool)(this["trainerinfo"]));
+            }
+            set {
+                this["trainerinfo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool batchedit {
+            get {
+                return ((bool)(this["batchedit"]));
+            }
+            set {
+                this["batchedit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("English")]
+        public global::PKHeX.Core.LanguageID botlang {
+            get {
+                return ((global::PKHeX.Core.LanguageID)(this["botlang"]));
+            }
+            set {
+                this["botlang"] = value;
             }
         }
     }

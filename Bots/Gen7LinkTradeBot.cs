@@ -24,6 +24,14 @@ namespace _3DS_link_trade_bot
             
             ChangeStatus("starting a Link Trade");
             await tradeinfo.discordcontext.User.SendMessageAsync("starting your trade now, be prepared to accept the invite!");
+            if (IsSoftBanned)
+            {
+                ChangeStatus("softban detected, restarting game");
+                await PressPower(1);
+                await presshome(10);
+                await click(A, 15);
+                await click(A, 7);
+            }
             if (!infestivalplaza)
             {
                 ChangeStatus("entering festival plaza");

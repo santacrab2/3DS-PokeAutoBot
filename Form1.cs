@@ -39,7 +39,7 @@ namespace _3DS_link_trade_bot
         public static Socket Connection = new Socket(AddressFamily.InterNetwork, SocketType.Dgram,0);
 
 
-        private void consoleconnect_Click(object sender, EventArgs e)
+        private async void consoleconnect_Click(object sender, EventArgs e)
         {
 
             ntr.Connect();
@@ -111,6 +111,7 @@ namespace _3DS_link_trade_bot
 
             var trainer = TrainerSettings.GetSavedTrainerData(7);
             RecentTrainerCache.SetRecentTrainer(trainer);
+           
         }
         public static void ChangeStatus(string text)
         {
@@ -161,7 +162,16 @@ namespace _3DS_link_trade_bot
             settings.Discordsettings.BotWTChannel = Properties.Settings.Default.wtchannels;
             settings.GTSdistribution = Properties.Settings.Default.gtsbool;
             settings.WonderTrade = Properties.Settings.Default.wtbool;
-            
+            settings.Legalitysettings.BotOT = Properties.Settings.Default.botot;
+            settings.Legalitysettings.BotTID = Properties.Settings.Default.bottid;
+            settings.Legalitysettings.BotSID = Properties.Settings.Default.botsid;
+            settings.Legalitysettings.BotLanguage = Properties.Settings.Default.botlang;
+            settings.Legalitysettings.AllowTrainerInfo = Properties.Settings.Default.trainerinfo;
+            settings.Legalitysettings.AddAllLegalRibbons = Properties.Settings.Default.Ribbons;
+            settings.Legalitysettings.SendMemePks = Properties.Settings.Default.memes;
+            settings.Legalitysettings.SetMatchingPokeball = Properties.Settings.Default.matchpokeball;
+            settings.Legalitysettings.SetUserSpecifiedPokeball = Properties.Settings.Default.userpokeball;
+            settings.Legalitysettings.UseBatchEditor = Properties.Settings.Default.batchedit;
             if (!Directory.Exists(wtfolder))
                 Directory.CreateDirectory(wtfolder);
             if(!Directory.Exists(logfolder))
@@ -233,6 +243,16 @@ namespace _3DS_link_trade_bot
             Properties.Settings.Default.wtchannels = settings.Discordsettings.BotWTChannel;
             Properties.Settings.Default.gtsbool = settings.GTSdistribution;
             Properties.Settings.Default.wtbool = settings.WonderTrade;
+            Properties.Settings.Default.botot = settings.Legalitysettings.BotOT;
+            Properties.Settings.Default.bottid=settings.Legalitysettings.BotTID;
+            Properties.Settings.Default.botsid=settings.Legalitysettings.BotSID;
+            Properties.Settings.Default.botlang=settings.Legalitysettings.BotLanguage;
+            Properties.Settings.Default.trainerinfo=settings.Legalitysettings.AllowTrainerInfo;
+            Properties.Settings.Default.Ribbons=settings.Legalitysettings.AddAllLegalRibbons;
+            Properties.Settings.Default.memes=settings.Legalitysettings.SendMemePks;
+            Properties.Settings.Default.matchpokeball=settings.Legalitysettings.SetMatchingPokeball;
+            Properties.Settings.Default.userpokeball=settings.Legalitysettings.SetUserSpecifiedPokeball;
+            Properties.Settings.Default.batchedit=settings.Legalitysettings.UseBatchEditor;
             Properties.Settings.Default.Save();
             var filelist = Directory.GetFiles(logfolder);
             if (Directory.GetFiles(logfolder).Length > 7)

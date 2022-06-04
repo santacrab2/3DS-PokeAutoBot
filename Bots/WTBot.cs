@@ -21,6 +21,14 @@ namespace _3DS_link_trade_bot
         public static async Task WTroutine()
         {
             var rng = new Random();
+            if (IsSoftBanned)
+            {
+                ChangeStatus("softban detected, restarting game");
+                await PressPower(2);
+                await presshome(10);
+                await click(A, 15);
+                await click(A, 7);
+            }
             if (!infestivalplaza)
             {
                 ChangeStatus("entering festival plaza");

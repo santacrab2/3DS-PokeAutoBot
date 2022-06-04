@@ -184,6 +184,36 @@ namespace _3DS_link_trade_bot
             var delay = delayinseconds * 1000;
             await Task.Delay((int)delay);
         }
+        public static async Task PressPower(double delayinseconds)
+        {
+            var buttonarray = new byte[20];
+            var nokey = BitConverter.GetBytes((uint)NoKey);
+            nokey.CopyTo(buttonarray, 0);
+            nokey = BitConverter.GetBytes(0x2000000);
+            nokey.CopyTo(buttonarray, 4);
+            nokey = BitConverter.GetBytes(0x800800);
+            nokey.CopyTo(buttonarray, 8);
+            nokey = BitConverter.GetBytes(0x80800081);
+            nokey.CopyTo(buttonarray, 12);
+            nokey = BitConverter.GetBytes(2);
+            nokey.CopyTo(buttonarray, 16);
+            Form1.Connection.Send(buttonarray);
+            await Task.Delay(500);
+            buttonarray = new byte[20];
+            nokey = BitConverter.GetBytes(0xFFF);
+            nokey.CopyTo(buttonarray, 0);
+            nokey = BitConverter.GetBytes(0x2000000);
+            nokey.CopyTo(buttonarray, 4);
+            nokey = BitConverter.GetBytes(0x800800);
+            nokey.CopyTo(buttonarray, 8);
+            nokey = BitConverter.GetBytes(0x80800081);
+            nokey.CopyTo(buttonarray, 12);
+            nokey = BitConverter.GetBytes(0);
+            nokey.CopyTo(buttonarray, 16);
+            Form1.Connection.Send(buttonarray);
+            var delay = delayinseconds * 1000;
+            await Task.Delay((int)delay);
+        }
 
         public static uint gethexcoord(decimal Xvalue, decimal Yvalue)
         {

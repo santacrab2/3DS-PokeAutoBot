@@ -40,7 +40,11 @@ namespace _3DS_link_trade_bot
         public static bool userinvitedbot => Form1.ntr.ReadBytes(Userinvitedbotscreenoff, 1)[0] == userinvitedbotscreenval;
 
         public static bool infestivalplaza => Form1.ntr.ReadBytes(festscreenoff, 1)[0] == festscreendisplayed;
-        
+
+        public static uint SoftBanOff = 0x32994352;
+        public static int softbanscreen = 0x50;
+        public static bool IsSoftBanned => Form1.ntr.ReadBytes(SoftBanOff, 1)[0] == softbanscreen;
+
         //gen6
         public static uint PSSFriendoff = 0x08C6FFDC;
         public static uint PSSBlockSize = 0x4E30;

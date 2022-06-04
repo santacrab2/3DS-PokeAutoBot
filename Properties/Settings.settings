@@ -26,5 +26,35 @@
     <Setting Name="wtbool" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="botot" Type="System.String" Scope="User">
+      <Value Profile="(Default)">pip</Value>
+    </Setting>
+    <Setting Name="bottid" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">42069</Value>
+    </Setting>
+    <Setting Name="botsid" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">42069</Value>
+    </Setting>
+    <Setting Name="Ribbons" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="matchpokeball" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="userpokeball" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="memes" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="trainerinfo" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="batchedit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="botlang" Type="PKHeX.Core.LanguageID" Scope="User">
+      <Value Profile="(Default)">English</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -21,6 +21,14 @@ namespace _3DS_link_trade_bot
         
         public static async Task GTStrades()
         {
+            if (IsSoftBanned)
+            {
+                ChangeStatus("softban detected, restarting game");
+                await PressPower(1);
+                await presshome(10);
+                await click(A, 15);
+                await click(A, 7);
+            }
             if (!infestivalplaza)
             {
                 ChangeStatus("entering festival plaza");
