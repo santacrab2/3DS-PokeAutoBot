@@ -41,16 +41,19 @@ namespace _3DS_link_trade_bot
 
         private async void consoleconnect_Click(object sender, EventArgs e)
         {
-
-            ntr.Connect();
-            if (clientNTR.IsConnected)
-                ChangeStatus("ntr connected");
-            Connection.Connect(Program.form1.IpAddress.Text, 4950);
-            if (Connection.Connected)
+            try
             {
+                ntr.Connect();
+                if (clientNTR.IsConnected)
+                    ChangeStatus("ntr connected");
+                Connection.Connect(Program.form1.IpAddress.Text, 4950);
+                if (Connection.Connected)
+                {
 
-                Log("IR Connected");
+                    Log("IR Connected");
+                }
             }
+            catch { }
             var buttonarray = new byte[20];
             var nokey = BitConverter.GetBytes(0xFFF);
             nokey.CopyTo(buttonarray, 0);
@@ -287,6 +290,7 @@ namespace _3DS_link_trade_bot
         private void consoledisconnect_Click(object sender, EventArgs e)
         {
             ntr.Disconnect();
+        
             form1.consoledisconnect.Enabled = false;
             form1.startlinktrades.Enabled = false;
             form1.LinkTradeStop.Enabled = false;

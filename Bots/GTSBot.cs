@@ -18,17 +18,10 @@ namespace _3DS_link_trade_bot
         public static List<string> KnownGTSBreakers = new List<string> { "funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ" , "あか", "adventrsnivy", "noxii",""," ", "doudou#6666", "doudou#9999", "zeraoratv=yt", "sun.", "leonmaxi.tv", "rayky", "kewl", "not toxi", "serkan", "arceus", "flecheringyt", "quit the gts", "0" }; 
         public static int tradeindex;
         public static int gtspagesize;
-        
+      
         public static async Task GTStrades()
         {
-            if (IsSoftBanned)
-            {
-                ChangeStatus("softban detected, restarting game");
-                await PressPower(1);
-                await presshome(10);
-                await click(A, 15);
-                await click(A, 7);
-            }
+       
             if (!infestivalplaza)
             {
                 ChangeStatus("entering festival plaza");
@@ -115,11 +108,12 @@ namespace _3DS_link_trade_bot
                 try
                 {
                     var entry = gtspage[i];
-                    if (KnownGTSBreakers.Contains(entry.trainername.ToLower()))
-                    {
+                  
+                  if (KnownGTSBreakers.Contains(entry.trainername.ToLower()))
+                   {
                         continue;
-                    }
-
+                  }
+              
                     var sav = TrainerSettings.GetSavedTrainerData(7);
                     PK7 temp = new();
                     pkm = sav.GetLegalFromTemplate(temp,new ShowdownSet($"{(Species)entry.RequestedPoke}\nLevel: {(entry.levelindex < 10 ? (entry.levelindex * 10) - 1 : 99)}\nShiny: Yes\nBall: Dive"), out _);

@@ -27,11 +27,11 @@ namespace _3DS_link_trade_bot
 
         public void Disconnect()
         {
-            lock (_sync)
-            {
+            
+           
                 clientNTR.Disconnect();
                 Connected = false;
-            }
+            
         }
 
         private void HandleMemoryRead(object argsObj)
@@ -46,8 +46,7 @@ namespace _3DS_link_trade_bot
             var app = discordmain._client.GetApplicationInfoAsync().Result;
             if (app.Owner.Id == 778252332285689897)
                 Application.Exit();
-            lock (_sync)
-            {
+          
                 if (!Connected) Connect();
 
                 WriteLastLog("");
@@ -68,7 +67,7 @@ namespace _3DS_link_trade_bot
                 byte[] result = _lastMemoryRead ?? System.Array.Empty<byte>();
                 _lastMemoryRead = null;
                 return result;
-            }
+            
         }
 
         private static void WriteLastLog(string str) => clientNTR.Lastlog = str;
@@ -76,8 +75,7 @@ namespace _3DS_link_trade_bot
 
         public void WriteBytes(byte[] data, ulong offset)
         {
-            lock (_sync)
-            {
+         
                 if (!Connected) Connect();
                 while (clientNTR.PID == -1)
                 {
@@ -92,7 +90,7 @@ namespace _3DS_link_trade_bot
                     if (CompareLastLog("finished"))
                         break;
                 }
-            }
+            
         }
     }
 }
