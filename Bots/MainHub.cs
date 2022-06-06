@@ -63,7 +63,7 @@ namespace _3DS_link_trade_bot
                         if (IsSoftBanned)
                         {
                             ChangeStatus("softban detected, restarting game");
-                           _settings.Legalitysettings.ZKnownGTSBreakers.Add(GTSBot.LastGTSTrainer);
+                           _settings.Legalitysettings.ZKnownGTSBreakers.Add(GTSBot.LastGTSTrainer.ToLower());
                          
                             await resetgame();
                         }
