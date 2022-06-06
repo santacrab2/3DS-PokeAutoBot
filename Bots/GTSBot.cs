@@ -15,9 +15,10 @@ namespace _3DS_link_trade_bot
     public class GTSBot
     {
         
-        public static List<string> KnownGTSBreakers = new List<string> { "funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ" , "あか", "adventrsnivy", "noxii",""," ", "doudou#6666", "doudou#9999", "zeraoratv=yt", "sun.", "leonmaxi.tv", "rayky", "kewl", "not toxi", "serkan", "arceus", "flecheringyt", "quit the gts", "0" }; 
+       
         public static int tradeindex;
         public static int gtspagesize;
+        public static string LastGTSTrainer;
       
         public static async Task GTStrades()
         {
@@ -77,6 +78,7 @@ namespace _3DS_link_trade_bot
                 return;
             }
             ChangeStatus("gts trading...");
+            
             await Gen7LinkTradeBot.injection(pkm);
             ntr.WriteBytes(BitConverter.GetBytes(tradeindex), GTScurrentview);
             await click(A, 5);
@@ -109,7 +111,7 @@ namespace _3DS_link_trade_bot
                 {
                     var entry = gtspage[i];
                   
-                  if (KnownGTSBreakers.Contains(entry.trainername.ToLower()))
+                  if (_settings.Legalitysettings.ZKnownGTSBreakers.Contains(entry.trainername.ToLower()))
                    {
                         continue;
                   }
@@ -127,6 +129,7 @@ namespace _3DS_link_trade_bot
                     else
                     {
                         Log($"Trading Trainer:{entry.trainername.ToLower()}");
+                        LastGTSTrainer = entry.trainername;
                         tradeindex = i;
                         break;
                     }

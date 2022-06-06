@@ -175,6 +175,7 @@ namespace _3DS_link_trade_bot
             settings.Legalitysettings.SetMatchingPokeball = Properties.Settings.Default.matchpokeball;
             settings.Legalitysettings.SetUserSpecifiedPokeball = Properties.Settings.Default.userpokeball;
             settings.Legalitysettings.UseBatchEditor = Properties.Settings.Default.batchedit;
+            settings.Legalitysettings.ZKnownGTSBreakers = Properties.Settings.Default.knowngtsbreakers;
             if (!Directory.Exists(wtfolder))
                 Directory.CreateDirectory(wtfolder);
             if(!Directory.Exists(logfolder))
@@ -256,6 +257,7 @@ namespace _3DS_link_trade_bot
             Properties.Settings.Default.matchpokeball=settings.Legalitysettings.SetMatchingPokeball;
             Properties.Settings.Default.userpokeball=settings.Legalitysettings.SetUserSpecifiedPokeball;
             Properties.Settings.Default.batchedit=settings.Legalitysettings.UseBatchEditor;
+            Properties.Settings.Default.knowngtsbreakers = settings.Legalitysettings.ZKnownGTSBreakers;
             Properties.Settings.Default.Save();
             var filelist = Directory.GetFiles(logfolder);
             if (Directory.GetFiles(logfolder).Length > 7)

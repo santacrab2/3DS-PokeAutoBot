@@ -34,6 +34,7 @@ namespace _3DS_link_trade_bot
         public bool AllowTrainerInfo { get; set; } = true;
         [Category(Legality), Description("Allow Batch Editor commands in showdown sets")]
         public bool UseBatchEditor { get; set; } = true;
-
+        [Category(Legality), Description("known GTS hackers, bot will update the list if it finds any new ones automatically")]
+        public List<string> ZKnownGTSBreakers { get; set; } = new List<string> { "funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ", "あか", "adventrsnivy", "noxii", "", " ", "doudou#6666", "doudou#9999", "zeraoratv=yt", "sun.", "leonmaxi.tv", "rayky", "kewl", "not toxi", "serkan", "arceus", "flecheringyt", "quit the gts", "0" };
     }
 }

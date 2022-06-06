@@ -238,5 +238,17 @@ namespace _3DS_link_trade_bot.Properties {
                 this["botlang"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"""""funkygamer26"", ""chloegarcia"", ""volcano.“do”"", ""33012888"", ""edou"", ""moon."", ""unknown.yt"", ""japan.kebuju"", ""はちゆきおし"", ""あああ"", ""あか"", ""adventrsnivy"", ""noxii"", """", "" "", ""doudou#6666"", ""doudou#9999"", ""zeraoratv=yt"", ""sun."", ""leonmaxi.tv"", ""rayky"", ""kewl"", ""not toxi"", ""serkan"", ""arceus"", ""flecheringyt"", ""quit the gts"", ""0""""")]
+        public global::System.Collections.Generic.List<string> knowngtsbreakers {
+            get {
+                return ((global::System.Collections.Generic.List<string>)(this["knowngtsbreakers"]));
+            }
+            set {
+                this["knowngtsbreakers"] = value;
+            }
+        }
     }
 }

@@ -56,5 +56,8 @@
     <Setting Name="botlang" Type="PKHeX.Core.LanguageID" Scope="User">
       <Value Profile="(Default)">English</Value>
     </Setting>
+    <Setting Name="knowngtsbreakers" Type="System.Collections.Generic.List&lt;string&gt;" Scope="User">
+      <Value Profile="(Default)">""funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ", "あか", "adventrsnivy", "noxii", "", " ", "doudou#6666", "doudou#9999", "zeraoratv=yt", "sun.", "leonmaxi.tv", "rayky", "kewl", "not toxi", "serkan", "arceus", "flecheringyt", "quit the gts", "0""</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

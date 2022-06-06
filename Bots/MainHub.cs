@@ -53,30 +53,29 @@ namespace _3DS_link_trade_bot
                     //this is where it performs idling tasks
                     if (The_Q.Count == 0)
                     {
-                        if (IsSoftBanned)
-                        {
-                            ChangeStatus("softban detected, restarting game");
-                            resetgame();
-                        }
+                    
                         if (_settings.GTSdistribution == true)
                             await GTSBot.GTStrades();
                         if (IsSoftBanned)
                         {
                             ChangeStatus("softban detected, restarting game");
+                           _settings.Legalitysettings.ZKnownGTSBreakers.Add(GTSBot.LastGTSTrainer);
+                            await Task.Delay(1000);
                             resetgame();
                         }
                         if (_settings.WonderTrade == true)
                             await WTBot.WTroutine();
+                        if (IsSoftBanned)
+                        {
+                            ChangeStatus("softban detected, restarting game");
+                            resetgame();
+                        }
                         continue;
 
 
                     }
                     tradeinfo = The_Q.Dequeue();
-                    if (IsSoftBanned)
-                    {
-                        ChangeStatus("softban detected, restarting game");
-                        resetgame();
-                    }
+              
 
                     switch (tradeinfo.mode)
                     {
@@ -113,7 +112,7 @@ namespace _3DS_link_trade_bot
 
       public static async void resetgame()
         {
-            await PressPower(2);
+            await PressPower(5);
             await presshome(10);
             await click(A, 15);
             await click(A, 7);
