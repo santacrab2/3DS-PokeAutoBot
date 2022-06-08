@@ -45,6 +45,9 @@ namespace _3DS_link_trade_bot
         public static int softbanscreen = 0x50;
         public static bool IsSoftBanned => Form1.ntr.ReadBytes(SoftBanOff, 1)[0] == softbanscreen;
 
+        public static uint WTReceivingPokemon = 0x314FF4D1;
+        public static uint WTTrainerMatch = 0x303987B4;
+
         //gen6
         public static uint PSSFriendoff = 0x08C6FFDC;
         public static uint PSSBlockSize = 0x4E30;

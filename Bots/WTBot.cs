@@ -119,17 +119,69 @@ namespace _3DS_link_trade_bot
                     await click(B, 5);
                     return;
                 }
-                
-                while (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != start_seekscreen && stop.ElapsedMilliseconds < 30_000)
-                    await Task.Delay(25);
-                stop.Restart();
-                while(stop.ElapsedMilliseconds < 60_000)
+            var receivingpkm = EntityFormat.GetFromBytes(ntr.ReadBytes(WTReceivingPokemon, 232));
+          
+            while (stop.ElapsedMilliseconds < 90_000)
+            {
+                if(receivingpkm != null)
+                {
+                    if (receivingpkm.ChecksumValid)
+                        break;
+                }
+                receivingpkm = EntityFormat.GetFromBytes(ntr.ReadBytes(WTReceivingPokemon, 232));
+             
+                await Task.Delay(1000);
+            }
+            var matchedtrainerbytes = ntr.ReadBytes(WTTrainerMatch, 24);
+            var matchedtrainer = Encoding.Unicode.GetString(matchedtrainerbytes).Trim('\0');
+            while(matchedtrainer == "１２３４５６")
+            {
+                matchedtrainerbytes = ntr.ReadBytes(WTTrainerMatch, 24);
+                matchedtrainer = Encoding.Unicode.GetString(matchedtrainerbytes).Trim('\0');
+            }
+            foreach (var chan in _settings.Discordsettings.BotWTChannel)
+            {
+                var tosend = (ITextChannel)_client.GetChannel(chan);
+
+                EmbedBuilder embed = new EmbedBuilder();
+                try
+                {
+                    embed.ThumbnailUrl = receivingpkm.IsShiny ? $"https://play.pokemonshowdown.com/sprites/ani-shiny/{((Species)receivingpkm.Species).ToString().ToLower().Replace(" ", "")}.gif" : $"https://play.pokemonshowdown.com/sprites/ani/{((Species)receivingpkm.Species).ToString().ToLower().Replace(" ", "")}.gif";
+                }
+                catch { }
+                var newShowdown = new List<string>();
+               
+                var showdown = ShowdownParsing.GetShowdownText(receivingpkm);
+                foreach (var line in showdown.Split('\n'))
+                    newShowdown.Add(line);
+
+                if (receivingpkm.IsEgg)
+                    newShowdown.Add("\nPokémon is an egg");
+                if (receivingpkm.Ball > (int)Ball.None)
+                    newShowdown.Insert(newShowdown.FindIndex(z => z.Contains("Nature")), $"Ball: {(Ball)receivingpkm.Ball} Ball");
+                if (receivingpkm.IsShiny)
+                {
+                    var index = newShowdown.FindIndex(x => x.Contains("Shiny: Yes"));
+                    if (receivingpkm.ShinyXor == 0 || receivingpkm.FatefulEncounter)
+                        newShowdown[index] = "Shiny: Square\r";
+                    else newShowdown[index] = "Shiny: Star\r";
+                }
+                embed.AddField($"WT Match Found!\nTrainer: {matchedtrainer}", Format.Code(string.Join("\n", newShowdown).TrimEnd()));
+                try
+                {
+                    await tosend.SendMessageAsync(embed: embed.Build());
+                }
+                catch (Exception ex) { await Log(ex.ToString()); }
+            }
+            stop.Restart();
+                while(BitConverter.ToInt16(ntr.ReadBytes(WTReceivingPokemon, 2)) != 0&&stop.ElapsedMilliseconds < 60_000)
                 {
 
                     await touch(155, 151, 1);
                 }
                 ChangeStatus("Wonder Trade Complete");
-                while (!infestivalplaza)
+            stop.Restart();
+                while (!infestivalplaza&&stop.ElapsedMilliseconds < 60_000)
                     await click(B, 2);
                 await Task.Delay(5_000);
 
