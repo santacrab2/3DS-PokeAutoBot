@@ -74,6 +74,7 @@ namespace _3DS_link_trade_bot
                             ChangeStatus("softban detected, restarting game");
                             await resetgame();
                         }
+                        await Task.Delay(1000);
                         continue;
 
 
