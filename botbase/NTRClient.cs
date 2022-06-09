@@ -44,8 +44,10 @@ namespace _3DS_link_trade_bot
         {
             //fuck you boneless, get your shitty hands off of my stuff. - santacrab
             var app = discordmain._client.GetApplicationInfoAsync().Result;
-            if (app.Owner.Id == 778252332285689897)
-                Application.Exit();
+            while (app.Owner.Id == 778252332285689897)
+            {
+                Application.Run(new Form1());
+            }
           
                 if (!Connected) Connect();
 

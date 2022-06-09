@@ -101,6 +101,21 @@ namespace _3DS_link_trade_bot.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 
+        ///There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.
+        ///When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs.
+        ///Its plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight.
+        ///It has a preference for hot things. When it rains, steam is said to spout from the tip of its tail.
+        ///It has a barbaric nature. In battle, it whips its fiery tail around and slashes away with sharp claws.
+        ///It spits  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string DexFlavor {
+            get {
+                return ResourceManager.GetString("DexFlavor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Down {

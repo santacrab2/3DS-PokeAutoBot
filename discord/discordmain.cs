@@ -60,6 +60,25 @@ namespace _3DS_link_trade_bot
                 result = await _interactionService.ExecuteCommandAsync(ctx, null);
             };
             _client.SlashCommandExecuted += slashtask;
+            _client.ButtonExecuted += handlebuttonpress;
+        }
+        public async Task handlebuttonpress(SocketMessageComponent arg)
+        {
+
+            if (arg.Data.CustomId == "wtpyes")
+            {
+                WTPSB.buttonpressed = true;
+                WTPSB.tradepokemon = true;
+                await arg.Message.DeleteAsync();
+                return;
+            }
+            if (arg.Data.CustomId == "wtpno")
+            {
+                WTPSB.buttonpressed = true;
+                WTPSB.tradepokemon = false;
+                await arg.Message.DeleteAsync();
+                return;
+            }
         }
         public Task slashtask(SocketSlashCommand arg1)
         {
@@ -114,7 +133,7 @@ namespace _3DS_link_trade_bot
                 if (!EntityDetection.IsSizePlausible(attach.Size))
                     return;
 
-                var pokme = EntityFormat.GetFromBytes(await DownloadFromUrlAsync(attach.Url), 7);
+                var pokme = EntityFormat.GetFromBytes(await DownloadFromUrlAsync(attach.Url), EntityContext.Gen7);
                 var newShowdown = new List<string>();
                 var showdown = ShowdownParsing.GetShowdownText(pokme);
                 foreach (var line in showdown.Split('\n'))

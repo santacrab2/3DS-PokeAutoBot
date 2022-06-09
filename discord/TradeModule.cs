@@ -51,14 +51,14 @@ namespace _3DS_link_trade_bot
           
 
                 ShowdownSet set = ConvertToShowdown(PokemonText);
-              
+
                 var sav = TrainerSettings.GetSavedTrainerData(7);
                 PK7 temp = new();
                 var pkm = sav.GetLegalFromTemplate(temp, set, out var res);
-
+                pkm.Legalize();
                 if (Legal.ZCrystalDictionary.ContainsValue(pkm.HeldItem))
                     pkm.HeldItem = 0;
-                if (!new LegalityAnalysis(pkm).Valid || res.ToString() != "Regenerated")
+                if (!new LegalityAnalysis(pkm).Valid || res != LegalizationResult.Regenerated || pkm == null)
                 {
                     var reason =  $"I wasn't able to create a {(Species)set.Species} from that set.";
                     var imsg = $"Oops! {reason}";
@@ -84,7 +84,7 @@ namespace _3DS_link_trade_bot
                     return;
                 }
                 var buffer = await discordmain.DownloadFromUrlAsync(pk7.Url);
-                var pkm = EntityFormat.GetFromBytes(buffer);
+                var pkm = EntityFormat.GetFromBytes(buffer, EntityContext.Gen7);
                 if(!new LegalityAnalysis(pkm).Valid)
                 {
                     SaveFile sav;
