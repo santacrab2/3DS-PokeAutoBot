@@ -118,7 +118,7 @@ namespace _3DS_link_trade_bot
         [DefaultMemberPermissions(GuildPermission.ViewChannel)]
         [SlashCommand("guess","guess the pokemon")]
        
-        public async Task WTPguess([Summary(description:"In Game Trainer Name")]string TrainerName,[Summary("pokemon")]string userguess)
+        public async Task WTPguess([Summary("pokemon")]string userguess, [Summary(description: "In Game Trainer Name, if you plan to receive your guess in trade")] string TrainerName="")
         {
             await DeferAsync();
             if (userguess.ToLower() == ((Species)randspecies).ToString().ToLower())

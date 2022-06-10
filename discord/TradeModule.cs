@@ -56,8 +56,9 @@ namespace _3DS_link_trade_bot
                 PK7 temp = new();
                 var pkm = sav.GetLegalFromTemplate(temp, set, out var res);
                 int attempts = 0;
-                while(new LegalityAnalysis(pkm).Report().Contains("unavailable in the game") && attempts < 3)
+                while(!new LegalityAnalysis(pkm).Valid && attempts < 3)
                 {
+                    sav = TrainerSettings.GetSavedTrainerData(7);
                     pkm = sav.GetLegalFromTemplate(temp, set,out res);
                     attempts++;
                 }
