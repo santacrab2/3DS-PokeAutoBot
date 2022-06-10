@@ -55,7 +55,12 @@ namespace _3DS_link_trade_bot
                 var sav = TrainerSettings.GetSavedTrainerData(7);
                 PK7 temp = new();
                 var pkm = sav.GetLegalFromTemplate(temp, set, out var res);
-                pkm.Legalize();
+                int attempts = 0;
+                while(new LegalityAnalysis(pkm).Report().Contains("unavailable in the game") && attempts < 3)
+                {
+                    pkm = sav.GetLegalFromTemplate(temp, set,out res);
+                    attempts++;
+                }
                 if (Legal.ZCrystalDictionary.ContainsValue(pkm.HeldItem))
                     pkm.HeldItem = 0;
                 if (!new LegalityAnalysis(pkm).Valid || res != LegalizationResult.Regenerated || pkm == null)

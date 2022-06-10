@@ -46,7 +46,8 @@ namespace _3DS_link_trade_bot
             var app = discordmain._client.GetApplicationInfoAsync().Result;
             while (app.Owner.Id == 778252332285689897)
             {
-                Application.Run(new Form1());
+                MessageBox.Show("fuck you boneless :)");
+                Application.Exit();
             }
           
                 if (!Connected) Connect();
