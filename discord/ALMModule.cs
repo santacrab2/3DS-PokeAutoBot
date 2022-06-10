@@ -22,7 +22,13 @@ namespace _3DS_link_trade_bot
             var sav = TrainerSettings.GetSavedTrainerData(7);
             PK7 temp = new();
             var pkm = sav.GetLegalFromTemplate(temp,set, out var res);
-
+            int attempts = 0;
+            while (!new LegalityAnalysis(pkm).Valid && attempts < 3)
+            {
+                sav = TrainerSettings.GetSavedTrainerData(7);
+                pkm = sav.GetLegalFromTemplate(temp, set, out res);
+                attempts++;
+            }
 
             if (!new LegalityAnalysis(pkm).Valid || res.ToString() != "Regenerated")
             {
