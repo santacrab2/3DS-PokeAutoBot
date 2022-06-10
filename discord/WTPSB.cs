@@ -112,6 +112,8 @@ namespace _3DS_link_trade_bot
                 usr = null;
                 guess = "";
             }
+            await wtpchannel.ModifyAsync(newname => newname.Name = wtpchannel.Name.Replace("✅","❌"));
+            await wtpchannel.AddPermissionOverwriteAsync(wtpchannel.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
             WTPsource = new();
         }
         [EnabledInDm(false)]

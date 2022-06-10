@@ -94,15 +94,18 @@ namespace _3DS_link_trade_bot
                 {
                     await Log(ex.ToString());
                     ChangeStatus("Bot DTF");
-                    foreach (var channel in _settings.Discordsettings.BotTradeChannel)
+                    if (_settings.Discordsettings.SendStatusMessage)
                     {
+                        foreach (var channel in _settings.Discordsettings.BotTradeChannel)
+                        {
 
-                        var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;
-                        await botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("✅", "❌"));
-                        await botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
-                        var offembed = new EmbedBuilder();
-                        offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Gen 7 Link Trade Bot is Offline");
-                        await botchannelid.SendMessageAsync(embed: offembed.Build());
+                            var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;
+                            await botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("✅", "❌"));
+                            await botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
+                            var offembed = new EmbedBuilder();
+                            offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Gen 7 Link Trade Bot is Offline");
+                            await botchannelid.SendMessageAsync(embed: offembed.Build());
+                        }
                     }
                     tradetoken.Cancel();
                     
