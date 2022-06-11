@@ -111,7 +111,14 @@ namespace _3DS_link_trade_bot
             stop.Restart();
             while ((!onboxscreen && !infestivalplaza))
             {
-                await click(A, 5);
+                await Task.Delay(500);
+                if (tradeevolution)
+                    break;
+            }
+            if (tradeevolution)
+            {
+                while (!onboxscreen && !infestivalplaza)
+                    await click(A, 2);
             }
             var tradedpkbytes = ntr.ReadBytes(box1slot1, 232);
             var tradedpk = new PK7(tradedpkbytes);

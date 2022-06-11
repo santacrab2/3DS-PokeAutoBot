@@ -59,5 +59,14 @@
     <Setting Name="knowngtsbreakers" Type="System.Collections.Generic.List&lt;string&gt;" Scope="User">
       <Value Profile="(Default)">""funkygamer26", "chloegarcia", "volcano.“do”", "33012888", "edou", "moon.", "unknown.yt", "japan.kebuju", "はちゆきおし", "あああ", "あか", "adventrsnivy", "noxii", "", " ", "doudou#6666", "doudou#9999", "zeraoratv=yt", "sun.", "leonmaxi.tv", "rayky", "kewl", "not toxi", "serkan", "arceus", "flecheringyt", "quit the gts", "0""</Value>
     </Setting>
+    <Setting Name="sendstatusmessage" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="pingroleid" Type="System.UInt64" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="pingmessage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Gen 7 Link Trade Bot is Online</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

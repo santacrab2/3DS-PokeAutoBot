@@ -65,7 +65,7 @@ namespace _3DS_link_trade_bot
             }
             gtspagesize = (int)BitConverter.ToUInt32(ntr.ReadBytes(GTSpagesizeoff, 0x04));
             var pkm = GetGTSPoke();
-
+           
             if(pkm == null)
             {
                 ChangeStatus("no legal request found");

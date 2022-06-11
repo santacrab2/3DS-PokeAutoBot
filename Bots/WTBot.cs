@@ -108,8 +108,8 @@ namespace _3DS_link_trade_bot
                 await tosend.SendMessageAsync("wonder trade now");
             }
                 ChangeStatus($"Wonder Trading: {(Species)thegift.Species}");
-            
-                var stop = new Stopwatch();
+           
+            var stop = new Stopwatch();
                 await click(A, 3);
                 stop.Restart();
                 if (BitConverter.ToInt16(ntr.ReadBytes(screenoff, 2)) != 0x41A8)
@@ -134,13 +134,14 @@ namespace _3DS_link_trade_bot
             }
             var matchedtrainerbytes = ntr.ReadBytes(WTTrainerMatch, 24);
             var matchedtrainer = Encoding.Unicode.GetString(matchedtrainerbytes).Trim('\0');
-            while(matchedtrainer == "１２３４５６")
+            stop.Restart();
+            while(matchedtrainer == "１２３４５６"&&stop.ElapsedMilliseconds < 30_000)
             {
                 matchedtrainerbytes = ntr.ReadBytes(WTTrainerMatch, 24);
                 matchedtrainer = Encoding.Unicode.GetString(matchedtrainerbytes).Trim('\0');
             }
             matchedtrainer = Encoding.Unicode.GetString(matchedtrainerbytes).Trim('\0').Trim('６').Trim('５').Trim('４');
-            ChangeStatus($"WT Match Found: Trainer: {matchedtrainer} Incoming: {(Species)receivingpkm.Species}");
+            ChangeStatus($"WT Match Found: Trainer: {matchedtrainer} Incoming: {(Species)receivingpkm.SpecForm}");
             foreach (var chan in _settings.Discordsettings.BotWTChannel)
             {
                 var tosend = (ITextChannel)_client.GetChannel(chan);

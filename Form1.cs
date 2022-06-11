@@ -114,7 +114,7 @@ namespace _3DS_link_trade_bot
 
             var trainer = TrainerSettings.GetSavedTrainerData(7);
             RecentTrainerCache.SetRecentTrainer(trainer);
-           
+          
         }
         public static void ChangeStatus(string text)
         {
@@ -176,6 +176,9 @@ namespace _3DS_link_trade_bot
             settings.Legalitysettings.SetUserSpecifiedPokeball = Properties.Settings.Default.userpokeball;
             settings.Legalitysettings.UseBatchEditor = Properties.Settings.Default.batchedit;
             settings.Legalitysettings.ZKnownGTSBreakers = Properties.Settings.Default.knowngtsbreakers;
+            settings.Discordsettings.SendStatusMessage = Properties.Settings.Default.sendstatusmessage;
+            settings.Discordsettings.PingRoleID = Properties.Settings.Default.pingroleid;
+            settings.Discordsettings.PingMessage = Properties.Settings.Default.pingmessage;
             if (!Directory.Exists(wtfolder))
                 Directory.CreateDirectory(wtfolder);
             if(!Directory.Exists(logfolder))
@@ -227,8 +230,8 @@ namespace _3DS_link_trade_bot
             }
             form1.startlinktrades.Enabled = false;
             form1.LinkTradeStop.Enabled = true;
+           
 
-            
         }
 
         private void discordconnect_Click(object sender, EventArgs e)
@@ -259,6 +262,9 @@ namespace _3DS_link_trade_bot
             Properties.Settings.Default.userpokeball=settings.Legalitysettings.SetUserSpecifiedPokeball;
             Properties.Settings.Default.batchedit=settings.Legalitysettings.UseBatchEditor;
             Properties.Settings.Default.knowngtsbreakers = settings.Legalitysettings.ZKnownGTSBreakers;
+            Properties.Settings.Default.pingmessage = settings.Discordsettings.PingMessage;
+            Properties.Settings.Default.pingroleid = settings.Discordsettings.PingRoleID;
+            Properties.Settings.Default.sendstatusmessage = settings.Discordsettings.SendStatusMessage;
             Properties.Settings.Default.Save();
             var filelist = Directory.GetFiles(logfolder);
             if (Directory.GetFiles(logfolder).Length > 7)
@@ -352,7 +358,7 @@ namespace _3DS_link_trade_bot
             nokey = BitConverter.GetBytes(0);
             nokey.CopyTo(buttonarray, 16);
             Connection.Send(buttonarray);
-
+           
 
         }
 
@@ -520,7 +526,7 @@ namespace _3DS_link_trade_bot
         private void RCpower_Click(object sender, EventArgs e)
         {
             var buttonarray = new byte[20];
-            var nokey = BitConverter.GetBytes((uint)Buttons.Select);
+            var nokey = BitConverter.GetBytes((uint)Buttons.NoKey);
             nokey.CopyTo(buttonarray, 0);
             nokey = BitConverter.GetBytes(0x2000000);
             nokey.CopyTo(buttonarray, 4);
