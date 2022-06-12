@@ -108,7 +108,7 @@
             this.LinkTradeStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.LinkTradeStop.Enabled = false;
             this.LinkTradeStop.ForeColor = System.Drawing.Color.White;
-            this.LinkTradeStop.Location = new System.Drawing.Point(281, 224);
+            this.LinkTradeStop.Location = new System.Drawing.Point(281, 255);
             this.LinkTradeStop.Name = "LinkTradeStop";
             this.LinkTradeStop.Size = new System.Drawing.Size(75, 23);
             this.LinkTradeStop.TabIndex = 2;
@@ -121,7 +121,7 @@
             this.startlinktrades.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.startlinktrades.Enabled = false;
             this.startlinktrades.ForeColor = System.Drawing.Color.White;
-            this.startlinktrades.Location = new System.Drawing.Point(187, 224);
+            this.startlinktrades.Location = new System.Drawing.Point(187, 255);
             this.startlinktrades.Name = "startlinktrades";
             this.startlinktrades.Size = new System.Drawing.Size(75, 23);
             this.startlinktrades.TabIndex = 0;
@@ -154,7 +154,7 @@
             this.propertyGrid1.Location = new System.Drawing.Point(8, 6);
             this.propertyGrid1.Name = "propertyGrid1";
             this.propertyGrid1.SelectedItemWithFocusBackColor = System.Drawing.SystemColors.ControlText;
-            this.propertyGrid1.Size = new System.Drawing.Size(519, 247);
+            this.propertyGrid1.Size = new System.Drawing.Size(519, 275);
             this.propertyGrid1.TabIndex = 0;
             this.propertyGrid1.ViewBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.propertyGrid1.ViewForeColor = System.Drawing.Color.White;
@@ -177,7 +177,7 @@
             this.logbox.Location = new System.Drawing.Point(8, 6);
             this.logbox.Name = "logbox";
             this.logbox.ReadOnly = true;
-            this.logbox.Size = new System.Drawing.Size(519, 247);
+            this.logbox.Size = new System.Drawing.Size(519, 275);
             this.logbox.TabIndex = 0;
             this.logbox.Text = "";
             // 
