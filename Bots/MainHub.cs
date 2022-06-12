@@ -107,6 +107,7 @@ namespace _3DS_link_trade_bot
                             await botchannelid.SendMessageAsync(embed: offembed.Build());
                         }
                     }
+                    WTPSB.WTPsource.Cancel();
                     tradetoken.Cancel();
                     
                    

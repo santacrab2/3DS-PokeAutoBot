@@ -278,6 +278,7 @@ namespace _3DS_link_trade_bot
         private void LinkTradeStop_Click(object sender, EventArgs e)
         {
             MainHub.tradetoken.Cancel();
+            WTPSB.WTPsource.Cancel();
             if (_settings.Discordsettings.SendStatusMessage)
             {
                 foreach (var channel in settings.Discordsettings.BotTradeChannel)
@@ -526,7 +527,7 @@ namespace _3DS_link_trade_bot
         private void RCpower_Click(object sender, EventArgs e)
         {
             var buttonarray = new byte[20];
-            var nokey = BitConverter.GetBytes((uint)Buttons.NoKey);
+            var nokey = BitConverter.GetBytes((uint)NoKey);
             nokey.CopyTo(buttonarray, 0);
             nokey = BitConverter.GetBytes(0x2000000);
             nokey.CopyTo(buttonarray, 4);
@@ -538,5 +539,25 @@ namespace _3DS_link_trade_bot
             nokey.CopyTo(buttonarray, 16);
             Connection.Send(buttonarray);
         }
+
+        private async void pictureBox6_Click(object sender, EventArgs e)
+        {
+            MouseEventArgs e2 = (MouseEventArgs)e;
+            var buttonarray = new byte[20];
+            var nokey = BitConverter.GetBytes((uint)NoKey);
+            nokey.CopyTo(buttonarray, 0);
+            nokey = BitConverter.GetBytes(gethexcoord(e2.X, e2.Y));
+            nokey.CopyTo(buttonarray, 4);
+            nokey = BitConverter.GetBytes(0x800800);
+            nokey.CopyTo(buttonarray, 8);
+            nokey = BitConverter.GetBytes(0x80800081);
+            nokey.CopyTo(buttonarray, 12);
+            nokey = BitConverter.GetBytes(0);
+            nokey.CopyTo(buttonarray, 16);
+            Connection.Send(buttonarray);
+       
+        }
+
+   
     }
 }
