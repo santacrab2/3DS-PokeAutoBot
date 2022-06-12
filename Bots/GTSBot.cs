@@ -118,7 +118,7 @@ namespace _3DS_link_trade_bot
               
                     var sav = TrainerSettings.GetSavedTrainerData(7);
                     PK7 temp = new();
-                    pkm = sav.GetLegalFromTemplate(temp,new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.levelindex < 10 ? (entry.levelindex * 10) - 1 : 99)}\nShiny: Yes\nBall: Dive"), out _);
+                    pkm = sav.GetLegalFromTemplate(temp,new ShowdownSet($"{(Species)entry.RequestedPoke}\nLevel: {(entry.levelindex < 10 ? (entry.levelindex * 10) - 1 : 99)}\nShiny: Yes\nBall: Dive"), out _);
                     pkm.Legalize();
                     pkm.OT_Name = entry.trainername;
                     pkm.Gender = entry.genderindex == 2 ? 1 : 0;
