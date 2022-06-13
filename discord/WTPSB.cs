@@ -96,19 +96,21 @@ namespace _3DS_link_trade_bot
                         pk.SetMoves(sugmov);
                         int natue = random.Next(24);
                         pk.Nature = natue;
-                        EffortValues.SetRandom(pk.EVs, 8);
+                        EffortValues.SetRandom(pk.EVs, 7);
 
                         try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await FollowupAsync("enable private messages from users on the server to be queued"); return; }
                         var tobequeued = new queuesystem() { discordcontext = con, friendcode = "", IGN = ign, tradepokemon = pk, mode = botmode.trade };
                         MainHub.The_Q.Enqueue(tobequeued);
-                        await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {MainHub.The_Q.Count()}. Receiving: {(Species)pk.Species}");
+                        await FollowupAsync($"{usr.Username} - Added to the queue. Current Position: {MainHub.The_Q.Count()}. Receiving: {(Species)pk.Species}");
 
                     }
                     usr = null;
                     guess = "";
+                    con = null;
                     tradepokemon = false;
                     buttonpressed = false;
                 }
+                con = null;
                 usr = null;
                 guess = "";
             }

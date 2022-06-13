@@ -140,8 +140,8 @@ namespace _3DS_link_trade_bot
                 matchedtrainerbytes = ntr.ReadBytes(WTTrainerMatch, 24);
                 matchedtrainer = Encoding.Unicode.GetString(matchedtrainerbytes).Trim('\0');
             }
-            matchedtrainer = Encoding.Unicode.GetString(matchedtrainerbytes).Trim('\0').Trim('６').Trim('５').Trim('４');
-            ChangeStatus($"WT Match Found: Trainer: {matchedtrainer} Incoming: {(Species)receivingpkm.SpecForm}");
+            matchedtrainer = Encoding.Unicode.GetString(matchedtrainerbytes).Trim('\0').Trim('６').Trim('５').Trim('４').Trim('\0');
+            ChangeStatus($"WT Match Found: Trainer: {matchedtrainer} Incoming: {(Species)receivingpkm.Species}");
             foreach (var chan in _settings.Discordsettings.BotWTChannel)
             {
                 var tosend = (ITextChannel)_client.GetChannel(chan);

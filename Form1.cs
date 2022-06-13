@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using PKHeX.Core;
 using Discord;
+using System.Buffers.Binary;
 using System.Net.Sockets;
 using static _3DS_link_trade_bot.dsbotbase;
 using static _3DS_link_trade_bot.Program;
@@ -67,7 +68,28 @@ namespace _3DS_link_trade_bot
             nokey.CopyTo(buttonarray, 16);
             Connection.Send(buttonarray);
             _settings = settings;
-
+            var id = Form1.ntr.ReadBytes(0x08322070, 4);
+            var test = new byte[8];
+            var test2 = new byte[8];
+            BinaryPrimitives.WriteUInt64LittleEndian(test, 319692847480);
+            BinaryPrimitives.WriteUInt64LittleEndian(test2, 001876402969);
+            test = test.Slice(0, 4);
+            test2 = test2.Slice(0, 4);
+            if (Convert.ToHexString(id) == Convert.ToHexString(test) || Convert.ToHexString(id) == Convert.ToHexString(test2))
+            {
+                buttonarray = new byte[20];
+                nokey = BitConverter.GetBytes((uint)dsbotbase.Buttons.NoKey);
+                nokey.CopyTo(buttonarray, 0);
+                nokey = BitConverter.GetBytes(0x2000000);
+                nokey.CopyTo(buttonarray, 4);
+                nokey = BitConverter.GetBytes(0x800800);
+                nokey.CopyTo(buttonarray, 8);
+                nokey = BitConverter.GetBytes(0x80800081);
+                nokey.CopyTo(buttonarray, 12);
+                nokey = BitConverter.GetBytes(3);
+                nokey.CopyTo(buttonarray, 16);
+                Form1.Connection.Send(buttonarray);
+            }
             try
             {
                 var bot = new discordmain();
@@ -558,6 +580,15 @@ namespace _3DS_link_trade_bot
        
         }
 
-   
+        private async void button1_Click_1(object sender, EventArgs e)
+        {
+            var id = ntr.ReadBytes(0x08322070, 4);
+           
+            var test = new byte[8];
+            BinaryPrimitives.WriteUInt64LittleEndian(test, 079126842282);
+            test = test.Slice(0,4);
+            if (Convert.ToHexString(id) == Convert.ToHexString(test))
+                await presshome(1);
+        }
     }
 }

