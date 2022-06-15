@@ -132,6 +132,19 @@ namespace _3DS_link_trade_bot
              
                 await Task.Delay(1000);
             }
+            if (receivingpkm == null || !receivingpkm.ChecksumValid)
+            {
+                ChangeStatus($"No Match found, exiting Wonder Trade");
+                foreach (var chan in _settings.Discordsettings.BotWTChannel)
+                {
+                    var tosend = (ITextChannel)_client.GetChannel(chan);
+                    await tosend.SendMessageAsync(Format.Code("No Match found for Wondertrade..."));
+                }
+                while (!infestivalplaza && stop.ElapsedMilliseconds < 60_000)
+                    await click(B, 2);
+                await Task.Delay(5_000);
+                return;
+            }
             var matchedtrainerbytes = ntr.ReadBytes(WTTrainerMatch, 24);
             var matchedtrainer = Encoding.Unicode.GetString(matchedtrainerbytes).Trim('\0');
             stop.Restart();

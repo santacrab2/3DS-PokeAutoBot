@@ -62,6 +62,18 @@ namespace _3DS_link_trade_bot
                     pkm = sav.GetLegalFromTemplate(temp, set,out res);
                     attempts++;
                 }
+                foreach (var i in set.InvalidLines)
+                {
+                    if (i.Contains("Ball:"))
+                    {
+
+                        var ball = i;
+                        ball = ball.Replace("Ball: ", "");
+                        var ball2 = (Ball)Enum.Parse(typeof(Ball), ball);
+                        pkm.Ball = (byte)ball2;
+
+                    }
+                }
                 if (Legal.ZCrystalDictionary.ContainsValue(pkm.HeldItem))
                     pkm.HeldItem = 0;
                 if (!new LegalityAnalysis(pkm).Valid || res != LegalizationResult.Regenerated || pkm == null)
@@ -100,6 +112,7 @@ namespace _3DS_link_trade_bot
                         sav = SaveUtil.GetBlankSAV(GameVersion.OR, "piplup");
                     ShowdownSet set = new(pkm);
                     await FollowupAsync($"This File is illegal. Heres why: {set.SetAnalysis(sav, pkm)}");
+                    return;
                 }
                 try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await FollowupAsync("enable private messages from users on the server to be queued"); return; }
                 var tobequeued = new queuesystem() { discordcontext = Context, friendcode = "", IGN = TrainerName, tradepokemon = pkm, mode = botmode.trade };
