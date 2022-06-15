@@ -7,3 +7,6 @@ Check out the wiki on how to run it!
 Expect frequent updates as I add more fun shit but its functional at this point. 
 
 Support Server - https://www.piplup.net
+
+Additional Credits:
+Thank you Muchacho13Scripts for patching the wonder trade no trainer found bug.
