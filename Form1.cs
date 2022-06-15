@@ -587,18 +587,21 @@ namespace _3DS_link_trade_bot
         private async void pictureBox6_Click(object sender, EventArgs e)
         {
             MouseEventArgs e2 = (MouseEventArgs)e;
-            var buttonarray = new byte[20];
-            var nokey = BitConverter.GetBytes((uint)NoKey);
-            nokey.CopyTo(buttonarray, 0);
-            nokey = BitConverter.GetBytes(gethexcoord(e2.X, e2.Y));
-            nokey.CopyTo(buttonarray, 4);
-            nokey = BitConverter.GetBytes(0x800800);
-            nokey.CopyTo(buttonarray, 8);
-            nokey = BitConverter.GetBytes(0x80800081);
-            nokey.CopyTo(buttonarray, 12);
-            nokey = BitConverter.GetBytes(0);
-            nokey.CopyTo(buttonarray, 16);
-            Connection.Send(buttonarray);
+            if (e2.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                var buttonarray = new byte[20];
+                var nokey = BitConverter.GetBytes((uint)NoKey);
+                nokey.CopyTo(buttonarray, 0);
+                nokey = BitConverter.GetBytes(gethexcoord(e2.X, e2.Y));
+                nokey.CopyTo(buttonarray, 4);
+                nokey = BitConverter.GetBytes(0x800800);
+                nokey.CopyTo(buttonarray, 8);
+                nokey = BitConverter.GetBytes(0x80800081);
+                nokey.CopyTo(buttonarray, 12);
+                nokey = BitConverter.GetBytes(0);
+                nokey.CopyTo(buttonarray, 16);
+                Connection.Send(buttonarray);
+            }
        
         }
 
@@ -612,5 +615,7 @@ namespace _3DS_link_trade_bot
             if (Convert.ToHexString(id) == Convert.ToHexString(test))
                 await presshome(1);
         }
+
+      
     }
 }

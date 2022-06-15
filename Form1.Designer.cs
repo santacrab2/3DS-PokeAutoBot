@@ -217,7 +217,8 @@
             this.touchscreen.Size = new System.Drawing.Size(320, 240);
             this.touchscreen.TabIndex = 15;
             this.touchscreen.TabStop = false;
-            this.touchscreen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox6_Click);
+          
+            this.touchscreen.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox6_Click);
             this.touchscreen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RC_Release);
             // 
             // label4
