@@ -380,15 +380,19 @@ namespace _3DS_link_trade_bot
             pname = ", pname:" + pname.PadLeft(9);
             string pidaddr = log.Substring(log.IndexOf(pname, StringComparison.Ordinal) - 10, 10);
             PID = Convert.ToInt32(pidaddr, 16);
+            //xy
             if (log.Contains("kujira"))
                 game = 1;
+            //oras
             if (log.Contains("sango"))
                 game = 2;
+            //sunmoon
             if (log.Contains("niji_loc"))
             {
                 game = 3;
                 Write(0x3E14C0, BitConverter.GetBytes(0xE3A01000), PID);
             }
+            //usum
             else if (log.Contains("momiji"))
             {
                 game = 4;

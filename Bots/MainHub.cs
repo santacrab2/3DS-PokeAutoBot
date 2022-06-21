@@ -13,7 +13,7 @@ using static _3DS_link_trade_bot.dsbotbase;
 using static _3DS_link_trade_bot.dsbotbase.Buttons;
 using static _3DS_link_trade_bot.RAM;
 using static _3DS_link_trade_bot.Gen7LinkTradeBot;
-
+using static _3DS_link_trade_bot.Gen6LinkTradeBot;
 
 namespace _3DS_link_trade_bot
 {
@@ -80,14 +80,25 @@ namespace _3DS_link_trade_bot
 
                     }
                     tradeinfo = The_Q.Dequeue();
-              
-
-                    switch (tradeinfo.mode)
+                    if (NTR.game == 1 || NTR.game == 2)
                     {
-                        case botmode.addfc: await FriendCodeRoutine(); continue;
-                        case botmode.trade: await LinkTradeRoutine(); continue;
-                        case botmode.dump: await DumpRoutine(); continue;
+                        switch (tradeinfo.mode)
+                        {
+                            case botmode.addfc: await FriendCodeRoutine(); continue;
+                            case botmode.trade: await LinkTradeRoutine6(); continue;
+                            case botmode.dump:  continue;
 
+                        }
+                    }
+                    else
+                    {
+                        switch (tradeinfo.mode)
+                        {
+                            case botmode.addfc: await FriendCodeRoutine(); continue;
+                            case botmode.trade: await LinkTradeRoutine(); continue;
+                            case botmode.dump: await DumpRoutine(); continue;
+
+                        }
                     }
                 }
                 catch (Exception ex)

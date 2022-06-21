@@ -116,27 +116,80 @@ namespace _3DS_link_trade_bot
             int TID = settings.Legalitysettings.BotTID;
             int SID = settings.Legalitysettings.BotSID;
             int lang = (int)settings.Legalitysettings.BotLanguage;
-            for (int i = 1; i <= 7; i++)
+            if (NTR.game == 3 || NTR.game == 4)
             {
-                var versions = GameUtil.GetVersionsInGeneration(i, 7);
-                foreach (var v in versions)
+                for (int i = 1; i <= 7; i++)
                 {
-                    var fallback = new SimpleTrainerInfo(v)
+                    var versions = GameUtil.GetVersionsInGeneration(i, 7);
+                    foreach (var v in versions)
                     {
-                        Language = lang,
-                        TID = TID,
-                        SID = SID,
-                        OT = OT,
-                    };
-                    var exist = TrainerSettings.GetSavedTrainerData(v, i, fallback);
-                    if (exist is SimpleTrainerInfo) // not anything from files; this assumes ALM returns SimpleTrainerInfo for non-user-provided fake templates.
-                        TrainerSettings.Register(fallback);
+                        var fallback = new SimpleTrainerInfo(v)
+                        {
+                            Language = lang,
+                            TID = TID,
+                            SID = SID,
+                            OT = OT,
+                        };
+                        var exist = TrainerSettings.GetSavedTrainerData(v, i, fallback);
+                        if (exist is SimpleTrainerInfo) // not anything from files; this assumes ALM returns SimpleTrainerInfo for non-user-provided fake templates.
+                            TrainerSettings.Register(fallback);
+                    }
                 }
-            }
 
-            var trainer = TrainerSettings.GetSavedTrainerData(7);
-            RecentTrainerCache.SetRecentTrainer(trainer);
-          
+                var trainer = TrainerSettings.GetSavedTrainerData(7);
+                RecentTrainerCache.SetRecentTrainer(trainer);
+            }
+            else
+            {
+                for (int i = 1; i <= 6; i++)
+                {
+                    var versions = GameUtil.GetVersionsInGeneration(i, 6);
+                    foreach (var v in versions)
+                    {
+                        var fallback = new SimpleTrainerInfo(v)
+                        {
+                            Language = lang,
+                            TID = TID,
+                            SID = SID,
+                            OT = OT,
+                        };
+                        var exist = TrainerSettings.GetSavedTrainerData(v, i, fallback);
+                        if (exist is SimpleTrainerInfo) // not anything from files; this assumes ALM returns SimpleTrainerInfo for non-user-provided fake templates.
+                            TrainerSettings.Register(fallback);
+                    }
+                }
+
+                var trainer = TrainerSettings.GetSavedTrainerData(6);
+                RecentTrainerCache.SetRecentTrainer(trainer);
+            }
+            if (NTR.game == 3)
+            {
+                GTSpagesizeoff = 0x32A6A1A4;
+                GTScurrentview = 0x305ea384;
+                GTSpagesizeoff = 0x32A6A1A4;
+                GTSblockoff = 0x32A6A7C4;
+                box1slot1 = 0x330D9838;
+                screenoff = 0x00674802;
+                GTSDeposit = 0x32A6A180;
+                Friendslistoffset = 0x30010F94;
+                isconnectedoff = 0x318635CE;
+                FailedTradeoff = 0x300FE0A0;
+                OfferedPokemonoff = 0x006754CC;
+                finalofferscreenoff = 0x307F7982;
+                festscreenoff = 0x31883B7C;
+                festscreendisplayed = 0xC8;
+                tradevolutionscreenoff = 0x3002310C;
+            }
+            if (NTR.game == 2)
+            {
+                PSSFriendoff = 0x08C776E0;
+                isconnectedoff = 0x08660F42;
+                pictureBox1.BackgroundImage = Properties.Resources.pkm_x;
+                pictureBox2.BackgroundImage = Properties.Resources.pkm_y;
+                pictureBox3.BackgroundImage = Properties.Resources.pkm_or;
+                pictureBox4.BackgroundImage = Properties.Resources.pkm_as;
+                LinkTrades.BackgroundImage = Properties.Resources.volcano;
+            }
         }
         public static void ChangeStatus(string text)
         {
@@ -210,25 +263,7 @@ namespace _3DS_link_trade_bot
 
         private void startlinktrades_Click(object sender, EventArgs e)
         {
-            if (NTR.game == 3)
-            {
-                GTSpagesizeoff = 0x32A6A1A4;
-                GTScurrentview = 0x305ea384;
-                GTSpagesizeoff = 0x32A6A1A4;
-                GTSblockoff = 0x32A6A7C4;
-                box1slot1 = 0x330D9838;
-                screenoff = 0x00674802;
-                GTSDeposit = 0x32A6A180;
-                Friendslistoffset = 0x30010F94;
-                isconnectedoff = 0x318635CE;
-                FailedTradeoff = 0x300FE0A0;
-                OfferedPokemonoff = 0x006754CC;
-                finalofferscreenoff = 0x307F7982;
-                festscreenoff = 0x31883B7C;
-                festscreendisplayed = 0xC8;
-                tradevolutionscreenoff = 0x3002310C;
-            }
-            
+       
            
             
           
@@ -358,20 +393,19 @@ namespace _3DS_link_trade_bot
             //this reads the PSS in gen 6 and gives me a list of the trainer names, this is basically the start of gen 6!!
             ulong blocksize = 0x4e30;
             ulong off = 0x08C6FFDC;
-            var data = ntr.ReadBytes(off, 0x4E20);
-            for (int i = 0; i < 2; i++)
+            var data = ntr.ReadBytes(PSSFriendoff, 0x4E20);
+          
+            PSSfriendlist friendlisttest = new PSSfriendlist(data);
+            for (int j = 99; j >= 0; j--)
             {
-                PSSfriendlist friendlisttest = new PSSfriendlist(data);
-                for (int j = 0; j < 100; j++)
-                {
-                    var friend = friendlisttest[j];
-                    if (friend.pssID == 0)
-                        break;
-                    Log(friend.otname);
-                }
-                off += blocksize;
-                data = ntr.ReadBytes(off, 0x4E20);
+                var friend = new PSSFriend();
+                friend = friendlisttest[j];
+                if (friend.pssID == 0)
+                    continue;
+                Log(friend.otname); 
             }
+          
+            
         }
 
         private async void RCup_Click(object sender, EventArgs e)
@@ -605,17 +639,6 @@ namespace _3DS_link_trade_bot
        
         }
 
-        private async void button1_Click_1(object sender, EventArgs e)
-        {
-            var id = ntr.ReadBytes(0x08322070, 4);
-           
-            var test = new byte[8];
-            BinaryPrimitives.WriteUInt64LittleEndian(test, 079126842282);
-            test = test.Slice(0,4);
-            if (Convert.ToHexString(id) == Convert.ToHexString(test))
-                await presshome(1);
-        }
-
-      
+     
     }
 }

@@ -187,7 +187,7 @@ namespace _3DS_link_trade_bot
             await presshome(10);
 
             await presshome(5);
-
+            await click(A, 1);
         }
         public static async Task DumpRoutine()
         {

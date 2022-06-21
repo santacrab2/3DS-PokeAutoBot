@@ -26,6 +26,7 @@ namespace _3DS_link_trade_bot
         public static string ign;
         public static int randspecies;
         public static SocketInteractionContext con;
+        [DefaultMemberPermissions(GuildPermission.BanMembers)]
         [SlashCommand("wtpstart","owner only")]
         [RequireOwner]
         public async Task WhoseThatPokemon()
@@ -136,6 +137,7 @@ namespace _3DS_link_trade_bot
             else
                 await FollowupAsync($"{Context.User.Username} You are incorrect. It is not {userguess}");
         }
+        [DefaultMemberPermissions(GuildPermission.BanMembers)]
         [SlashCommand("wtpcancel","owner only")]
         [RequireOwner]
         public async Task wtpcancel()

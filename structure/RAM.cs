@@ -51,7 +51,9 @@ namespace _3DS_link_trade_bot
         //gen6
         public static uint PSSFriendoff = 0x08C6FFDC;
         public static uint PSSBlockSize = 0x4E30;
-        public static uint PSSDataSize = 0x4E20;
+        public static int PSSDataSize = 0x4E20;
+        public static int C_in_connected = 0x63;
+        public static bool isconnected6 => Form1.ntr.ReadBytes(isconnectedoff, 1)[0] == C_in_connected;
     }
     public readonly ref struct FriendList
     {
@@ -103,7 +105,7 @@ namespace _3DS_link_trade_bot
         private readonly Span<byte> Data;
         public PSSFriend(Span<byte> data) => Data = data;
         public const int friendsize = 0xc8;
-         public ulong pssID => ReadUInt64LittleEndian(Data);
+        public ulong pssID => ReadUInt64LittleEndian(Data);
         
         public string otname => Encoding.Unicode.GetString(Data.Slice(8, 24)).Trim('\0');
     }
