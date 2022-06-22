@@ -50,10 +50,12 @@ namespace _3DS_link_trade_bot
 
         //gen6
         public static uint PSSFriendoff = 0x08C6FFDC;
+        //public static uint PSSFriendoff = 0x08C776E0;
         public static uint PSSBlockSize = 0x4E30;
         public static int PSSDataSize = 0x4E20;
-        public static int C_in_connected = 0x63;
-        public static bool isconnected6 => Form1.ntr.ReadBytes(isconnectedoff, 1)[0] == C_in_connected;
+        public static int d_in_disconnect = 0x64;
+
+        public static bool isconnected6 => Form1.ntr.ReadBytes(isconnectedoff, 1)[0] == d_in_disconnect;
     }
     public readonly ref struct FriendList
     {

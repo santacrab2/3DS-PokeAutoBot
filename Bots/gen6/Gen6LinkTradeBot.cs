@@ -20,15 +20,15 @@ namespace _3DS_link_trade_bot
         {
             ChangeStatus("starting a Link Trade");
             await tradeinfo.discordcontext.User.SendMessageAsync("starting your trade now, be prepared to accept the invite!");
+            await touch(227, 15, 2);
             if (!isconnected6)
             {
-                await touch(227, 15, 2);
                 await touch(164, 130, 2);
                 await click(A, 60);
-            }
+            }else { await click(B, 1); }
 
             var friends = getfriendlist6();
-            friendindex = 0;
+            friendindex = 100;
             for(int j = 0; j < friends.Count(); j++)
             {
                 if (friends[j].Contains(tradeinfo.IGN))
@@ -36,8 +36,14 @@ namespace _3DS_link_trade_bot
                     friendindex = j;
                     break;
                 }
+         
             }
-            if(friendindex <= 5)
+            if (friendindex == 100)
+            {
+                await tradeinfo.discordcontext.User.SendMessageAsync("Did not find you on the friend list, make sure you have added me using /addfc");
+                return;
+            }
+            if (friendindex <= 5)
             {
                 await touch(25 + (friendindex * 45), 74, 2);
             }

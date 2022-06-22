@@ -161,35 +161,13 @@ namespace _3DS_link_trade_bot
 
                 var trainer = TrainerSettings.GetSavedTrainerData(6);
                 RecentTrainerCache.SetRecentTrainer(trainer);
-            }
-            if (NTR.game == 3)
-            {
-                GTSpagesizeoff = 0x32A6A1A4;
-                GTScurrentview = 0x305ea384;
-                GTSpagesizeoff = 0x32A6A1A4;
-                GTSblockoff = 0x32A6A7C4;
-                box1slot1 = 0x330D9838;
-                screenoff = 0x00674802;
-                GTSDeposit = 0x32A6A180;
-                Friendslistoffset = 0x30010F94;
-                isconnectedoff = 0x318635CE;
-                FailedTradeoff = 0x300FE0A0;
-                OfferedPokemonoff = 0x006754CC;
-                finalofferscreenoff = 0x307F7982;
-                festscreenoff = 0x31883B7C;
-                festscreendisplayed = 0xC8;
-                tradevolutionscreenoff = 0x3002310C;
-            }
-            if (NTR.game == 2)
-            {
-                PSSFriendoff = 0x08C776E0;
-                isconnectedoff = 0x08660F42;
                 pictureBox1.BackgroundImage = Properties.Resources.pkm_x;
                 pictureBox2.BackgroundImage = Properties.Resources.pkm_y;
                 pictureBox3.BackgroundImage = Properties.Resources.pkm_or;
                 pictureBox4.BackgroundImage = Properties.Resources.pkm_as;
                 LinkTrades.BackgroundImage = Properties.Resources.volcano;
             }
+         
         }
         public static void ChangeStatus(string text)
         {
@@ -263,10 +241,33 @@ namespace _3DS_link_trade_bot
 
         private void startlinktrades_Click(object sender, EventArgs e)
         {
-       
-           
-            
-          
+
+
+            if (NTR.game == 3)
+            {
+                GTSpagesizeoff = 0x32A6A1A4;
+                GTScurrentview = 0x305ea384;
+                GTSpagesizeoff = 0x32A6A1A4;
+                GTSblockoff = 0x32A6A7C4;
+                box1slot1 = 0x330D9838;
+                screenoff = 0x00674802;
+                GTSDeposit = 0x32A6A180;
+                Friendslistoffset = 0x30010F94;
+                isconnectedoff = 0x318635CE;
+                FailedTradeoff = 0x300FE0A0;
+                OfferedPokemonoff = 0x006754CC;
+                finalofferscreenoff = 0x307F7982;
+                festscreenoff = 0x31883B7C;
+                festscreendisplayed = 0xC8;
+                tradevolutionscreenoff = 0x3002310C;
+            }
+            if (NTR.game == 2)
+            {
+                PSSFriendoff = 0x08C776E0;
+                isconnectedoff = 0x08660F38;
+
+            }
+
 
             MainHub.starttrades();
 
