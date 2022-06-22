@@ -164,7 +164,7 @@ namespace _3DS_link_trade_bot
         {
             ChangeStatus($"Adding {tradeinfo.discordcontext.User.Username} with friend code: {tradeinfo.friendcode}");
             await tradeinfo.discordcontext.User.SendMessageAsync("adding you to the friends list now!");
-            await presshome(2);
+            await presshome(5);
 
             await touch(120, 10, 1);
 
@@ -187,7 +187,10 @@ namespace _3DS_link_trade_bot
             await presshome(10);
 
             await presshome(5);
+            await click(A, 5);
             await click(A, 1);
+      
+
         }
         public static async Task DumpRoutine()
         {

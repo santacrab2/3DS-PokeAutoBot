@@ -370,7 +370,7 @@ namespace _3DS_link_trade_bot
                     botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("✅", "❌"));
                     botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
                     var offembed = new EmbedBuilder();
-                    offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Gen 7 Link Trade Bot is Offline");
+                    offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Link Trade Bot is offline");
                     botchannelid.SendMessageAsync(embed: offembed.Build());
                 }
             }

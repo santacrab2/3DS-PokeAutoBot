@@ -23,11 +23,12 @@ namespace _3DS_link_trade_bot
         [SlashCommand("addfc","adds you to the bots friend list, dont forget to add the bot!")]
         public async Task addfc([Summary(description:"No Dashes!!")]string friendcode)
         {
+            await DeferAsync();
             try { await Context.User.SendMessageAsync($"I Have added you to the Friend Code queue. I will message you here when I am adding you. My FC is {_settings.FriendCode}"); } catch { await RespondAsync("enable private messages from users on the server to be queued"); return; }
             friendcode = friendcode.Replace("-", "").Replace(" ","");
             var tobequeued = new queuesystem() { discordcontext = Context,friendcode = friendcode,tradepokemon=EntityBlank.GetBlank(7),IGN ="",mode = botmode.addfc};
             The_Q.Enqueue(tobequeued);
-            await RespondAsync($"Added {Context.User.Username} to the Friend Code queue.");
+            await FollowupAsync($"Added {Context.User.Username} to the Friend Code queue.");
        
 
         }
@@ -101,33 +102,54 @@ namespace _3DS_link_trade_bot
             }
             if (pk7orpk6 != null)
             {
-                
+
                 if (!EntityDetection.IsSizePlausible(pk7orpk6.Size))
                 {
-                    await FollowupAsync("this is not a pk file", ephemeral:true);
+                    await FollowupAsync("this is not a pk file", ephemeral: true);
                     return;
                 }
                 var buffer = await discordmain.DownloadFromUrlAsync(pk7orpk6.Url);
-                PKM pkm;
+
                 if (NTR.game == 3 || NTR.game == 4)
-                    pkm = EntityFormat.GetFromBytes(buffer, EntityContext.Gen7);
-                else
-                    pkm = EntityFormat.GetFromBytes(buffer, EntityContext.Gen6);
-                if(!new LegalityAnalysis(pkm).Valid)
                 {
-                    SaveFile sav;
-                    if (NTR.game == 3 || NTR.game == 4)
-                        sav = SaveUtil.GetBlankSAV(GameVersion.UM, "Piplup");
-                    else
-                        sav = SaveUtil.GetBlankSAV(GameVersion.OR, "piplup");
-                    ShowdownSet set = new(pkm);
-                    await FollowupAsync($"This File is illegal. Heres why: {set.SetAnalysis(sav, pkm)}");
-                    return;
+                    var pkm = EntityFormat.GetFromBytes(buffer, EntityContext.Gen7);
+
+                    if (!new LegalityAnalysis(pkm).Valid)
+                    {
+                        SaveFile sav;
+                        if (NTR.game == 3 || NTR.game == 4)
+                            sav = SaveUtil.GetBlankSAV(GameVersion.UM, "Piplup");
+                        else
+                            sav = SaveUtil.GetBlankSAV(GameVersion.OR, "piplup");
+                        ShowdownSet set = new(pkm);
+                        await FollowupAsync($"This File is illegal. Heres why: {set.SetAnalysis(sav, pkm)}");
+                        return;
+                    }
+                    try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await FollowupAsync("enable private messages from users on the server to be queued"); return; }
+                    var tobequeued = new queuesystem() { discordcontext = Context, friendcode = "", IGN = TrainerName, tradepokemon = pkm, mode = botmode.trade };
+                    The_Q.Enqueue(tobequeued);
+                    await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count()}. Receiving: {(Species)pkm.Species}");
                 }
-                try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await FollowupAsync("enable private messages from users on the server to be queued"); return; }
-                var tobequeued = new queuesystem() { discordcontext = Context, friendcode = "", IGN = TrainerName, tradepokemon = pkm, mode = botmode.trade };
-                The_Q.Enqueue(tobequeued);
-                await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count()}. Receiving: {(Species)pkm.Species}");
+                else
+                {
+                    var pkm = EntityFormat.GetFromBytes(buffer, EntityContext.Gen6);
+
+                    if (!new LegalityAnalysis(pkm).Valid)
+                    {
+                        SaveFile sav;
+                        if (NTR.game == 3 || NTR.game == 4)
+                            sav = SaveUtil.GetBlankSAV(GameVersion.UM, "Piplup");
+                        else
+                            sav = SaveUtil.GetBlankSAV(GameVersion.OR, "piplup");
+                        ShowdownSet set = new(pkm);
+                        await FollowupAsync($"This File is illegal. Heres why: {set.SetAnalysis(sav, pkm)}");
+                        return;
+                    }
+                    try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await FollowupAsync("enable private messages from users on the server to be queued"); return; }
+                    var tobequeued = new queuesystem() { discordcontext = Context, friendcode = "", IGN = TrainerName, tradepokemon = pkm, mode = botmode.trade };
+                    The_Q.Enqueue(tobequeued);
+                    await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count()}. Receiving: {(Species)pkm.Species}");
+                }
             }
         }
 

@@ -160,15 +160,27 @@ namespace _3DS_link_trade_bot
             List<int> dex = new();
             for (int i = 1; i <= 907; i++)
             {
-                var entry = PersonalTable.USUM.GetFormEntry(i,0);
-                if (entry is PersonalInfoSM { IsPresentInGame: false})
-                    continue;
+                if (NTR.game == 3 || NTR.game == 4)
+                {
+                    var entry = PersonalTable.USUM.GetFormEntry(i, 0);
 
+
+                    if (entry is PersonalInfoSM { IsPresentInGame: false } )
+                        continue;
+                }else
+                {
+                    var entry = PersonalTable.AO.GetFormEntry(i, 0);
+                    if (entry is PersonalInfoORAS { IsPresentInGame: false })
+                        continue;
+                }    
                 var species = SpeciesName.GetSpeciesNameGeneration(i, 2, 8);
                 var set = new ShowdownSet($"{species}{(i == (int)NidoranF ? "-F" : i == (int)NidoranM ? "-M" : "")}");
-                var template = new PK7();
-                var sav = TrainerSettings.GetSavedTrainerData(7);
-                _ = sav.GetLegalFromTemplate(template, set, out var result);
+                
+                var trainer = TrainerSettings.GetSavedTrainerData(7);
+                if (NTR.game == 1 || NTR.game == 2)
+                    trainer = TrainerSettings.GetSavedTrainerData(6);
+                var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
+                _ = sav.GetLegalFromSet(set, out var result);
 
                 if (result == LegalizationResult.Regenerated)
                     dex.Add(i);
