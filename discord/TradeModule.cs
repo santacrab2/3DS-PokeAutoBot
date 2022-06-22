@@ -33,7 +33,7 @@ namespace _3DS_link_trade_bot
         }
 
         [SlashCommand("trade", "trades you a pokemon over link trade in 3ds games")]
-        public async Task trade(string TrainerName, string PokemonText = " ", Attachment pk7 = null)
+        public async Task trade(string TrainerName, string PokemonText = " ", Attachment pk7orpk6 = null)
         {
             await DeferAsync();
            
@@ -51,15 +51,21 @@ namespace _3DS_link_trade_bot
           
 
                 ShowdownSet set = ConvertToShowdown(PokemonText);
-
-                var sav = TrainerSettings.GetSavedTrainerData(7);
-                PK7 temp = new();
-                var pkm = sav.GetLegalFromTemplate(temp, set, out var res);
+                
+                var trainer = TrainerSettings.GetSavedTrainerData(7);
+                if (NTR.game == 2 || NTR.game==1)
+                    trainer = TrainerSettings.GetSavedTrainerData(6);
+                var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
+               
+                var pkm = sav.GetLegalFromSet(set, out var res);
                 int attempts = 0;
                 while(!new LegalityAnalysis(pkm).Valid && attempts < 3)
                 {
-                    sav = TrainerSettings.GetSavedTrainerData(7);
-                    pkm = sav.GetLegalFromTemplate(temp, set,out res);
+                    trainer = TrainerSettings.GetSavedTrainerData(7);
+                    if (NTR.game == 2 || NTR.game == 1)
+                        trainer = TrainerSettings.GetSavedTrainerData(6);
+                    sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
+                    pkm = sav.GetLegalFromSet(set,out res);
                     attempts++;
                 }
                 foreach (var i in set.InvalidLines)
@@ -93,16 +99,20 @@ namespace _3DS_link_trade_bot
                 
                
             }
-            if (pk7 != null)
+            if (pk7orpk6 != null)
             {
                 
-                if (!EntityDetection.IsSizePlausible(pk7.Size))
+                if (!EntityDetection.IsSizePlausible(pk7orpk6.Size))
                 {
                     await FollowupAsync("this is not a pk file", ephemeral:true);
                     return;
                 }
-                var buffer = await discordmain.DownloadFromUrlAsync(pk7.Url);
-                var pkm = EntityFormat.GetFromBytes(buffer, EntityContext.Gen7);
+                var buffer = await discordmain.DownloadFromUrlAsync(pk7orpk6.Url);
+                PKM pkm;
+                if (NTR.game == 3 || NTR.game == 4)
+                    pkm = EntityFormat.GetFromBytes(buffer, EntityContext.Gen7);
+                else
+                    pkm = EntityFormat.GetFromBytes(buffer, EntityContext.Gen6);
                 if(!new LegalityAnalysis(pkm).Valid)
                 {
                     SaveFile sav;

@@ -80,29 +80,35 @@ namespace _3DS_link_trade_bot
                     if (tradepokemon)
                     {
                         var set = new ShowdownSet($"{(Species)randspecies}\nShiny: Yes");
-                        var template = new PK7();
-                        var sav = TrainerSettings.GetSavedTrainerData(7);
-                        var pk = sav.GetLegalFromTemplate(template,set, out var result);
-                        pk = pk.Legalize();
+                     
+                        var trainer = TrainerSettings.GetSavedTrainerData(7);
+                        if (NTR.game == 1 || NTR.game == 2)
+                            trainer = TrainerSettings.GetSavedTrainerData(6);
+                        var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
+                        var pk = sav.GetLegalFromSet(set, out var result);
+                  
                         if (!new LegalityAnalysis(pk).Valid)
                         {
                             set = new ShowdownSet(((Species)randspecies).ToString());
-                            template = new PK7();
-                            sav = TrainerSettings.GetSavedTrainerData(7);
-                            pk = sav.GetLegalFromTemplate(template, set, out result);
-                            pk = pk.Legalize();
+                            
+                            trainer = TrainerSettings.GetSavedTrainerData(7);
+                            if (NTR.game == 1 || NTR.game == 2)
+                                trainer = TrainerSettings.GetSavedTrainerData(6);
+                            sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
+                            pk = sav.GetLegalFromSet( set, out result);
+                            
                         }
                         pk.Ball = BallApplicator.ApplyBallLegalByColor(pk);
                         int[] sugmov = MoveSetApplicator.GetMoveSet(pk, true);
                         pk.SetMoves(sugmov);
                         int natue = random.Next(24);
                         pk.Nature = natue;
-                        EffortValues.SetRandom(pk.EVs, 7);
+                        EffortValues.SetRandom(pk.EVs, trainer.Generation);
 
-                        try { await Context.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await FollowupAsync("enable private messages from users on the server to be queued"); return; }
+                        try { await con.User.SendMessageAsync("I have added you to the queue. I will message you here when the trade starts"); } catch { await con.Interaction.FollowupAsync("enable private messages from users on the server to be queued"); return; }
                         var tobequeued = new queuesystem() { discordcontext = con, friendcode = "", IGN = ign, tradepokemon = pk, mode = botmode.trade };
                         MainHub.The_Q.Enqueue(tobequeued);
-                        await FollowupAsync($"{usr.Username} - Added to the queue. Current Position: {MainHub.The_Q.Count()}. Receiving: {(Species)pk.Species}");
+                        await con.Interaction.FollowupAsync($"{usr.Username} - Added to the queue. Current Position: {MainHub.The_Q.Count()}. Receiving: {(Species)pk.Species}");
 
                     }
                     usr = null;

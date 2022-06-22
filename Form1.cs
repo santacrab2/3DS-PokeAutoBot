@@ -264,7 +264,9 @@ namespace _3DS_link_trade_bot
             if (NTR.game == 2)
             {
                 PSSFriendoff = 0x08C776E0;
-                isconnectedoff = 0x08660F38;
+                isconnectedoff = 0x602110;
+                box1slot1 = 0x8C9E134;
+                currentscreenoff = 0x62C2EC; 
 
             }
 
