@@ -18,7 +18,7 @@ namespace _3DS_link_trade_bot
         public static int friendindex = 0;
         public static async Task LinkTradeRoutine6()
         {
-            ChangeStatus("starting a Link Trade");
+            ChangeStatus($"starting a Link Trade with {tradeinfo.discordcontext.User.Username}");
             await tradeinfo.discordcontext.User.SendMessageAsync("starting your trade now, be prepared to accept the invite!");
        
             if (!isconnected6)
@@ -95,7 +95,7 @@ namespace _3DS_link_trade_bot
             var receivedpkm = EntityFormat.GetFromBytes(ntr.ReadBytes(box1slot1, 260), EntityContext.Gen6);
             if(SearchUtil.HashByDetails(tradeinfo.tradepokemon) != SearchUtil.HashByDetails(receivedpkm))
             {
-                ChangeStatus("user completed the trade");
+                ChangeStatus($"{tradeinfo.discordcontext.User.Username} completed the trade");
                 var temp = $"{Directory.GetCurrentDirectory()}/{receivedpkm.FileName}";
                 File.WriteAllBytes(temp, receivedpkm.DecryptedBoxData);
                 await tradeinfo.discordcontext.User.SendFileAsync(temp, "Here is the pokemon you traded me");
@@ -103,7 +103,7 @@ namespace _3DS_link_trade_bot
             }
             else
             {
-                ChangeStatus("user did not complete the trade");
+                ChangeStatus($"{tradeinfo.discordcontext.User.Username} did not complete the trade");
                 await tradeinfo.discordcontext.User.SendMessageAsync("Something went wrong, please try again");
             }
             return;
