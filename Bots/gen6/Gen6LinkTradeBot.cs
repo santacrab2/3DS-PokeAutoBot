@@ -65,6 +65,7 @@ namespace _3DS_link_trade_bot
             {
                 await tradeinfo.discordcontext.User.SendMessageAsync("You did not accept the trade invite in time, please try again.");
                 ChangeStatus($"{tradeinfo.discordcontext.User.Username} did not accept the trade invite in time");
+                await click(B, 1);
                 return;
             }
             while (checkscreen(currentscreenoff, AcceptedTradeScreenVal))
