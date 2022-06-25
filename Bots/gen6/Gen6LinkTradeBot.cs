@@ -32,7 +32,7 @@ namespace _3DS_link_trade_bot
             var friendindex = 0;
             while(friendindex < 6)
             {
-                await touch(25 + (friendindex * 45), 74, 2);
+                await touch(25 + (friendindex * 45), 74, 5);
                 trainersearch = Encoding.Unicode.GetString(ntr.ReadBytes(SelectedFriendoff, 24)).Trim('\0');
                 if (trainersearch.Contains(tradeinfo.IGN))
                     break;
@@ -68,26 +68,32 @@ namespace _3DS_link_trade_bot
                 await click(B, 1);
                 return;
             }
+            ChangeStatus($"{tradeinfo.discordcontext.User.Username} accepted the trade, waiting for box screen");
             while (checkscreen(currentscreenoff, AcceptedTradeScreenVal))
                 await Task.Delay(1000);
             await Task.Delay(10000);
+            ChangeStatus($"offering {(Species)tradeinfo.tradepokemon.Species} for trade");
             for(int a = 0;a<2; a++)
                 await DpadClick(DpadRIGHT, 1);
-            await click(A, 1);
-            await click(A, 1);
-            await click(A, 1);
+            await click(A, 2);
+            await click(A, 2);
+            await click(A, 2);
             while (!TradeButtonOnScreen)
                 await Task.Delay(1000);
             await click(A, 5);
+            stop.Restart();
+            while (!ontradeanimationscreen && stop.ElapsedMilliseconds < 60_000)
+                await Task.Delay(500);
             ChangeStatus("watching trade animation");
-            while (ontradeanimationscreen || oncommunicatingscreen)
+            stop.Restart();
+            while ((ontradeanimationscreen || oncommunicatingscreen)&& stop.ElapsedMilliseconds<180_000)
                 await Task.Delay(1000);
             await Task.Delay(10000);
             ChangeStatus("exiting trade");
             await click(B, 1);
             await click(A, 1);
             ChangeStatus("waiting for trade partner to exit");
-            while (!checkscreen(currentscreenoff, DoMoreScreen))
+            while (!checkscreen(currentscreenoff, DoMoreScreen)&&stop.ElapsedMilliseconds<180_000)
                 await Task.Delay(1000);
             await touch(165, 170, 2);
             while (!checkscreen(currentscreenoff, OverWorldScreenVal))

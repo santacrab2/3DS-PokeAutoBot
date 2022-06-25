@@ -267,6 +267,7 @@ namespace _3DS_link_trade_bot
                 isconnectedoff = 0x602110;
                 box1slot1 = 0x8C9E134;
                 currentscreenoff = 0x62C2EC; 
+                pokemonwantedoff = 0x08335290;
 
             }
 

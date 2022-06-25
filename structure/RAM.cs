@@ -47,21 +47,27 @@ namespace _3DS_link_trade_bot
 
         public static uint WTReceivingPokemon = 0x314FF4D1;
         public static uint WTTrainerMatch = 0x303987B4;
+        public static uint HasEggOff = 0x3307B1E8;
 
         //gen6
         public static uint PSSFriendoff = 0x08C6FFDC;
         public static uint SelectedFriendoff = 0x0866048E;
+        public static uint secondSelectedFriendoff = 0x0865EED6;
         public static uint PSSBlockSize = 0x4E30;
         public static int PSSDataSize = 0x4E20;
-        //oras
+        public static uint pokemonwantedoff = 0x08334988;
         public static uint currentscreenoff = 0x08334988;
+        //oras
         public static uint AcceptedTradeScreenVal = 0x040054e0;
         public static uint DoMoreScreen = 0x040008d0;
         public static uint OverWorldScreenVal = 0x043229F0;
+        public static uint GTSScreenVal = 0x407F720;
         public static uint finaltradebuttonoff = 0x08554B24;
         public static uint tradeanimationscreenoff = 0x084207DC;
-        public static bool ontradeanimationscreen => Form1.ntr.ReadBytes(tradeanimationscreenoff, 1)[0] == 0x48;
         public static uint oncommunicatingscreenoff = 0x084207B0;
+      
+        public static bool ontradeanimationscreen => Form1.ntr.ReadBytes(tradeanimationscreenoff, 1)[0] == 0x48;
+        
         public static bool oncommunicatingscreen => Form1.ntr.ReadBytes(oncommunicatingscreenoff, 1)[0] == 0x11;
         public static bool TradeButtonOnScreen => Form1.ntr.ReadBytes(finaltradebuttonoff,1)[0] != 0;
         public static bool isconnected6 => Form1.ntr.ReadBytes(isconnectedoff, 1)[0] == 1;
