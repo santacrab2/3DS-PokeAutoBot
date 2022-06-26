@@ -22,7 +22,10 @@ namespace _3DS_link_trade_bot.Bots.gen6
                 await touch(164, 130, 2);
                 await click(A, 60);
             }
+            if (userinvitedbot6)
+                await touch(178, 213, 1);
             await click(Start, 1);
+            await click(R, 1);
             await touch(87, 54, 1);
             await click(A, 15);
             await click(A, 1);

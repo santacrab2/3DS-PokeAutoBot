@@ -65,12 +65,17 @@ namespace _3DS_link_trade_bot
         public static uint finaltradebuttonoff = 0x08554B24;
         public static uint tradeanimationscreenoff = 0x084207DC;
         public static uint oncommunicatingscreenoff = 0x084207B0;
-      
+        public static uint GTSListBlockOff = 0x8C694F8;
+        public static uint GTSPageSize = 0x08C6D69C;
+        public static uint GTSPageIndex = 0x08C6945C;
+        public static uint GTSCurrentView = 0x08C6D6AC;
+        public static uint UserInvitedBotOff6 = 0x15A57A00;
         public static bool ontradeanimationscreen => Form1.ntr.ReadBytes(tradeanimationscreenoff, 1)[0] == 0x48;
         
         public static bool oncommunicatingscreen => Form1.ntr.ReadBytes(oncommunicatingscreenoff, 1)[0] == 0x11;
         public static bool TradeButtonOnScreen => Form1.ntr.ReadBytes(finaltradebuttonoff,1)[0] != 0;
         public static bool isconnected6 => Form1.ntr.ReadBytes(isconnectedoff, 1)[0] == 1;
+        public static bool userinvitedbot6 => Form1.ntr.ReadBytes(UserInvitedBotOff6, 1)[0] == 0xAC;
         public static bool checkscreen(uint CurrentScreen,uint screenval)
         {
             var screenread = BitConverter.ToUInt32(Form1.ntr.ReadBytes(CurrentScreen, 4));
@@ -133,5 +138,23 @@ namespace _3DS_link_trade_bot
         public ulong pssID => ReadUInt64LittleEndian(Data);
         
         public string otname => Encoding.Unicode.GetString(Data.Slice(8, 24)).Trim('\0');
+    }
+    public readonly ref struct GTSPage6
+    {
+        public const int GTSBlocksize6 = 0x3E80;
+        private readonly Span<byte> Data;
+        public GTSPage6(Span<byte> data) => Data = data;
+        public GTSEntry6 this[int index] => new(Data.Slice(GTSEntry6.GTSEntrySize6 * index, GTSEntry6.GTSEntrySize6));
+    }
+    public readonly ref struct GTSEntry6
+    {
+        public const int GTSEntrySize6 = 0xA0;
+        private readonly Span<byte> Data;
+        public GTSEntry6(Span<byte> data) => Data = data;
+        public int RequestedPoke => BitConverter.ToInt16(Data[0x0..]);
+        public int RequestedGender => BitConverter.ToInt16(Data[0x2..]);
+        public int RequestLevel => BitConverter.ToInt16(Data[0x3..]);
+        public string trainername => Encoding.Unicode.GetString(Data.Slice(0x40, 24)).Trim('\0');
+        public string GTSmsg => Encoding.Unicode.GetString(Data.Slice(0x5A, 24)).Trim('\0');
     }
 }

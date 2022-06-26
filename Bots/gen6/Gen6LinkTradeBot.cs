@@ -27,6 +27,8 @@ namespace _3DS_link_trade_bot
                 await touch(164, 130, 2);
                 await click(A, 60);
             }
+            if (userinvitedbot6)
+                await touch(178, 213, 1);
             await injection(tradeinfo.tradepokemon);
             var trainersearch = "";
             var friendindex = 0;
