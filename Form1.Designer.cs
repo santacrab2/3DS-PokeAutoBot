@@ -64,6 +64,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.BotMode = new System.Windows.Forms.ComboBox();
             this.tabs.SuspendLayout();
             this.LinkTrades.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -101,7 +102,7 @@
             this.LinkTrades.Padding = new System.Windows.Forms.Padding(3);
             this.LinkTrades.Size = new System.Drawing.Size(530, 284);
             this.LinkTrades.TabIndex = 0;
-            this.LinkTrades.Text = "Link Trades";
+            this.LinkTrades.Text = "Bots Home";
             // 
             // LinkTradeStop
             // 
@@ -538,12 +539,23 @@
             this.pictureBox4.TabIndex = 9;
             this.pictureBox4.TabStop = false;
             // 
+            // BotMode
+            // 
+            this.BotMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BotMode.ForeColor = System.Drawing.Color.White;
+            this.BotMode.FormattingEnabled = true;
+            this.BotMode.Location = new System.Drawing.Point(294, 6);
+            this.BotMode.Name = "BotMode";
+            this.BotMode.Size = new System.Drawing.Size(98, 23);
+            this.BotMode.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.ClientSize = new System.Drawing.Size(550, 404);
+            this.Controls.Add(this.BotMode);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
@@ -616,5 +628,6 @@
         private Label label3;
         public Button RCpower;
         private PictureBox touchscreen;
+        public ComboBox BotMode;
     }
 }

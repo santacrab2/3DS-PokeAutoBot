@@ -14,6 +14,7 @@ namespace _3DS_link_trade_bot
         protected const string Discord = nameof(Discord);
         protected const string BotsMainSettings = nameof(BotsMainSettings);
         protected const string Legality = nameof(Legality);
+        protected const string RNG = nameof(RNG);
         [Category(BotsMainSettings), Description("GTS Distribution")]
         public bool GTSdistribution { get; set; } = false;
         [Category(BotsMainSettings), Description("GTS Page To Start on")]
@@ -29,5 +30,17 @@ namespace _3DS_link_trade_bot
         [Category(Legality)]
         [TypeConverter(typeof(ExpandableObjectConverter))]
         public LegalitySettings Legalitysettings { get; set; } = new();
+        [Category(RNG)]
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public RNGSettings RNGsettings { get; set; } = new();
+
+    }
+    public enum Mode
+    {
+        FlexTrade,
+        GTSOnly,
+        WTOnly,
+        EggRNGNonePID,
+        EggRNGPID,
     }
 }

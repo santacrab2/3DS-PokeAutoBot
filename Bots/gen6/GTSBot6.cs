@@ -10,7 +10,7 @@ using static _3DS_link_trade_bot.RAM;
 using static _3DS_link_trade_bot.discordmain;
 using System.Text;
 
-namespace _3DS_link_trade_bot.Bots.gen6
+namespace _3DS_link_trade_bot
 {
     public class GTSBot6
     {

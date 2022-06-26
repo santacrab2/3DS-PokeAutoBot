@@ -24,7 +24,7 @@ namespace _3DS_link_trade_bot
         public static queuesystem tradeinfo;
         public static CancellationTokenSource tradetoken = new CancellationTokenSource();
         public static Queue<queuesystem> The_Q = new Queue<queuesystem>();
-        
+
         public static async void starttrades()
         {
             await Log("loading WT mons");
@@ -45,34 +45,65 @@ namespace _3DS_link_trade_bot
             }
             if (wtmons.Count() == 0)
                 await Log("No Wonder Trade Pokemon Loaded");
+            switch ((Mode)Program.form1.BotMode.SelectedItem)
+            {
+                case Mode.FlexTrade: await FlexTradeRoutine(); break;
+                case Mode.GTSOnly:
+                    while (!tradetoken.IsCancellationRequested)
+                    {
+                        if (NTR.game == 1 || NTR.game == 2)
+                            await GTSBot6.GTSRoutine6();
+                        else
+                            await GTSBot.GTStrades();
+                    } break;
+                case Mode.WTOnly:
+                    while (!tradetoken.IsCancellationRequested)
+                    {
+                        await WTBot.WTroutine();
+                    } break;
+                case Mode.EggRNGNonePID:
+                
+                        await EggRNGBot7.EggRNGNonePID7Routine();
+                     break;
+            } 
+            ChangeStatus("Bot Stopped");
+            tradetoken = new();
+            Program.form1.startlinktrades.Enabled = true;
+            Program.form1.LinkTradeStop.Enabled = false;
+        }
+
+        public static async Task FlexTradeRoutine()
+        {
             while (!tradetoken.IsCancellationRequested)
             {
-              
-                
-                try {
+                try
+                {
                     //this is where it performs idling tasks
                     if (The_Q.Count == 0)
                     {
-                        if (IsSoftBanned)
+                        if (NTR.game == 3 || NTR.game == 4)
                         {
-                            ChangeStatus("softban detected, restarting game");
-                            await resetgame();
-                        }
-                        if (_settings.GTSdistribution == true)
-                            await GTSBot.GTStrades();
-                        if (IsSoftBanned)
-                        {
-                            ChangeStatus("softban detected, restarting game");
-                           _settings.Legalitysettings.ZKnownGTSBreakers.Add(GTSBot.LastGTSTrainer.ToLower());
-                         
-                            await resetgame();
-                        }
-                        if (_settings.WonderTrade == true)
-                            await WTBot.WTroutine();
-                        if (IsSoftBanned)
-                        {
-                            ChangeStatus("softban detected, restarting game");
-                            await resetgame();
+                            if (IsSoftBanned)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                await resetgame();
+                            }
+                            if (_settings.GTSdistribution == true)
+                                await GTSBot.GTStrades();
+                            if (IsSoftBanned)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                _settings.Legalitysettings.ZKnownGTSBreakers.Add(GTSBot.LastGTSTrainer.ToLower());
+
+                                await resetgame();
+                            }
+                            if (_settings.WonderTrade == true)
+                                await WTBot.WTroutine();
+                            if (IsSoftBanned)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                await resetgame();
+                            }
                         }
                         await Task.Delay(1000);
                         continue;
@@ -86,7 +117,7 @@ namespace _3DS_link_trade_bot
                         {
                             case botmode.addfc: await FriendCodeRoutine(); continue;
                             case botmode.trade: await LinkTradeRoutine6(); continue;
-                            case botmode.dump:  continue;
+                            case botmode.dump: continue;
 
                         }
                     }
@@ -120,16 +151,9 @@ namespace _3DS_link_trade_bot
                     }
                     WTPSB.WTPsource.Cancel();
                     tradetoken.Cancel();
-                    
-                   
                 }
             }
-            ChangeStatus("Bot Stopped");
-            tradetoken = new();
-            Program.form1.startlinktrades.Enabled = true;
-            Program.form1.LinkTradeStop.Enabled = false;
         }
-
       public static async Task resetgame()
         {
             await PressPower(5);

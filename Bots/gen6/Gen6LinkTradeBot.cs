@@ -31,12 +31,16 @@ namespace _3DS_link_trade_bot
                 await touch(178, 213, 1);
             await injection(tradeinfo.tradepokemon);
             var trainersearch = "";
+            var trainersearch2 = "";
+            
             var friendindex = 0;
             while(friendindex < 6)
             {
                 await touch(25 + (friendindex * 45), 74, 5);
                 trainersearch = Encoding.Unicode.GetString(ntr.ReadBytes(SelectedFriendoff, 24)).Trim('\0');
-                if (trainersearch.Contains(tradeinfo.IGN))
+                trainersearch2 = Encoding.Unicode.GetString(ntr.ReadBytes(secondSelectedFriendoff, 24)).Trim('\0');
+
+                if (trainersearch.Contains(tradeinfo.IGN) || trainersearch2.Contains(tradeinfo.IGN))
                     break;
                 await click(B, 1);
                 friendindex++;

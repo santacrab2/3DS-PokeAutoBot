@@ -30,6 +30,7 @@ namespace _3DS_link_trade_bot
 
             InitializeComponent();
             propertyGrid1.SelectedObject = settings;
+            BotMode.DataSource = Enum.GetValues(typeof(Mode));
           
             
         }
@@ -239,7 +240,7 @@ namespace _3DS_link_trade_bot
 
         }
 
-        private void startlinktrades_Click(object sender, EventArgs e)
+        private async void startlinktrades_Click(object sender, EventArgs e)
         {
 
 
@@ -268,6 +269,18 @@ namespace _3DS_link_trade_bot
                 box1slot1 = 0x8C9E134;
                 currentscreenoff = 0x62C2EC; 
                 pokemonwantedoff = 0x08335290;
+                AcceptedTradeScreenVal = 0x040054e0;
+                DoMoreScreen = 0x040008d0;
+                OverWorldScreenVal = 0x043229F0;
+                GTSScreenVal = 0x407F720;
+                finaltradebuttonoff = 0x08554B24;
+                tradeanimationscreenoff = 0x084207DC;
+                oncommunicatingscreenoff = 0x084207B0;
+                GTSListBlockOff = 0x8C694F8;
+                GTSPageSize = 0x08C6D69C;
+                GTSPageIndex = 0x08C6945C;
+                GTSCurrentView = 0x08C6D6AC;
+                UserInvitedBotOff6 = 0x15A57A00;
 
             }
 
@@ -281,11 +294,11 @@ namespace _3DS_link_trade_bot
 
                     var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;
 
-                    botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("❌", "✅"));
-                    botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
+                    await botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("❌", "✅"));
+                    await botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
                     var offembed = new EmbedBuilder();
                     offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", _settings.Discordsettings.PingMessage);
-                    botchannelid.SendMessageAsync($"<@&{_settings.Discordsettings.PingRoleID}>", embed: offembed.Build());
+                    await botchannelid.SendMessageAsync($"<@&{_settings.Discordsettings.PingRoleID}>", embed: offembed.Build());
 
                 }
             }
@@ -358,7 +371,7 @@ namespace _3DS_link_trade_bot
 
 
 
-        private void LinkTradeStop_Click(object sender, EventArgs e)
+        private async void LinkTradeStop_Click(object sender, EventArgs e)
         {
             MainHub.tradetoken.Cancel();
             WTPSB.WTPsource.Cancel();
@@ -368,11 +381,11 @@ namespace _3DS_link_trade_bot
                 {
 
                     var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;
-                    botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("✅", "❌"));
-                    botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
+                    await botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("✅", "❌"));
+                    await botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
                     var offembed = new EmbedBuilder();
                     offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Link Trade Bot is offline");
-                    botchannelid.SendMessageAsync(embed: offembed.Build());
+                    await botchannelid.SendMessageAsync(embed: offembed.Build());
                 }
             }
             form1.startlinktrades.Enabled = true;

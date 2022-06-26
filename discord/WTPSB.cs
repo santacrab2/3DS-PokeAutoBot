@@ -31,9 +31,10 @@ namespace _3DS_link_trade_bot
         [RequireOwner]
         public async Task WhoseThatPokemon()
         {
+            await DeferAsync();
             ITextChannel wtpchannel = (ITextChannel)Context.Channel;
             await wtpchannel.ModifyAsync(newname => newname.Name = wtpchannel.Name.Replace("❌", "✅"));
-            await RespondAsync("\"who's that pokemon\" mode started!",ephemeral:true); 
+            await FollowupAsync("\"who's that pokemon\" mode started!",ephemeral:true); 
             await wtpchannel.AddPermissionOverwriteAsync(wtpchannel.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
             while (!WTPsource.IsCancellationRequested)
             {
