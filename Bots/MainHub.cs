@@ -52,19 +52,64 @@ namespace _3DS_link_trade_bot
                     while (!tradetoken.IsCancellationRequested)
                     {
                         if (NTR.game == 1 || NTR.game == 2)
+                        {
                             await GTSBot6.GTSRoutine6();
+                          
+
+                        }
                         else
+                        {
                             await GTSBot.GTStrades();
+                            if (IsSoftBanned)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                _settings.Legalitysettings.ZKnownGTSBreakers.Add(GTSBot.LastGTSTrainer.ToLower());
+
+                                await resetgame();
+                            }
+                        }
                     } break;
                 case Mode.WTOnly:
                     while (!tradetoken.IsCancellationRequested)
                     {
                         await WTBot.WTroutine();
+                        if (IsSoftBanned)
+                        {
+                            ChangeStatus("softban detected, restarting game");
+                            await resetgame();
+                        }
+                    } break;
+                case Mode.GTSWTOnly:
+                    while (!tradetoken.IsCancellationRequested)
+                    {
+                        if (NTR.game == 1 || NTR.game == 2)
+                        {
+                            await GTSBot6.GTSRoutine6();
+
+                        }
+                        else
+                        {
+                            await GTSBot.GTStrades();
+                            if (IsSoftBanned)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                _settings.Legalitysettings.ZKnownGTSBreakers.Add(GTSBot.LastGTSTrainer.ToLower());
+
+                                await resetgame();
+                            }
+                        }
+                        await WTBot.WTroutine();
+                        if (IsSoftBanned)
+                        {
+                            ChangeStatus("softban detected, restarting game");
+                            await resetgame();
+                        }
                     } break;
                 case Mode.EggRNGNonePID:
                 
                         await EggRNGBot7.EggRNGNonePID7Routine();
                      break;
+
             } 
             ChangeStatus("Bot Stopped");
             tradetoken = new();

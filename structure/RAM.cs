@@ -62,13 +62,15 @@ namespace _3DS_link_trade_bot
         public static uint DoMoreScreen = 0x040008d0;
         public static uint OverWorldScreenVal = 0x043229F0;
         public static uint GTSScreenVal = 0x407F720;
+        public static uint BoxScreenVal = 0x4011170;
+        public static uint AcceptScreenVal = 0x40a2b90;
         public static uint finaltradebuttonoff = 0x08554B24;
         public static uint tradeanimationscreenoff = 0x084207DC;
         public static uint oncommunicatingscreenoff = 0x084207B0;
         public static uint GTSListBlockOff = 0x8C694F8;
         public static uint GTSPageSize = 0x08C6D69C;
         public static uint GTSPageIndex = 0x08C6945C;
-        public static uint GTSCurrentView = 0x08C6D6AC;
+        public static uint GTSCurrentView6 = 0x08C6D6AC;
         public static uint UserInvitedBotOff6 = 0x15A57A00;
         public static bool ontradeanimationscreen => Form1.ntr.ReadBytes(tradeanimationscreenoff, 1)[0] == 0x48;
         

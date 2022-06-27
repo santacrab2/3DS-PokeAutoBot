@@ -279,7 +279,7 @@ namespace _3DS_link_trade_bot
                 GTSListBlockOff = 0x8C694F8;
                 GTSPageSize = 0x08C6D69C;
                 GTSPageIndex = 0x08C6945C;
-                GTSCurrentView = 0x08C6D6AC;
+                GTSCurrentView6 = 0x08C6D6AC;
                 UserInvitedBotOff6 = 0x15A57A00;
 
             }

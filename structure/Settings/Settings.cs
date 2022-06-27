@@ -40,6 +40,7 @@ namespace _3DS_link_trade_bot
         FlexTrade,
         GTSOnly,
         WTOnly,
+        GTSWTOnly,
         EggRNGNonePID,
         EggRNGPID,
     }
