@@ -43,6 +43,15 @@ namespace _3DS_link_trade_bot
                 await Task.Delay(500);
             ChangeStatus("searching the GTS list");
             var tosend = GetGTSPoke();
+            await Task.Delay(2000);
+            if(tosend == null)
+            {
+                ChangeStatus("no legal match found");
+                while (!checkscreen(currentscreenoff, OverWorldScreenVal))
+                    await click(B, 1);
+                _settings.PokemonWanted++;
+                return;
+            }
             await Task.Delay(1000);
             ChangeStatus($"sending: {(Species)tosend.Species} to: {LastGTSTrainer}");
             await Gen7LinkTradeBot.injection(tosend);
@@ -63,9 +72,10 @@ namespace _3DS_link_trade_bot
         }
         public static PKM GetGTSPoke()
         {
+            
             PKM pkm = null;
             GTSPage6 gtspage = new GTSPage6(ntr.ReadBytes(GTSListBlockOff, GTSPage6.GTSBlocksize6));
-            //gtspagesize = BitConverter.ToInt32(ntr.ReadBytes(GTSpagesizeoff, 2));
+            
             for (int i = 99; i >= 0; i--)
             {
                 try
@@ -85,6 +95,7 @@ namespace _3DS_link_trade_bot
                     pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nShiny: Yes\nBall: Dive"), out var res);
                     pkm.OT_Name = entry.trainername;
                     pkm.Gender = entry.RequestedGender == 2 ? 1 : 0;
+                    RibbonApplicator.RemoveAllValidRibbons(pkm);
                     if (!new LegalityAnalysis(pkm).Valid || pkm.FatefulEncounter)
                     {
                         pkm = null;
@@ -93,6 +104,7 @@ namespace _3DS_link_trade_bot
                     else
                     {
                         ChangeStatus($"Trading Trainer:{entry.trainername.ToLower()}");
+                        ChangeStatus($"{entry.RequestedGender}");
                         LastGTSTrainer = entry.trainername;
                         tradeindex = (uint)i;
                         break;
