@@ -64,6 +64,7 @@ namespace _3DS_link_trade_bot
         public static uint GTSScreenVal = 0x407F720;
         public static uint BoxScreenVal = 0x4011170;
         public static uint AcceptScreenVal = 0x40a2b90;
+        public static uint MenuScreenVal = 0x0434b1a0;
         public static uint finaltradebuttonoff = 0x08554B24;
         public static uint tradeanimationscreenoff = 0x084207DC;
         public static uint oncommunicatingscreenoff = 0x084207B0;
@@ -74,6 +75,8 @@ namespace _3DS_link_trade_bot
         public static uint UserInvitedBotOff6 = 0x15A57A00;
         public static uint WTTrainerMatch6 = 0x0824EFC8;
         public static uint WTReceivingPokemon6 = 0X0824EDD4;
+        public static uint softbanoff6 = 0x081FD008;
+        public static bool IsSoftbanned6 => Form1.ntr.ReadBytes(softbanoff6, 1)[0] == 0x41;
         public static bool ontradeanimationscreen => Form1.ntr.ReadBytes(tradeanimationscreenoff, 1)[0] == 0x48;
         
         public static bool oncommunicatingscreen => Form1.ntr.ReadBytes(oncommunicatingscreenoff, 1)[0] == 0x11;

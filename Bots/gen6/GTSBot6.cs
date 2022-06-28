@@ -30,7 +30,8 @@ namespace _3DS_link_trade_bot
             if (userinvitedbot6)
                 await touch(178, 213, 1);
             ChangeStatus("Entering GTS");
-            await click(Start, 1);
+            while(!checkscreen(currentscreenoff,MenuScreenVal))
+                await click(Start, 1);
             await click(R, 1);
             await touch(87, 54, 3);
             await click(A, 15);
@@ -39,7 +40,9 @@ namespace _3DS_link_trade_bot
             ntr.WriteBytes(BitConverter.GetBytes(_settings.PokemonWanted), pokemonwantedoff);
             await Task.Delay(1000);
             await touch(156, 180,1);
-            while (!checkscreen(currentscreenoff, GTSScreenVal))
+            var stop = new Stopwatch();
+            stop.Restart();
+            while (!checkscreen(currentscreenoff, GTSScreenVal) && stop.ElapsedMilliseconds < 60_000)
                 await Task.Delay(500);
             ChangeStatus("searching the GTS list");
             var tosend = GetGTSPoke();
@@ -65,7 +68,9 @@ namespace _3DS_link_trade_bot
            for(int i = 0; i < 5; i++)
                 await click(A, 1);
             await Task.Delay(5000);
-            while (!checkscreen(currentscreenoff, OverWorldScreenVal))
+            
+            stop.Restart();
+            while (!checkscreen(currentscreenoff, OverWorldScreenVal) && stop.ElapsedMilliseconds < 60_000)
                 await click(B, 1);
             
 
@@ -92,9 +97,9 @@ namespace _3DS_link_trade_bot
                     var trainer = TrainerSettings.GetSavedTrainerData(6);
                     var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
 
-                    pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nShiny: Yes\nBall: Dive"), out var res);
+                    pkm = sav.GetLegalFromSet(new ShowdownSet($"{(Species)entry.RequestedPoke}\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nShiny: Yes\nBall: Dive"), out var res);
                     if((entry.GTSmsg.ToLower().Contains("no")||entry.GTSmsg.ToLower().Contains("not")) && entry.GTSmsg.Contains("shiny"))
-                        pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nBall: Dive"), out res);
+                        pkm = sav.GetLegalFromSet(new ShowdownSet($"{(Species)entry.RequestedPoke}\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nBall: Dive"), out res);
                     pkm.OT_Name = entry.trainername;
                     pkm.Gender = entry.RequestedGender == 2 ? 1 : 0;
                     RibbonApplicator.RemoveAllValidRibbons(pkm);

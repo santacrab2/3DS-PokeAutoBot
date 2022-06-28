@@ -33,7 +33,8 @@ namespace _3DS_link_trade_bot
             ChangeStatus("Starting WonderTrade");
             var thegift = wtmons[rng.Next(wtmons.Count())];
             await Gen7LinkTradeBot.injection(thegift);
-            await click(Start, 1);
+            while (!checkscreen(currentscreenoff, MenuScreenVal))
+                await click(Start, 1);
             await click(L, 1);
             await touch(230, 120, 3);
             await click(A, 5);

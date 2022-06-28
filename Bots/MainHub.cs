@@ -54,7 +54,14 @@ namespace _3DS_link_trade_bot
                         if (NTR.game == 1 || NTR.game == 2)
                         {
                             await GTSBot6.GTSRoutine6();
-                          
+                            if (IsSoftbanned6)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                _settings.Legalitysettings.ZKnownGTSBreakers.Add(GTSBot.LastGTSTrainer.ToLower());
+
+                                await resetgame();
+                            }
+
 
                         }
                         else
@@ -73,7 +80,14 @@ namespace _3DS_link_trade_bot
                     while (!tradetoken.IsCancellationRequested)
                     {
                         if (NTR.game == 1 || NTR.game == 2)
+                        {
                             await WTBot6.WTRoutine6();
+                            if (IsSoftbanned6)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                await resetgame();
+                            }
+                        }
                         else
                         {
                             await WTBot.WTroutine();
@@ -90,6 +104,13 @@ namespace _3DS_link_trade_bot
                         if (NTR.game == 1 || NTR.game == 2)
                         {
                             await GTSBot6.GTSRoutine6();
+                            if (IsSoftbanned6)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                _settings.Legalitysettings.ZKnownGTSBreakers.Add(GTSBot.LastGTSTrainer.ToLower());
+
+                                await resetgame();
+                            }
 
                         }
                         else
@@ -104,7 +125,14 @@ namespace _3DS_link_trade_bot
                             }
                         }
                         if (NTR.game == 1 || NTR.game == 2)
+                        {
                             await WTBot6.WTRoutine6();
+                            if (IsSoftbanned6)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                await resetgame();
+                            }
+                        }
                         else
                         {
                             await WTBot.WTroutine();
@@ -160,6 +188,30 @@ namespace _3DS_link_trade_bot
                                 await resetgame();
                             }
                         }
+                        else
+                        {
+                            if (IsSoftbanned6)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                await resetgame();
+                            }
+                            if (_settings.GTSdistribution == true)
+                                 await GTSBot6.GTSRoutine6();
+                            if (IsSoftbanned6)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                _settings.Legalitysettings.ZKnownGTSBreakers.Add(GTSBot.LastGTSTrainer.ToLower());
+
+                                await resetgame();
+                            }
+                            if (_settings.WonderTrade == true)
+                                await WTBot6.WTRoutine6();
+                            if (IsSoftbanned6)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                await resetgame();
+                            }
+                        }
                         await Task.Delay(1000);
                         continue;
 
@@ -200,7 +252,7 @@ namespace _3DS_link_trade_bot
                             await botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("✅", "❌"));
                             await botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
                             var offembed = new EmbedBuilder();
-                            offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Gen 7 Link Trade Bot is Offline");
+                            offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Link Trade Bot is Offline");
                             await botchannelid.SendMessageAsync(embed: offembed.Build());
                         }
                     }
@@ -216,10 +268,14 @@ namespace _3DS_link_trade_bot
             await click(A, 15);
             await click(A, 7);
             await click(A, 7);
-            ntr.Disconnect();
             await Task.Delay(2000);
-            ntr.Connect();
             await Task.Delay(5000);
+            if(NTR.game==1 || NTR.game == 2)
+            {
+                await click(A, 5);
+                await click(A, 5);
+                await touch(120, 54, 2);
+            }
         }
 
 
