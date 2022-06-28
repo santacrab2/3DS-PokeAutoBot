@@ -72,6 +72,8 @@ namespace _3DS_link_trade_bot
         public static uint GTSPageIndex = 0x08C6945C;
         public static uint GTSCurrentView6 = 0x08C6D6AC;
         public static uint UserInvitedBotOff6 = 0x15A57A00;
+        public static uint WTTrainerMatch6 = 0x0824EFC8;
+        public static uint WTReceivingPokemon6 = 0X0824EDD4;
         public static bool ontradeanimationscreen => Form1.ntr.ReadBytes(tradeanimationscreenoff, 1)[0] == 0x48;
         
         public static bool oncommunicatingscreen => Form1.ntr.ReadBytes(oncommunicatingscreenoff, 1)[0] == 0x11;

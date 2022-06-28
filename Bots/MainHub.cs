@@ -72,11 +72,16 @@ namespace _3DS_link_trade_bot
                 case Mode.WTOnly:
                     while (!tradetoken.IsCancellationRequested)
                     {
-                        await WTBot.WTroutine();
-                        if (IsSoftBanned)
+                        if (NTR.game == 1 || NTR.game == 2)
+                            await WTBot6.WTRoutine6();
+                        else
                         {
-                            ChangeStatus("softban detected, restarting game");
-                            await resetgame();
+                            await WTBot.WTroutine();
+                            if (IsSoftBanned)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                await resetgame();
+                            }
                         }
                     } break;
                 case Mode.GTSWTOnly:
@@ -98,11 +103,16 @@ namespace _3DS_link_trade_bot
                                 await resetgame();
                             }
                         }
-                        await WTBot.WTroutine();
-                        if (IsSoftBanned)
+                        if (NTR.game == 1 || NTR.game == 2)
+                            await WTBot6.WTRoutine6();
+                        else
                         {
-                            ChangeStatus("softban detected, restarting game");
-                            await resetgame();
+                            await WTBot.WTroutine();
+                            if (IsSoftBanned)
+                            {
+                                ChangeStatus("softban detected, restarting game");
+                                await resetgame();
+                            }
                         }
                     } break;
                 case Mode.EggRNGNonePID:

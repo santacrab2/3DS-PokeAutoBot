@@ -55,14 +55,14 @@ namespace _3DS_link_trade_bot
             await Task.Delay(1000);
             ChangeStatus($"sending: {(Species)tosend.Species} to: {LastGTSTrainer}");
             await Gen7LinkTradeBot.injection(tosend);
-            await click(Y, 5);
+            await click(Y, 3);
             ntr.WriteBytes(BitConverter.GetBytes(tradeindex),GTSCurrentView6);
             await Task.Delay(1000);
            
             await click(B, 3);
            
             await click(A, 5);
-            while (checkscreen(currentscreenoff, BoxScreenVal) || checkscreen(currentscreenoff, AcceptScreenVal))
+           for(int i = 0; i < 5; i++)
                 await click(A, 1);
             await Task.Delay(5000);
             while (!checkscreen(currentscreenoff, OverWorldScreenVal))
@@ -93,6 +93,8 @@ namespace _3DS_link_trade_bot
                     var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
 
                     pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nShiny: Yes\nBall: Dive"), out var res);
+                    if((entry.GTSmsg.ToLower().Contains("no")||entry.GTSmsg.ToLower().Contains("not")) && entry.GTSmsg.Contains("shiny"))
+                        pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nBall: Dive"), out res);
                     pkm.OT_Name = entry.trainername;
                     pkm.Gender = entry.RequestedGender == 2 ? 1 : 0;
                     RibbonApplicator.RemoveAllValidRibbons(pkm);
@@ -103,8 +105,8 @@ namespace _3DS_link_trade_bot
                     }
                     else
                     {
-                        ChangeStatus($"Trading Trainer:{entry.trainername.ToLower()}");
-                        ChangeStatus($"{entry.RequestedGender}");
+                        
+                 
                         LastGTSTrainer = entry.trainername;
                         tradeindex = (uint)i;
                         break;
