@@ -21,7 +21,7 @@ namespace _3DS_link_trade_bot
 
         public void Connect()
         {
-            clientNTR.Connect(IP, Port);
+            clientNTR.Connect(Program.form1.IpAddress.Text, Port);
             if (clientNTR.IsConnected)
                 Connected = true;
         }

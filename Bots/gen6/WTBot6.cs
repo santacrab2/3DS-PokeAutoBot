@@ -112,7 +112,7 @@ namespace _3DS_link_trade_bot
 
                 await Task.Delay(1000);
             }
-            if (receivingpkm == null || !receivingpkm.ChecksumValid)
+            if (receivingpkm == null || !new LegalityAnalysis(receivingpkm).Valid)
             {
                 ChangeStatus($"No Match found, exiting Wonder Trade");
                 foreach (var chan in _settings.Discordsettings.BotWTChannel)

@@ -18,6 +18,7 @@ namespace _3DS_link_trade_bot
         public static int friendindex = 0;
         public static async Task LinkTradeRoutine6()
         {
+            
             ChangeStatus($"starting a Link Trade with {tradeinfo.discordcontext.User.Username}");
             await tradeinfo.discordcontext.User.SendMessageAsync("starting your trade now, be prepared to accept the invite!");
        
@@ -75,7 +76,8 @@ namespace _3DS_link_trade_bot
                 return;
             }
             ChangeStatus($"{tradeinfo.discordcontext.User.Username} accepted the trade, waiting for box screen");
-            while (checkscreen(currentscreenoff, AcceptedTradeScreenVal))
+            stop.Restart();
+            while (checkscreen(currentscreenoff, AcceptedTradeScreenVal) && stop.ElapsedMilliseconds < 60_000)
                 await Task.Delay(1000);
             await Task.Delay(10000);
             ChangeStatus($"offering {(Species)tradeinfo.tradepokemon.Species} for trade");
@@ -102,7 +104,8 @@ namespace _3DS_link_trade_bot
             while (!checkscreen(currentscreenoff, DoMoreScreen)&&stop.ElapsedMilliseconds<180_000)
                 await Task.Delay(1000);
             await touch(165, 170, 2);
-            while (!checkscreen(currentscreenoff, OverWorldScreenVal))
+            stop.Restart();
+            while (!checkscreen(currentscreenoff, OverWorldScreenVal) && stop.ElapsedMilliseconds<60_000)
                 await Task.Delay(1000);
             var receivedpkm = EntityFormat.GetFromBytes(ntr.ReadBytes(box1slot1, 260), EntityContext.Gen6);
             if(SearchUtil.HashByDetails(tradeinfo.tradepokemon) != SearchUtil.HashByDetails(receivedpkm))
