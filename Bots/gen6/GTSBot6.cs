@@ -87,7 +87,7 @@ namespace _3DS_link_trade_bot
                 {
                     var entry = gtspage[i];
 
-                    if (_settings.Legalitysettings.ZKnownGTSBreakers.Contains(entry.trainername.ToLower()))
+                    if (_settings.Legalitysettings.ZKnownGTSBreakers.Contains(entry.trainername.ToLower())||entry.trainername == string.Empty || entry.trainername.Contains("\n") || entry.trainername == " ")
                     {
                         continue;
                     }
@@ -97,9 +97,9 @@ namespace _3DS_link_trade_bot
                     var trainer = TrainerSettings.GetSavedTrainerData(6);
                     var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
 
-                    pkm = sav.GetLegalFromSet(new ShowdownSet($"{(Species)entry.RequestedPoke}\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nShiny: Yes\nBall: Dive"), out var res);
+                    pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nShiny: Yes\nBall: Dive"), out var res);
                     if((entry.GTSmsg.ToLower().Contains("no")||entry.GTSmsg.ToLower().Contains("not")) && entry.GTSmsg.Contains("shiny"))
-                        pkm = sav.GetLegalFromSet(new ShowdownSet($"{(Species)entry.RequestedPoke}\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nBall: Dive"), out res);
+                        pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nBall: Dive"), out res);
                     pkm.OT_Name = entry.trainername;
                     pkm.Gender = entry.RequestedGender == 2 ? 1 : 0;
                     RibbonApplicator.RemoveAllValidRibbons(pkm);

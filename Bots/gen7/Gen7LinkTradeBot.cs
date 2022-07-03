@@ -142,9 +142,12 @@ namespace _3DS_link_trade_bot
             return;
 
         }
-        public static async Task injection(PKM pk)
+        public static async Task injection(PKM pk, bool party1slot1=false)
         {
-            ntr.WriteBytes(pk.EncryptedBoxData, box1slot1);
+            if (party1slot1)
+                ntr.WriteBytes(pk.EncryptedPartyData, Party1Slot1);
+            else
+                ntr.WriteBytes(pk.EncryptedBoxData, box1slot1);
         }
         public static List<string> getfriendlist()
         {

@@ -58,6 +58,7 @@ namespace _3DS_link_trade_bot
         public static uint pokemonwantedoff = 0x08334988;
         public static uint currentscreenoff = 0x08334988;
         //oras
+        public static uint Party1Slot1 = 0x08CFB26C;
         public static uint AcceptedTradeScreenVal = 0x040054e0;
         public static uint DoMoreScreen = 0x040008d0;
         public static uint OverWorldScreenVal = 0x043229F0;

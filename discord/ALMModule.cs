@@ -24,14 +24,7 @@ namespace _3DS_link_trade_bot
                 trainer = TrainerSettings.GetSavedTrainerData(6);
             var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
             var pkm = sav.GetLegalFromSet(set, out var res);
-            int attempts = 0;
-            while (!new LegalityAnalysis(pkm).Valid && attempts < 3)
-            {
-                trainer = TrainerSettings.GetSavedTrainerData(7);
-                sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
-                pkm = sav.GetLegalFromSet( set, out res);
-                attempts++;
-            }
+         
 
             if (!new LegalityAnalysis(pkm).Valid || res.ToString() != "Regenerated")
             {

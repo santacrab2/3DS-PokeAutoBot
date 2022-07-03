@@ -120,6 +120,8 @@ namespace _3DS_link_trade_bot
                     var tosend = (ITextChannel)_client.GetChannel(chan);
                     await tosend.SendMessageAsync(Format.Code("No Match found for Wondertrade..."));
                 }
+                await click(A, 1);
+                await click(A, 1);
                 while (!checkscreen(currentscreenoff, OverWorldScreenVal))
                     await click(B, 1);
                 await Task.Delay(1_000);

@@ -30,7 +30,7 @@ namespace _3DS_link_trade_bot
             }
             if (userinvitedbot6)
                 await touch(178, 213, 1);
-            await injection(tradeinfo.tradepokemon);
+            await injection(tradeinfo.tradepokemon,true);
             var trainersearch = "";
             var trainersearch2 = "";
             
@@ -79,19 +79,12 @@ namespace _3DS_link_trade_bot
             stop.Restart();
             while (checkscreen(currentscreenoff, AcceptedTradeScreenVal) && stop.ElapsedMilliseconds < 60_000)
                 await Task.Delay(1000);
-            await Task.Delay(10000);
+            
             ChangeStatus($"offering {(Species)tradeinfo.tradepokemon.Species} for trade");
-            for(int a = 0;a<2; a++)
-                await DpadClick(DpadRIGHT, 1);
-            await click(A, 2);
-            await click(A, 2);
-            await click(A, 2);
-            while (!TradeButtonOnScreen)
-                await Task.Delay(1000);
-            await click(A, 5);
+      
             stop.Restart();
             while (!ontradeanimationscreen && stop.ElapsedMilliseconds < 60_000)
-                await Task.Delay(500);
+                await click(A,1);
             ChangeStatus("watching trade animation");
             stop.Restart();
             while ((ontradeanimationscreen || oncommunicatingscreen)&& stop.ElapsedMilliseconds<180_000)
@@ -107,7 +100,7 @@ namespace _3DS_link_trade_bot
             stop.Restart();
             while (!checkscreen(currentscreenoff, OverWorldScreenVal) && stop.ElapsedMilliseconds<60_000)
                 await Task.Delay(1000);
-            var receivedpkm = EntityFormat.GetFromBytes(ntr.ReadBytes(box1slot1, 260), EntityContext.Gen6);
+            var receivedpkm = EntityFormat.GetFromBytes(ntr.ReadBytes(Party1Slot1, 260), EntityContext.Gen6);
             if(SearchUtil.HashByDetails(tradeinfo.tradepokemon) != SearchUtil.HashByDetails(receivedpkm))
             {
                 ChangeStatus($"{tradeinfo.discordcontext.User.Username} completed the trade");

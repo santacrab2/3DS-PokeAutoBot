@@ -69,18 +69,7 @@ namespace _3DS_link_trade_bot
                     pkm = sav.GetLegalFromSet(set,out res);
                     attempts++;
                 }
-                foreach (var i in set.InvalidLines)
-                {
-                    if (i.Contains("Ball:"))
-                    {
-
-                        var ball = i;
-                        ball = ball.Replace("Ball: ", "");
-                        var ball2 = (Ball)Enum.Parse(typeof(Ball), ball);
-                        pkm.Ball = (byte)ball2;
-
-                    }
-                }
+      
                 if (Legal.ZCrystalDictionary.ContainsValue(pkm.HeldItem))
                     pkm.HeldItem = 0;
                 if (!new LegalityAnalysis(pkm).Valid || res != LegalizationResult.Regenerated || pkm == null)
