@@ -86,20 +86,28 @@ namespace _3DS_link_trade_bot
                 try
                 {
                     var entry = gtspage[i];
-
-                    if (_settings.Legalitysettings.ZKnownGTSBreakers.Contains(entry.trainername.ToLower())||entry.trainername == string.Empty || entry.trainername.Contains("\n") || entry.trainername == " ")
+                    bool isafuckhead = false;
+                    foreach(string fuckhead in _settings.Legalitysettings.ZKnownGTSBreakers)
                     {
-                        continue;
+                        if (entry.trainername.Contains(fuckhead))
+                        {
+                            isafuckhead = true;
+                            break;
+                        }
+
+                         
                     }
+                    if (isafuckhead)
+                        continue;
                     
-                    if (entry.RequestedPoke == 0)
+                    if (entry.RequestedPoke == 0 || entry.RequestedPoke == 263)
                         continue;
                     var trainer = TrainerSettings.GetSavedTrainerData(6);
                     var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
 
-                    pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nShiny: Yes\nBall: Dive"), out var res);
+                    pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nShiny: Yes"), out var res);
                     if((entry.GTSmsg.ToLower().Contains("no")||entry.GTSmsg.ToLower().Contains("not")) && entry.GTSmsg.Contains("shiny"))
-                        pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nBall: Dive"), out res);
+                        pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}"), out res);
                     pkm.OT_Name = entry.trainername;
                     pkm.Gender = entry.RequestedGender == 2 ? 1 : 0;
                     RibbonApplicator.RemoveAllValidRibbons(pkm);
