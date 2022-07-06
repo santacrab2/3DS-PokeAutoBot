@@ -111,9 +111,9 @@ namespace _3DS_link_trade_bot
                     var trainer = TrainerSettings.GetSavedTrainerData(6);
                     var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
 
-                    pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({SpeciesName.GetSpeciesNameGeneration(entry.RequestedPoke,2,6)})\nLevel: {(entry.RequestLevel > 0 ? (entry.RequestLevel * 10) - 1 : 99)}\nShiny: Yes"), out var res);
+                    pkm = sav.GetLegalFromSet(new ShowdownSet($"{SpeciesName.GetSpeciesNameGeneration(entry.RequestedPoke,2,6)}\nLevel: {(entry.RequestLevel > 0 ? (entry.RequestLevel * 10) - 1 : 99)}\nShiny: Yes"), out var res);
                     if((entry.GTSmsg.ToLower().Contains("no")||entry.GTSmsg.ToLower().Contains("not")) && entry.GTSmsg.Contains("shiny"))
-                        pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({SpeciesName.GetSpeciesNameGeneration(entry.RequestedPoke,2,6)})\nLevel: {(entry.RequestLevel > 0 ? (entry.RequestLevel * 10) - 1 : 99)}"), out res);
+                        pkm = sav.GetLegalFromSet(new ShowdownSet($"{SpeciesName.GetSpeciesNameGeneration(entry.RequestedPoke,2,6)}\nLevel: {(entry.RequestLevel > 0 ? (entry.RequestLevel * 10) - 1 : 99)}"), out res);
                     pkm.OT_Name = entry.trainername;
                     pkm.Gender = entry.RequestedGender == 2 ? 1 : 0;
                     
