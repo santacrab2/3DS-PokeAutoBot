@@ -126,7 +126,7 @@ namespace _3DS_link_trade_bot
         public string trainername => Encoding.Unicode.GetString(Data.Slice(0x4c,24)).Trim('\0');
         public int genderindex => Data[0xE];
         public int levelindex => Data[0xF];
-
+        public string Phrase => Encoding.Unicode.GetString(Data.Slice(0x5A, 30)).Trim('\0');
 
     }
     public readonly ref struct PSSfriendlist

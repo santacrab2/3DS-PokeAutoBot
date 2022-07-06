@@ -80,20 +80,20 @@ namespace _3DS_link_trade_bot
                     }
                     if (tradepokemon)
                     {
-                        var set = new ShowdownSet($"{(Species)randspecies}\nShiny: Yes");
+                        var set = new ShowdownSet($"{SpeciesName.GetSpeciesNameGeneration(randspecies,2,6)}\nShiny: Yes");
                      
                         var trainer = TrainerSettings.GetSavedTrainerData(7);
-                        if (NTR.game == 1 || NTR.game == 2)
+                        if (NTR.game <3)
                             trainer = TrainerSettings.GetSavedTrainerData(6);
                         var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
                         var pk = sav.GetLegalFromSet(set, out var result);
                   
                         if (!new LegalityAnalysis(pk).Valid)
                         {
-                            set = new ShowdownSet(((Species)randspecies).ToString());
+                            set = new ShowdownSet(SpeciesName.GetSpeciesNameGeneration(randspecies,2,6));
                             
                             trainer = TrainerSettings.GetSavedTrainerData(7);
-                            if (NTR.game == 1 || NTR.game == 2)
+                            if (NTR.game <3)
                                 trainer = TrainerSettings.GetSavedTrainerData(6);
                             sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
                             pk = sav.GetLegalFromSet( set, out result);
@@ -161,7 +161,7 @@ namespace _3DS_link_trade_bot
             List<int> dex = new();
             for (int i = 1; i <= 907; i++)
             {
-                if (NTR.game == 3 || NTR.game == 4)
+                if (NTR.game >2)
                 {
                     var entry = PersonalTable.USUM.GetFormEntry(i, 0);
 
@@ -174,11 +174,11 @@ namespace _3DS_link_trade_bot
                     if (entry is PersonalInfoORAS { IsPresentInGame: false })
                         continue;
                 }    
-                var species = SpeciesName.GetSpeciesNameGeneration(i, 2, 8);
+                var species = SpeciesName.GetSpeciesNameGeneration(i, 2, 6);
                 var set = new ShowdownSet($"{species}{(i == (int)NidoranF ? "-F" : i == (int)NidoranM ? "-M" : "")}");
                 
                 var trainer = TrainerSettings.GetSavedTrainerData(7);
-                if (NTR.game == 1 || NTR.game == 2)
+                if (NTR.game <3)
                     trainer = TrainerSettings.GetSavedTrainerData(6);
                 var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
                 _ = sav.GetLegalFromSet(set, out var result);

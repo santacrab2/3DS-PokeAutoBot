@@ -268,8 +268,11 @@ namespace _3DS_link_trade_bot
             await click(A, 15);
             await click(A, 7);
             await click(A, 7);
-         
-            if(NTR.game==1 || NTR.game == 2)
+            ntr.Disconnect();
+            await Task.Delay(2000);
+            ntr.Connect();
+            await Task.Delay(5000);
+            if (NTR.game==1 || NTR.game == 2)
             {
                 await click(A, 5);
                 await click(A, 5);

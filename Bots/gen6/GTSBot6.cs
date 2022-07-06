@@ -9,6 +9,7 @@ using static _3DS_link_trade_bot.dsbotbase.Buttons;
 using static _3DS_link_trade_bot.RAM;
 using static _3DS_link_trade_bot.discordmain;
 using System.Text;
+using static System.Buffers.Binary.BinaryPrimitives;
 
 namespace _3DS_link_trade_bot
 {
@@ -50,9 +51,14 @@ namespace _3DS_link_trade_bot
             if(tosend == null)
             {
                 ChangeStatus("no legal match found");
+                if (ReadUInt16LittleEndian(ntr.ReadBytes(GTSPageSize, 2)) == 0)
+                    await click(A, 1);
                 while (!checkscreen(currentscreenoff, OverWorldScreenVal))
                     await click(B, 1);
+                
                 _settings.PokemonWanted++;
+                if (_settings.PokemonWanted > 718)
+                    _settings.PokemonWanted = 1;
                 return;
             }
             await Task.Delay(1000);
@@ -89,7 +95,7 @@ namespace _3DS_link_trade_bot
                     bool isafuckhead = false;
                     foreach(string fuckhead in _settings.Legalitysettings.ZKnownGTSBreakers)
                     {
-                        if (entry.trainername.Contains(fuckhead))
+                        if (fuckhead.Contains(entry.trainername))
                         {
                             isafuckhead = true;
                             break;
@@ -105,12 +111,12 @@ namespace _3DS_link_trade_bot
                     var trainer = TrainerSettings.GetSavedTrainerData(6);
                     var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
 
-                    pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}\nShiny: Yes"), out var res);
+                    pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({SpeciesName.GetSpeciesNameGeneration(entry.RequestedPoke,2,6)})\nLevel: {(entry.RequestLevel > 0 ? (entry.RequestLevel * 10) - 1 : 99)}\nShiny: Yes"), out var res);
                     if((entry.GTSmsg.ToLower().Contains("no")||entry.GTSmsg.ToLower().Contains("not")) && entry.GTSmsg.Contains("shiny"))
-                        pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.RequestLevel < 10 ? (entry.RequestLevel * 10) - 1 : 99)}"), out res);
+                        pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({SpeciesName.GetSpeciesNameGeneration(entry.RequestedPoke,2,6)})\nLevel: {(entry.RequestLevel > 0 ? (entry.RequestLevel * 10) - 1 : 99)}"), out res);
                     pkm.OT_Name = entry.trainername;
                     pkm.Gender = entry.RequestedGender == 2 ? 1 : 0;
-                    RibbonApplicator.RemoveAllValidRibbons(pkm);
+                    
                     if (!new LegalityAnalysis(pkm).Valid || pkm.FatefulEncounter)
                     {
                         pkm = null;

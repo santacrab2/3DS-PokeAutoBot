@@ -72,9 +72,9 @@ namespace _3DS_link_trade_bot
       
                 if (Legal.ZCrystalDictionary.ContainsValue(pkm.HeldItem))
                     pkm.HeldItem = 0;
-                if (!new LegalityAnalysis(pkm).Valid || res != LegalizationResult.Regenerated || pkm == null)
+                if (!new LegalityAnalysis(pkm).Valid || res != LegalizationResult.Regenerated || pkm == null || FormInfo.IsFusedForm(pkm.Species,pkm.Form,pkm.Format))
                 {
-                    var reason =  $"I wasn't able to create a {(Species)set.Species} from that set.";
+                    var reason = FormInfo.IsFusedForm(pkm.Species,pkm.Form,pkm.Format)?"You can not trade Fused Pokemon because you won't have the originals when they de-fuse and your save file will crash": $"I wasn't able to create a {(Species)set.Species} from that set.";
                     var imsg = $"Oops! {reason}";
                  
                         imsg += $"\n{set.SetAnalysis(sav,pkm)}";

@@ -54,7 +54,7 @@ namespace _3DS_link_trade_bot
             ChangeStatus("Searching the GTS...");
             if(BitConverter.ToUInt32(ntr.ReadBytes(screenoff,0x04)) == 0x40F5)
             {
-                ChangeStatus("no pokemon found");
+                ChangeStatus("no Deposits found");
                 _settings.PokemonWanted++;
                 if (_settings.PokemonWanted > 800)
                     _settings.PokemonWanted = 1;
@@ -77,8 +77,8 @@ namespace _3DS_link_trade_bot
                 await click(A, 5);
                 return;
             }
-            ChangeStatus("gts trading...");
-            
+            ChangeStatus($"sending: {(Species)pkm.Species} to: {LastGTSTrainer}");
+
             await Gen7LinkTradeBot.injection(pkm);
             ntr.WriteBytes(BitConverter.GetBytes(tradeindex), GTScurrentview);
             await click(A, 5);
@@ -116,10 +116,10 @@ namespace _3DS_link_trade_bot
                         continue;
                   }
               
-                    var sav = TrainerSettings.GetSavedTrainerData(7);
-                    PK7 temp = new();
-                    pkm = sav.GetLegalFromTemplate(temp,new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.levelindex < 10 ? (entry.levelindex * 10) - 1 : 99)}\nShiny: Yes\nBall: Dive"), out _);
-                    pkm.Legalize();
+                    var trainer = TrainerSettings.GetSavedTrainerData(7);
+                    var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
+                    pkm = sav.GetLegalFromSet(new ShowdownSet($"Piplup.net({(Species)entry.RequestedPoke})\nLevel: {(entry.levelindex >0 ? (entry.levelindex * 10) - 1 : 99)}\nShiny: Yes"), out _);
+                    
                     pkm.OT_Name = entry.trainername;
                     pkm.Gender = entry.genderindex == 2 ? 1 : 0;
                     if (!new LegalityAnalysis(pkm).Valid)
@@ -129,7 +129,8 @@ namespace _3DS_link_trade_bot
                     }
                     else
                     {
-                        Log($"Trading Trainer:{entry.trainername.ToLower()}");
+                        
+
                         LastGTSTrainer = entry.trainername;
                         tradeindex = i;
                         break;
