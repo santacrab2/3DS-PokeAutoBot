@@ -54,13 +54,7 @@ namespace _3DS_link_trade_bot
                         if (NTR.game == 1 || NTR.game == 2)
                         {
                             await GTSBot6.GTSRoutine6();
-                            if (IsSoftbanned6)
-                            {
-                                ChangeStatus("softban detected, restarting game");
-                                _settings.Legalitysettings.ZKnownGTSBreakers.Add(GTSBot.LastGTSTrainer.ToLower());
-
-                                await resetgame();
-                            }
+                           
 
 
                         }
@@ -82,11 +76,7 @@ namespace _3DS_link_trade_bot
                         if (NTR.game == 1 || NTR.game == 2)
                         {
                             await WTBot6.WTRoutine6();
-                            if (IsSoftbanned6)
-                            {
-                                ChangeStatus("softban detected, restarting game");
-                                await resetgame();
-                            }
+                           
                         }
                         else
                         {
@@ -104,13 +94,7 @@ namespace _3DS_link_trade_bot
                         if (NTR.game == 1 || NTR.game == 2)
                         {
                             await GTSBot6.GTSRoutine6();
-                            if (IsSoftbanned6)
-                            {
-                                ChangeStatus("softban detected, restarting game");
-                                _settings.Legalitysettings.ZKnownGTSBreakers.Add(GTSBot.LastGTSTrainer.ToLower());
-
-                                await resetgame();
-                            }
+                            
 
                         }
                         else
@@ -127,11 +111,7 @@ namespace _3DS_link_trade_bot
                         if (NTR.game == 1 || NTR.game == 2)
                         {
                             await WTBot6.WTRoutine6();
-                            if (IsSoftbanned6)
-                            {
-                                ChangeStatus("softban detected, restarting game");
-                                await resetgame();
-                            }
+                            
                         }
                         else
                         {
@@ -190,27 +170,13 @@ namespace _3DS_link_trade_bot
                         }
                         else
                         {
-                            if (IsSoftbanned6)
-                            {
-                                ChangeStatus("softban detected, restarting game");
-                                await resetgame();
-                            }
+                           
                             if (_settings.GTSdistribution == true)
                                  await GTSBot6.GTSRoutine6();
-                            if (IsSoftbanned6)
-                            {
-                                ChangeStatus("softban detected, restarting game");
-                                _settings.Legalitysettings.ZKnownGTSBreakers.Add(GTSBot.LastGTSTrainer.ToLower());
-
-                                await resetgame();
-                            }
+                         
                             if (_settings.WonderTrade == true)
                                 await WTBot6.WTRoutine6();
-                            if (IsSoftbanned6)
-                            {
-                                ChangeStatus("softban detected, restarting game");
-                                await resetgame();
-                            }
+                        
                         }
                         await Task.Delay(1000);
                         continue;
