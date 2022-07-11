@@ -52,23 +52,14 @@ namespace _3DS_link_trade_bot
           
 
                 ShowdownSet set = ConvertToShowdown(PokemonText);
-                
-                var trainer = TrainerSettings.GetSavedTrainerData(7);
-                if (NTR.game == 2 || NTR.game==1)
-                    trainer = TrainerSettings.GetSavedTrainerData(6);
+
+                var trainer = TrainerSettings.GetSavedTrainerData(GameVersion.USUM, 7);
+                if (NTR.game == 2 || NTR.game == 1)
+                    trainer = TrainerSettings.GetSavedTrainerData(GameVersion.ORAS, 6);
                 var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
                
                 var pkm = sav.GetLegalFromSet(set, out var res);
-                int attempts = 0;
-                while(!new LegalityAnalysis(pkm).Valid && attempts < 3)
-                {
-                    trainer = TrainerSettings.GetSavedTrainerData(7);
-                    if (NTR.game == 2 || NTR.game == 1)
-                        trainer = TrainerSettings.GetSavedTrainerData(6);
-                    sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
-                    pkm = sav.GetLegalFromSet(set,out res);
-                    attempts++;
-                }
+          
       
                 if (Legal.ZCrystalDictionary.ContainsValue(pkm.HeldItem))
                     pkm.HeldItem = 0;

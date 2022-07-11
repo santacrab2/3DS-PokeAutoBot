@@ -10,6 +10,7 @@ using static _3DS_link_trade_bot.Form1;
 namespace _3DS_link_trade_bot
 {
     [DefaultMemberPermissions(GuildPermission.BanMembers)]
+    [RequireOwner]
     public class OwnerModule : InteractionModuleBase<SocketInteractionContext>
     {
         [SlashCommand("addtradechannel", "add this channel to the Trade channel List")]

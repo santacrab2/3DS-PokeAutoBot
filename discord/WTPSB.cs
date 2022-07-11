@@ -46,7 +46,7 @@ namespace _3DS_link_trade_bot
                 randspecies = Dex[random.Next(Dex.Length)];
                 EmbedBuilder embed = new EmbedBuilder();
                 embed.Title = "Who's That Pokemon";
-                embed.AddField(new EmbedFieldBuilder { Name = "instructions", Value = "Type /guess <pokemon name> to guess the name of the pokemon displayed and you get that pokemon in your actual game!" });
+                embed.AddField(new EmbedFieldBuilder { Name = "instructions", Value = "1. add your friendcode to the bots 3ds with /addfc command(only once)\n2. Type /guess pokemon to guess. Include your in game name if you plan to receive it in a trade!" });
                 if (randspecies < 891)
                     embed.ImageUrl = $"https://logoassetsgame.s3.us-east-2.amazonaws.com/wtp/pokemon/{randspecies}q.png";
                 else
