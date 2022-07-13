@@ -76,7 +76,7 @@ namespace _3DS_link_trade_bot
             await Task.Delay(5000);
             
             stop.Restart();
-            while (!checkscreen(currentscreenoff, OverWorldScreenVal) && stop.ElapsedMilliseconds < 60_000)
+            while (!checkscreen(currentscreenoff, OverWorldScreenVal) && stop.ElapsedMilliseconds < 90_000)
                 await click(B, 1);
             
 
