@@ -53,17 +53,18 @@ namespace _3DS_link_trade_bot
 
                 ShowdownSet set = ConvertToShowdown(PokemonText);
 
-                var trainer = TrainerSettings.GetSavedTrainerData(GameVersion.USUM, 7);
+                var trainer = TrainerSettings.GetSavedTrainerData(GameVersion.USUM,7);
                 if (NTR.game == 2 || NTR.game == 1)
                     trainer = TrainerSettings.GetSavedTrainerData(GameVersion.ORAS, 6);
                 var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
                
                 var pkm = sav.GetLegalFromSet(set, out var res);
-          
+
+
       
                 if (Legal.ZCrystalDictionary.ContainsValue(pkm.HeldItem))
                     pkm.HeldItem = 0;
-                if (!new LegalityAnalysis(pkm).Valid || res != LegalizationResult.Regenerated || pkm == null || FormInfo.IsFusedForm(pkm.Species,pkm.Form,pkm.Format))
+                if (!new LegalityAnalysis(pkm).Valid || FormInfo.IsFusedForm(pkm.Species,pkm.Form,pkm.Format))
                 {
                     var reason = FormInfo.IsFusedForm(pkm.Species,pkm.Form,pkm.Format)?"You can not trade Fused Pokemon because you won't have the originals when they de-fuse and your save file will crash": $"I wasn't able to create a {(Species)set.Species} from that set.";
                     var imsg = $"Oops! {reason}";
@@ -142,7 +143,10 @@ namespace _3DS_link_trade_bot
         [SlashCommand("hi","hi")]
         public  async Task some()
         {
-            await RespondAsync("hi", ephemeral: true);
+           
+                await DeferAsync();
+                await FollowupAsync("hi", ephemeral: true);
+           
             
         }
         public static ShowdownSet? ConvertToShowdown(string setstring)

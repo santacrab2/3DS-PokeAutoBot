@@ -145,7 +145,10 @@ namespace _3DS_link_trade_bot
         public static async Task injection(PKM pk, bool party1slot1=false)
         {
             if (party1slot1)
+            {
+                pk.ResetPartyStats();
                 ntr.WriteBytes(pk.EncryptedPartyData, Party1Slot1);
+            }
             else
                 ntr.WriteBytes(pk.EncryptedBoxData, box1slot1);
         }

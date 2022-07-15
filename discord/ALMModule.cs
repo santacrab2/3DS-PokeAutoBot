@@ -25,16 +25,18 @@ namespace _3DS_link_trade_bot
             var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
             var pkm = sav.GetLegalFromSet(set, out var res);
       
-
+         
             var correctfile = (NTR.game > 2 && pkm is PK7) ? true : pkm is PK6 ? true : false;
 
-            if (!new LegalityAnalysis(pkm).Valid || res.ToString() != "Regenerated"|| !correctfile)
+            if (!new LegalityAnalysis(pkm).Valid || !correctfile)
             {
                 var reason = $"I wasn't able to create a {(Species)set.Species} from that set.";
                 var imsg = $"Oops! {reason}";
 
                 imsg += $"\n{set.SetAnalysis(sav, pkm)} Attempted Save: {sav.Version}";
+            
                 await FollowupAsync(imsg, ephemeral: true).ConfigureAwait(false);
+                
                 return;
             }
             var tempfile = $"{Directory.GetCurrentDirectory()}//{pkm.FileName}";

@@ -52,14 +52,14 @@ namespace _3DS_link_trade_bot
                 else
                     embed.ImageUrl = $"https://raw.githubusercontent.com/santacrab2/SysBot.NET/RNGstuff/finalimages/{randspecies}q.png";
                 await wtpchannel.SendMessageAsync(embed: embed.Build());
-                while (guess.ToLower() != ((Species)randspecies).ToString().ToLower() && sw.ElapsedMilliseconds / 1000 < 600)
+                while (guess.ToLower() != SpeciesName.GetSpeciesName(randspecies,2).ToLower() && sw.ElapsedMilliseconds / 1000 < 600)
                 {
                     await Task.Delay(25);
                 }
                
                 var entry = File.ReadAllLines("deps/DexFlavor.txt")[randspecies];
                 embed = new EmbedBuilder().WithFooter(entry);
-                embed.Title = $"It's {(Species)randspecies}";
+                embed.Title = $"It's {SpeciesName.GetSpeciesName(randspecies, 2)}";
                 embed.AddField(new EmbedFieldBuilder { Name = "instructions", Value = $"Type /guess <pokemon name> to guess the name of the pokemon displayed and you get that pokemon in your actual game!" });
                 if (randspecies < 891)
                     embed.ImageUrl = $"https://logoassetsgame.s3.us-east-2.amazonaws.com/wtp/pokemon/{randspecies}a.png";
@@ -67,7 +67,7 @@ namespace _3DS_link_trade_bot
                     embed.ImageUrl = $"https://raw.githubusercontent.com/santacrab2/SysBot.NET/RNGstuff/finalimages/{randspecies}a.png";
                 await wtpchannel.SendMessageAsync(embed: embed.Build());
       
-                if (guess.ToLower() == ((Species)randspecies).ToString().ToLower())
+                if (guess.ToLower() == SpeciesName.GetSpeciesName(randspecies, 2).ToLower())
                 {
                     var compmessage = new ComponentBuilder().WithButton("Yes","wtpyes",ButtonStyle.Success).WithButton("No","wtpno",ButtonStyle.Danger);
                     var embedmes = new EmbedBuilder();
@@ -133,7 +133,7 @@ namespace _3DS_link_trade_bot
         public async Task WTPguess([Summary("pokemon")]string userguess, [Summary(description: "In Game Trainer Name, if you plan to receive your guess in trade")] string TrainerName)
         {
             await DeferAsync();
-            if (userguess.ToLower() == ((Species)randspecies).ToString().ToLower())
+            if (userguess.ToLower() == SpeciesName.GetSpeciesName(randspecies, 2).ToLower())
             {
                 await FollowupAsync($"{Context.User.Username} You are correct! It's {userguess}");
                 guess = userguess;

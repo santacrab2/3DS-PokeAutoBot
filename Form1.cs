@@ -109,7 +109,7 @@ namespace _3DS_link_trade_bot
             Legalizer.EnableEasterEggs = settings.Legalitysettings.SendMemePks;
             APILegality.AllowTrainerOverride = settings.Legalitysettings.AllowTrainerInfo;
             APILegality.AllowBatchCommands = settings.Legalitysettings.UseBatchEditor;
-            APILegality.Timeout = 30;
+            APILegality.Timeout = 60;
             APILegality.PrioritizeGame = false;
             EncounterEvent.RefreshMGDB($"{Directory.GetCurrentDirectory()}//mgdb//");
             RibbonStrings.ResetDictionary(GameInfo.Strings.ribbons);
