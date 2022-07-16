@@ -24,7 +24,7 @@ namespace _3DS_link_trade_bot
                 trainer = TrainerSettings.GetSavedTrainerData(GameVersion.ORAS,6);
             var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
             var pkm = sav.GetLegalFromSet(set, out var res);
-      
+            pkm.Legalize();
          
             var correctfile = (NTR.game > 2 && pkm is PK7) ? true : pkm is PK6 ? true : false;
 
@@ -32,11 +32,12 @@ namespace _3DS_link_trade_bot
             {
                 var reason = $"I wasn't able to create a {(Species)set.Species} from that set.";
                 var imsg = $"Oops! {reason}";
-
+                var tempfile2 = $"{Directory.GetCurrentDirectory()}//{pkm.FileName}";
+                File.WriteAllBytes(tempfile2, pkm.DecryptedBoxData);
                 imsg += $"\n{set.SetAnalysis(sav, pkm)} Attempted Save: {sav.Version}";
             
-                await FollowupAsync(imsg, ephemeral: true).ConfigureAwait(false);
-                
+                await FollowupWithFileAsync(tempfile2,text:imsg, ephemeral: true).ConfigureAwait(false);
+                File.Delete(tempfile2);
                 return;
             }
             var tempfile = $"{Directory.GetCurrentDirectory()}//{pkm.FileName}";

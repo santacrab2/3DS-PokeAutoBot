@@ -59,7 +59,7 @@ namespace _3DS_link_trade_bot
                 var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
                
                 var pkm = sav.GetLegalFromSet(set, out var res);
-
+                pkm.Legalize();
 
       
                 if (Legal.ZCrystalDictionary.ContainsValue(pkm.HeldItem))
