@@ -60,8 +60,13 @@ namespace _3DS_link_trade_bot
                
                 var pkm = sav.GetLegalFromSet(set, out var res);
                 pkm.Legalize();
+                if (pkm is PK7 pk7)
+                {
+                    pk7.SetDefaultRegionOrigins();
+                    pkm = pk7;
+                }
 
-      
+
                 if (Legal.ZCrystalDictionary.ContainsValue(pkm.HeldItem))
                     pkm.HeldItem = 0;
                 if (!new LegalityAnalysis(pkm).Valid || FormInfo.IsFusedForm(pkm.Species,pkm.Form,pkm.Format))

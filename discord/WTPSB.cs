@@ -31,7 +31,7 @@ namespace _3DS_link_trade_bot
         [RequireOwner]
         public async Task WhoseThatPokemon()
         {
-            await DeferAsync();
+            await DeferAsync(ephemeral: true);
             ITextChannel wtpchannel = (ITextChannel)Context.Channel;
             await wtpchannel.ModifyAsync(newname => newname.Name = wtpchannel.Name.Replace("❌", "✅"));
             await FollowupAsync("\"who's that pokemon\" mode started!",ephemeral:true); 
@@ -87,7 +87,13 @@ namespace _3DS_link_trade_bot
                             trainer = TrainerSettings.GetSavedTrainerData(6);
                         var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
                         var pk = sav.GetLegalFromSet(set, out var result);
-                  
+                        pk.Legalize();
+                        if (pk is PK7 pkk)
+                        {
+                            pkk.SetDefaultRegionOrigins();
+                            pk = pkk;
+                        }
+
                         if (!new LegalityAnalysis(pk).Valid)
                         {
                             set = new ShowdownSet(SpeciesName.GetSpeciesNameGeneration(randspecies,2,6));
@@ -97,7 +103,12 @@ namespace _3DS_link_trade_bot
                                 trainer = TrainerSettings.GetSavedTrainerData(6);
                             sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
                             pk = sav.GetLegalFromSet( set, out result);
-                            
+                            pk.Legalize();
+                            if (pk is PK7 pk7)
+                            {
+                                pk7.SetDefaultRegionOrigins();
+                                pk = pk7;
+                            }
                         }
                         pk.Ball = BallApplicator.ApplyBallLegalByColor(pk);
                         int[] sugmov = MoveSetApplicator.GetMoveSet(pk, true);
