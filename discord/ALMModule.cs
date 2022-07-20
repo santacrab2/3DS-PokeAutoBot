@@ -24,7 +24,7 @@ namespace _3DS_link_trade_bot
                 trainer = TrainerSettings.GetSavedTrainerData(GameVersion.ORAS,6);
             var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
             var pkm = sav.GetLegalFromSet(set, out var res);
-            pkm.Legalize();
+            pkm = pkm.Legalize();
             if(pkm is PK7 pk7)
             {
                 pk7.SetDefaultRegionOrigins();
