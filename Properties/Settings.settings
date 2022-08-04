@@ -68,5 +68,11 @@
     <Setting Name="pingmessage" Type="System.String" Scope="User">
       <Value Profile="(Default)">Gen 7 Link Trade Bot is Online</Value>
     </Setting>
+    <Setting Name="WTPChannels" Type="System.UInt64" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="WhoThat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

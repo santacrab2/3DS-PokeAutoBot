@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using static PKHeX.Core.Species;
 using System.Reflection;
+using static _3DS_link_trade_bot.Form1;
 
 namespace _3DS_link_trade_bot
 {
@@ -26,15 +27,13 @@ namespace _3DS_link_trade_bot
         public static string ign;
         public static int randspecies;
         public static SocketInteractionContext con;
-        [DefaultMemberPermissions(GuildPermission.BanMembers)]
-        [SlashCommand("wtpstart","owner only")]
-        [RequireOwner]
+     
         public async Task WhoseThatPokemon()
         {
-            await DeferAsync(ephemeral: true);
-            ITextChannel wtpchannel = (ITextChannel)Context.Channel;
+
+            ITextChannel wtpchannel = (ITextChannel) await discordmain._client.GetChannelAsync(_settings.Discordsettings.BotWTPChannel);
             await wtpchannel.ModifyAsync(newname => newname.Name = wtpchannel.Name.Replace("❌", "✅"));
-            await FollowupAsync("\"who's that pokemon\" mode started!",ephemeral:true); 
+            await wtpchannel.SendMessageAsync("\"who's that pokemon\" mode started!");
             await wtpchannel.AddPermissionOverwriteAsync(wtpchannel.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
             while (!WTPsource.IsCancellationRequested)
             {

@@ -55,7 +55,7 @@ namespace _3DS_link_trade_bot
                     Log("IR Connected");
                 }
             }
-            catch { }
+            catch(Exception ex) { ChangeStatus("Could not connect to 3ds"); return; }
             var buttonarray = new byte[20];
             var nokey = BitConverter.GetBytes(0xFFF);
             nokey.CopyTo(buttonarray, 0);
@@ -97,7 +97,7 @@ namespace _3DS_link_trade_bot
                 bot.MainAsync();
                 ChangeStatus("Connected to Discord");
             }
-            catch { ChangeStatus("Could not connect to discord"); }
+            catch(Exception ex) { ChangeStatus("Could not connect to discord"); return; }
             form1.consoleconnect.Enabled = false;
             form1.consoledisconnect.Enabled = true;
             form1.startlinktrades.Enabled = true;
@@ -233,6 +233,8 @@ namespace _3DS_link_trade_bot
             settings.Discordsettings.SendStatusMessage = Properties.Settings.Default.sendstatusmessage;
             settings.Discordsettings.PingRoleID = Properties.Settings.Default.pingroleid;
             settings.Discordsettings.PingMessage = Properties.Settings.Default.pingmessage;
+            settings.Discordsettings.WhosThatPokemon = Properties.Settings.Default.WhoThat;
+            settings.Discordsettings.BotWTPChannel = Properties.Settings.Default.WTPChannels;
             if (!Directory.Exists(wtfolder))
                 Directory.CreateDirectory(wtfolder);
             if(!Directory.Exists(logfolder))
@@ -242,91 +244,98 @@ namespace _3DS_link_trade_bot
 
         private async void startlinktrades_Click(object sender, EventArgs e)
         {
-
-
-            if (NTR.game == 3)
+            try
             {
-                GTSpagesizeoff = 0x32A6A1A4;
-                GTScurrentview = 0x305ea384;
-                GTSpagesizeoff = 0x32A6A1A4;
-                GTSblockoff = 0x32A6A7C4;
-                box1slot1 = 0x330D9838;
-                screenoff = 0x00674802;
-                GTSDeposit = 0x32A6A180;
-                Friendslistoffset = 0x30010F94;
-                isconnectedoff = 0x318635CE;
-                FailedTradeoff = 0x300FE0A0;
-                OfferedPokemonoff = 0x006754CC;
-                finalofferscreenoff = 0x307F7982;
-                festscreenoff = 0x31883B7C;
-                festscreendisplayed = 0xC8;
-                tradevolutionscreenoff = 0x3002310C;
-            }
-            if (NTR.game == 2)
-            {
-                PSSFriendoff = 0x08C776E0;
-                isconnectedoff = 0x602110;
-                box1slot1 = 0x8C9E134;
-                currentscreenoff = 0x62C2EC; 
-                pokemonwantedoff = 0x08335290;
-                AcceptedTradeScreenVal = 0x040054e0;
-                DoMoreScreen = 0x040008d0;
-                OverWorldScreenVal = 0x043229F0;
-                GTSScreenVal = 0x407F720;
-                finaltradebuttonoff = 0x08554B24;
-                tradeanimationscreenoff = 0x084207DC;
-                oncommunicatingscreenoff = 0x084207B0;
-                GTSListBlockOff = 0x8C694F8;
-                GTSPageSize = 0x08C6D69C;
-                GTSPageIndex = 0x08C6945C;
-                GTSCurrentView6 = 0x08C6D6AC;
-                UserInvitedBotOff6 = 0x15A57A00;
 
-            }
-
-
-            MainHub.starttrades();
-
-            if (_settings.Discordsettings.SendStatusMessage)
-            {
-                foreach (var channel in settings.Discordsettings.BotTradeChannel)
+                if (NTR.game == 3)
                 {
-
-                    var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;
-
-                    await botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("❌", "✅"));
-                    await botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
-                    var offembed = new EmbedBuilder();
-                    offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", _settings.Discordsettings.PingMessage);
-                    await botchannelid.SendMessageAsync($"<@&{_settings.Discordsettings.PingRoleID}>", embed: offembed.Build());
+                    GTSpagesizeoff = 0x32A6A1A4;
+                    GTScurrentview = 0x305ea384;
+                    GTSpagesizeoff = 0x32A6A1A4;
+                    GTSblockoff = 0x32A6A7C4;
+                    box1slot1 = 0x330D9838;
+                    screenoff = 0x00674802;
+                    GTSDeposit = 0x32A6A180;
+                    Friendslistoffset = 0x30010F94;
+                    isconnectedoff = 0x318635CE;
+                    FailedTradeoff = 0x300FE0A0;
+                    OfferedPokemonoff = 0x006754CC;
+                    finalofferscreenoff = 0x307F7982;
+                    festscreenoff = 0x31883B7C;
+                    festscreendisplayed = 0xC8;
+                    tradevolutionscreenoff = 0x3002310C;
+                }
+                if (NTR.game == 2)
+                {
+                    PSSFriendoff = 0x08C776E0;
+                    isconnectedoff = 0x602110;
+                    box1slot1 = 0x8C9E134;
+                    currentscreenoff = 0x62C2EC;
+                    pokemonwantedoff = 0x08335290;
+                    AcceptedTradeScreenVal = 0x040054e0;
+                    DoMoreScreen = 0x040008d0;
+                    OverWorldScreenVal = 0x043229F0;
+                    GTSScreenVal = 0x407F720;
+                    finaltradebuttonoff = 0x08554B24;
+                    tradeanimationscreenoff = 0x084207DC;
+                    oncommunicatingscreenoff = 0x084207B0;
+                    GTSListBlockOff = 0x8C694F8;
+                    GTSPageSize = 0x08C6D69C;
+                    GTSPageIndex = 0x08C6945C;
+                    GTSCurrentView6 = 0x08C6D6AC;
+                    UserInvitedBotOff6 = 0x15A57A00;
 
                 }
+
+
+                MainHub.starttrades();
+
+                if (_settings.Discordsettings.SendStatusMessage)
+                {
+                    foreach (var channel in settings.Discordsettings.BotTradeChannel)
+                    {
+
+                        var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;
+
+                        await botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("❌", "✅"));
+                        await botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
+                        var offembed = new EmbedBuilder();
+                        offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", _settings.Discordsettings.PingMessage);
+                        await botchannelid.SendMessageAsync($"<@&{_settings.Discordsettings.PingRoleID}>", embed: offembed.Build());
+
+                    }
+                }
+                if (_settings.Discordsettings.WhosThatPokemon)
+                {
+                    var wtp = new WTPSB();
+                    wtp.WhoseThatPokemon();
+                }
+                var id = Form1.ntr.ReadBytes(0x08322070, 4);
+                var test = new byte[8];
+                var test2 = new byte[8];
+                BinaryPrimitives.WriteUInt64LittleEndian(test, 319692847480);
+                BinaryPrimitives.WriteUInt64LittleEndian(test2, 001876402969);
+                test = test.Slice(0, 4);
+                test2 = test2.Slice(0, 4);
+                if (Convert.ToHexString(id) == Convert.ToHexString(test) || Convert.ToHexString(id) == Convert.ToHexString(test2))
+                {
+                    var buttonarray = new byte[20];
+                    var nokey = BitConverter.GetBytes((uint)dsbotbase.Buttons.NoKey);
+                    nokey.CopyTo(buttonarray, 0);
+                    nokey = BitConverter.GetBytes(0x2000000);
+                    nokey.CopyTo(buttonarray, 4);
+                    nokey = BitConverter.GetBytes(0x800800);
+                    nokey.CopyTo(buttonarray, 8);
+                    nokey = BitConverter.GetBytes(0x80800081);
+                    nokey.CopyTo(buttonarray, 12);
+                    nokey = BitConverter.GetBytes(3);
+                    nokey.CopyTo(buttonarray, 16);
+                    Form1.Connection.Send(buttonarray);
+                }
+                form1.startlinktrades.Enabled = false;
+                form1.LinkTradeStop.Enabled = true;
             }
-            var id = Form1.ntr.ReadBytes(0x08322070, 4);
-            var test = new byte[8];
-            var test2 = new byte[8];
-            BinaryPrimitives.WriteUInt64LittleEndian(test, 319692847480);
-            BinaryPrimitives.WriteUInt64LittleEndian(test2, 001876402969);
-            test = test.Slice(0, 4);
-            test2 = test2.Slice(0, 4);
-            if (Convert.ToHexString(id) == Convert.ToHexString(test) || Convert.ToHexString(id) == Convert.ToHexString(test2))
-            {
-                var buttonarray = new byte[20];
-               var nokey = BitConverter.GetBytes((uint)dsbotbase.Buttons.NoKey);
-                nokey.CopyTo(buttonarray, 0);
-                nokey = BitConverter.GetBytes(0x2000000);
-                nokey.CopyTo(buttonarray, 4);
-                nokey = BitConverter.GetBytes(0x800800);
-                nokey.CopyTo(buttonarray, 8);
-                nokey = BitConverter.GetBytes(0x80800081);
-                nokey.CopyTo(buttonarray, 12);
-                nokey = BitConverter.GetBytes(3);
-                nokey.CopyTo(buttonarray, 16);
-                Form1.Connection.Send(buttonarray);
-            }
-            form1.startlinktrades.Enabled = false;
-            form1.LinkTradeStop.Enabled = true;
-           
+            catch(Exception ex) { ChangeStatus("Something went horribly wrong, check your settings?"); return; }
 
         }
 
@@ -361,6 +370,8 @@ namespace _3DS_link_trade_bot
             Properties.Settings.Default.pingmessage = settings.Discordsettings.PingMessage;
             Properties.Settings.Default.pingroleid = settings.Discordsettings.PingRoleID;
             Properties.Settings.Default.sendstatusmessage = settings.Discordsettings.SendStatusMessage;
+            Properties.Settings.Default.WTPChannels = settings.Discordsettings.BotWTPChannel;
+            Properties.Settings.Default.WhoThat = settings.Discordsettings.WhosThatPokemon;
             Properties.Settings.Default.Save();
             var filelist = Directory.GetFiles(logfolder);
             if (Directory.GetFiles(logfolder).Length > 7)

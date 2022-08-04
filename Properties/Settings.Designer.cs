@@ -286,5 +286,29 @@ namespace _3DS_link_trade_bot.Properties {
                 this["pingmessage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public ulong WTPChannels {
+            get {
+                return ((ulong)(this["WTPChannels"]));
+            }
+            set {
+                this["WTPChannels"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool WhoThat {
+            get {
+                return ((bool)(this["WhoThat"]));
+            }
+            set {
+                this["WhoThat"] = value;
+            }
+        }
     }
 }

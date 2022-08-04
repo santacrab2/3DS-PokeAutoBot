@@ -83,12 +83,13 @@ namespace _3DS_link_trade_bot
             await click(A, 1);
             Stopwatch stop = new();
             stop.Restart();
-            while (stop.ElapsedMilliseconds <= 30_000 && ntr.ReadBytes(FailedTradeoff, 1)[0] != 0xFF && !failedtrade)
+            while (stop.ElapsedMilliseconds <= 60_000 && ntr.ReadBytes(FailedTradeoff, 1)[0] != 0xFF && !failedtrade)
                 await Task.Delay(25);
             if (failedtrade)
             {
                 await click(B, 2);
                 await click(B, 2);
+                return;
             }
 
             await Task.Delay(5_000);

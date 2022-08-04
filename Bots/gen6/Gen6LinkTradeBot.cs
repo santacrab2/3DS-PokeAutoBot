@@ -30,7 +30,7 @@ namespace _3DS_link_trade_bot
             }
             if (userinvitedbot6)
                 await touch(178, 213, 1);
-            await injection(tradeinfo.tradepokemon,true);
+            await injection(tradeinfo.tradepokemon);
             var trainersearch = "";
             var trainersearch2 = "";
             
@@ -83,6 +83,9 @@ namespace _3DS_link_trade_bot
             ChangeStatus($"offering {(Species)tradeinfo.tradepokemon.Species} for trade");
       
             stop.Restart();
+            await Task.Delay(10_000);
+            await DpadClick(DpadRIGHT, 2);
+            await DpadClick(DpadRIGHT, 2);
             while (!ontradeanimationscreen && stop.ElapsedMilliseconds < 60_000)
                 await click(A,1);
             ChangeStatus("watching trade animation");
@@ -100,7 +103,7 @@ namespace _3DS_link_trade_bot
             stop.Restart();
             while (!checkscreen(currentscreenoff, OverWorldScreenVal) && stop.ElapsedMilliseconds<60_000)
                 await Task.Delay(1000);
-            var receivedpkm = EntityFormat.GetFromBytes(ntr.ReadBytes(Party1Slot1, 260), EntityContext.Gen6);
+            var receivedpkm = EntityFormat.GetFromBytes(ntr.ReadBytes(box1slot1, 260), EntityContext.Gen6);
             if(SearchUtil.HashByDetails(tradeinfo.tradepokemon) != SearchUtil.HashByDetails(receivedpkm))
             {
                 ChangeStatus($"{tradeinfo.discordcontext.User.Username} completed the trade");

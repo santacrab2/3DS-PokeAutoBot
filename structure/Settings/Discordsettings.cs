@@ -28,6 +28,9 @@ namespace _3DS_link_trade_bot
         public ulong PingRoleID { get; set; }
         [Category(Discord), Description("the message to send when announcing it is turning on")]
         public string PingMessage { get; set; } = "Gen 7 Link Trade Bot is Online";
-
+        [Category(Discord), Description("Toggle Who's That Pokemon Mode on/off")]
+        public bool WhosThatPokemon { get; set; } = true;
+        [Category(Discord), Description("The Channel(s) the bot will post the Wonder Trade Embed and Countdown too")]
+        public ulong BotWTPChannel { get; set; } = 0;
     }
 }
