@@ -71,7 +71,7 @@ namespace _3DS_link_trade_bot
                     var compmessage = new ComponentBuilder().WithButton("Yes","wtpyes",ButtonStyle.Success).WithButton("No","wtpno",ButtonStyle.Danger);
                     var embedmes = new EmbedBuilder();
                     embedmes.AddField("Receive Pokemon?", $"Would you like to receive {(Species)randspecies} in your game?");
-                    await ReplyAsync(embed: embedmes.Build(), components: compmessage.Build());
+                    await wtpchannel.SendMessageAsync(embed: embedmes.Build(), components: compmessage.Build());
                     
                     while (!buttonpressed)
                     {
@@ -132,8 +132,7 @@ namespace _3DS_link_trade_bot
                 usr = null;
                 guess = "";
             }
-            await wtpchannel.ModifyAsync(newname => newname.Name = wtpchannel.Name.Replace("✅","❌"));
-            await wtpchannel.AddPermissionOverwriteAsync(wtpchannel.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
+            
             WTPsource = new();
         }
         [EnabledInDm(false)]
@@ -169,21 +168,12 @@ namespace _3DS_link_trade_bot
         private int[] GetPokedex()
         {
             List<int> dex = new();
-            for (int i = 1; i <= 907; i++)
+            var dexcount = 807;
+            if (NTR.game < 3)
+                dexcount = 721;
+            for (int i = 1; i <= dexcount; i++)
             {
-                if (NTR.game >2)
-                {
-                    var entry = PersonalTable.USUM.GetFormEntry(i, 0);
-
-
-                    if (entry is PersonalInfoSM { IsPresentInGame: false } )
-                        continue;
-                }else
-                {
-                    var entry = PersonalTable.AO.GetFormEntry(i, 0);
-                    if (entry is PersonalInfoORAS { IsPresentInGame: false })
-                        continue;
-                }    
+               
                 var species = SpeciesName.GetSpeciesNameGeneration(i, 2, 6);
                 var set = new ShowdownSet($"{species}{(i == (int)NidoranF ? "-F" : i == (int)NidoranM ? "-M" : "")}");
                 

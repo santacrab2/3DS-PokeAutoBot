@@ -224,6 +224,15 @@ namespace _3DS_link_trade_bot
                             offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Link Trade Bot is Offline");
                             await botchannelid.SendMessageAsync(embed: offembed.Build());
                         }
+                        if(_settings.Discordsettings.WhosThatPokemon)
+                        {
+                            var wtpchannelid = (ITextChannel)discordmain._client.GetChannelAsync(_settings.Discordsettings.BotWTPChannel).Result;
+                            await wtpchannelid.ModifyAsync(newname => newname.Name = wtpchannelid.Name.Replace("✅", "❌"));
+                            await wtpchannelid.AddPermissionOverwriteAsync(wtpchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
+                            var offembed = new EmbedBuilder();
+                            offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Who's That Pokemon mode is Offline");
+                            await wtpchannelid.SendMessageAsync(embed: offembed.Build());
+                        }
                     }
                     WTPSB.WTPsource.Cancel();
                     tradetoken.Cancel();
