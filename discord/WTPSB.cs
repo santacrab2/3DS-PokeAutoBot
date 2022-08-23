@@ -142,6 +142,14 @@ namespace _3DS_link_trade_bot
         public async Task WTPguess([Summary("pokemon")]string userguess, [Summary(description: "In Game Trainer Name, if you plan to receive your guess in trade")] string TrainerName)
         {
             await DeferAsync();
+            if (MainHub.The_Q.Count != 0)
+            {
+                if (MainHub.The_Q.Any(z => z.discordcontext.User == Context.User))
+                {
+                    await FollowupAsync("you are already in queue", ephemeral: true);
+                    return;
+                }
+            }
             if (userguess.ToLower() == SpeciesName.GetSpeciesName(randspecies, 2).ToLower())
             {
                 await FollowupAsync($"{Context.User.Username} You are correct! It's {userguess}");

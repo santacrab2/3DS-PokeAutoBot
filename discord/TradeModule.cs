@@ -24,6 +24,14 @@ namespace _3DS_link_trade_bot
         public async Task addfc([Summary(description:"No Dashes!!")]string friendcode)
         {
             await DeferAsync();
+            if (The_Q.Count != 0)
+            {
+                if (The_Q.Any(z => z.discordcontext.User == Context.User))
+                {
+                    await FollowupAsync("you are already in queue", ephemeral: true);
+                    return;
+                }
+            }
             try { await Context.User.SendMessageAsync($"I Have added you to the Friend Code queue. I will message you here when I am adding you. My FC is {_settings.FriendCode}"); } catch { await RespondAsync("enable private messages from users on the server to be queued"); return; }
             friendcode = friendcode.Replace("-", "").Replace(" ","");
             var tobequeued = new queuesystem() { discordcontext = Context,friendcode = friendcode,tradepokemon=EntityBlank.GetBlank(7),IGN ="",mode = botmode.addfc};
@@ -40,7 +48,7 @@ namespace _3DS_link_trade_bot
            
             if (The_Q.Count != 0)
             {
-                if (The_Q.Any(z => z.IGN == TrainerName))
+                if (The_Q.Any(z => z.discordcontext.User == Context.User))
                 {
                     await FollowupAsync("you are already in queue", ephemeral: true);
                     return;
@@ -142,8 +150,17 @@ namespace _3DS_link_trade_bot
         [SlashCommand("dump","reads pokemon in your box that you show the bot and sends you pk files of them without trading")]
         public async Task dump(string TrainerName)
         {
+            DeferAsync();
+            if (The_Q.Count != 0)
+            {
+                if (The_Q.Any(z => z.discordcontext.User == Context.User))
+                {
+                    await FollowupAsync("you are already in queue", ephemeral: true);
+                    return;
+                }
+            }
             The_Q.Enqueue(new queuesystem { discordcontext = Context, IGN = TrainerName, friendcode = "", tradepokemon = null, mode = botmode.dump });
-            await RespondAsync($"{Context.User.Username} - added to the dump queue. Current Position: {The_Q.Count()}.");
+            await FollowupAsync($"{Context.User.Username} - added to the dump queue. Current Position: {The_Q.Count()}.");
         }
         [SlashCommand("hi","hi")]
         public  async Task some()

@@ -19,13 +19,17 @@ namespace _3DS_link_trade_bot
         {
             await DeferAsync();
             ShowdownSet set = TradeModule.ConvertToShowdown(PokemonText);
+           
             var trainer = TrainerSettings.GetSavedTrainerData(GameVersion.USUM,7);
             if (NTR.game == 2 || NTR.game == 1)
                 trainer = TrainerSettings.GetSavedTrainerData(GameVersion.ORAS,6);
             var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
+          
             var pkm = sav.GetLegalFromSet(set, out var res);
+           
             pkm = pkm.Legalize();
-            if(pkm is PK7 pk7)
+            
+            if (pkm is PK7 pk7)
             {
                 pk7.SetDefaultRegionOrigins();
                 pkm = pk7;
