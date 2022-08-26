@@ -37,5 +37,13 @@ namespace _3DS_link_trade_bot
             MainHub.The_Q.Clear();
             await RespondAsync("the queue has been cleared", ephemeral:true);
         }
+        [SlashCommand("clearfriendlist","clears your 3ds friend list for however many friends you state starting at whichever index you state")]
+        public async Task clearf(int index, int friendstoremove)
+        {
+            await DeferAsync(ephemeral:true);
+            await FollowupAsync("Starting Friend Deletion Routine...", ephemeral: true);
+            await MainHub.clearfriendlist(index, friendstoremove);
+            await FollowupAsync($"Friend Deletion Routine Complete! I have Deleted {friendstoremove} friends");
+        }
     }
 }

@@ -24,6 +24,7 @@ namespace _3DS_link_trade_bot
         public static queuesystem tradeinfo;
         public static CancellationTokenSource tradetoken = new CancellationTokenSource();
         public static Queue<queuesystem> The_Q = new Queue<queuesystem>();
+        public static bool clearfriends = false;
 
         public static async void starttrades()
         {
@@ -257,6 +258,25 @@ namespace _3DS_link_trade_bot
                 await touch(120, 54, 2);
             }
         }
+        public static async Task clearfriendlist(int index,int friendstoremove)
+        {
+            await presshome(5);
+            await touch(120, 10, 1);
+            await touch(120, 10, 6);
+            await touch(60, 21, 2);
+            await touch(158, 163, 2);
+            for (int i = 2; i < index; i++)
+            {
+                await DpadClick(DpadRIGHT, 1);
+            }
+            for (int i = 1; i < friendstoremove; i++)
+            {
+                await touch(276, 171, 1);
+                await click(A, 5);
+            }
+            clearfriends = false;
+        }
+     
 
 
     }
