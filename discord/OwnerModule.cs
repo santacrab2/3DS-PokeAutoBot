@@ -43,7 +43,7 @@ namespace _3DS_link_trade_bot
             await DeferAsync(ephemeral:true);
             await FollowupAsync("Starting Friend Deletion Routine...", ephemeral: true);
             await MainHub.clearfriendlist(index, friendstoremove);
-            await FollowupAsync($"Friend Deletion Routine Complete! I have Deleted {friendstoremove} friends");
+            await FollowupAsync($"Friend Deletion Routine Complete! I have Deleted {friendstoremove} friends",ephemeral:true);
         }
     }
 }
