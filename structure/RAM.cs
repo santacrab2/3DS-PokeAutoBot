@@ -121,7 +121,7 @@ namespace _3DS_link_trade_bot
         public const int GTSEntrySize = 0x100;
         private readonly Span<byte> Data;
         public GTSEntry(Span<byte> data) => Data = data;
-        public int RequestedPoke => BitConverter.ToInt16(Data[0xC..]);
+        public ushort RequestedPoke => BitConverter.ToUInt16(Data[0xC..]);
         public string trainername => Encoding.Unicode.GetString(Data.Slice(0x4c,24)).Trim('\0');
         public int genderindex => Data[0xE];
         public int levelindex => Data[0xF];
@@ -158,7 +158,7 @@ namespace _3DS_link_trade_bot
         public const int GTSEntrySize6 = 0xA0;
         private readonly Span<byte> Data;
         public GTSEntry6(Span<byte> data) => Data = data;
-        public int RequestedPoke => BitConverter.ToInt32(Data[0x0..]);
+        public ushort RequestedPoke => BitConverter.ToUInt16(Data[0x0..]);
         public uint RequestedGender => Data[0x2];
         public int RequestLevel=>Data[0x3];
         public string trainername => Encoding.Unicode.GetString(Data.Slice(0x40, 24)).Trim('\0');

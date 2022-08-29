@@ -268,9 +268,10 @@ namespace _3DS_link_trade_bot
                 OnConnected(EventArgs.Empty);
                 IsConnected = true;
             }
-            catch
+            catch(Exception ex)
             {
-                Console.WriteLine("Could not connect, make sure the IP is correct, you're running NTR and you're online in-game!");
+                IsConnected = false;
+                return;
             }
         }
 
@@ -295,24 +296,27 @@ namespace _3DS_link_trade_bot
 
         private void SendPacket(uint type, uint cmd, IReadOnlyList<uint>? args, uint dataLen)
         {
-            _currentSeq += 1000;
-            var buf = new byte[84];
-            var t = 12;
-            BitConverter.GetBytes(0x12345678).CopyTo(buf, 0);
-            BitConverter.GetBytes(_currentSeq).CopyTo(buf, 4);
-            BitConverter.GetBytes(type).CopyTo(buf, 8);
-            BitConverter.GetBytes(cmd).CopyTo(buf, 12);
-            for (var i = 0; i < 16; i++)
+            try
             {
-                t += 4;
-                uint arg = 0;
-                if (args != null)
-                    arg = args[i];
-                BitConverter.GetBytes(arg).CopyTo(buf, t);
-            }
-            BitConverter.GetBytes(dataLen).CopyTo(buf, t + 4);
-            var stream = _netStream ?? throw new ArgumentNullException(nameof(_netStream));
-            stream.Write(buf, 0, buf.Length);
+                _currentSeq += 1000;
+                var buf = new byte[84];
+                var t = 12;
+                BitConverter.GetBytes(0x12345678).CopyTo(buf, 0);
+                BitConverter.GetBytes(_currentSeq).CopyTo(buf, 4);
+                BitConverter.GetBytes(type).CopyTo(buf, 8);
+                BitConverter.GetBytes(cmd).CopyTo(buf, 12);
+                for (var i = 0; i < 16; i++)
+                {
+                    t += 4;
+                    uint arg = 0;
+                    if (args != null)
+                        arg = args[i];
+                    BitConverter.GetBytes(arg).CopyTo(buf, t);
+                }
+                BitConverter.GetBytes(dataLen).CopyTo(buf, t + 4);
+                var stream = _netStream ?? throw new ArgumentNullException(nameof(_netStream));
+                stream.Write(buf, 0, buf.Length);
+            }catch(Exception exe) { }
         }
 
         private uint SendReadMemPacket(uint addr, uint size, uint pid)
@@ -324,38 +328,45 @@ namespace _3DS_link_trade_bot
 
         private void SendWriteMemPacket(uint addr, uint pid, byte[] buf)
         {
-            uint[] args = new uint[16];
-            args[0] = pid;
-            args[1] = addr;
-            args[2] = (uint)buf.Length;
-            SendPacket(1, 10, args, args[2]);
-            var stream = _netStream ?? throw new ArgumentNullException(nameof(_netStream));
-            stream.Write(buf, 0, buf.Length);
+            try
+            {
+                uint[] args = new uint[16];
+                args[0] = pid;
+                args[1] = addr;
+                args[2] = (uint)buf.Length;
+                SendPacket(1, 10, args, args[2]);
+                var stream = _netStream ?? throw new ArgumentNullException(nameof(_netStream));
+                stream.Write(buf, 0, buf.Length);
+            }catch(Exception ex) { }
         }
 
         private void SendHeartbeatPacket()
         {
             if (_tcp != null)
             {
-                lock (_syncLock)
+                try
                 {
                     if (_heartbeatSendable == 1)
                     {
                         _heartbeatSendable = 0;
                         SendPacket(0, 0, null, 0);
                     }
-                }
+                }catch(Exception ex) { }
+                
             }
         }
 
         private void SendEmptyPacket(uint cmd, uint arg0 = 0, uint arg1 = 0, uint arg2 = 0)
         {
-            var args = new uint[16];
+            try
+            {
+                var args = new uint[16];
 
-            args[0] = arg0;
-            args[1] = arg1;
-            args[2] = arg2;
-            SendPacket(0, cmd, args, 0);
+                args[0] = arg0;
+                args[1] = arg1;
+                args[2] = arg2;
+                SendPacket(0, cmd, args, 0);
+            }catch(Exception ex) { }
         }
 
         private void Log(string msg)

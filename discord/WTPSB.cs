@@ -25,7 +25,7 @@ namespace _3DS_link_trade_bot
         public static string guess = "";
         public static SocketUser usr;
         public static string ign;
-        public static int randspecies;
+        public static ushort randspecies;
         public static SocketInteractionContext con;
      
         public async Task WhoseThatPokemon()
@@ -110,7 +110,7 @@ namespace _3DS_link_trade_bot
                             }
                         }
                         pk.Ball = BallApplicator.ApplyBallLegalByColor(pk);
-                        int[] sugmov = MoveSetApplicator.GetMoveSet(pk, true);
+                        ushort[] sugmov = MoveSetApplicator.GetMoveSet(pk, true);
                         pk.SetMoves(sugmov);
                         int natue = random.Next(24);
                         pk.Nature = natue;
@@ -173,13 +173,13 @@ namespace _3DS_link_trade_bot
             await wtpchannel.AddPermissionOverwriteAsync(wtpchannel.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
         }
 
-        private int[] GetPokedex()
+        private ushort[] GetPokedex()
         {
-            List<int> dex = new();
+            List<ushort> dex = new();
             var dexcount = 807;
             if (NTR.game < 3)
                 dexcount = 721;
-            for (int i = 1; i <= dexcount; i++)
+            for (ushort i = 1; i <= dexcount; i++)
             {
                
                 var species = SpeciesName.GetSpeciesNameGeneration(i, 2, 6);

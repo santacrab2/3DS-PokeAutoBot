@@ -150,8 +150,8 @@ namespace _3DS_link_trade_bot
                         newShowdown[index] = "Shiny: Square\r";
                     else newShowdown[index] = "Shiny: Star\r";
                 }
-                var SID = string.Format("{0:0000}", pokme.TrainerSID7);
-                var TID = string.Format("{0:000000}", pokme.TrainerID7);
+                var SID = NTR.game>2?string.Format("{0:0000}",pokme.TrainerSID7):string.Format("{0:00000}",pokme.SID);
+                var TID = NTR.game>2?string.Format("{0:000000}",pokme.TrainerID7):string.Format("{0:00000}",pokme.TID);
                 newShowdown.InsertRange(1, new string[] { $"OT: {pokme.OT_Name}", $"TID: {TID}", $"SID: {SID}", $"OTGender: {(Gender)pokme.OT_Gender}", $"Language: {(LanguageID)pokme.Language}" });
                 await message.Channel.SendMessageAsync(Format.Code(string.Join("\n", newShowdown).TrimEnd()));
             }

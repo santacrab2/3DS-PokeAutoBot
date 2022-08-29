@@ -75,7 +75,7 @@ namespace _3DS_link_trade_bot
                 }
 
 
-                if (Legal.ZCrystalDictionary.ContainsValue(pkm.HeldItem))
+                if (Legal.ZCrystalDictionary.ContainsValue((ushort)pkm.HeldItem))
                     pkm.HeldItem = 0;
                 if (!new LegalityAnalysis(pkm).Valid || FormInfo.IsFusedForm(pkm.Species,pkm.Form,pkm.Format))
                 {

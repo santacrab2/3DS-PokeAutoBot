@@ -48,14 +48,17 @@ namespace _3DS_link_trade_bot
                 ntr.Connect();
                 if (clientNTR.IsConnected)
                     ChangeStatus("ntr connected");
+            }
+            catch (Exception ex) { ChangeStatus("Could not connect to NTR"); }
+            try { 
                 Connection.Connect(Program.form1.IpAddress.Text, 4950);
                 if (Connection.Connected)
                 {
 
-                    Log("IR Connected");
+                    ChangeStatus("IR Connected");
                 }
             }
-            catch(Exception ex) { ChangeStatus("Could not connect to 3ds"); return; }
+            catch(Exception ex) { ChangeStatus("Could not connect to input redirection"); }
             var buttonarray = new byte[20];
             var nokey = BitConverter.GetBytes(0xFFF);
             nokey.CopyTo(buttonarray, 0);

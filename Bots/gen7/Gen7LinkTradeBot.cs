@@ -71,7 +71,7 @@ namespace _3DS_link_trade_bot
             }
             if (downpresses == 50)
             {
-                ChangeStatus("user not found");
+                ChangeStatus($"{tradeinfo.discordcontext.User.Username} not found");
                 await tradeinfo.discordcontext.User.SendMessageAsync("I could not find you on the guest list, Please refresh your internet connection and try again!");
                 await click(B, 1);
                 await click(B, 5);
@@ -87,6 +87,8 @@ namespace _3DS_link_trade_bot
                 await Task.Delay(25);
             if (failedtrade)
             {
+                ChangeStatus($"{tradeinfo.discordcontext.User.Username} failed to accept the trade offer");
+                await tradeinfo.discordcontext.User.SendMessageAsync("something went wrong, please try again!");
                 await click(B, 2);
                 await click(B, 2);
                 return;
@@ -125,13 +127,13 @@ namespace _3DS_link_trade_bot
             var tradedpk = new PK7(tradedpkbytes);
             if (SearchUtil.HashByDetails(tradedpk) == SearchUtil.HashByDetails(tradeinfo.tradepokemon))
             {
-                ChangeStatus("user did not complete the trade");
+                ChangeStatus($"{tradeinfo.discordcontext.User.Username} did not complete the trade");
                 await tradeinfo.discordcontext.User.SendMessageAsync("Something went wrong, please try again");
 
             }
             else
             {
-                ChangeStatus("user completed the trade");
+                ChangeStatus($"{tradeinfo.discordcontext.User.Username} completed the trade");
                 var temp = $"{Directory.GetCurrentDirectory()}/{tradedpk.FileName}";
                 File.WriteAllBytes(temp, tradedpk.DecryptedBoxData);
                 await tradeinfo.discordcontext.User.SendFileAsync(temp, "Here is the pokemon you traded me");
@@ -238,7 +240,7 @@ namespace _3DS_link_trade_bot
             }
             if (downpresses == 50)
             {
-                ChangeStatus("user not found");
+                ChangeStatus($"{tradeinfo.discordcontext.User.Username} not found");
                 await tradeinfo.discordcontext.User.SendMessageAsync("I could not find you on the trade list, Please refresh your internet connection and try again!");
                 await click(B, 1);
                 await click(B, 5);

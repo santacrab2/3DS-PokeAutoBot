@@ -51,10 +51,11 @@ namespace _3DS_link_trade_bot
         
           
                 if (!Connected) Connect();
-
+                System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
                 WriteLastLog("");
                 DataReadyWaiting myArgs = new(new byte[length], HandleMemoryRead, null);
-                while (clientNTR.PID == -1)
+                stopwatch.Restart();
+                while (clientNTR.PID == -1 && stopwatch.ElapsedMilliseconds<30000)
                 {
                     Thread.Sleep(10);
                 }
