@@ -131,6 +131,33 @@ namespace _3DS_link_trade_bot
                 
                         await EggRNGBot7.EggRNGNonePID7Routine();
                      break;
+                case Mode.FriendCodeOnly:
+                    while (!tradetoken.IsCancellationRequested)
+                    {
+                        if(The_Q.Count == 0)
+                        {
+                            await Task.Delay(1000);
+                            continue;
+                        }
+                        tradeinfo = The_Q.Dequeue();
+                        await touch(120, 10, 1);
+
+                        await touch(120, 10, 6);
+                        await click(A, 2);
+                        await touch(160, 10, 3);
+
+                        await touch(160, 180, 5);
+
+                        await enterfriendcode(tradeinfo.friendcode);
+                        await Task.Delay(2000);
+                        await touch(240, 230, 10);
+
+                        await touch(180, 100, 1);
+                        await presshome(5);
+                        continue;
+                    }
+                    break;
+
 
             } 
             ChangeStatus("Bot Stopped");

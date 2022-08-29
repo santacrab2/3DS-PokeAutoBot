@@ -38,9 +38,11 @@ namespace _3DS_link_trade_bot
     public enum Mode
     {
         FlexTrade,
+        FriendCodeOnly,
         GTSOnly,
         WTOnly,
         GTSWTOnly,
+
         EggRNGNonePID,
         EggRNGPID,
     }
