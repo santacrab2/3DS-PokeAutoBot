@@ -153,7 +153,11 @@ namespace _3DS_link_trade_bot
                         await touch(240, 230, 10);
 
                         await touch(180, 100, 1);
-                        await presshome(5);
+
+                        await touch(240, 230, 3);
+
+                        await touch(240, 200, 5);
+                        await presshome(2);
                         continue;
                     }
                     break;
