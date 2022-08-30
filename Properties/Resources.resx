@@ -142,7 +142,7 @@
   <data name="Y" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Y.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="alola-background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Bg000" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\alola-background.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pkm_s" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -187,7 +187,178 @@
   <data name="touchscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\touchscreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="volcano" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Bg058" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\volcano.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg001" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg001.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg002" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg002.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg003" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg003.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg004" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg004.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg005" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg005.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg006" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg006.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg007" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg007.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg008" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg008.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg009" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg009.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg010" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg010.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg011" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg011.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg012" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg012.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg013" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg013.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg014" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg014.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg015" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg015.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg016" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg017" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg017.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg018" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg018.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg019" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg019.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg020" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg020.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg021" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg021.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg022" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg022.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg023" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg023.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg024" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg024.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg025" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg025.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg026" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg026.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg027" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg027.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg028" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg028.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg029" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg029.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg030" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg030.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg031" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg031.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg032" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg032.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg033" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg033.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg034" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg034.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg035" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg035.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg036" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg036.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg037" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg037.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg038" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg038.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg039" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg039.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg040" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg040.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg041" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg041.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg042" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg042.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg043" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg043.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg044" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg044.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg045" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg045.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg046" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg046.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg047" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg047.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg048" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg048.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg049" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg049.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg050" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg050.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg051" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg051.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg052" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg052.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg053" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg053.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg054" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg054.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg055" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg055.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg056" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg056.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bg057" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backgrounds\Bg057.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

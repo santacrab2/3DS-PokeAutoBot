@@ -12,9 +12,8 @@ using static _3DS_link_trade_bot.NTRClient;
 using static _3DS_link_trade_bot.dsbotbase.Buttons;
 using PKHeX.Core.AutoMod;
 using static _3DS_link_trade_bot.RAM;
-
-
-
+using System.Resources;
+using System.Collections;
 
 namespace _3DS_link_trade_bot
 {
@@ -142,6 +141,18 @@ namespace _3DS_link_trade_bot
 
                 var trainer = TrainerSettings.GetSavedTrainerData(7);
                 RecentTrainerCache.SetRecentTrainer(trainer);
+                ResourceSet rsrcSet = Properties.Resources.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.CurrentCulture, false, true);
+                List<System.Drawing.Image> bgimages = new List<System.Drawing.Image>();
+
+                foreach (DictionaryEntry entry in rsrcSet)
+                {
+                    if (entry.Key.ToString().Contains("Bg0"))
+                        bgimages.Add((System.Drawing.Image)entry.Value);
+
+                }
+
+                var prng = new Random();
+                LinkTrades.BackgroundImage = bgimages[prng.Next(59)];
             }
             else
             {
@@ -162,14 +173,25 @@ namespace _3DS_link_trade_bot
                             TrainerSettings.Register(fallback);
                     }
                 }
-
                 var trainer = TrainerSettings.GetSavedTrainerData(6);
                 RecentTrainerCache.SetRecentTrainer(trainer);
+                ResourceSet rsrcSet = Properties.Resources.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.CurrentCulture, false, true);
+                List<System.Drawing.Image> bgimages = new List<System.Drawing.Image>();
+          
+                    foreach (DictionaryEntry entry in rsrcSet)
+                    {
+                        if(entry.Key.ToString().Contains("Bg0"))
+                            bgimages.Add((System.Drawing.Image)entry.Value);
+   
+                    }
+                
+                var prng = new Random();
+                
                 pictureBox1.BackgroundImage = Properties.Resources.pkm_x;
                 pictureBox2.BackgroundImage = Properties.Resources.pkm_y;
                 pictureBox3.BackgroundImage = Properties.Resources.pkm_or;
                 pictureBox4.BackgroundImage = Properties.Resources.pkm_as;
-                LinkTrades.BackgroundImage = Properties.Resources.volcano;
+                LinkTrades.BackgroundImage = bgimages[prng.Next(59)];
             }
          
         }

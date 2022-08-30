@@ -93,7 +93,7 @@
             // LinkTrades
             // 
             this.LinkTrades.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.LinkTrades.BackgroundImage = global::_3DS_link_trade_bot.Properties.Resources.alola_background;
+            this.LinkTrades.BackgroundImage = global::_3DS_link_trade_bot.Properties.Resources.Bg000;
             this.LinkTrades.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.LinkTrades.Controls.Add(this.LinkTradeStop);
             this.LinkTrades.Controls.Add(this.startlinktrades);
