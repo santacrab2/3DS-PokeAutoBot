@@ -140,6 +140,8 @@ namespace _3DS_link_trade_bot
                             continue;
                         }
                         tradeinfo = The_Q.Dequeue();
+                        ChangeStatus($"Adding {tradeinfo.discordcontext.User.Username} with friend code: {tradeinfo.friendcode}");
+                        await tradeinfo.discordcontext.User.SendMessageAsync("adding you to the friends list now!");
                         await touch(120, 10, 1);
 
                         await touch(120, 10, 6);

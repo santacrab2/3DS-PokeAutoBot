@@ -32,7 +32,7 @@ namespace _3DS_link_trade_bot
                     return;
                 }
             }
-            try { await Context.User.SendMessageAsync($"I Have added you to the Friend Code queue. I will message you here when I am adding you. My FC is {_settings.FriendCode}"); } catch { await RespondAsync("enable private messages from users on the server to be queued"); return; }
+            try { await Context.User.SendMessageAsync($"I Have added you to the Friend Code queue. I will message you here when I am adding you. My FC is {_settings.FriendCode} Please add me."); } catch { await RespondAsync("enable private messages from users on the server to be queued"); return; }
             friendcode = friendcode.Replace("-", "").Replace(" ","");
             var tobequeued = new queuesystem() { discordcontext = Context,friendcode = friendcode,tradepokemon=EntityBlank.GetBlank(7),IGN ="",mode = botmode.addfc};
             The_Q.Enqueue(tobequeued);
