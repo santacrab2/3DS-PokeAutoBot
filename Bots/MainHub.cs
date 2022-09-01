@@ -132,6 +132,17 @@ namespace _3DS_link_trade_bot
                         await EggRNGBot7.EggRNGNonePID7Routine();
                      break;
                 case Mode.FriendCodeOnly:
+                    var seataverntest = discordmain._client.GetGuild(872587205787394119);
+                    var addfccommandtest = await seataverntest.GetApplicationCommandsAsync();
+                    foreach (var command in addfccommandtest)
+                    {
+                        if (command.Name == "dump")
+                            await command.DeleteAsync();
+                        else if (command.Name == "trade")
+                            await command.DeleteAsync();
+                        else if (command.Name == "guess")
+                            await command.DeleteAsync();
+                    }
                     while (!tradetoken.IsCancellationRequested)
                     {
                         if(The_Q.Count == 0)
@@ -174,6 +185,17 @@ namespace _3DS_link_trade_bot
 
         public static async Task FlexTradeRoutine()
         {
+            if (NTR.game < 3)
+            {
+                var seataverntest = discordmain._client.GetGuild(872587205787394119);
+                var addfccommandtest = await seataverntest.GetApplicationCommandsAsync();
+                foreach (var command in addfccommandtest)
+                {
+                    if (command.Name == "addfc")
+                        await command.DeleteAsync();
+                 
+                }
+            }
             while (!tradetoken.IsCancellationRequested)
             {
                 try
