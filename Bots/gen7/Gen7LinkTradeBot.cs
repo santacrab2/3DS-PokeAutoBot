@@ -262,7 +262,10 @@ namespace _3DS_link_trade_bot
 
             await Task.Delay(5_000);
             var initialpokebytes = ntr.ReadBytes(OfferedPokemonoff, 232);
-            var initpoke = EntityFormat.GetFromBytes(initialpokebytes);
+            var econtext = EntityContext.Gen6;
+            if (NTR.game > 2)
+                econtext = EntityContext.Gen7;
+            var initpoke = EntityFormat.GetFromBytes(initialpokebytes,econtext);
             var temppath = $"{Path.GetTempPath()}//{initpoke.FileName}";
             File.WriteAllBytes(temppath, initpoke.DecryptedBoxData);
             await tradeinfo.discordcontext.User.SendFileAsync(temppath, "Here is the pokemon you showed me.");

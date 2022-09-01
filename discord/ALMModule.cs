@@ -19,15 +19,15 @@ namespace _3DS_link_trade_bot
         {
             await DeferAsync();
             ShowdownSet set = TradeModule.ConvertToShowdown(PokemonText);
-           
+            RegenTemplate rset = new(set);
             var trainer = TrainerSettings.GetSavedTrainerData(GameVersion.USUM,7);
-            if (NTR.game == 2 || NTR.game == 1)
+            if (NTR.game <3)
                 trainer = TrainerSettings.GetSavedTrainerData(GameVersion.ORAS,6);
             var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
           
-            var pkm = sav.GetLegalFromSet(set, out var res);
+            var pkm = sav.GetLegalFromSet(rset, out var res);
            
-            pkm = pkm.Legalize();
+           
             
             if (pkm is PK7 pk7)
             {

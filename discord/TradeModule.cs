@@ -60,14 +60,15 @@ namespace _3DS_link_trade_bot
           
 
                 ShowdownSet set = ConvertToShowdown(PokemonText);
-
+                RegenTemplate rset = new(set);
                 var trainer = TrainerSettings.GetSavedTrainerData(GameVersion.USUM,7);
-                if (NTR.game == 2 || NTR.game == 1)
+                if (NTR.game <3)
                     trainer = TrainerSettings.GetSavedTrainerData(GameVersion.ORAS, 6);
                 var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
                
-                var pkm = sav.GetLegalFromSet(set, out var res);
-                pkm = pkm.Legalize();
+                var pkm = sav.GetLegalFromSet(rset, out var res);
+                
+                
                 if (pkm is PK7 pk7)
                 {
                     pk7.SetDefaultRegionOrigins();
@@ -104,14 +105,14 @@ namespace _3DS_link_trade_bot
                 }
                 var buffer = await discordmain.DownloadFromUrlAsync(pk7orpk6.Url);
 
-                if (NTR.game == 3 || NTR.game == 4)
+                if (NTR.game >2)
                 {
                     var pkm = EntityFormat.GetFromBytes(buffer, EntityContext.Gen7);
 
                     if (!new LegalityAnalysis(pkm).Valid)
                     {
                         SaveFile sav;
-                        if (NTR.game == 3 || NTR.game == 4)
+                        if (NTR.game >2)
                             sav = SaveUtil.GetBlankSAV(GameVersion.UM, "Piplup");
                         else
                             sav = SaveUtil.GetBlankSAV(GameVersion.OR, "piplup");
@@ -131,7 +132,7 @@ namespace _3DS_link_trade_bot
                     if (!new LegalityAnalysis(pkm).Valid)
                     {
                         SaveFile sav;
-                        if (NTR.game == 3 || NTR.game == 4)
+                        if (NTR.game>2)
                             sav = SaveUtil.GetBlankSAV(GameVersion.UM, "Piplup");
                         else
                             sav = SaveUtil.GetBlankSAV(GameVersion.OR, "piplup");

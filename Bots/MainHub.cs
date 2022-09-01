@@ -55,7 +55,7 @@ namespace _3DS_link_trade_bot
                 case Mode.GTSOnly:
                     while (!tradetoken.IsCancellationRequested)
                     {
-                        if (NTR.game == 1 || NTR.game == 2)
+                        if (NTR.game<3)
                         {
                             await GTSBot6.GTSRoutine6();
                            
@@ -77,7 +77,7 @@ namespace _3DS_link_trade_bot
                 case Mode.WTOnly:
                     while (!tradetoken.IsCancellationRequested)
                     {
-                        if (NTR.game == 1 || NTR.game == 2)
+                        if (NTR.game <3)
                         {
                             await WTBot6.WTRoutine6();
                            
@@ -95,7 +95,7 @@ namespace _3DS_link_trade_bot
                 case Mode.GTSWTOnly:
                     while (!tradetoken.IsCancellationRequested)
                     {
-                        if (NTR.game == 1 || NTR.game == 2)
+                        if (NTR.game <3)
                         {
                             await GTSBot6.GTSRoutine6();
                             
@@ -112,7 +112,7 @@ namespace _3DS_link_trade_bot
                                 await resetgame();
                             }
                         }
-                        if (NTR.game == 1 || NTR.game == 2)
+                        if (NTR.game <3)
                         {
                             await WTBot6.WTRoutine6();
                             
@@ -181,7 +181,7 @@ namespace _3DS_link_trade_bot
                     //this is where it performs idling tasks
                     if (The_Q.Count == 0)
                     {
-                        if (NTR.game == 3 || NTR.game == 4)
+                        if (NTR.game>2)
                         {
                             if (IsSoftBanned)
                             {
@@ -221,7 +221,7 @@ namespace _3DS_link_trade_bot
 
                     }
                     tradeinfo = The_Q.Dequeue();
-                    if (NTR.game == 1 || NTR.game == 2)
+                    if (NTR.game<3)
                     {
                         switch (tradeinfo.mode)
                         {
