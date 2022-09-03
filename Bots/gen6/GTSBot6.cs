@@ -95,7 +95,7 @@ namespace _3DS_link_trade_bot
                     bool isafuckhead = false;
                     foreach(string fuckhead in _settings.Legalitysettings.ZKnownGTSBreakers)
                     {
-                        if (fuckhead.Contains(entry.trainername))
+                        if (fuckhead.ToLower().Contains(entry.trainername.ToLower()))
                         {
                             isafuckhead = true;
                             break;
