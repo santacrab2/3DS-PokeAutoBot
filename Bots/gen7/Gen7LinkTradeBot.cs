@@ -134,7 +134,7 @@ namespace _3DS_link_trade_bot
             else
             {
                 ChangeStatus($"{tradeinfo.discordcontext.User.Username} completed the trade");
-                var temp = $"{Directory.GetCurrentDirectory()}/{tradedpk.FileName}";
+                var temp = $"{Directory.GetCurrentDirectory()}/{tradedpk.Species}.pk7";
                 File.WriteAllBytes(temp, tradedpk.DecryptedBoxData);
                 await tradeinfo.discordcontext.User.SendFileAsync(temp, "Here is the pokemon you traded me");
                 File.Delete(temp);
