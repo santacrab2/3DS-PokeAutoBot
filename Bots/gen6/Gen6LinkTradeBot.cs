@@ -50,6 +50,7 @@ namespace _3DS_link_trade_bot
             {
                 await tradeinfo.discordcontext.User.SendMessageAsync("Could not find you on my friend list, refresh your internet connection in game and  try again!");
                 ChangeStatus($"{tradeinfo.discordcontext.User.Username} not found");
+                
                 return;
             }
             await touch(214, 114, 1);
@@ -72,6 +73,7 @@ namespace _3DS_link_trade_bot
             {
                 await tradeinfo.discordcontext.User.SendMessageAsync("You did not accept the trade invite in time, please try again.");
                 ChangeStatus($"{tradeinfo.discordcontext.User.Username} did not accept the trade invite in time");
+                await click(B, 2);
                 await click(B, 1);
                 return;
             }
