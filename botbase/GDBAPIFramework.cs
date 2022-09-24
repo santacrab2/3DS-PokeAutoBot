@@ -23,6 +23,7 @@ namespace _3DS_link_trade_bot
                 _netStream = _tcp.GetStream();
                 if(_tcp.Connected)
                     Form1.ChangeStatus("GDB Connected");
+            _netStream.Socket.Send(Encoding.Unicode.GetBytes("PacketSize = 400; qXfer: features: read/write +; multiprocess +; QStartNoAckMode +"));
                 return Task.CompletedTask;
 
                
@@ -32,16 +33,18 @@ namespace _3DS_link_trade_bot
         public static Task GDBSendContinueCommand()
         {
             var c = "$C";
-            var b = Encoding.BigEndianUnicode.GetBytes(c);
+            var b = Encoding.Unicode.GetBytes(c);
             _netStream.Socket.Send(b);
             var buf = new byte[1024];
-            var a = _netStream.Socket.Receive(buf);
-            Form1.ChangeStatus(Encoding.Default.GetString(buf));
-            c = $"$D;{38}";
-            b = Encoding.BigEndianUnicode.GetBytes(c);
+           // var a = _netStream.Socket.Receive(buf);
+           // Form1.ChangeStatus(Encoding.Default.GetString(buf));
+            c = $"$k";
+            b = Encoding.Unicode.GetBytes(c);
             _netStream.Socket.Send(b);
-            a = _netStream.Socket.Receive(buf);
-            Form1.ChangeStatus(Encoding.Default.GetString(buf));
+           // a = _netStream.Socket.Receive(buf);
+           // Form1.ChangeStatus(Encoding.Default.GetString(buf));
+            //_netStream.Socket.Send(Encoding.BigEndianUnicode.GetBytes($"$A;{38}"));
+           // a = _netStream.Socket.Receive(buf);
 
             return Task.CompletedTask;
         }   
