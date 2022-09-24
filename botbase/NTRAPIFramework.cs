@@ -183,10 +183,7 @@ namespace _3DS_link_trade_bot
                             OnInfoReady(new InfoReadyEventArgs(logMsg));
                             Log(logMsg);
                         }
-                        lock (_syncLock)
-                        {
-                            _heartbeatSendable = 1;
-                        }
+                        
                         continue;
                     }
                     if (dataLen != 0)
@@ -259,13 +256,9 @@ namespace _3DS_link_trade_bot
                 _tcp.Connect(_host, _port);
                 _currentSeq = 0;
                 _netStream = _tcp.GetStream();
-                _heartbeatSendable = 1;
-                _packetRecvThread = new Thread(PacketRecvThreadStart);
-                _packetRecvThread.Start();
-                _heartbeatThread = new Thread(SendHeartBeat);
-                _heartbeatThread.Start();
+              
                 Log("Server connected.");
-                OnConnected(EventArgs.Empty);
+                
                 IsConnected = true;
             }
             catch(Exception ex)

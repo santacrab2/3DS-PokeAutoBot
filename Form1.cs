@@ -701,6 +701,17 @@ namespace _3DS_link_trade_bot
        
         }
 
-     
+        private async void button1_Click_1(object sender, EventArgs e)
+        {
+            await GDBAPIFramework.GDBConnect(form1.IpAddress.Text, 4000);
+            await Task.Delay(2000);
+           
+
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            await GDBAPIFramework.GDBSendContinueCommand();
+        }
     }
 }
