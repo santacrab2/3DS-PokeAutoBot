@@ -21,7 +21,7 @@ namespace _3DS_link_trade_bot
         
        
         [SlashCommand("addfc","adds you to the bots friend list, dont forget to add the bot!")]
-        public async Task addfc([Summary(description:"No Dashes!!")]string friendcode)
+        public async Task addfc(string friendcode)
         {
             await DeferAsync();
             if (The_Q.Count != 0)
