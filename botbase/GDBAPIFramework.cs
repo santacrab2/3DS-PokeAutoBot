@@ -14,39 +14,86 @@ namespace _3DS_link_trade_bot
     {
         public static TcpClient _tcp;
         public static NetworkStream _netStream;
-        public static Task GDBConnect(string ip, int port)
+        public static async Task GDBConnect(string ip, int port)
         {
-            
+            try
+            {
                 _tcp = new TcpClient { NoDelay = true };
                 _tcp.Connect(ip, port);
-               
+
                 _netStream = _tcp.GetStream();
-                if(_tcp.Connected)
+                if (_tcp.Connected)
                     Form1.ChangeStatus("GDB Connected");
-            _netStream.Socket.Send(Encoding.Unicode.GetBytes("PacketSize = 400; qXfer: features: read/write +; multiprocess +; QStartNoAckMode +"));
-                return Task.CompletedTask;
+
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$QStartNoAckMode#b0"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$!#21"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$Hg0#df"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$qXfer:features:read:target.xml:0,3fb#46"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$qXfer:features:read:target.xml:3fb,3fb#11"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$?#3f"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$Hc-1#09"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$qC#b4"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$qAttached#8f"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$g#67"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$m4ec4ec4f,1#5c"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$m4ec4ec4f,1#5c"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$qTStatus#49"));
+                await receivebufferandlog();
+                return;
+            }catch(Exception ex)
+            {
+                Form1.ChangeStatus(ex.Message);
+            }
 
                
             
         }
 
-        public static Task GDBSendContinueCommand()
+        public static async Task receivebufferandlog()
         {
-            var c = "$C";
-            var b = Encoding.Unicode.GetBytes(c);
-            _netStream.Socket.Send(b);
-            var buf = new byte[1024];
-           // var a = _netStream.Socket.Receive(buf);
-           // Form1.ChangeStatus(Encoding.Default.GetString(buf));
-            c = $"$k";
-            b = Encoding.Unicode.GetBytes(c);
-            _netStream.Socket.Send(b);
-           // a = _netStream.Socket.Receive(buf);
-           // Form1.ChangeStatus(Encoding.Default.GetString(buf));
-            //_netStream.Socket.Send(Encoding.BigEndianUnicode.GetBytes($"$A;{38}"));
-           // a = _netStream.Socket.Receive(buf);
+            try
+            {
+                var buf = new byte[1024];
+                _netStream.Socket.Receive(buf);
+                var text = Encoding.UTF8.GetString(buf);
+                Form1.ChangeStatus(text);
+            }
+            catch(Exception ex)
+            {
+                Form1.ChangeStatus(ex.Message);
+            }
 
-            return Task.CompletedTask;
+        }
+        public static async Task GDBSendContinueCommand()
+        {
+            try
+            {
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$qTStatus#49"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$D#44"));
+                await receivebufferandlog();
+                _netStream.Socket.Send(Encoding.UTF8.GetBytes("$?#3f"));
+                await receivebufferandlog();
+
+                return;
+            }
+            catch (Exception ex)
+            {
+                Form1.ChangeStatus(ex.Message);
+            }
         }   
     }
 }
