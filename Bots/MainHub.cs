@@ -171,6 +171,7 @@ namespace _3DS_link_trade_bot
 
                         await touch(240, 200, 5);
                         await presshome(2);
+                        await tradeinfo.discordcontext.User.SendMessageAsync("Adding Routine Complete. Double check that I am online on your friend list! Bot Name: Dpool");
                         continue;
                     }
                     break;

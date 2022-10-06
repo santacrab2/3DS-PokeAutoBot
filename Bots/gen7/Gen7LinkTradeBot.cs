@@ -198,7 +198,8 @@ namespace _3DS_link_trade_bot
             await presshome(5);
             await click(A, 5);
             await click(A, 1);
-      
+            
+            await tradeinfo.discordcontext.User.SendMessageAsync($"Adding Routine Complete. Double check that I am online on your friend list! Bot Name: jeb");
 
         }
         public static async Task DumpRoutine()
