@@ -99,7 +99,7 @@ namespace _3DS_link_trade_bot
                 bot.MainAsync();
                 ChangeStatus("Connected to Discord");
             }
-            catch(Exception ex) { ChangeStatus("Could not connect to discord"); return; }
+            catch(Exception ex) { ChangeStatus("Could not connect to discord");  }
             form1.consoleconnect.Enabled = false;
             form1.consoledisconnect.Enabled = true;
             form1.startlinktrades.Enabled = true;
@@ -255,9 +255,7 @@ namespace _3DS_link_trade_bot
             settings.Legalitysettings.SetUserSpecifiedPokeball = Properties.Settings.Default.userpokeball;
             settings.Legalitysettings.UseBatchEditor = Properties.Settings.Default.batchedit;
             settings.Legalitysettings.ZKnownGTSBreakers = Properties.Settings.Default.knowngtsbreakers;
-            settings.Discordsettings.SendStatusMessage = Properties.Settings.Default.sendstatusmessage;
-            settings.Discordsettings.PingRoleID = Properties.Settings.Default.pingroleid;
-            settings.Discordsettings.PingMessage = Properties.Settings.Default.pingmessage;
+
             settings.Discordsettings.WhosThatPokemon = Properties.Settings.Default.WhoThat;
             settings.Discordsettings.BotWTPChannel = Properties.Settings.Default.WTPChannels;
             if (!Directory.Exists(wtfolder))
@@ -315,21 +313,7 @@ namespace _3DS_link_trade_bot
 
                 MainHub.starttrades();
 
-                if (_settings.Discordsettings.SendStatusMessage)
-                {
-                    foreach (var channel in settings.Discordsettings.BotTradeChannel)
-                    {
-
-                        var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;
-
-                        await botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("❌", "✅"));
-                        await botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
-                        var offembed = new EmbedBuilder();
-                        offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", _settings.Discordsettings.PingMessage);
-                        await botchannelid.SendMessageAsync($"<@&{_settings.Discordsettings.PingRoleID}>", embed: offembed.Build());
-
-                    }
-                }
+                
                 if (_settings.Discordsettings.WhosThatPokemon)
                 {
                     var wtp = new WTPSB();
@@ -392,9 +376,7 @@ namespace _3DS_link_trade_bot
             Properties.Settings.Default.userpokeball=settings.Legalitysettings.SetUserSpecifiedPokeball;
             Properties.Settings.Default.batchedit=settings.Legalitysettings.UseBatchEditor;
             Properties.Settings.Default.knowngtsbreakers = settings.Legalitysettings.ZKnownGTSBreakers;
-            Properties.Settings.Default.pingmessage = settings.Discordsettings.PingMessage;
-            Properties.Settings.Default.pingroleid = settings.Discordsettings.PingRoleID;
-            Properties.Settings.Default.sendstatusmessage = settings.Discordsettings.SendStatusMessage;
+    
             Properties.Settings.Default.WTPChannels = settings.Discordsettings.BotWTPChannel;
             Properties.Settings.Default.WhoThat = settings.Discordsettings.WhosThatPokemon;
             Properties.Settings.Default.Save();
@@ -411,28 +393,9 @@ namespace _3DS_link_trade_bot
         {
             MainHub.tradetoken.Cancel();
             WTPSB.WTPsource.Cancel();
-            if (_settings.Discordsettings.SendStatusMessage)
-            {
-                foreach (var channel in settings.Discordsettings.BotTradeChannel)
-                {
-
-                    var botchannelid = (ITextChannel)discordmain._client.GetChannelAsync(channel).Result;
-                    await botchannelid.ModifyAsync(x => x.Name = botchannelid.Name.Replace("✅", "❌"));
-                    await botchannelid.AddPermissionOverwriteAsync(botchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
-                    var offembed = new EmbedBuilder();
-                    offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Link Trade Bot is offline");
-                    await botchannelid.SendMessageAsync(embed: offembed.Build());
-                }
-                if (_settings.Discordsettings.WhosThatPokemon)
-                {
-                    var wtpchannelid = (ITextChannel)discordmain._client.GetChannelAsync(_settings.Discordsettings.BotWTPChannel).Result;
-                    await wtpchannelid.ModifyAsync(newname => newname.Name = wtpchannelid.Name.Replace("✅", "❌"));
-                    await wtpchannelid.AddPermissionOverwriteAsync(wtpchannelid.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
-                    var offembed = new EmbedBuilder();
-                    offembed.AddField($"{discordmain._client.CurrentUser.Username} Bot Announcement", "Who's That Pokemon mode is Offline");
-                    await wtpchannelid.SendMessageAsync(embed: offembed.Build());
-                }
-            }
+            
+               
+            
             form1.startlinktrades.Enabled = true;
             form1.LinkTradeStop.Enabled = false;
          
