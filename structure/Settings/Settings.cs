@@ -15,6 +15,8 @@ namespace _3DS_link_trade_bot
         protected const string BotsMainSettings = nameof(BotsMainSettings);
         protected const string Legality = nameof(Legality);
         protected const string RNG = nameof(RNG);
+        [Category(BotsMainSettings), Description("True/false if you are running the bot on an old 3ds.")]
+        public bool old3ds { get; set; } = false;
         [Category(BotsMainSettings), Description("GTS Distribution")]
         public bool GTSdistribution { get; set; } = false;
         [Category(BotsMainSettings), Description("GTS Page To Start on")]
