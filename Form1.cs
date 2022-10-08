@@ -348,13 +348,7 @@ namespace _3DS_link_trade_bot
 
         }
 
-        private void discordconnect_Click(object sender, EventArgs e)
-        {
-            var bot = new discordmain();
-            bot.MainAsync();
-            ChangeStatus("Connected to Discord");
-           
-        }
+   
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Properties.Settings.Default.IpAddress = form1.IpAddress.Text;

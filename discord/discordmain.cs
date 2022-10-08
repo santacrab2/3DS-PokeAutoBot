@@ -50,8 +50,30 @@ namespace _3DS_link_trade_bot
             await _interactionService.AddModulesAsync(Assembly.GetEntryAssembly(), null);
 
             var gilds = _client.Guilds.ToArray();
-            foreach(var gild in gilds)
+            foreach (var gild in gilds)
+            {
                 await _interactionService.RegisterCommandsToGuildAsync(gild.Id);
+                if (_settings.old3ds)
+                {
+                    if ((Mode)form1.BotMode.SelectedItem == Mode.FriendCodeOnly)
+                    {
+                        var commands = await gild.GetApplicationCommandsAsync();
+                        SocketApplicationCommand command = (SocketApplicationCommand)commands.Select(z => z.Name == "dump");
+                        await command.DeleteAsync();
+                        command = (SocketApplicationCommand)commands.Select(z => z.Name == "trade");
+                        await command.DeleteAsync();
+                        command = (SocketApplicationCommand)commands.Select(z => z.Name == "guess");
+                        await command.DeleteAsync();
+
+                    }
+                    if((Mode)form1.BotMode.SelectedItem == Mode.FlexTrade)
+                    {
+                        var commands = await gild.GetApplicationCommandsAsync();
+                        SocketApplicationCommand command = (SocketApplicationCommand)commands.Select(z => z.Name == "addfc");
+                        await command.DeleteAsync();
+                    }
+                }
+            }
             
             _client.InteractionCreated += async interaction =>
             {
