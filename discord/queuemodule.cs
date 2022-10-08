@@ -13,6 +13,7 @@ namespace _3DS_link_trade_bot
     [DefaultMemberPermissions(GuildPermission.ViewChannel)]
     public class queuemodule : InteractionModuleBase<SocketInteractionContext>
     {
+         
         [SlashCommand("queuelist","Displays the queue")]
         public async Task queuelist()
         {

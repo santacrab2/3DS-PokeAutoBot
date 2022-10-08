@@ -310,5 +310,17 @@ namespace _3DS_link_trade_bot.Properties {
                 this["WhoThat"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Old3ds {
+            get {
+                return ((bool)(this["Old3ds"]));
+            }
+            set {
+                this["Old3ds"] = value;
+            }
+        }
     }
 }

@@ -28,23 +28,26 @@ namespace _3DS_link_trade_bot
 
         public static async void starttrades()
         {
-            await Log("loading WT mons");
-            var gamecontext = EntityContext.Gen6;
-            if (NTR.game > 2)
-                gamecontext = EntityContext.Gen7;
-            var wtfiles = Directory.GetFiles(wtfolder);
-            if (wtfiles.Length > 0)
+            if ((Mode)Program.form1.BotMode.SelectedItem != Mode.FriendCodeOnly)
             {
-                foreach (var wtfile in wtfiles)
+                await Log("loading WT mons");
+                var gamecontext = EntityContext.Gen6;
+                if (NTR.game > 2)
+                    gamecontext = EntityContext.Gen7;
+                var wtfiles = Directory.GetFiles(wtfolder);
+                if (wtfiles.Length > 0)
                 {
-                    var wtpkm = EntityFormat.GetFromBytes(File.ReadAllBytes(wtfile),gamecontext);
-                    if (!new LegalityAnalysis(wtpkm).Valid || wtpkm.FatefulEncounter == true)
+                    foreach (var wtfile in wtfiles)
                     {
-                        await Log($"{wtfile} not added due to being illegal or untradeable");
-                        continue;
-                    }
+                        var wtpkm = EntityFormat.GetFromBytes(File.ReadAllBytes(wtfile), gamecontext);
+                        if (!new LegalityAnalysis(wtpkm).Valid || wtpkm.FatefulEncounter == true)
+                        {
+                            await Log($"{wtfile} not added due to being illegal or untradeable");
+                            continue;
+                        }
 
-                    wtmons.Add(wtpkm);
+                        wtmons.Add(wtpkm);
+                    }
                 }
             }
             if (wtmons.Count() == 0)

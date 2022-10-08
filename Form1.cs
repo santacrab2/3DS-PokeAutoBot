@@ -244,6 +244,7 @@ namespace _3DS_link_trade_bot
             settings.Discordsettings.BotWTChannel = Properties.Settings.Default.wtchannels;
             settings.GTSdistribution = Properties.Settings.Default.gtsbool;
             settings.WonderTrade = Properties.Settings.Default.wtbool;
+            settings.old3ds = Properties.Settings.Default.Old3ds;
             settings.Legalitysettings.BotOT = Properties.Settings.Default.botot;
             settings.Legalitysettings.BotTID = Properties.Settings.Default.bottid;
             settings.Legalitysettings.BotSID = Properties.Settings.Default.botsid;
@@ -255,6 +256,9 @@ namespace _3DS_link_trade_bot
             settings.Legalitysettings.SetUserSpecifiedPokeball = Properties.Settings.Default.userpokeball;
             settings.Legalitysettings.UseBatchEditor = Properties.Settings.Default.batchedit;
             settings.Legalitysettings.ZKnownGTSBreakers = Properties.Settings.Default.knowngtsbreakers;
+            settings.Discordsettings.SendStatusMessage = Properties.Settings.Default.sendstatusmessage;
+            settings.Discordsettings.PingRoleID = Properties.Settings.Default.pingroleid;
+            settings.Discordsettings.PingMessage = Properties.Settings.Default.pingmessage;
 
             settings.Discordsettings.WhosThatPokemon = Properties.Settings.Default.WhoThat;
             settings.Discordsettings.BotWTPChannel = Properties.Settings.Default.WTPChannels;
@@ -373,6 +377,7 @@ namespace _3DS_link_trade_bot
             Properties.Settings.Default.wtchannels = settings.Discordsettings.BotWTChannel;
             Properties.Settings.Default.gtsbool = settings.GTSdistribution;
             Properties.Settings.Default.wtbool = settings.WonderTrade;
+            Properties.Settings.Default.Old3ds = settings.old3ds;
             Properties.Settings.Default.botot = settings.Legalitysettings.BotOT;
             Properties.Settings.Default.bottid=settings.Legalitysettings.BotTID;
             Properties.Settings.Default.botsid=settings.Legalitysettings.BotSID;
@@ -384,7 +389,10 @@ namespace _3DS_link_trade_bot
             Properties.Settings.Default.userpokeball=settings.Legalitysettings.SetUserSpecifiedPokeball;
             Properties.Settings.Default.batchedit=settings.Legalitysettings.UseBatchEditor;
             Properties.Settings.Default.knowngtsbreakers = settings.Legalitysettings.ZKnownGTSBreakers;
-    
+            Properties.Settings.Default.pingmessage = settings.Discordsettings.PingMessage;
+            Properties.Settings.Default.pingroleid = settings.Discordsettings.PingRoleID;
+            Properties.Settings.Default.sendstatusmessage = settings.Discordsettings.SendStatusMessage;
+
             Properties.Settings.Default.WTPChannels = settings.Discordsettings.BotWTPChannel;
             Properties.Settings.Default.WhoThat = settings.Discordsettings.WhosThatPokemon;
             Properties.Settings.Default.Save();
