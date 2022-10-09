@@ -74,7 +74,7 @@ namespace _3DS_link_trade_bot
                         }
 
                     }
-                    if((Mode)form1.BotMode.SelectedItem == Mode.FlexTrade)
+                    if ((Mode)form1.BotMode.SelectedItem == Mode.FlexTrade)
                     {
                         ChangeStatus("Removing Friend Code command for Flex Trade");
                         var commands = await gild.GetApplicationCommandsAsync();
