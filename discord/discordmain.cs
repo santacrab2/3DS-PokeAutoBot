@@ -55,23 +55,34 @@ namespace _3DS_link_trade_bot
                 await _interactionService.RegisterCommandsToGuildAsync(gild.Id);
                 if (_settings.old3ds)
                 {
+                    ChangeStatus("old 3ds detected removing commands");
                     if ((Mode)form1.BotMode.SelectedItem == Mode.FriendCodeOnly)
                     {
+                        ChangeStatus("Removing Trade Module Commands for Friend Code Mode");
                         var commands = await gild.GetApplicationCommandsAsync();
-                        SocketApplicationCommand command = (SocketApplicationCommand)commands.Select(z => z.Name == "dump");
-                        await command.DeleteAsync();
-                        command = (SocketApplicationCommand)commands.Select(z => z.Name == "trade");
-                        await command.DeleteAsync();
-                        command = (SocketApplicationCommand)commands.Select(z => z.Name == "guess");
-                        await command.DeleteAsync();
+                        foreach (var command in commands)
+                        {
+                            if (command.Name == "dump")
+                                await command.DeleteAsync();
+                            else if (command.Name == "trade")
+                                await command.DeleteAsync();
+                            else if (command.Name == "guess")
+                                await command.DeleteAsync();
+                        }
 
                     }
-                    if((Mode)form1.BotMode.SelectedItem == Mode.FlexTrade)
+                    if ((Mode)form1.BotMode.SelectedItem == Mode.FlexTrade)
                     {
+                        ChangeStatus("Removing Friend Code command for Flex Trade");
                         var commands = await gild.GetApplicationCommandsAsync();
-                        SocketApplicationCommand command = (SocketApplicationCommand)commands.Select(z => z.Name == "addfc");
-                        await command.DeleteAsync();
+                        foreach (var command in commands)
+                        {
+                            if (command.Name == "addfc")
+                                await command.DeleteAsync();
+                        }
                     }
+
+
                 }
             }
             
