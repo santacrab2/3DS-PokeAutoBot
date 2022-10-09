@@ -32,7 +32,12 @@ namespace _3DS_link_trade_bot
         {
 
             ITextChannel wtpchannel = (ITextChannel) await discordmain._client.GetChannelAsync(_settings.Discordsettings.BotWTPChannel);
-  
+            if (_settings.Discordsettings.SendStatusMessage)
+            {
+                await wtpchannel.ModifyAsync(newname => newname.Name = wtpchannel.Name.Replace("❌", "✅"));
+                await wtpchannel.SendMessageAsync("\"who's that pokemon\" mode started!");
+                await wtpchannel.AddPermissionOverwriteAsync(wtpchannel.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
+            }
             while (!WTPsource.IsCancellationRequested)
             {
                 Stopwatch sw = new();
@@ -166,8 +171,14 @@ namespace _3DS_link_trade_bot
         {
             WTPsource.Cancel();
             await RespondAsync("\"Who's That Pokemon\" mode stopped.",ephemeral:true);
-            
+            if (_settings.Discordsettings.SendStatusMessage)
+            {
+                ITextChannel wtpchannel = (ITextChannel)Context.Channel;
+                await wtpchannel.ModifyAsync(newname => newname.Name = wtpchannel.Name.Replace("✅", "❌"));
+                await wtpchannel.AddPermissionOverwriteAsync(wtpchannel.Guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
+            }
         }
+    
 
         private ushort[] GetPokedex()
         {
