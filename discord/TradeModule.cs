@@ -98,9 +98,9 @@ namespace _3DS_link_trade_bot
             if (pk7orpk6 != null)
             {
 
-                if (!EntityDetection.IsSizePlausible(pk7orpk6.Size))
+                if (!EntityDetection.IsSizePlausible(pk7orpk6.Size) || !pk7orpk6.Filename.EndsWith(".pk6")||pk7orpk6.Filename.EndsWith(".pk7"))
                 {
-                    await FollowupAsync("this is not a pk file", ephemeral: true);
+                    await FollowupAsync("this is not a pk6 or pk7 file", ephemeral: true);
                     return;
                 }
                 var buffer = await discordmain.DownloadFromUrlAsync(pk7orpk6.Url);
