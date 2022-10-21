@@ -31,5 +31,7 @@ namespace _3DS_link_trade_bot
         public bool WhosThatPokemon { get; set; } = true;
         [Category(Discord), Description("The Channel(s) the bot will post the Wonder Trade Embed and Countdown too")]
         public ulong BotWTPChannel { get; set; } = 0;
+        [Category(Discord), Description("send an announcement message to discord when the bot turns on/off or crashes")]
+        public bool SendStatusMessage { get; set; } = false;
     }
 }
