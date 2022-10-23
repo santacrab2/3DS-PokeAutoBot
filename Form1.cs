@@ -42,13 +42,16 @@ namespace _3DS_link_trade_bot
 
         private async void consoleconnect_Click(object sender, EventArgs e)
         {
-            try
+            if ((Mode)form1.BotMode.SelectedItem != Mode.FriendCodeOnly)
             {
-                ntr.Connect();
-                if (clientNTR.IsConnected)
-                    ChangeStatus("ntr connected");
+                try
+                {
+                    ntr.Connect();
+                    if (clientNTR.IsConnected)
+                        ChangeStatus("ntr connected");
+                }
+                catch (Exception ex) { ChangeStatus("Could not connect to NTR"); }
             }
-            catch (Exception ex) { ChangeStatus("Could not connect to NTR"); }
             try { 
                 Connection.Connect(Program.form1.IpAddress.Text, 4950);
                 if (Connection.Connected)
