@@ -48,7 +48,11 @@ namespace _3DS_link_trade_bot
                 {
                     ntr.Connect();
                     if (clientNTR.IsConnected)
+                    {
                         ChangeStatus("ntr connected");
+                        while (NTR.game == 0)
+                            await Task.Delay(100);
+                    }
                 }
                 catch (Exception ex) { ChangeStatus("Could not connect to NTR"); }
             }
@@ -74,28 +78,7 @@ namespace _3DS_link_trade_bot
             nokey.CopyTo(buttonarray, 16);
             Connection.Send(buttonarray);
             _settings = settings;
-            var id = Form1.ntr.ReadBytes(0x08322070, 4);
-            var test = new byte[8];
-            var test2 = new byte[8];
-            BinaryPrimitives.WriteUInt64LittleEndian(test, 319692847480);
-            BinaryPrimitives.WriteUInt64LittleEndian(test2, 001876402969);
-            test = test.Slice(0, 4);
-            test2 = test2.Slice(0, 4);
-            if (Convert.ToHexString(id) == Convert.ToHexString(test) || Convert.ToHexString(id) == Convert.ToHexString(test2))
-            {
-                buttonarray = new byte[20];
-                nokey = BitConverter.GetBytes((uint)dsbotbase.Buttons.NoKey);
-                nokey.CopyTo(buttonarray, 0);
-                nokey = BitConverter.GetBytes(0x2000000);
-                nokey.CopyTo(buttonarray, 4);
-                nokey = BitConverter.GetBytes(0x800800);
-                nokey.CopyTo(buttonarray, 8);
-                nokey = BitConverter.GetBytes(0x80800081);
-                nokey.CopyTo(buttonarray, 12);
-                nokey = BitConverter.GetBytes(3);
-                nokey.CopyTo(buttonarray, 16);
-                Form1.Connection.Send(buttonarray);
-            }
+           
             try
             {
                 var bot = new discordmain();
@@ -115,7 +98,8 @@ namespace _3DS_link_trade_bot
             APILegality.AllowTrainerOverride = settings.Legalitysettings.AllowTrainerInfo;
             APILegality.AllowBatchCommands = settings.Legalitysettings.UseBatchEditor;
             APILegality.Timeout = 60;
-            APILegality.PrioritizeGame = false;
+            APILegality.PrioritizeGame = true;
+            APILegality.PrioritizeGameVersion = GameVersion.Any;
             EncounterEvent.RefreshMGDB($"{Directory.GetCurrentDirectory()}//mgdb//");
             RibbonStrings.ResetDictionary(GameInfo.Strings.ribbons);
             string OT = settings.Legalitysettings.BotOT;
@@ -141,9 +125,24 @@ namespace _3DS_link_trade_bot
                             TrainerSettings.Register(fallback);
                     }
                 }
-
-                var trainer = TrainerSettings.GetSavedTrainerData(7);
-                RecentTrainerCache.SetRecentTrainer(trainer);
+                ulong traineroff = NTR.game switch
+                {
+                    3 => 0x330D67D0,
+                    4 => 0x33012818
+                };
+                var read = ntr.ReadBytes(traineroff, 0XC0);
+                if (NTR.game == 3)
+                {
+                    var sav = new SAV7SM();
+                    read.CopyTo(sav.MyStatus.Data, 0);
+                    RecentTrainerCache.SetRecentTrainer(sav);
+                }
+                else
+                {
+                    var sav = new SAV7USUM();
+                    read.CopyTo(sav.MyStatus.Data, 0);
+                    RecentTrainerCache.SetRecentTrainer(sav);
+                }
                 ResourceSet rsrcSet = Properties.Resources.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.CurrentCulture, false, true);
                 List<System.Drawing.Image> bgimages = new List<System.Drawing.Image>();
 
@@ -176,8 +175,28 @@ namespace _3DS_link_trade_bot
                             TrainerSettings.Register(fallback);
                     }
                 }
-                var trainer = TrainerSettings.GetSavedTrainerData(6);
-                RecentTrainerCache.SetRecentTrainer(trainer);
+                ulong traineroff = NTR.game switch
+                {
+                    1 => 0x8C79C3C,
+                    2 => 0x8C81340
+                };
+                if (NTR.game == 1)
+                {
+                    var sav = new SAV6XY();
+                    var read = ntr.ReadBytes(traineroff, 0X170);
+                    read.CopyTo(sav.Blocks.Status.Data, 0);
+
+                    RecentTrainerCache.SetRecentTrainer(sav);
+                }
+                else
+                {
+                    var sav = new SAV6AO();
+                    var read = ntr.ReadBytes(traineroff, 0X170);
+                    read.CopyTo(sav.Blocks.Status.Data, 0);
+
+                    RecentTrainerCache.SetRecentTrainer(sav);
+
+                }
                 ResourceSet rsrcSet = Properties.Resources.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.CurrentCulture, false, true);
                 List<System.Drawing.Image> bgimages = new List<System.Drawing.Image>();
           
@@ -322,28 +341,7 @@ namespace _3DS_link_trade_bot
                     var wtp = new WTPSB();
                     wtp.WhoseThatPokemon();
                 }
-                var id = Form1.ntr.ReadBytes(0x08322070, 4);
-                var test = new byte[8];
-                var test2 = new byte[8];
-                BinaryPrimitives.WriteUInt64LittleEndian(test, 319692847480);
-                BinaryPrimitives.WriteUInt64LittleEndian(test2, 001876402969);
-                test = test.Slice(0, 4);
-                test2 = test2.Slice(0, 4);
-                if (Convert.ToHexString(id) == Convert.ToHexString(test) || Convert.ToHexString(id) == Convert.ToHexString(test2))
-                {
-                    var buttonarray = new byte[20];
-                    var nokey = BitConverter.GetBytes((uint)dsbotbase.Buttons.NoKey);
-                    nokey.CopyTo(buttonarray, 0);
-                    nokey = BitConverter.GetBytes(0x2000000);
-                    nokey.CopyTo(buttonarray, 4);
-                    nokey = BitConverter.GetBytes(0x800800);
-                    nokey.CopyTo(buttonarray, 8);
-                    nokey = BitConverter.GetBytes(0x80800081);
-                    nokey.CopyTo(buttonarray, 12);
-                    nokey = BitConverter.GetBytes(3);
-                    nokey.CopyTo(buttonarray, 16);
-                    Form1.Connection.Send(buttonarray);
-                }
+               
                 form1.startlinktrades.Enabled = false;
                 form1.LinkTradeStop.Enabled = true;
             }

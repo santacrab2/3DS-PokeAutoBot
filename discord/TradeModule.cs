@@ -61,9 +61,13 @@ namespace _3DS_link_trade_bot
 
                 ShowdownSet set = ConvertToShowdown(PokemonText);
                 RegenTemplate rset = new(set);
-                var trainer = TrainerSettings.GetSavedTrainerData(GameVersion.USUM,7);
-                if (NTR.game <3)
-                    trainer = TrainerSettings.GetSavedTrainerData(GameVersion.ORAS, 6);
+                var trainer = NTR.game switch
+                {
+                    4 => TrainerSettings.GetSavedTrainerData(GameVersion.USUM, 7),
+                    3 => TrainerSettings.GetSavedTrainerData(GameVersion.SM, 7),
+                    2 => TrainerSettings.GetSavedTrainerData(GameVersion.ORAS, 6),
+                    1 => TrainerSettings.GetSavedTrainerData(GameVersion.XY, 6)
+                };
                 var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
                
                 var pkm = sav.GetLegalFromSet(rset, out var res);
@@ -98,10 +102,25 @@ namespace _3DS_link_trade_bot
             if (pk7orpk6 != null)
             {
 
-                if (!EntityDetection.IsSizePlausible(pk7orpk6.Size) || !pk7orpk6.Filename.EndsWith(".pk6")||pk7orpk6.Filename.EndsWith(".pk7"))
+                if (!EntityDetection.IsSizePlausible(pk7orpk6.Size))
                 {
-                    await FollowupAsync("this is not a pk6 or pk7 file", ephemeral: true);
+                    await FollowupAsync("this is not a pk file", ephemeral: true);
                     return;
+                }
+                if (NTR.game < 3)
+                {
+                    if (!pk7orpk6.Filename.EndsWith(".pk6"))
+                    {
+                        await FollowupAsync("this is not a pk6 file, pk6 is required for the generation 6 bot. Please use text if you are unsure how to obtain this file type.");
+                        return;
+                    }
+                }
+                else
+                {
+                    if (!pk7orpk6.Filename.EndsWith(".pk7"))
+                    {
+                        await FollowupAsync("this is not a pk7 file, pk7 is required for the generation 7 bot. Please use text if you are unsure how to obtain this file type.");
+                    }
                 }
                 var buffer = await discordmain.DownloadFromUrlAsync(pk7orpk6.Url);
 
