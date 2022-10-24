@@ -48,7 +48,11 @@ namespace _3DS_link_trade_bot
                 {
                     ntr.Connect();
                     if (clientNTR.IsConnected)
+                    {
                         ChangeStatus("ntr connected");
+                        while (NTR.game == 0)
+                            await Task.Delay(100);
+                    }
                 }
                 catch (Exception ex) { ChangeStatus("Could not connect to NTR"); }
             }
@@ -101,6 +105,7 @@ namespace _3DS_link_trade_bot
             int TID = settings.Legalitysettings.BotTID;
             int SID = settings.Legalitysettings.BotSID;
             int lang = (int)settings.Legalitysettings.BotLanguage;
+           
             if (NTR.game == 3 || NTR.game == 4)
             {
                 for (int i = 1; i <= 7; i++)
@@ -176,7 +181,7 @@ namespace _3DS_link_trade_bot
                 ulong traineroff = NTR.game switch
                 {
                     1 => 0x8C79C3C,
-                   2 => 0x8C81340
+                    2 => 0x8C81340
                 };
                 if (NTR.game == 1)
                 {
@@ -358,28 +363,7 @@ namespace _3DS_link_trade_bot
                     var wtp = new WTPSB();
                     wtp.WhoseThatPokemon();
                 }
-                var id = Form1.ntr.ReadBytes(0x08322070, 4);
-                var test = new byte[8];
-                var test2 = new byte[8];
-                BinaryPrimitives.WriteUInt64LittleEndian(test, 319692847480);
-                BinaryPrimitives.WriteUInt64LittleEndian(test2, 001876402969);
-                test = test.Slice(0, 4);
-                test2 = test2.Slice(0, 4);
-                if (Convert.ToHexString(id) == Convert.ToHexString(test) || Convert.ToHexString(id) == Convert.ToHexString(test2))
-                {
-                    var buttonarray = new byte[20];
-                    var nokey = BitConverter.GetBytes((uint)dsbotbase.Buttons.NoKey);
-                    nokey.CopyTo(buttonarray, 0);
-                    nokey = BitConverter.GetBytes(0x2000000);
-                    nokey.CopyTo(buttonarray, 4);
-                    nokey = BitConverter.GetBytes(0x800800);
-                    nokey.CopyTo(buttonarray, 8);
-                    nokey = BitConverter.GetBytes(0x80800081);
-                    nokey.CopyTo(buttonarray, 12);
-                    nokey = BitConverter.GetBytes(3);
-                    nokey.CopyTo(buttonarray, 16);
-                    Form1.Connection.Send(buttonarray);
-                }
+            
                 form1.startlinktrades.Enabled = false;
                 form1.LinkTradeStop.Enabled = true;
             }

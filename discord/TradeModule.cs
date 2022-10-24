@@ -42,6 +42,7 @@ namespace _3DS_link_trade_bot
 
                 ShowdownSet set = ConvertToShowdown(PokemonText);
                 RegenTemplate rset = new(set);
+             
                 var trainer = NTR.game switch {
                     4 => TrainerSettings.GetSavedTrainerData(GameVersion.USUM, 7),
                     3 => TrainerSettings.GetSavedTrainerData(GameVersion.SM,7),
