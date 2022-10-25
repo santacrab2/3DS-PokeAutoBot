@@ -11,7 +11,7 @@ Support Server - https://www.piplup.net
 Additional Credits:
 Thank you Muchacho13Scripts for patching the wonder trade no trainer found bug.
 
-Update 9/22/2022
-- At this point the release is out of date. It needs to be updated to latest deps for pkhex and I still need to add/find all the offsets for x/y as it currently only runs on ORAS for gen 6. I am currently working on attempting to switch it from NTR debugger to Luma's Rosalina Debugger but they are different and this is relatively new to me so may take a minute. This switch should fix any issues the old 3ds has with running the software. 
+Update 10/25/2022
+- I still need to add/find all the offsets for x/y as it currently only runs on ORAS for gen 6.
 
 Pull Requests are always welcome, contributions are always welcome, having a custom fork is always welcome, have fun with it since thats its purpose.
