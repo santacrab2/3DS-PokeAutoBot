@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <None Remove="165Ledyba.ico" />
-    <None Remove="deps\DexFlavor.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,9 +21,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="165Ledyba.ico" />
-    <EmbeddedResource Include="deps\DexFlavor.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -53,7 +49,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

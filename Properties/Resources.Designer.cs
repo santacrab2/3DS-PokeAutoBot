@@ -22,7 +22,7 @@ namespace _3DS_link_trade_bot.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace _3DS_link_trade_bot.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("_3DS_link_trade_bot.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace _3DS_link_trade_bot.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap A {
+        public static System.Drawing.Bitmap A {
             get {
                 object obj = ResourceManager.GetObject("A", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap B {
+        public static System.Drawing.Bitmap B {
             get {
                 object obj = ResourceManager.GetObject("B", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +83,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg000 {
+        public static System.Drawing.Bitmap Bg000 {
             get {
                 object obj = ResourceManager.GetObject("Bg000", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +93,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg001 {
+        public static System.Drawing.Bitmap Bg001 {
             get {
                 object obj = ResourceManager.GetObject("Bg001", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +103,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg002 {
+        public static System.Drawing.Bitmap Bg002 {
             get {
                 object obj = ResourceManager.GetObject("Bg002", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +113,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg003 {
+        public static System.Drawing.Bitmap Bg003 {
             get {
                 object obj = ResourceManager.GetObject("Bg003", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,7 +123,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg004 {
+        public static System.Drawing.Bitmap Bg004 {
             get {
                 object obj = ResourceManager.GetObject("Bg004", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -133,7 +133,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg005 {
+        public static System.Drawing.Bitmap Bg005 {
             get {
                 object obj = ResourceManager.GetObject("Bg005", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,7 +143,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg006 {
+        public static System.Drawing.Bitmap Bg006 {
             get {
                 object obj = ResourceManager.GetObject("Bg006", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -153,7 +153,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg007 {
+        public static System.Drawing.Bitmap Bg007 {
             get {
                 object obj = ResourceManager.GetObject("Bg007", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -163,7 +163,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg008 {
+        public static System.Drawing.Bitmap Bg008 {
             get {
                 object obj = ResourceManager.GetObject("Bg008", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -173,7 +173,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg009 {
+        public static System.Drawing.Bitmap Bg009 {
             get {
                 object obj = ResourceManager.GetObject("Bg009", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -183,7 +183,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg010 {
+        public static System.Drawing.Bitmap Bg010 {
             get {
                 object obj = ResourceManager.GetObject("Bg010", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -193,7 +193,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg011 {
+        public static System.Drawing.Bitmap Bg011 {
             get {
                 object obj = ResourceManager.GetObject("Bg011", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -203,7 +203,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg012 {
+        public static System.Drawing.Bitmap Bg012 {
             get {
                 object obj = ResourceManager.GetObject("Bg012", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -213,7 +213,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg013 {
+        public static System.Drawing.Bitmap Bg013 {
             get {
                 object obj = ResourceManager.GetObject("Bg013", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -223,7 +223,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg014 {
+        public static System.Drawing.Bitmap Bg014 {
             get {
                 object obj = ResourceManager.GetObject("Bg014", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -233,7 +233,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg015 {
+        public static System.Drawing.Bitmap Bg015 {
             get {
                 object obj = ResourceManager.GetObject("Bg015", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -243,7 +243,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg016 {
+        public static System.Drawing.Bitmap Bg016 {
             get {
                 object obj = ResourceManager.GetObject("Bg016", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -253,7 +253,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg017 {
+        public static System.Drawing.Bitmap Bg017 {
             get {
                 object obj = ResourceManager.GetObject("Bg017", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -263,7 +263,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg018 {
+        public static System.Drawing.Bitmap Bg018 {
             get {
                 object obj = ResourceManager.GetObject("Bg018", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -273,7 +273,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg019 {
+        public static System.Drawing.Bitmap Bg019 {
             get {
                 object obj = ResourceManager.GetObject("Bg019", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -283,7 +283,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg020 {
+        public static System.Drawing.Bitmap Bg020 {
             get {
                 object obj = ResourceManager.GetObject("Bg020", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -293,7 +293,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg021 {
+        public static System.Drawing.Bitmap Bg021 {
             get {
                 object obj = ResourceManager.GetObject("Bg021", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -303,7 +303,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg022 {
+        public static System.Drawing.Bitmap Bg022 {
             get {
                 object obj = ResourceManager.GetObject("Bg022", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -313,7 +313,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg023 {
+        public static System.Drawing.Bitmap Bg023 {
             get {
                 object obj = ResourceManager.GetObject("Bg023", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -323,7 +323,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg024 {
+        public static System.Drawing.Bitmap Bg024 {
             get {
                 object obj = ResourceManager.GetObject("Bg024", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -333,7 +333,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg025 {
+        public static System.Drawing.Bitmap Bg025 {
             get {
                 object obj = ResourceManager.GetObject("Bg025", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -343,7 +343,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg026 {
+        public static System.Drawing.Bitmap Bg026 {
             get {
                 object obj = ResourceManager.GetObject("Bg026", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -353,7 +353,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg027 {
+        public static System.Drawing.Bitmap Bg027 {
             get {
                 object obj = ResourceManager.GetObject("Bg027", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -363,7 +363,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg028 {
+        public static System.Drawing.Bitmap Bg028 {
             get {
                 object obj = ResourceManager.GetObject("Bg028", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -373,7 +373,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg029 {
+        public static System.Drawing.Bitmap Bg029 {
             get {
                 object obj = ResourceManager.GetObject("Bg029", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -383,7 +383,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg030 {
+        public static System.Drawing.Bitmap Bg030 {
             get {
                 object obj = ResourceManager.GetObject("Bg030", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -393,7 +393,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg031 {
+        public static System.Drawing.Bitmap Bg031 {
             get {
                 object obj = ResourceManager.GetObject("Bg031", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -403,7 +403,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg032 {
+        public static System.Drawing.Bitmap Bg032 {
             get {
                 object obj = ResourceManager.GetObject("Bg032", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -413,7 +413,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg033 {
+        public static System.Drawing.Bitmap Bg033 {
             get {
                 object obj = ResourceManager.GetObject("Bg033", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -423,7 +423,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg034 {
+        public static System.Drawing.Bitmap Bg034 {
             get {
                 object obj = ResourceManager.GetObject("Bg034", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -433,7 +433,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg035 {
+        public static System.Drawing.Bitmap Bg035 {
             get {
                 object obj = ResourceManager.GetObject("Bg035", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -443,7 +443,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg036 {
+        public static System.Drawing.Bitmap Bg036 {
             get {
                 object obj = ResourceManager.GetObject("Bg036", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -453,7 +453,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg037 {
+        public static System.Drawing.Bitmap Bg037 {
             get {
                 object obj = ResourceManager.GetObject("Bg037", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -463,7 +463,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg038 {
+        public static System.Drawing.Bitmap Bg038 {
             get {
                 object obj = ResourceManager.GetObject("Bg038", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -473,7 +473,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg039 {
+        public static System.Drawing.Bitmap Bg039 {
             get {
                 object obj = ResourceManager.GetObject("Bg039", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -483,7 +483,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg040 {
+        public static System.Drawing.Bitmap Bg040 {
             get {
                 object obj = ResourceManager.GetObject("Bg040", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -493,7 +493,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg041 {
+        public static System.Drawing.Bitmap Bg041 {
             get {
                 object obj = ResourceManager.GetObject("Bg041", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -503,7 +503,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg042 {
+        public static System.Drawing.Bitmap Bg042 {
             get {
                 object obj = ResourceManager.GetObject("Bg042", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -513,7 +513,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg043 {
+        public static System.Drawing.Bitmap Bg043 {
             get {
                 object obj = ResourceManager.GetObject("Bg043", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -523,7 +523,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg044 {
+        public static System.Drawing.Bitmap Bg044 {
             get {
                 object obj = ResourceManager.GetObject("Bg044", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -533,7 +533,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg045 {
+        public static System.Drawing.Bitmap Bg045 {
             get {
                 object obj = ResourceManager.GetObject("Bg045", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -543,7 +543,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg046 {
+        public static System.Drawing.Bitmap Bg046 {
             get {
                 object obj = ResourceManager.GetObject("Bg046", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -553,7 +553,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg047 {
+        public static System.Drawing.Bitmap Bg047 {
             get {
                 object obj = ResourceManager.GetObject("Bg047", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -563,7 +563,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg048 {
+        public static System.Drawing.Bitmap Bg048 {
             get {
                 object obj = ResourceManager.GetObject("Bg048", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -573,7 +573,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg049 {
+        public static System.Drawing.Bitmap Bg049 {
             get {
                 object obj = ResourceManager.GetObject("Bg049", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -583,7 +583,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg050 {
+        public static System.Drawing.Bitmap Bg050 {
             get {
                 object obj = ResourceManager.GetObject("Bg050", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -593,7 +593,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg051 {
+        public static System.Drawing.Bitmap Bg051 {
             get {
                 object obj = ResourceManager.GetObject("Bg051", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -603,7 +603,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg052 {
+        public static System.Drawing.Bitmap Bg052 {
             get {
                 object obj = ResourceManager.GetObject("Bg052", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -613,7 +613,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg053 {
+        public static System.Drawing.Bitmap Bg053 {
             get {
                 object obj = ResourceManager.GetObject("Bg053", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -623,7 +623,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg054 {
+        public static System.Drawing.Bitmap Bg054 {
             get {
                 object obj = ResourceManager.GetObject("Bg054", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -633,7 +633,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg055 {
+        public static System.Drawing.Bitmap Bg055 {
             get {
                 object obj = ResourceManager.GetObject("Bg055", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -643,7 +643,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg056 {
+        public static System.Drawing.Bitmap Bg056 {
             get {
                 object obj = ResourceManager.GetObject("Bg056", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -653,7 +653,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg057 {
+        public static System.Drawing.Bitmap Bg057 {
             get {
                 object obj = ResourceManager.GetObject("Bg057", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -663,7 +663,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Bg058 {
+        public static System.Drawing.Bitmap Bg058 {
             get {
                 object obj = ResourceManager.GetObject("Bg058", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -673,7 +673,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Center {
+        public static System.Drawing.Bitmap Center {
             get {
                 object obj = ResourceManager.GetObject("Center", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -689,7 +689,7 @@ namespace _3DS_link_trade_bot.Properties {
         ///It has a barbaric nature. In battle, it whips its fiery tail around and slashes away with sharp claws.
         ///It spits  [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string DexFlavor {
+        public static string DexFlavor {
             get {
                 return ResourceManager.GetString("DexFlavor", resourceCulture);
             }
@@ -698,7 +698,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Down {
+        public static System.Drawing.Bitmap Down {
             get {
                 object obj = ResourceManager.GetObject("Down", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -708,7 +708,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Homebutton {
+        public static System.Drawing.Bitmap Homebutton {
             get {
                 object obj = ResourceManager.GetObject("Homebutton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -718,7 +718,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Left {
+        public static System.Drawing.Bitmap Left {
             get {
                 object obj = ResourceManager.GetObject("Left", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -728,7 +728,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pkm_as {
+        public static System.Drawing.Bitmap pkm_as {
             get {
                 object obj = ResourceManager.GetObject("pkm_as", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -738,7 +738,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pkm_m {
+        public static System.Drawing.Bitmap pkm_m {
             get {
                 object obj = ResourceManager.GetObject("pkm_m", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -748,7 +748,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pkm_or {
+        public static System.Drawing.Bitmap pkm_or {
             get {
                 object obj = ResourceManager.GetObject("pkm_or", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -758,7 +758,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pkm_s {
+        public static System.Drawing.Bitmap pkm_s {
             get {
                 object obj = ResourceManager.GetObject("pkm_s", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -768,7 +768,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pkm_um {
+        public static System.Drawing.Bitmap pkm_um {
             get {
                 object obj = ResourceManager.GetObject("pkm_um", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -778,7 +778,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pkm_us {
+        public static System.Drawing.Bitmap pkm_us {
             get {
                 object obj = ResourceManager.GetObject("pkm_us", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -788,7 +788,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pkm_x {
+        public static System.Drawing.Bitmap pkm_x {
             get {
                 object obj = ResourceManager.GetObject("pkm_x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -798,7 +798,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pkm_y {
+        public static System.Drawing.Bitmap pkm_y {
             get {
                 object obj = ResourceManager.GetObject("pkm_y", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -808,7 +808,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap powerbutton {
+        public static System.Drawing.Bitmap powerbutton {
             get {
                 object obj = ResourceManager.GetObject("powerbutton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -818,7 +818,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Right {
+        public static System.Drawing.Bitmap Right {
             get {
                 object obj = ResourceManager.GetObject("Right", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -828,7 +828,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap startselectbutton {
+        public static System.Drawing.Bitmap startselectbutton {
             get {
                 object obj = ResourceManager.GetObject("startselectbutton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -838,7 +838,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap touchscreen {
+        public static System.Drawing.Bitmap touchscreen {
             get {
                 object obj = ResourceManager.GetObject("touchscreen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -848,7 +848,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Up {
+        public static System.Drawing.Bitmap Up {
             get {
                 object obj = ResourceManager.GetObject("Up", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -858,7 +858,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap X {
+        public static System.Drawing.Bitmap X {
             get {
                 object obj = ResourceManager.GetObject("X", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -868,7 +868,7 @@ namespace _3DS_link_trade_bot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Y {
+        public static System.Drawing.Bitmap Y {
             get {
                 object obj = ResourceManager.GetObject("Y", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

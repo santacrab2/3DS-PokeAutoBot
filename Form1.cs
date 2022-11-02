@@ -125,26 +125,9 @@ namespace _3DS_link_trade_bot
                             TrainerSettings.Register(fallback);
                     }
                 }
-            
-                ulong traineroff = NTR.game switch
-                {
-                    3 => 0x330D67D0,
-                    4 => 0x33012818
-                };
 
-                var read = ntr.ReadBytes(traineroff, 0XC0);
-                if (NTR.game == 3)
-                {
-                    var sav = new SAV7SM();
-                    read.CopyTo(sav.MyStatus.Data, 0);
-                    RecentTrainerCache.SetRecentTrainer(sav);
-                }
-                else
-                {
-                    var sav = new SAV7USUM();
-                    read.CopyTo(sav.MyStatus.Data, 0);
-                    RecentTrainerCache.SetRecentTrainer(sav);
-                }
+                var trainer = TrainerSettings.GetSavedTrainerData(7);
+                RecentTrainerCache.SetRecentTrainer(trainer);
                 ResourceSet rsrcSet = Properties.Resources.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.CurrentCulture, false, true);
                 List<System.Drawing.Image> bgimages = new List<System.Drawing.Image>();
 
