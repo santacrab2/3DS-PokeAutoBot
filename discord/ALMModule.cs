@@ -26,17 +26,19 @@ namespace _3DS_link_trade_bot
             var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
           
             var pkm = sav.GetLegalFromSet(rset, out var res);
-           
-           
-            
-            if (pkm is PK7 pk7)
+
+
+
+            if (pkm is PK7)
             {
+
+                PK7 pk7 = (PK7)pkm;
                 pk7.SetDefaultRegionOrigins();
                 pkm = pk7;
             }
-               
-            
-         
+
+
+
             var correctfile = (NTR.game > 2 && pkm is PK7) ? true : pkm is PK6 ? true : false;
 
             if (!new LegalityAnalysis(pkm).Valid || !correctfile)
