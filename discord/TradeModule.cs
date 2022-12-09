@@ -73,7 +73,7 @@ namespace _3DS_link_trade_bot
                  
                         imsg += $"\n{set.SetAnalysis(sav,pkm)}";
                     if (pkm.Species == 0)
-                        imsg += $"\nI did not detect any pokemon species, check your spelling and text format. See <#872614034619367444> for more info.";
+                        imsg += $"\n\nI did not detect any pokemon species, check your spelling and text format. See <#872614034619367444> for more info.";
                     await FollowupAsync(imsg).ConfigureAwait(false);
                     return;
                 }
@@ -82,7 +82,7 @@ namespace _3DS_link_trade_bot
                 tobequeued = new queuesystem() { discordcontext = Context, friendcode = "", IGN = TrainerName, mode = botmode.trade, tradepokemon = pkm };
                 The_Q.Enqueue(tobequeued);
                 await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count()}. Receiving: {(Species)pkm.Species}");
-                
+                return;
                
             }
             if (pk7orpk6 != null)
@@ -106,6 +106,7 @@ namespace _3DS_link_trade_bot
                     if (!pk7orpk6.Filename.EndsWith(".pk7"))
                     {
                         await FollowupAsync("this is not a pk7 file, pk7 is required for the generation 7 bot. Please use text if you are unsure how to obtain this file type.");
+                        return;
                     }
                 }
                 var buffer = await discordmain.DownloadFromUrlAsync(pk7orpk6.Url);
