@@ -37,12 +37,12 @@ namespace _3DS_link_trade_bot
             }
             if (PokemonText != " ")
             {
-               
-          
 
+
+              
                 ShowdownSet set = ConvertToShowdown(PokemonText);
                 RegenTemplate rset = new(set);
-             
+                
                 var trainer = NTR.game switch {
                     4 => TrainerSettings.GetSavedTrainerData(GameVersion.USUM, 7),
                     3 => TrainerSettings.GetSavedTrainerData(GameVersion.SM,7),
@@ -52,7 +52,7 @@ namespace _3DS_link_trade_bot
                 var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
                
                 var pkm = sav.GetLegalFromSet(rset, out var res);
-
+                
 
 
                 if (pkm is PK7)
@@ -72,6 +72,8 @@ namespace _3DS_link_trade_bot
                     var imsg = $"Oops! {reason}";
                  
                         imsg += $"\n{set.SetAnalysis(sav,pkm)}";
+                    if (pkm.Species == 0)
+                        imsg += $"\nI did not detect any pokemon species, check your spelling and text format. See <#872614034619367444> for more info.";
                     await FollowupAsync(imsg).ConfigureAwait(false);
                     return;
                 }
@@ -127,6 +129,7 @@ namespace _3DS_link_trade_bot
                     var tobequeued = new queuesystem() { discordcontext = Context, friendcode = "", IGN = TrainerName, tradepokemon = pkm, mode = botmode.trade };
                     The_Q.Enqueue(tobequeued);
                     await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count()}. Receiving: {(Species)pkm.Species}");
+                    return;
                 }
                 else
                 {
@@ -147,8 +150,10 @@ namespace _3DS_link_trade_bot
                     var tobequeued = new queuesystem() { discordcontext = Context, friendcode = "", IGN = TrainerName, tradepokemon = pkm, mode = botmode.trade };
                     The_Q.Enqueue(tobequeued);
                     await FollowupAsync($"{Context.User.Username} - Added to the queue. Current Position: {The_Q.Count()}. Receiving: {(Species)pkm.Species}");
+                    return;
                 }
             }
+            await FollowupAsync("You did not include any pokemon information, Please make sure the command boxes are filled out. See <#872614034619367444> for instructions and examples");
         }
 
         [SlashCommand("dump","reads pokemon in your box that you show the bot and sends you pk files of them without trading")]

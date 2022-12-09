@@ -140,7 +140,10 @@ namespace _3DS_link_trade_bot
                     {
                         if(The_Q.Count == 0)
                         {
-                            await Task.Delay(1000);
+                            await Task.Delay(5000);
+                            await touch(120, 10, 10);
+                            await click(A, 3);
+                            await click(X, 10);
                             continue;
                         }
                         tradeinfo = The_Q.Dequeue();

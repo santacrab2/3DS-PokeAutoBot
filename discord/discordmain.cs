@@ -124,21 +124,22 @@ namespace _3DS_link_trade_bot
                 switch (result.Error)
                 {
                     case InteractionCommandError.UnmetPrecondition:
-                        // implement
+                        arg1.FollowupAsync("some kind of unmet precondition error? What does that even mean?");
                         break;
                     case InteractionCommandError.UnknownCommand:
-                        // implement
+                        arg1.FollowupAsync("That's not a command?! Watcha doin?");
                         break;
                     case InteractionCommandError.BadArgs:
-                        // implement
+                        arg1.FollowupAsync("You Did not fill in all of the required parameters or Your Format is incorrect, pay attention to what you are doing and try again!");
                         break;
                     case InteractionCommandError.Exception:
-                        // implement
+                        arg1.FollowupAsync("Exception thrown, try again?");
                         break;
                     case InteractionCommandError.Unsuccessful:
-                        // implement
+                        arg1.FollowupAsync("The command was just simply unsuccessful");
                         break;
                     default:
+                        arg1.FollowupAsync("This error could literally be anything, this is the default message!");
                         break;
                 }
             }
