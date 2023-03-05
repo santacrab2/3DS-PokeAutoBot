@@ -29,10 +29,10 @@
     <Setting Name="botot" Type="System.String" Scope="User">
       <Value Profile="(Default)">pip</Value>
     </Setting>
-    <Setting Name="bottid" Type="System.Int32" Scope="User">
+    <Setting Name="bottid" Type="System.UInt16" Scope="User">
       <Value Profile="(Default)">42069</Value>
     </Setting>
-    <Setting Name="botsid" Type="System.Int32" Scope="User">
+    <Setting Name="botsid" Type="System.UInt16" Scope="User">
       <Value Profile="(Default)">42069</Value>
     </Setting>
     <Setting Name="Ribbons" Type="System.Boolean" Scope="User">
