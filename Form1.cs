@@ -14,6 +14,9 @@ using PKHeX.Core.AutoMod;
 using static _3DS_link_trade_bot.RAM;
 using System.Resources;
 using System.Collections;
+using _3DS_link_trade_bot.Properties;
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Reflection.PortableExecutable;
 
 namespace _3DS_link_trade_bot
 {
@@ -102,8 +105,8 @@ namespace _3DS_link_trade_bot
             EncounterEvent.RefreshMGDB($"{Directory.GetCurrentDirectory()}//mgdb//");
             RibbonStrings.ResetDictionary(GameInfo.Strings.ribbons);
             string OT = settings.Legalitysettings.BotOT;
-            int TID = settings.Legalitysettings.BotTID;
-            int SID = settings.Legalitysettings.BotSID;
+            ushort TID = settings.Legalitysettings.BotTID;
+            ushort SID = settings.Legalitysettings.BotSID;
             int lang = (int)settings.Legalitysettings.BotLanguage;
            
             if (NTR.game == 3 || NTR.game == 4)
@@ -116,8 +119,8 @@ namespace _3DS_link_trade_bot
                         var fallback = new SimpleTrainerInfo(v)
                         {
                             Language = lang,
-                            TID = TID,
-                            SID = SID,
+                            TID16 = TID,
+                            SID16 = SID,
                             OT = OT,
                         };
                         var exist = TrainerSettings.GetSavedTrainerData(v, i, fallback);
@@ -151,8 +154,8 @@ namespace _3DS_link_trade_bot
                         var fallback = new SimpleTrainerInfo(v)
                         {
                             Language = lang,
-                            TID = TID,
-                            SID = SID,
+                            TID16 = TID,
+                            SID16 = SID,
                             OT = OT,
                         };
                         var exist = TrainerSettings.GetSavedTrainerData(v, i, fallback);
@@ -665,9 +668,7 @@ namespace _3DS_link_trade_bot
                 nokey.CopyTo(buttonarray, 16);
                 Connection.Send(buttonarray);
             }
-       
         }
 
-     
     }
 }

@@ -11,7 +11,7 @@ using Discord.Interactions;
 namespace _3DS_link_trade_bot
 {
     [EnabledInDm(false)]
-    [DefaultMemberPermissions(GuildPermission.ViewChannel)]
+ 
     public class ALMModule : InteractionModuleBase<SocketInteractionContext>
     {
         [SlashCommand("convert", "Makes you a pokemon file from showdown text")]

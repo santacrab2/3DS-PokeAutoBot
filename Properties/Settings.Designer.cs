@@ -12,7 +12,7 @@ namespace _3DS_link_trade_bot.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -134,9 +134,9 @@ namespace _3DS_link_trade_bot.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("42069")]
-        public int bottid {
+        public ushort bottid {
             get {
-                return ((int)(this["bottid"]));
+                return ((ushort)(this["bottid"]));
             }
             set {
                 this["bottid"] = value;
@@ -146,9 +146,9 @@ namespace _3DS_link_trade_bot.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("42069")]
-        public int botsid {
+        public ushort botsid {
             get {
-                return ((int)(this["botsid"]));
+                return ((ushort)(this["botsid"]));
             }
             set {
                 this["botsid"] = value;

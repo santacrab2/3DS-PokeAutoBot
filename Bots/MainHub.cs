@@ -141,9 +141,7 @@ namespace _3DS_link_trade_bot
                         if(The_Q.Count == 0)
                         {
                             await Task.Delay(5000);
-                            await touch(120, 10, 10);
-                            await click(A, 3);
-                            await click(X, 10);
+                          
                             continue;
                         }
                         tradeinfo = The_Q.Dequeue();
@@ -301,20 +299,27 @@ namespace _3DS_link_trade_bot
         }
         public static async Task clearfriendlist(int index,int friendstoremove)
         {
-            await presshome(5);
+            Log("pressing home");
+            await presshome(10);
+            Log("pressing friend list");
             await touch(120, 10, 1);
             await touch(120, 10, 6);
+            Log("pressing settings");
             await touch(60, 21, 2);
+            Log("pressing delete");
             await touch(158, 163, 2);
+            Log("scrolling to index");
             for (int i = 2; i < index; i++)
             {
                 await DpadClick(DpadRIGHT, 1);
             }
+            Log("deleting friends");
             for (int i = 0; i < friendstoremove; i++)
             {
                 await touch(276, 171, 1);
                 await click(A, 5);
             }
+            Log("friend deletion complete");
             await presshome(3);
             await presshome(3);
             

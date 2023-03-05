@@ -10,7 +10,7 @@ using static _3DS_link_trade_bot.MainHub;
 namespace _3DS_link_trade_bot
 {
     [EnabledInDm(true)]
-    [DefaultMemberPermissions(GuildPermission.ViewChannel)]
+   
     public class queuemodule : InteractionModuleBase<SocketInteractionContext>
     {
          
