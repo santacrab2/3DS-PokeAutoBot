@@ -1,3 +1,6 @@
+***No Support is provided for this software, its a figure it out on your own kind of thing. There are also no releases build it yourself. If you do not know how you don't get to use it.***
+
+
 Huge Thank you to PKHeX developers, ledybot, NTR, Luma developers who all made projects like these possible.
 
 Couldn't have made this program as pretty as it is and as user friendly without constant feedback from bewearhugs.
