@@ -20,15 +20,18 @@ namespace _3DS_link_trade_bot
             await DeferAsync();
             ShowdownSet set = TradeModule.ConvertToShowdown(PokemonText);
             RegenTemplate rset = new(set);
-            var trainer = TrainerSettings.GetSavedTrainerData(GameVersion.USUM,7);
-            if (NTR.game <3)
-                trainer = TrainerSettings.GetSavedTrainerData(GameVersion.ORAS,6);
-            var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
-          
+            var trainer = NTR.game switch
+            {
+                4 => TrainerSettings.GetSavedTrainerData(GameVersion.USUM, 7),
+                3 => TrainerSettings.GetSavedTrainerData(GameVersion.SM, 7),
+                2 => TrainerSettings.GetSavedTrainerData(GameVersion.ORAS, 6),
+                1 => TrainerSettings.GetSavedTrainerData(GameVersion.XY, 6)
+            };
+            var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, "pip");
+
             var pkm = sav.GetLegalFromSet(rset, out var res);
-           
-           
-            
+            //pkm = EntityConverter.ConvertToType(pkm, sav.PKMType, out var result);
+ 
             if (pkm is PK7)
             {
                 
@@ -41,7 +44,7 @@ namespace _3DS_link_trade_bot
          
             var correctfile = (NTR.game > 2 && pkm is PK7) ? true : pkm is PK6 ? true : false;
 
-            if (!new LegalityAnalysis(pkm).Valid || !correctfile)
+            if (!new LegalityAnalysis(pkm).Valid)
             {
                 var reason = $"I wasn't able to create a {(Species)set.Species} from that set.";
                 var imsg = $"Oops! {reason}";

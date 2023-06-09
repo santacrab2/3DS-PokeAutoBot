@@ -113,7 +113,7 @@ namespace _3DS_link_trade_bot
                             }
                         }
                         pk.Ball = BallApplicator.ApplyBallLegalByColor(pk);
-                        ushort[] sugmov = MoveSetApplicator.GetMoveSet(pk, true);
+                        ushort[] sugmov = Array.Empty<ushort>();
                         pk.SetMoves(sugmov);
                         int natue = random.Next(24);
                         pk.Nature = natue;

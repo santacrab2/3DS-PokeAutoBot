@@ -158,7 +158,13 @@ namespace _3DS_link_trade_bot
         }
         private async Task readpkfiles(SocketMessage messageParam)
         {
+            
             var message = messageParam as SocketUserMessage;
+            if(message.Channel is SocketDMChannel && !message.Author.IsBot)
+            {
+               var logs= (ITextChannel)await _client.GetChannelAsync(872613946471899196);
+               await logs.SendMessageAsync($"DM Log: User: {message.Author.Username} ID: {message.Author.Id} Message: {message.Content}");
+            }
             if (message == null) 
                 return;
             if(message.Attachments.Count > 0)

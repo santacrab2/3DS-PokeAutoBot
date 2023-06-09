@@ -11,6 +11,7 @@ using static _3DS_link_trade_bot.dsbotbase;
 using static _3DS_link_trade_bot.dsbotbase.Buttons;
 using static _3DS_link_trade_bot.MainHub;
 using static _3DS_link_trade_bot.Form1;
+using System.Configuration;
 
 namespace _3DS_link_trade_bot
 {
@@ -43,14 +44,15 @@ namespace _3DS_link_trade_bot
                 ShowdownSet set = ConvertToShowdown(PokemonText);
                 RegenTemplate rset = new(set);
                 
-                var trainer = NTR.game switch {
-                    4 => TrainerSettings.GetSavedTrainerData(GameVersion.USUM, 7),
-                    3 => TrainerSettings.GetSavedTrainerData(GameVersion.SM,7),
-                    2 => TrainerSettings.GetSavedTrainerData(GameVersion.ORAS,6),
-                    1 => TrainerSettings.GetSavedTrainerData(GameVersion.XY,6)
-                };
-                var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
+                var sav = NTR.game switch
+                {
+                    4 or 3 => SaveUtil.GetBlankSAV(EntityContext.Gen7, "Pip"),
+                    
+                    2 or 1 => SaveUtil.GetBlankSAV(EntityContext.Gen6,"Pip"),
                
+                };
+               
+                
                 var pkm = sav.GetLegalFromSet(rset, out var res);
                 
 
@@ -64,8 +66,8 @@ namespace _3DS_link_trade_bot
                 }
 
 
-                if (Legal.ZCrystalDictionary.ContainsValue((ushort)pkm.HeldItem))
-                    pkm.HeldItem = 0;
+                /*if (ItemStorage7USUM.GetCrystalHeld((ushort)pkm.HeldItem,out var crystal))
+                    pkm.HeldItem = 0;*/
                 if (!new LegalityAnalysis(pkm).Valid || FormInfo.IsFusedForm(pkm.Species,pkm.Form,pkm.Format))
                 {
                     var reason = FormInfo.IsFusedForm(pkm.Species,pkm.Form,pkm.Format)?"You can not trade Fused Pokemon because you won't have the originals when they de-fuse and your save file will crash": $"I wasn't able to create a {(Species)set.Species} from that set.";
@@ -203,7 +205,178 @@ namespace _3DS_link_trade_bot
             }
 
             var finalset = restorenick + setstring;
-            return new ShowdownSet(finalset);
+
+            var TheShow = new ShowdownSet(finalset);
+            if (TheShow.Species == 0)
+            {
+
+                var setsplit = finalset.Split("\r\n");
+                var langID = (LanguageID)0;
+
+                if (setsplit[0].IndexOf("(") > -1 && setsplit[0].IndexOf(")") - 2 != setsplit[0].IndexOf("("))
+                {
+                    var spec = setsplit[0][(setsplit[0].IndexOf("(") + 1)..setsplit[0].IndexOf(")")];
+                    var nick = setsplit[0][..setsplit[0].IndexOf("(")];
+                    var specid = -1;
+
+                    for (int i = 0; i < 11; i++)
+                    {
+                        specid = SpeciesName.GetSpeciesID(spec, i);
+                        if (specid > -1)
+                        {
+                            langID = (LanguageID)i;
+                            break;
+                        }
+                    }
+                    var engspec = SpeciesName.GetSpeciesNameGeneration((ushort)specid, 2, 9);
+                    setsplit[0] = nick + $"({engspec})";
+
+                    if (!finalset.Contains("Language:"))
+                    {
+                        var langs = Enum.GetNames(typeof(LanguageID));
+                        if (setsplit.Length > 2)
+                        {
+                            var setlist = setsplit.ToList();
+                            setlist.Insert(1, $"Language: {langs[(int)langID]}");
+                            setsplit = setlist.ToArray();
+                        }
+                        else
+                            setsplit = setsplit.Append($"Language: {langs[(int)langID]}").ToArray();
+
+                    }
+                    var result = new StringBuilder();
+                    foreach (var item in setsplit)
+                    {
+                        result.Append(item + "\n");
+                    }
+                    finalset = result.ToString();
+                    return new ShowdownSet(finalset);
+                }
+                else
+                {
+                    if (setsplit[0].IndexOf("(") > -1)
+                    {
+                        var spec = setsplit[0][..(setsplit[0].IndexOf("(") - 1)];
+                        var specid = -1;
+
+                        for (int i = 0; i < 11; i++)
+                        {
+                            specid = SpeciesName.GetSpeciesID(spec, i);
+                            if (specid > -1)
+                            {
+                                langID = (LanguageID)i;
+                                break;
+                            }
+                        }
+                        var engspec = SpeciesName.GetSpeciesNameGeneration((ushort)specid, 2, 9);
+                        setsplit[0] = setsplit[0].Replace(spec, "");
+                        setsplit[0] = setsplit[0].Insert(0, engspec);
+                        if (!finalset.Contains("Language:"))
+                        {
+                            var langs = Enum.GetNames(typeof(LanguageID));
+                            if (setsplit.Length > 2)
+                            {
+                                var setlist = setsplit.ToList();
+                                setlist.Insert(1, $"Language: {langs[(int)langID]}");
+                                setsplit = setlist.ToArray();
+                            }
+                            else
+                                setsplit = setsplit.Append($"Language: {langs[(int)langID]}").ToArray();
+
+                        }
+                        var result = new StringBuilder();
+                        foreach (var item in setsplit)
+                        {
+                            result.Append(item + "\n");
+                        }
+                        finalset = result.ToString();
+                        return new ShowdownSet(finalset);
+                    }
+                    else if (setsplit[0].Contains("@"))
+                    {
+                        var spec = setsplit[0][0..(setsplit[0].IndexOf("@") - 1)];
+                        var specid = -1;
+
+                        for (int i = 0; i < 11; i++)
+                        {
+                            specid = SpeciesName.GetSpeciesID(spec, i);
+                            if (specid > -1)
+                            {
+                                langID = (LanguageID)i;
+                                break;
+                            }
+
+                        }
+                        var engspec = SpeciesName.GetSpeciesNameGeneration((ushort)specid, 2, 9);
+                        setsplit[0] = setsplit[0].Replace(spec, "");
+                        setsplit[0] = setsplit[0].Insert(0, engspec);
+                        if (!finalset.Contains("Language:"))
+                        {
+                            var langs = Enum.GetNames(typeof(LanguageID));
+                            if (setsplit.Length > 2)
+                            {
+                                var setlist = setsplit.ToList();
+                                setlist.Insert(1, $"Language: {langs[(int)langID]}");
+                                setsplit = setlist.ToArray();
+                            }
+                            else
+                                setsplit = setsplit.Append($"Language: {langs[(int)langID]}").ToArray();
+
+                        }
+
+                        var result = new StringBuilder();
+                        foreach (var item in setsplit)
+                        {
+                            result.Append(item + "\n");
+                        }
+                        finalset = result.ToString();
+                        return new ShowdownSet(finalset);
+                    }
+                    else
+                    {
+                        var spec = setsplit[0].Trim();
+
+                        var specid = -1;
+
+                        for (int i = 0; i < 11; i++)
+                        {
+                            specid = SpeciesName.GetSpeciesID(spec, i);
+                            if (specid > -1)
+                            {
+                                langID = (LanguageID)i;
+                                break;
+                            }
+                        }
+
+                        var engspec = SpeciesName.GetSpeciesName((ushort)specid, (int)LanguageID.English);
+
+                        setsplit[0] = engspec;
+                        if (!finalset.Contains("Language:"))
+                        {
+                            var langs = Enum.GetNames(typeof(LanguageID));
+                            if (setsplit.Length > 2)
+                            {
+                                var setlist = setsplit.ToList();
+                                setlist.Insert(1, $"Language: {langs[(int)langID]}");
+                                setsplit = setlist.ToArray();
+                            }
+                            else
+                                setsplit = setsplit.Append($"Language: {langs[(int)langID]}").ToArray();
+
+                        }
+                        var result = new StringBuilder();
+                        foreach (var item in setsplit)
+                        {
+                            result.Append(item + "\n");
+                        }
+                        finalset = result.ToString();
+                        return new ShowdownSet(finalset);
+                    }
+                }
+
+
+            }
+            return TheShow;
         }
 
         private static readonly string[] splittables =

@@ -67,26 +67,17 @@ namespace _3DS_link_trade_bot
             var embed = new EmbedBuilder();
             embed.Title = $"Rule {rule}";
             embed.AddField(ruletitles[rule], rulebody[rule]);
-            await FollowupAsync(embed: embed.Build());
-           
-            var warnrecords = (await File.ReadAllLinesAsync($"{Directory.GetCurrentDirectory()}/warns.txt")).ToList();
-            if (warnrecords == null)
-                warnrecords = new();
-            if (warnrecords.Any(z => z == Context.User.Id.ToString()))
+            await FollowupAsync($"@{user.Username}",embed: embed.Build());
+
+            try
             {
-                await user.SendMessageAsync("You have been banned. Reason: see below. There is no appeal, have a good one! :)", embed:embed.Build());
-                await user.BanAsync(reason: $"Rule {rule}. {ruletitles[rule]}");
-                warnrecords.Remove(Context.User.Id.ToString());
-                warnrecords.Remove(Context.User.Username);
-                await File.WriteAllLinesAsync($"{Directory.GetCurrentDirectory()}/warns.txt", warnrecords);
+                await user.SendMessageAsync("You have been kicked for breaking the rule below. You may rejoin with https://www.piplup.net. Please re-read the server rules.", embed: embed.Build());
             }
-            else
-            {
-                await user.SendMessageAsync("You have been kicked for breaking the rule below. You may rejoin with https://www.piplup.net. Please re-read the server rules as one more infraction will result in a ban", embed: embed.Build());
-                warnrecords.Add($"{Context.User.Id}\n{Context.User.Username}\n");
-                await user.KickAsync($"Rule {rule}. {ruletitles[rule]}");
-                await File.WriteAllLinesAsync($"{Directory.GetCurrentDirectory()}/warns.txt",warnrecords);
-            }
+            catch { }
+               
+            await user.KickAsync($"Rule {rule}. {ruletitles[rule]}");
+            
+            
         }
 
         [SlashCommand("banhammer", "bans the user")]
@@ -116,7 +107,7 @@ namespace _3DS_link_trade_bot
         public string[] ruletitles = new string[]
         {
             "No Bots eTa WeN",
-            "No Spam or Advertising",
+            "No Spam",
             "Keep your conduct and conversation civil",
             "NSFW content of any kind is strictly prohibited.",
             "No Charging Real Money for Pokemon",
@@ -124,7 +115,7 @@ namespace _3DS_link_trade_bot
             "Evading the rules, breaking TOS, seeking loopholes, or attempting to stay \"borderline\" within the rules is considered the same as breaking the rules.",
             "Do not send unsolicited DMs or Friend Requests to other users.",
             "It is prohibited to discuss, request, or promote methods to defy intended game mechanics.",
-            "YOU MUST",
+            "No Advertising",
             "No Genning for others",
             "Do not bring any outside drama here.",
             "Read the guides/help",
@@ -134,8 +125,8 @@ namespace _3DS_link_trade_bot
 
         public string[] rulebody = new string[]
         {
-            "The bots are up when they are up. It is a free service. Therefore there is no schedule and Bot Owners run them when they want to. Asking for a bot to be online or asking when it will be online will get you on the naughty list.",
-            "Disruptive, repetitive, and pointless messages will be immediately removed. Statuses may passively link to a stream or server as long as they are not paid services. Any other ads are prohibited.",
+            "The bots are up when they are up. It is a free service. Therefore there is no schedule and I run them when I want to. Asking when in a chat will get you kicked/banned. You can head to ⁠<#1081994925635289131> to see how to request a bot to be turned on sooner.",
+            "Do not Spam the same message across multiple channels. Do not post in an incorrect channel just because one seems more active.",
             "This is a general rule that covers \"Be nice\" and \"Stay on-topic\".\r\n- Avoid inflammatory topics and heated arguments. Harassment and hateful speech are obviously not allowed.\r\n- Swearing is permitted as long as it is not meant to insult and belittle another user.\r\n- If someone has specific requests about how they are treated, respect their wishes.",
             "This includes gore, other \"shock\" content, or off-topic lewd conversations. In general, if it is inappropriate to talk about it at work, it's not allowed here.",
             "No charging real money for pokemon. We will never charge, neither should you! If you are found to be selling pokemon from this server's services, you will be put on the naughty list.",
@@ -143,7 +134,7 @@ namespace _3DS_link_trade_bot
             "We understand that it is not possible for the rules to cover every case of misbehavior. In such cases, moderators have discretion to decide whether a user is in violation or intentionally toeing the line.",
             "Make sure the other user is all right with it before you send a private message or friend request. Use the public help channels to request help. To report an issue to moderators in private, send a private message to them.",
             "This includes asking for help with shiny-locked Pokémon or other impossible/illegal Pokémon to trade to others. You will be warned once, and ignoring the warning will result in being put on the naughty list",
-            "*giggle* Enjoy Your Time here",
+            "Statuses may passively link to a stream or server as long as they are not paid services. Any other ads are prohibited.",
             "This means you can NOT be the middle man for genning, meaning you trade bot, then trade other person. You can help people who are struggling with it, and send them pkhex files in public chat.\r\n​\r\nThis is to avoid people bypassing bans. If you are found to be helping someone bypass a ban, you will also be put on the naughty list.",
             "This includes any arguments between users on other sites or other servers. If you pursue a user here to continue harassment after they have made it clear that it is unwanted, you will be banned.",
             "The vast majority of questions are answered in the how-to-guide channel, reading the pins in the help/bot channels, or reading the description on the slash commands.\r\n​\r\nYou are expected to have made an attempt to solve the problem yourself before asking for human help.\r\n​\r\nEnsure that you are in the correct channel before asking your question, and provide as much information as possible. Do not tag random users to answer your question or hop from channel to channel. Users who are uncooperative may be kicked or banned from the server.",

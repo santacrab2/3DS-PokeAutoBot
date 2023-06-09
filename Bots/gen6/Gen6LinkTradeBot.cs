@@ -86,8 +86,8 @@ namespace _3DS_link_trade_bot
       
             stop.Restart();
             await Task.Delay(10_000);
-            await DpadClick(DpadRIGHT, 2);
-            await DpadClick(DpadRIGHT, 2);
+            await touch(238,60, 1);
+            await touch(238,60, 2);
             while (!ontradeanimationscreen && stop.ElapsedMilliseconds < 60_000)
                 await click(A,1);
             ChangeStatus("watching trade animation");
