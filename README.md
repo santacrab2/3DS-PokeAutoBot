@@ -1,4 +1,4 @@
-***No Support is provided for this software, its a figure it out on your own kind of thing. This is due to too many people thinking its appropriate to profit off of other people's free work. There are also no releases build it yourself. If you do not know how you don't get to use it.***
+***No Support is provided for this software, its a figure it out on your own kind of thing. There are also no releases build it yourself. If you do not know how you don't get to use it.***
 
  
 
