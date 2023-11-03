@@ -7,7 +7,7 @@ using PKHeX.Core.AutoMod;
 using PKHeX.Core;
 using Discord;
 using Discord.Interactions;
-
+using static _3DS_link_trade_bot.Form1;
 namespace _3DS_link_trade_bot
 {
     [EnabledInDm(false)]
@@ -28,20 +28,28 @@ namespace _3DS_link_trade_bot
                 1 => TrainerSettings.GetSavedTrainerData(GameVersion.XY, 6)
             };
             var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, "pip");
+           
 
-            var pkm = sav.GetLegalFromSet(rset, out var res);
+            var pkm = sav.GetLegalFromSet(rset).Created;
             //pkm = EntityConverter.ConvertToType(pkm, sav.PKMType, out var result);
- 
+            if (pkm.Generation < 6)
+                pkm.CurrentHandler = 1;
             if (pkm is PK7)
             {
-                
-               PK7 pk7 = (PK7)pkm;
-                pk7.SetDefaultRegionOrigins();
+               
+                PK7 pk7 = (PK7)pkm;
+                pk7.SetDefaultRegionOrigins(pk7.Language);
                 pkm = pk7;
             }
-               
-            
-         
+            if (pkm is PK6 pk6)
+            {
+                pk6.SetDefaultRegionOrigins(pk6.Language);
+                pkm = pk6;
+            }
+
+
+            if (ItemStorage7USUM.GetCrystalKey((ushort)pkm.HeldItem, out var key)) 
+                pkm.HeldItem = 0;
             var correctfile = (NTR.game > 2 && pkm is PK7) ? true : pkm is PK6 ? true : false;
 
             if (!new LegalityAnalysis(pkm).Valid)
@@ -58,7 +66,7 @@ namespace _3DS_link_trade_bot
             }
             var tempfile = $"{Directory.GetCurrentDirectory()}//{pkm.FileName}";
             File.WriteAllBytes(tempfile, pkm.DecryptedBoxData);
-            await FollowupWithFileAsync(tempfile, text:"Here is your legalized pk file");
+            await FollowupWithFileAsync(tempfile, text:$"Here is your legalized pk file\n{TradeModule.GetFormattedShowdownText(pkm)}");
             File.Delete(tempfile);
         }
     }

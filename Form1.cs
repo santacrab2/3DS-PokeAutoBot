@@ -95,7 +95,7 @@ namespace _3DS_link_trade_bot
             APILegality.SetAllLegalRibbons = settings.Legalitysettings.AddAllLegalRibbons;
             APILegality.SetMatchingBalls = settings.Legalitysettings.SetMatchingPokeball;
             APILegality.ForceSpecifiedBall = settings.Legalitysettings.SetUserSpecifiedPokeball;
-            APILegality.UseXOROSHIRO = true;
+            APILegality.ForceLevel100for50 = false;
             Legalizer.EnableEasterEggs = settings.Legalitysettings.SendMemePks;
             APILegality.AllowTrainerOverride = settings.Legalitysettings.AllowTrainerInfo;
             APILegality.AllowBatchCommands = settings.Legalitysettings.UseBatchEditor;

@@ -88,11 +88,11 @@ namespace _3DS_link_trade_bot
                         if (NTR.game <3)
                             trainer = TrainerSettings.GetSavedTrainerData(6);
                         var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
-                        var pk = sav.GetLegalFromSet(set, out var result);
+                        var pk = sav.GetLegalFromSet(set).Created;
                         pk=pk.Legalize();
                         if (pk is PK7 pkk)
                         {
-                            pkk.SetDefaultRegionOrigins();
+                            pkk.SetDefaultRegionOrigins(pk.Language);
                             pk = pkk;
                         }
 
@@ -104,11 +104,11 @@ namespace _3DS_link_trade_bot
                             if (NTR.game <3)
                                 trainer = TrainerSettings.GetSavedTrainerData(6);
                             sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
-                            pk = sav.GetLegalFromSet( set, out result);
+                            pk = sav.GetLegalFromSet(set).Created;
                             pk.Legalize();
                             if (pk is PK7 pk7)
                             {
-                                pk7.SetDefaultRegionOrigins();
+                                pk7.SetDefaultRegionOrigins(pk.Language);
                                 pk = pk7;
                             }
                         }
@@ -196,7 +196,7 @@ namespace _3DS_link_trade_bot
                 if (NTR.game <3)
                     trainer = TrainerSettings.GetSavedTrainerData(6);
                 var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
-                _ = sav.GetLegalFromSet(set, out var result);
+                var result = sav.GetLegalFromSet(set).Status;
 
                 if (result == LegalizationResult.Regenerated)
                     dex.Add(i);

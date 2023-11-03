@@ -175,9 +175,10 @@ namespace _3DS_link_trade_bot
             await tradeinfo.discordcontext.User.SendMessageAsync("adding you to the friends list now!");
             await presshome(5);
 
-            await touch(120, 10, 1);
+            await touch(120, 10, 2);
 
             await touch(120, 10, 6);
+            await click(A, 2);
             await click(A, 2);
             await touch(160, 10, 3);
 

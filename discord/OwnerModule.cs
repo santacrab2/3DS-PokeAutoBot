@@ -67,11 +67,11 @@ namespace _3DS_link_trade_bot
             var embed = new EmbedBuilder();
             embed.Title = $"Rule {rule}";
             embed.AddField(ruletitles[rule], rulebody[rule]);
-            await FollowupAsync($"@{user.Username}",embed: embed.Build());
+            await FollowupAsync(user.Mention,embed: embed.Build());
 
             try
             {
-                await user.SendMessageAsync("You have been kicked for breaking the rule below. You may rejoin with https://www.piplup.net. Please re-read the server rules.", embed: embed.Build());
+                await user.SendMessageAsync("You have been kicked for breaking the rule below. You may rejoin with https://www.piplup.net . Please re-read the server rules.", embed: embed.Build());
             }
             catch { }
                
@@ -82,27 +82,47 @@ namespace _3DS_link_trade_bot
 
         [SlashCommand("banhammer", "bans the user")]
         [DefaultMemberPermissions(GuildPermission.BanMembers)]
-        public async Task TavernBan(SocketGuildUser user,int rule,bool DeleteMessages = false)
+        public async Task TavernBan(SocketGuildUser user,int rule)
         {
             await DeferAsync();
             var embed = new EmbedBuilder();
             embed.Title = $"Rule {rule}";
             embed.AddField(ruletitles[rule], rulebody[rule]);
-            if (DeleteMessages)
+            try
             {
-               foreach(IMessageChannel channel in Context.Guild.Channels)
-                {
-                    var usermessages = (await AsyncEnumerableExtensions.FlattenAsync(channel.GetMessagesAsync())).Where(z=>z.Author.Id==Context.User.Id);
-                    foreach(IMessage message in usermessages)
-                    {
-                       await message.DeleteAsync();
-                    }
-                }
+                await user.SendMessageAsync("You have been banned. Reason: see below. There is no appeal, have a good one! :)", embed: embed.Build());
             }
-            await user.SendMessageAsync("You have been banned. Reason: see below. There is no appeal, have a good one! :)", embed: embed.Build());
+            catch { }
             await user.BanAsync(reason: $"Rule {rule}. {ruletitles[rule]}");
-            await Context.Channel.SendMessageAsync($"{Context.User.Username} has been banned for Rule {rule}. {ruletitles[rule]}");
+            await FollowupAsync($"{Context.User.Username} has been banned for Rule {rule}. {ruletitles[rule]}");
 
+        }
+        [SlashCommand("clearcache","clear")]
+        public async Task clearthecache()
+        {
+            TradeModule.simpletradecache.Clear();
+            await RespondAsync("cache cleared", ephemeral: true);
+        }
+        [SlashCommand("respond", "responds to appeals")]
+        [RequireOwner]
+        [DefaultMemberPermissions(GuildPermission.BanMembers)]
+        
+        public async Task AppealResponse(SocketGuildUser user, AppealResponses response)
+        {
+            switch(response)
+            {
+                case AppealResponses.Approved: await user.SendMessageAsync("Upon review your appeal has been approved and your mute has been removed!"); break;
+                case AppealResponses.Denied: await user.SendMessageAsync("Upon review your appeal has been denied and your muted status will remain for the remainder of the original 24 hours."); break;
+                case AppealResponses.Escalated: await user.SendMessageAsync("Upon review further infractions were discovered and your mute has been escalated to a ban. Have a good one."); break;
+            }
+            await RespondAsync($"Appeal Response Sent. {response}");
+        }
+        [SlashCommand("message", "message users")]
+        [RequireOwner]
+        public async Task message(SocketGuildUser user, string message)
+        {
+            await user.SendMessageAsync(message);
+            await RespondAsync($"```{message}``` was sent to {user.Username}");
         }
         public string[] ruletitles = new string[]
         {
@@ -132,7 +152,7 @@ namespace _3DS_link_trade_bot
             "No charging real money for pokemon. We will never charge, neither should you! If you are found to be selling pokemon from this server's services, you will be put on the naughty list.",
             "No slandering the server or the services. If we feel you have ill intent towards the server or the people that are here you will be put on the naughty list.",
             "We understand that it is not possible for the rules to cover every case of misbehavior. In such cases, moderators have discretion to decide whether a user is in violation or intentionally toeing the line.",
-            "Make sure the other user is all right with it before you send a private message or friend request. Use the public help channels to request help. To report an issue to moderators in private, send a private message to them.",
+            "Make sure the other user is all right with it before you send a private message or friend request. Use the public help channels to request help. If you need to report an issue privately, DM one of the trade bots that are currently online and a mod will review. Otherwise all reports should be made public.",
             "This includes asking for help with shiny-locked Pokémon or other impossible/illegal Pokémon to trade to others. You will be warned once, and ignoring the warning will result in being put on the naughty list",
             "Statuses may passively link to a stream or server as long as they are not paid services. Any other ads are prohibited.",
             "This means you can NOT be the middle man for genning, meaning you trade bot, then trade other person. You can help people who are struggling with it, and send them pkhex files in public chat.\r\n​\r\nThis is to avoid people bypassing bans. If you are found to be helping someone bypass a ban, you will also be put on the naughty list.",
@@ -142,6 +162,11 @@ namespace _3DS_link_trade_bot
             "There are no excuses for not having read these rules. It is a requirement to participate in this server. If you try to use an excuse such as a disability as the reason you did not read the rules, you will be banned immediately. There are accessiblity tools all over the internet and many ways for a person to follow these rules while having a disability, if you want to participate here you have to put in an effort."
 
         };
-       
+       public enum AppealResponses
+        {
+            Approved,
+            Denied,
+            Escalated
+        }
     }
 }

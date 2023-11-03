@@ -97,23 +97,51 @@ namespace _3DS_link_trade_bot
             };
             _client.SlashCommandExecuted += slashtask;
             _client.ButtonExecuted += handlebuttonpress;
+            _client.SelectMenuExecuted += MenuHandler;
+        }
+        public async Task MenuHandler(SocketMessageComponent arg)
+        {
+            var currentcache = TradeModule.simpletradecache.Find(z => z.user == arg.User);
+            currentcache.response = arg;
+            currentcache.responded = true;
+            await arg.RespondAsync();
         }
         public async Task handlebuttonpress(SocketMessageComponent arg)
         {
+            var currentcache = TradeModule.simpletradecache.Find(z => z.user == arg.User);
+            var lastpage = currentcache.opti.Length % 25 == 0 ? (currentcache.opti.Length / 25) - 1 : currentcache.opti.Length / 25;
+            switch (arg.Data.CustomId)
+            {
+                
+                case "next":
+                    if (currentcache.page < lastpage)
+                    {
+                        currentcache.page++;
+                            
+                        await arg.UpdateAsync(z => z.Components = TradeModule.compo(currentcache.currenttype, currentcache.page, currentcache.opti)); 
+                    }
+                    else
+                    {
+                        currentcache.page= 0;
+                        await arg.UpdateAsync(z => z.Components = TradeModule.compo(currentcache.currenttype, currentcache.page, currentcache.opti));
+                    }
+                    break;
+                case "prev":
+                    if (currentcache.page > 0)
+                    {
+                        currentcache.page--;
+                        await arg.UpdateAsync(z => z.Components = TradeModule.compo(currentcache.currenttype, currentcache.page, currentcache.opti));
+                    }
+                    else if (currentcache.opti.Length > 25)
+                    {
+                        if (currentcache.opti.Length % 25 == 0)
+                            currentcache.page = (currentcache.opti.Length / 25) - 1;
+                        else
+                            currentcache.page = (currentcache.opti.Length / 25);
+                        await arg.UpdateAsync(z => z.Components = TradeModule.compo(currentcache.currenttype, currentcache.page, currentcache.opti));
+                    }
+                    break;
 
-            if (arg.Data.CustomId == "wtpyes")
-            {
-                WTPSB.buttonpressed = true;
-                WTPSB.tradepokemon = true;
-                await arg.Message.DeleteAsync();
-                return;
-            }
-            if (arg.Data.CustomId == "wtpno")
-            {
-                WTPSB.buttonpressed = true;
-                WTPSB.tradepokemon = false;
-                await arg.Message.DeleteAsync();
-                return;
             }
         }
         public Task slashtask(SocketSlashCommand arg1)

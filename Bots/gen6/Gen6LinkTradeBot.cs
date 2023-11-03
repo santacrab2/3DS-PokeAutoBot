@@ -60,7 +60,7 @@ namespace _3DS_link_trade_bot
             stop.Restart();
             var msgsent = false;
             ChangeStatus("waiting for trade partner to accept invite");
-            while(!checkscreen(currentscreenoff,AcceptedTradeScreenVal) && stop.ElapsedMilliseconds < 35_000)
+            while(!checkscreen(currentscreenoff,AcceptedTradeScreenVal) && stop.ElapsedMilliseconds < 45_000)
             {
                 await Task.Delay(500);
                 if(stop.ElapsedMilliseconds > 20_000 && !msgsent)
@@ -69,7 +69,7 @@ namespace _3DS_link_trade_bot
                     msgsent = true;
                 }
             }
-            if(stop.ElapsedMilliseconds > 35_000)
+            if(stop.ElapsedMilliseconds > 45_000)
             {
                 await tradeinfo.discordcontext.User.SendMessageAsync("You did not accept the trade invite in time, please try again.");
                 ChangeStatus($"{tradeinfo.discordcontext.User.Username} did not accept the trade invite in time");

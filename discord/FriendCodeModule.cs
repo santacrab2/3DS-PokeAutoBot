@@ -34,7 +34,7 @@ namespace _3DS_link_trade_bot
             friendcode = friendcode.Replace("-", "").Replace(" ", "");
             var tobequeued = new queuesystem() { discordcontext = Context, friendcode = friendcode, tradepokemon = EntityBlank.GetBlank(7), IGN = "", mode = botmode.addfc };
             The_Q.Enqueue(tobequeued);
-            await FollowupAsync($"Added {Context.User.Username} to the Friend Code queue.");
+            await FollowupAsync($"{Context.User.Mention} - Added to the Friend Code queue. Current Position: {The_Q.Count}.");
 
 
         }

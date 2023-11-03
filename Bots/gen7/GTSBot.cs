@@ -118,11 +118,11 @@ namespace _3DS_link_trade_bot
               
                     var trainer = TrainerSettings.GetSavedTrainerData(7);
                     var sav = SaveUtil.GetBlankSAV((GameVersion)trainer.Game, trainer.OT);
-                    pkm = sav.GetLegalFromSet(new ShowdownSet($"{SpeciesName.GetSpeciesName(entry.RequestedPoke,2)}\nLevel: {(entry.levelindex >0 ? (entry.levelindex * 10) - 1 : 99)}\nShiny: Yes"), out _);
+                    pkm = sav.GetLegalFromSet(new ShowdownSet($"{SpeciesName.GetSpeciesName(entry.RequestedPoke,2)}\nLevel: {(entry.levelindex >0 ? (entry.levelindex * 10) - 1 : 99)}\nShiny: Yes")).Created;
                    pkm = pkm.Legalize();
                     if (pkm is PK7 pk7)
                     {
-                        pk7.SetDefaultRegionOrigins();
+                        pk7.SetDefaultRegionOrigins(2);
                         pkm = pk7;
                     }
                     pkm.OT_Name = entry.trainername;
