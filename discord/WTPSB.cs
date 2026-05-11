@@ -140,7 +140,7 @@ namespace _3DS_link_trade_bot
         }
         [EnabledInDm(false)]
         [DefaultMemberPermissions(GuildPermission.ViewChannel)]
-        [SlashCommand("guess","guess the pokemon")]
+
        
         public async Task WTPguess([Summary("pokemon")]string userguess, [Summary(description: "In Game Trainer Name, if you plan to receive your guess in trade")] string TrainerName)
         {
@@ -165,7 +165,6 @@ namespace _3DS_link_trade_bot
                 await FollowupAsync($"{Context.User.Username} You are incorrect. It is not {userguess}");
         }
         [DefaultMemberPermissions(GuildPermission.BanMembers)]
-        [SlashCommand("wtpcancel","owner only")]
         [RequireOwner]
         public async Task wtpcancel()
         {

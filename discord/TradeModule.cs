@@ -24,7 +24,7 @@ namespace _3DS_link_trade_bot
        
        
 
-        [SlashCommand("trade", "trades you a pokemon over link trade in 3ds games")]
+        
         public async Task trade(string TrainerName, string PokemonText = " ", Attachment pk7orpk6 = null)
         {
             await DeferAsync();
@@ -166,7 +166,7 @@ namespace _3DS_link_trade_bot
             await FollowupAsync("You did not include any pokemon information, Please make sure the command boxes are filled out. See <id:guide> for instructions and examples");
         }
         public static List<simpletradeobject> simpletradecache = new();
-        [SlashCommand("simpletrade", "helps you build a pokemon with a simple form")]
+        
 
         public async Task DumbassTrade(string TrainerName)
         {
@@ -331,7 +331,7 @@ namespace _3DS_link_trade_bot
 
             return select.Build();
         }
-        [SlashCommand("dump","reads pokemon in your box that you show the bot and sends you pk files of them without trading")]
+        
         public async Task dump(string TrainerName)
         {
             DeferAsync();

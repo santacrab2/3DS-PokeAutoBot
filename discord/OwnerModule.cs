@@ -12,10 +12,9 @@ using static _3DS_link_trade_bot.Form1;
 namespace _3DS_link_trade_bot
 {
     [DefaultMemberPermissions(GuildPermission.BanMembers)]
-    [RequireOwner]
     public class OwnerModule : InteractionModuleBase<SocketInteractionContext>
     {
-        [SlashCommand("addtradechannel", "add this channel to the Trade channel List")]
+
        
         public async Task AddChannel()
         {
@@ -24,7 +23,6 @@ namespace _3DS_link_trade_bot
 
             await RespondAsync($"I have added the channel **{Context.Channel.Name}** with the id {Context.Channel.Id} for you {Context.User.Username}", ephemeral: true);
         }
-        [SlashCommand("addwtchannel", "add this channel to the WT channel List")]
 
         public async Task AddWTChannel()
         {
@@ -33,13 +31,12 @@ namespace _3DS_link_trade_bot
 
             await RespondAsync($"I have added the channel **{Context.Channel.Name}** with the id {Context.Channel.Id} for you {Context.User.Username}", ephemeral: true);
         }
-        [SlashCommand("queueclear","clears the queue entirely, owner command")]
         public async Task clearqueue()
         {
             MainHub.The_Q.Clear();
             await RespondAsync("the queue has been cleared", ephemeral:true);
         }
-        [SlashCommand("clearfriendlist","clears your 3ds friend list for however many friends you state starting at whichever index you state")]
+       
         public async Task clearf(int index, int friendstoremove)
         {
             await DeferAsync(ephemeral:true);
@@ -59,7 +56,7 @@ namespace _3DS_link_trade_bot
             await FollowupAsync(embed: embed.Build());
         }
 
-        [SlashCommand("kickwarn", "posts the rule and kicks the user, bans on second warn")]
+        [SlashCommand("kickwarn", "posts the rule and kicks the user")]
         [DefaultMemberPermissions(GuildPermission.BanMembers)]
         public async Task rulekick(SocketGuildUser user, int rule)
         {
@@ -79,32 +76,61 @@ namespace _3DS_link_trade_bot
             
             
         }
+        [SlashCommand("hackbanhammer", "bans the user by id")]
+        [DefaultMemberPermissions(GuildPermission.BanMembers)]
+        public async Task TavernBan(string userid, int rule, bool sendmessage, int DeletePreviousMessageDays = 0)
+        {
+            await DeferAsync();
+            var parsed = ulong.TryParse(userid, out var user);
+            if (!parsed)
+            {
+                await FollowupAsync("invalid user id", ephemeral: true);
+                return;
+            }
+            var embed = new EmbedBuilder();
+            embed.Title = $"Rule {rule}";
+            embed.AddField(ruletitles[rule], rulebody[rule]);
+            if (sendmessage)
+            {
+                try
+                {
+                    var usr = await Context.Client.GetUserAsync(user);
+                    await usr.SendMessageAsync("You have been banned. Reason: see below. Reply to appeal with proof of an incorrect ban.", embed: embed.Build());
+                }
+                catch (Exception) { }
+            }
+            await Context.Guild.AddBanAsync(user,DeletePreviousMessageDays, reason: $"Rule {rule}. {ruletitles[rule]}");
+            await FollowupAsync($"<@{user}> has been banned for Rule {rule}. {ruletitles[rule]}");
+
+        }
 
         [SlashCommand("banhammer", "bans the user")]
         [DefaultMemberPermissions(GuildPermission.BanMembers)]
-        public async Task TavernBan(SocketGuildUser user,int rule)
+        public async Task TavernBan(SocketGuildUser user,int rule, bool sendmessage, int DeletePreviousMessageDays = 0)
         {
             await DeferAsync();
             var embed = new EmbedBuilder();
             embed.Title = $"Rule {rule}";
             embed.AddField(ruletitles[rule], rulebody[rule]);
-            try
+            if (sendmessage)
             {
-                await user.SendMessageAsync("You have been banned. Reason: see below. There is no appeal, have a good one! :)", embed: embed.Build());
+                try
+                {
+                    await user.SendMessageAsync("You have been banned. Reason: see below. There is no appeal, have a good one! :)", embed: embed.Build());
+                }
+                catch (Exception) { }
             }
-            catch { }
-            await user.BanAsync(reason: $"Rule {rule}. {ruletitles[rule]}");
+            await user.BanAsync(DeletePreviousMessageDays,reason: $"Rule {rule}. {ruletitles[rule]}");
             await FollowupAsync($"{Context.User.Username} has been banned for Rule {rule}. {ruletitles[rule]}");
 
         }
-        [SlashCommand("clearcache","clear")]
+
         public async Task clearthecache()
         {
             TradeModule.simpletradecache.Clear();
             await RespondAsync("cache cleared", ephemeral: true);
         }
         [SlashCommand("respond", "responds to appeals")]
-        [RequireOwner]
         [DefaultMemberPermissions(GuildPermission.BanMembers)]
         
         public async Task AppealResponse(SocketGuildUser user, AppealResponses response)
@@ -118,7 +144,7 @@ namespace _3DS_link_trade_bot
             await RespondAsync($"Appeal Response Sent. {response}");
         }
         [SlashCommand("message", "message users")]
-        [RequireOwner]
+        [DefaultMemberPermissions(GuildPermission.BanMembers)]
         public async Task message(SocketGuildUser user, string message)
         {
             await user.SendMessageAsync(message);
@@ -140,7 +166,9 @@ namespace _3DS_link_trade_bot
             "Do not bring any outside drama here.",
             "Read the guides/help",
             "Staying in this server means you agree to my tyranny.",
-            "No Excuses",
+            "Do not encourage illegal activities",
+            "Emulators",
+            "No cheating at the expense of others."
         };
 
         public string[] rulebody = new string[]
@@ -159,8 +187,9 @@ namespace _3DS_link_trade_bot
             "This includes any arguments between users on other sites or other servers. If you pursue a user here to continue harassment after they have made it clear that it is unwanted, you will be banned.",
             "The vast majority of questions are answered in the how-to-guide channel, reading the pins in the help/bot channels, or reading the description on the slash commands.\r\n​\r\nYou are expected to have made an attempt to solve the problem yourself before asking for human help.\r\n​\r\nEnsure that you are in the correct channel before asking your question, and provide as much information as possible. Do not tag random users to answer your question or hop from channel to channel. Users who are uncooperative may be kicked or banned from the server.",
             "You have no right or obligation to stay here.",
-            "There are no excuses for not having read these rules. It is a requirement to participate in this server. If you try to use an excuse such as a disability as the reason you did not read the rules, you will be banned immediately. There are accessiblity tools all over the internet and many ways for a person to follow these rules while having a disability, if you want to participate here you have to put in an effort."
-
+            "- Admitting to or encouraging piracy is an automatic ban.\r\n- Violating Discord TOS is an automatic ban.",
+            "Emulator support will not be provided. If your problem is with using an emulator you will either be directed to Google, or told to use your CFW console",
+            "No cheating at the expense of others. This includes Pokémon Champions, as it is PvP. Please note that some offenses may result in an instant ban. https://projectpokemon.org/home/forums/topic/38950-project-pok%C3%A9mon-does-not-support-cheating/"
         };
        public enum AppealResponses
         {

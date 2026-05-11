@@ -18,7 +18,7 @@ namespace _3DS_link_trade_bot
     [DefaultMemberPermissions(GuildPermission.ViewChannel)]
     public class FriendCodeModule : InteractionModuleBase<SocketInteractionContext>
     {
-        [SlashCommand("addfc", "adds you to the bots friend list, dont forget to add the bot!")]
+        
         public async Task addfc(string friendcode)
         {
             await DeferAsync();

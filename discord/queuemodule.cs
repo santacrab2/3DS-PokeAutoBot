@@ -14,7 +14,7 @@ namespace _3DS_link_trade_bot
     public class queuemodule : InteractionModuleBase<SocketInteractionContext>
     {
          
-        [SlashCommand("queuelist","Displays the queue")]
+        
         public async Task queuelist()
         {
             await DeferAsync();
@@ -35,7 +35,7 @@ namespace _3DS_link_trade_bot
             }
 
         }
-        [SlashCommand("leavequeue","removes you from queue")]
+        
         public async Task qc()
         {
             await DeferAsync();
