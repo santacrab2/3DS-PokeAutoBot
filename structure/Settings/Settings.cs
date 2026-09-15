@@ -35,7 +35,9 @@ namespace _3DS_link_trade_bot
         [Category(RNG)]
         [TypeConverter(typeof(ExpandableObjectConverter))]
         public RNGSettings RNGsettings { get; set; } = new();
-
+        public string SerebiiUri { get; set; } = "";
+        public string pkhexsha { get; set; } = "";
+    
     }
     public enum Mode
     {

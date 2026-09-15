@@ -228,6 +228,8 @@ namespace _3DS_link_trade_bot
         {
             
             form1.IpAddress.Text = Properties.Settings.Default.IpAddress;
+            settings.SerebiiUri = Properties.Settings.Default.SerebiiUri;
+            settings.pkhexsha = Properties.Settings.Default.pkhexsha;
             settings.Discordsettings.token = Properties.Settings.Default.discordtoken;
             settings.Discordsettings.BotTradeChannel = Properties.Settings.Default.botchannels;
             settings.FriendCode = Properties.Settings.Default.botfc;
@@ -362,7 +364,8 @@ namespace _3DS_link_trade_bot
             Properties.Settings.Default.pingmessage = settings.Discordsettings.PingMessage;
             Properties.Settings.Default.pingroleid = settings.Discordsettings.PingRoleID;
             Properties.Settings.Default.sendstatusmessage = settings.Discordsettings.SendStatusMessage;
-
+            Properties.Settings.Default.SerebiiUri = settings.SerebiiUri;
+            Properties.Settings.Default.pkhexsha = settings.pkhexsha;
             Properties.Settings.Default.WTPChannels = settings.Discordsettings.BotWTPChannel;
             Properties.Settings.Default.WhoThat = settings.Discordsettings.WhosThatPokemon;
             Properties.Settings.Default.Save();

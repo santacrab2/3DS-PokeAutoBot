@@ -11,13 +11,16 @@ using System.Net;
 using static _3DS_link_trade_bot.Program;
 using static _3DS_link_trade_bot.Form1;
 using PKHeX.Core;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace _3DS_link_trade_bot
 {
     public class discordmain
     {
         public static Discord.Interactions.IResult result;
-        public static readonly WebClient webClient = new WebClient();
+        public static readonly HttpClient httpClient = new();
         public static DiscordSocketClient _client;
         //public static Settings Unisettings;
 
@@ -33,7 +36,11 @@ namespace _3DS_link_trade_bot
             _client.Log += Log;
             _client.Ready += ready;
 
-            
+            // Source - https://stackoverflow.com/a/56706459
+            // Posted by Raphtaliyah
+            // Retrieved 2026-09-06, License - CC BY-SA 4.0
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.202 Safari/535.1");
+
             //var token = File.ReadAllText("token.txt");
 
             await _client.LoginAsync(TokenType.Bot, _settings.Discordsettings.token);
@@ -41,6 +48,7 @@ namespace _3DS_link_trade_bot
             // CommandHandler ch = new CommandHandler(_client, _commands);
             //await ch.InstallCommandsAsync();
             _client.MessageReceived += readpkfiles;
+            Task.Run(PostSerebii);
             // Block this task until the program is closed.
             await Task.Delay(-1);
         }
@@ -182,7 +190,7 @@ namespace _3DS_link_trade_bot
         }
         public static async Task<byte[]> DownloadFromUrlAsync(string url)
         {
-            return await webClient.DownloadDataTaskAsync(url);
+            return await httpClient.GetByteArrayAsync(url);
         }
         private async Task readpkfiles(SocketMessage messageParam)
         {
@@ -226,5 +234,71 @@ namespace _3DS_link_trade_bot
                 await message.Channel.SendMessageAsync(Format.Code(string.Join("\n", newShowdown).TrimEnd()));
             }
         }
+        public static async void PostSerebii()
+        {
+            while (true)
+            {
+                var serebiiposts = await httpClient.GetAsync("https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=serebii.bsky.social");
+                if (serebiiposts.StatusCode != HttpStatusCode.OK)
+                {
+                    ChangeStatus("Error fetching Serebii posts: " + serebiiposts.StatusCode);
+                    await Task.Delay(60000); // Wait for 60 seconds before retrying
+                    continue;
+                }
+                var serebiicontent = await serebiiposts.Content.ReadAsStringAsync();
+                var j = JsonDocument.Parse(serebiicontent);
+                var latesturi = j.RootElement.GetProperty("feed").EnumerateArray().FirstOrDefault().GetProperty("post").GetProperty("uri").GetString();
+                if (latesturi is not null && latesturi != _settings.SerebiiUri)
+                {
+                    int i = 0;
+                    var urinicycle = j.RootElement.GetProperty("feed").EnumerateArray().Select(z => z.GetProperty("post").GetProperty("uri").GetString()).ToList();
+                    while (urinicycle[i] != _settings.SerebiiUri)
+                    {
+
+                        var editeduri = urinicycle[i].Replace("at://", "");
+                        var urlparts = editeduri.Split('/');
+                        ITextChannel serebiichannel = (ITextChannel)await _client.GetChannelAsync(872613836723744768);
+                        await serebiichannel.SendMessageAsync("https://bsky.app/profile/serebii.bsky.social/post/" + urlparts[2]);
+                        i++;
+                    }
+                    _settings.SerebiiUri = latesturi;
+                }
+                await Task.Delay(60000); // Check every 60 seconds
+            }
+        }
+        public static async void PostPKHEX()
+        {
+            while (true)
+            {
+                var pkhexcommits = await httpClient.GetAsync("https://api.github.com/repos/kwsch/PKHeX/commits");
+                if (pkhexcommits.StatusCode != HttpStatusCode.OK)
+                {
+                    ChangeStatus("Error fetching PKHeX commits: " + pkhexcommits.StatusCode);
+                    await Task.Delay(60000); // Wait for 60 seconds before retrying
+                    continue;
+                }
+                var pkhexcommitcontent = await pkhexcommits.Content.ReadAsStringAsync();
+                var prettycontent = JsonDocument.Parse(pkhexcommitcontent);
+                var latestsha = prettycontent.RootElement.EnumerateArray().FirstOrDefault().GetProperty("sha").GetString();
+
+                if (latestsha != _settings.pkhexsha)
+                {
+                    int i = 0;
+                    var shacycle = prettycontent.RootElement.EnumerateArray().Select(z => z.GetProperty("sha").GetString()).ToList();
+                    while (shacycle[i] != _settings.pkhexsha)
+                    {
+                        var commitsha = shacycle[i];
+                        var commiturl = $"https://github.com/kwsch/PKHeX/commit/{commitsha}";
+                        ITextChannel pkhexchannel = (ITextChannel)await _client.GetChannelAsync(1549531305941925898);
+                        await pkhexchannel.SendMessageAsync(commiturl);
+                        i++;
+                    }
+                    _settings.pkhexsha = latestsha;
+                    await Task.Delay(360000);
+                }
+
+            }
+        }
     }
+
 }
