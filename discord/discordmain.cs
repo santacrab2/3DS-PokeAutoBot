@@ -49,6 +49,7 @@ namespace _3DS_link_trade_bot
             //await ch.InstallCommandsAsync();
             _client.MessageReceived += readpkfiles;
             Task.Run(PostSerebii);
+            Task.Run(PostPKHEX);
             // Block this task until the program is closed.
             await Task.Delay(-1);
         }
